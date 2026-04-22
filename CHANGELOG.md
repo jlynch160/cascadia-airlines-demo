@@ -1,5 +1,61 @@
 # Changelog
 
+## 2026-04-22 — IROps Cascade Commander canvas (marquee airline UC)
+
+Built the centerpiece interactive canvas that hits the "cascading-disruption + gate-productivity" brief head-on.
+
+### New home tile + app-shell
+- **"IROps Cascade" tile** on the home grid (all four personas), rendered with a custom ripple-wave logomark (concentric orange arcs fanning into teal dots) and a red-orange `LIVE` badge with the pulse-halo animation.
+- **`#app-irops` app-shell canvas** (~360 lines of HTML + 220 lines of scoped CSS + 130 lines of JS) routes from the tile via the existing `openApp('irops')` pipeline.
+
+### Three-column live dashboard
+
+**Top command bar** — title + subtitle ("grounded on live Sabre AirOps + FAA SWIM + METAR/TAF"), a live ticking clock chip (fictional start 06:47 PT, advances in real time while the canvas is open), `Simulate cascade` CTA, and `Ask Copilot`.
+
+**Active-event banner** — pulsing `GROUND STOP` severity badge, KORD event headline with real aviation metadata (AFP ZAU03, EDCT, KMDW/KMKE/KRFD alternates), and four KPI tiles (47 flights affected · 6,284 pax exposed · 2 FAR 117 risks · $312K DOT exposure).
+
+**Left column — Network ripple viz** — the "what a human analyst would miss" story. Red origin node (ORD · Ground Stop) trunk with four categorized branches:
+- Downstream flight delays (23 flights, with real CAS flight numbers, tails, STDs, and predicted delays)
+- Crew legality risk (2 FAR 117 pairings with FDP cushion math)
+- Passenger connections at risk (1,842 pax · 14 UMNRs · 6 WCHR · 2 medical · DOT 2h tarmac trigger analysis)
+- Gate + ramp conflicts (SEA B12/B17/C3/C7 · MDW capacity at 11:00 · curfew risk on CAS2118 ICN inbound)
+
+**Middle column — Copilot recovery plans** — three ranked plan cards with a gradient-border treatment on the recommended Plan A:
+- **Plan A (recommended)** — Route around ORD via MDW: tail swap N8421CA↔N6152CA, deadhead FO Martinez, cancel CAS1318, $146K, 81% on-time, all FAR 117 legal, $0 DOT.
+- **Plan B (conservative)** — Hold SEA: cheap ($38K) but $312K DOT exposure, 22% on-time, 2 pairings at FDP risk.
+- **Plan C (aggressive)** — Cancel 4 flights: clean recovery but $412K net cost (EU261 compensation for 96 EU-origin pax).
+
+Each plan surfaces five KPIs (misconnects, crew legality, DOT exposure, net cost, on-time rate) with ok/warn/bad color coding. Accept / Modify / "Why this plan?" buttons wired — `Why this plan?` fires a 7.5 s Copilot-styled toast with the ranking rationale.
+
+**Right column — Gate productivity (the "even when nothing's wrong" angle)** — six live gate cards for SEA hub, covering the full turn-productivity surface:
+- **B12 · CAS1247**: parallelize fueling + catering (save 6 min), pre-position cabin crew (save 2 min)
+- **B17 · CAS0842**: bag loader re-task, 11-min recovery on a predicted +11 delay
+- **C3→C7 · CAS1102 inbound**: gate swap to free C3 for priority CAS2201 OGG→SEA
+- **A4 · CAS0517**: auto-upgrade 2 loyalty pax on standby (NPS +14)
+- **D11 · CAS2118 ICN→SEA**: pre-stage overnight team, pre-position bus B-4, avoid 01:00 curfew breach
+- **N1 · CAS4412 SEA→YVR**: offer 4 standby pax on predicted under-load (+$1,842 revenue)
+
+Each gate card has Apply / secondary-action chips that fire a `showToast` + flash-green `ir-applied` CSS animation on the card.
+
+**Telemetry footer** — dark-themed live log (Foundry · GraphModel, Sabre AirOps, Crew Legality Agent, Pax Comms Agent, Pred MX Agent, Bag Misconnect Agent, Gate Optimizer, Purview). Seeds with 8 realistic entries on app-open; prepends new rows whenever Simulate Cascade runs or a gate suggestion is applied.
+
+### Interactive behaviors
+
+- **Simulate cascade button** runs a 7-step animated narration (0.3 s → 5.1 s) with Copilot-styled toasts at start and finish. Streams new rows into the telemetry log with realistic timing: graph rebuild → FAA SWIM pull → 128 candidate pruning → crew-legality check → pax impact → cost model → Purview labeling.
+- **Accept plan A/B/C** writes an audit row to the telemetry log and fires a Copilot-styled toast naming the dispatched downstream systems (Sabre AirOps, Crew Scheduling, Pax Comms, Ramp Ops, Purview).
+- **Gate "Apply" buttons** flash the card green and log to telemetry with a gate-specific outcome message ("cabin crew pre-positioned · predicted off-block 07:34").
+- **Live clock** advances second-by-second while the canvas is open; the cascade-graph-age counter ticks up in parallel.
+
+### Aviation realism checklist
+- Real FAA systems named: SWIM, AFP (ZAU03), EDCT, FSDO, Part 117 §b/§c
+- Real alternates for ORD: KMDW (Midway), KMKE (Milwaukee), KRFD (Rockford)
+- Real regulatory concepts: FAR 117 crew duty/rest, DOT 3-hour tarmac rule (with 2h notify trigger), EU261 compensation thresholds
+- Real ops concepts: pairings, FDP cushion, deadhead, tail swap, pax rebook sequencing, UMNR/WCHR/medical special-handling codes, cargo short-ship vs. hold, NPS, revenue-management standby release
+- Aircraft registrations use the Cascadia `N####CA` pattern (fictional but syntactically valid)
+- Flight numbers use `CAS####` with realistic route pairings (SEA-ORD, SEA-LAX, SEA-DEN, SEA-YVR, OGG-SEA, ICN-SEA, SEA-MDW)
+
+---
+
 ## 2026-04-22 — Fork + airline rebrand (initial)
 
 Forked from the `king-county-pao-demo` (KCPAO Microsoft 365 + Copilot demo) and rebranded for the fictional carrier **Cascadia Airways** (hub KSEA). This changelog tracks what is *shipped* in the rebrand vs. what is still on the punch list.

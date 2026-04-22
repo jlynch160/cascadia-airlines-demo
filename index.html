@@ -6709,6 +6709,368 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #c8c6c4; border-radius: 5px; }
 ::-webkit-scrollbar-thumb:hover { background: #a19f9d; }
+
+/* ==========================================================================
+   IROPS CASCADE — marquee airline canvas
+   ========================================================================== */
+#app-irops { overflow-y: auto; }
+.ir-wrap {
+  padding: 14px 20px 24px;
+  max-width: 1860px; margin: 0 auto;
+  font-family: "Segoe UI", sans-serif;
+  color: var(--gray-160);
+}
+
+/* Top bar */
+.ir-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray-30);
+  margin-bottom: 14px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.ir-title-group { display: flex; align-items: center; gap: 12px; }
+.ir-title-mark { flex-shrink: 0; }
+.ir-title { font-size: 20px; font-weight: 700; color: var(--kc-navy); letter-spacing: -0.2px; }
+.ir-subtitle { font-size: 12px; color: var(--gray-130); margin-top: 2px; }
+.ir-subtitle a { color: var(--kc-blue); cursor: pointer; text-decoration: none; border-bottom: 1px dotted var(--kc-blue); }
+.ir-topbar-right { display: flex; align-items: center; gap: 10px; }
+.ir-time-chip {
+  font-family: "Segoe UI", monospace;
+  font-size: 11px;
+  background: #f3f4f6;
+  border: 1px solid var(--gray-30);
+  color: var(--gray-130);
+  padding: 5px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.2px;
+}
+
+/* Buttons */
+.ir-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 7px 13px;
+  font-size: 12.5px;
+  font-family: inherit; font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.08s, background 0.15s, box-shadow 0.15s;
+}
+.ir-btn-primary {
+  background: linear-gradient(135deg, #0b2545, #1e3a5f);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(11,37,69,0.35);
+}
+.ir-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(11,37,69,0.5); }
+.ir-btn-ghost {
+  background: #fff; color: var(--kc-navy);
+  border-color: var(--gray-40);
+}
+.ir-btn-ghost:hover { background: #f7faff; border-color: var(--kc-blue); }
+.ir-btn-link {
+  background: transparent; color: var(--kc-blue);
+  padding: 7px 6px;
+}
+.ir-btn-link:hover { text-decoration: underline; }
+
+/* Event banner */
+.ir-event-banner {
+  display: flex; align-items: stretch; justify-content: space-between;
+  gap: 20px;
+  background: linear-gradient(90deg, #fff5e8 0%, #fff 60%);
+  border: 1px solid #f3c38a;
+  border-left: 4px solid #c50f1f;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(197,15,31,0.08);
+  animation: irBannerIn 0.35s cubic-bezier(0.22,0.61,0.36,1);
+}
+@keyframes irBannerIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+.ir-event-left { display: flex; gap: 16px; align-items: flex-start; flex: 1; min-width: 0; }
+.ir-event-severity {
+  background: #c50f1f;
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-flex; align-items: center; gap: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(197,15,31,0.35);
+}
+.ir-event-dot {
+  width: 7px; height: 7px; background: #fff; border-radius: 50%;
+  animation: irSevPulse 1.2s ease-in-out infinite;
+}
+@keyframes irSevPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+.ir-event-body { min-width: 0; }
+.ir-event-headline { font-size: 14px; font-weight: 600; color: var(--gray-160); margin-bottom: 4px; }
+.ir-event-sub { font-size: 12px; color: var(--gray-130); line-height: 1.55; }
+.ir-event-meta { display: flex; gap: 18px; flex-shrink: 0; }
+.ir-event-kpi {
+  text-align: right;
+  padding-left: 18px;
+  border-left: 1px solid rgba(197,15,31,0.15);
+}
+.ir-event-kpi:first-child { border-left: none; padding-left: 0; }
+.ir-kpi-v { font-size: 22px; font-weight: 700; color: var(--kc-navy); line-height: 1; }
+.ir-kpi-v.ir-kpi-warn { color: #c57f00; }
+.ir-kpi-l { font-size: 10.5px; color: var(--gray-130); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+/* Grid */
+.ir-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 0.95fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+@media (max-width: 1400px) { .ir-grid { grid-template-columns: 1fr 1fr; } .ir-col-gates { grid-column: 1 / -1; } }
+@media (max-width: 980px)  { .ir-grid { grid-template-columns: 1fr; } }
+
+.ir-col {
+  background: #fff;
+  border: 1px solid var(--gray-30);
+  border-radius: 10px;
+  padding: 14px 16px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.ir-card-head { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-30); }
+.ir-card-title { font-size: 14px; font-weight: 700; color: var(--kc-navy); letter-spacing: -0.1px; }
+.ir-card-sub   { font-size: 11.5px; color: var(--gray-130); margin-top: 2px; }
+.ir-pill-rank {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg,#14b8a6,#0ea5e9);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 10px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/* Cascade viz */
+.ir-cascade-viz { position: relative; padding: 4px 0 10px; }
+.ir-cas-trunk { display: flex; justify-content: center; margin-bottom: 16px; }
+.ir-cas-node.ir-cas-origin {
+  background: linear-gradient(135deg, #c50f1f, #8a0a15);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  min-width: 220px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(197,15,31,0.35);
+  position: relative;
+}
+.ir-cas-node.ir-cas-origin::after {
+  content: ''; position: absolute; left: 50%; top: 100%;
+  width: 2px; height: 14px; background: #c50f1f; transform: translateX(-50%);
+}
+.ir-cas-n-t { font-weight: 700; font-size: 13px; }
+.ir-cas-n-m { font-size: 10.5px; opacity: 0.9; margin-top: 2px; }
+
+.ir-cas-branches { display: flex; flex-direction: column; gap: 10px; }
+.ir-cas-branch {
+  border: 1px solid var(--gray-30);
+  border-radius: 8px;
+  background: #fafbfc;
+  overflow: hidden;
+  transform-origin: top center;
+}
+.ir-cas-b-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 12px;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-30);
+  font-size: 12.5px;
+}
+.ir-cas-b-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ir-cas-b-n {
+  margin-left: auto;
+  font-size: 10.5px;
+  background: #f3f4f6;
+  color: var(--gray-130);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.ir-cas-b-body { padding: 8px 12px 10px; }
+.ir-cas-item {
+  font-size: 11.5px;
+  color: var(--gray-160);
+  padding: 4px 0;
+  line-height: 1.5;
+  border-bottom: 1px dotted var(--gray-30);
+}
+.ir-cas-item:last-child { border-bottom: none; }
+.ir-cas-item.ir-cas-more { color: var(--kc-blue); font-style: italic; cursor: pointer; }
+.ir-f { font-family: "Segoe UI", monospace; font-weight: 700; color: var(--kc-navy); background: #eef3f8; padding: 1px 5px; border-radius: 3px; font-size: 10.5px; }
+.ir-m { font-family: "Segoe UI", monospace; color: var(--gray-130); font-size: 10.5px; }
+.ir-bad { color: #c50f1f; }
+.ir-warn { color: #c57f00; }
+
+.ir-cascade-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; color: var(--gray-130);
+  margin-top: 10px; padding-top: 8px;
+  border-top: 1px dashed var(--gray-40);
+}
+.ir-cascade-foot a { color: var(--kc-blue); cursor: pointer; text-decoration: none; }
+
+/* Recovery plans */
+.ir-col-plans { display: flex; flex-direction: column; gap: 10px; }
+.ir-plan {
+  border: 1px solid var(--gray-30);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #fafbfc;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.ir-plan:hover { box-shadow: 0 4px 12px rgba(11,37,69,0.08); }
+.ir-plan.ir-plan-a {
+  background: linear-gradient(#fff,#fff) padding-box, linear-gradient(135deg,#14b8a6,#0ea5e9,#f59e0b) border-box;
+  border: 1.5px solid transparent;
+  box-shadow: 0 4px 14px rgba(14,165,233,0.14);
+}
+.ir-plan-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.ir-plan-rank {
+  width: 30px; height: 30px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--kc-navy);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ir-plan-a .ir-plan-rank { background: linear-gradient(135deg,#14b8a6,#0ea5e9); }
+.ir-plan-title-wrap { flex: 1; min-width: 0; }
+.ir-plan-title { font-weight: 700; font-size: 13.5px; color: var(--kc-navy); }
+.ir-plan-score { font-size: 11px; margin-top: 3px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ir-score-pill {
+  background: #f3f4f6; color: var(--gray-130);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 10px;
+  border: 1px solid var(--gray-30);
+}
+.ir-score-pill.ir-score-good { background: linear-gradient(135deg,#14b8a6,#0ea5e9); color: #fff; border-color: transparent; }
+.ir-plan-meta { color: var(--gray-130); font-size: 11px; }
+.ir-plan-actions { list-style: none; padding: 0; margin: 8px 0 10px; }
+.ir-plan-actions li {
+  font-size: 11.5px; color: var(--gray-160);
+  padding: 4px 0 4px 14px;
+  position: relative;
+  line-height: 1.5;
+  border-bottom: 1px dotted var(--gray-30);
+}
+.ir-plan-actions li:last-child { border-bottom: none; }
+.ir-plan-actions li::before {
+  content: '▸'; position: absolute; left: 0; top: 4px;
+  color: var(--kc-blue); font-size: 10px;
+}
+.ir-plan-kpis {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  background: #fff;
+  border: 1px solid var(--gray-30);
+  border-radius: 6px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+.ir-pk { text-align: center; }
+.ir-pk-l { font-size: 9.5px; color: var(--gray-130); text-transform: uppercase; letter-spacing: 0.3px; }
+.ir-pk-v { font-size: 13px; font-weight: 700; color: var(--kc-navy); margin-top: 2px; }
+.ir-pk-v.ir-pk-ok   { color: #107c10; }
+.ir-pk-v.ir-pk-warn { color: #c57f00; }
+.ir-pk-v.ir-pk-bad  { color: #c50f1f; }
+.ir-plan-actions-row { display: flex; gap: 6px; }
+
+/* Gate productivity */
+.ir-gate-grid { display: flex; flex-direction: column; gap: 8px; }
+.ir-gate {
+  border: 1px solid var(--gray-30);
+  border-left: 3px solid #c8c6c4;
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: #fafbfc;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.ir-gate:hover { background: #f3f6fb; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.ir-gate.ir-gate-ok   { border-left-color: #107c10; }
+.ir-gate.ir-gate-warn { border-left-color: #c57f00; }
+.ir-gate.ir-gate-crit { border-left-color: #c50f1f; background: #fff8f8; }
+.ir-gate-head { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; font-size: 11.5px; margin-bottom: 6px; }
+.ir-gate-id { font-family: "Segoe UI", monospace; font-weight: 700; color: var(--kc-navy); background: #eef3f8; padding: 2px 7px; border-radius: 4px; font-size: 11px; }
+.ir-gate-flight { color: var(--gray-160); font-weight: 600; }
+.ir-gate-std { color: var(--gray-130); font-size: 11px; white-space: nowrap; }
+.ir-gate-pred { font-weight: 700; }
+.ir-gate-sugg {
+  display: flex; align-items: flex-start; gap: 7px;
+  font-size: 11.5px;
+  color: var(--gray-160);
+  line-height: 1.5;
+  background: #fff;
+  border: 1px dashed var(--gray-30);
+  border-radius: 5px;
+  padding: 7px 9px;
+  margin: 4px 0 6px;
+}
+.ir-s-ico { flex-shrink: 0; margin-top: 2px; }
+.ir-gate-actions { display: flex; gap: 5px; }
+.ir-chip {
+  font-size: 11px; font-family: inherit; font-weight: 600;
+  border: 1px solid var(--gray-40);
+  background: #fff;
+  border-radius: 12px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.ir-chip.ir-chip-ok { background: linear-gradient(135deg,#0b2545,#1e3a5f); color: #fff; border-color: transparent; }
+.ir-chip.ir-chip-ok:hover { background: linear-gradient(135deg,#0ea5e9,#0b2545); }
+.ir-chip.ir-chip-ghost:hover { background: #f3f4f6; border-color: var(--gray-60); }
+.ir-gate-foot {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px dashed var(--gray-40);
+  font-size: 11.5px;
+  color: var(--gray-130);
+}
+.ir-gate-foot strong { color: var(--kc-navy); }
+
+/* Telemetry */
+.ir-telemetry {
+  background: #051429;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #c8d9ee;
+  font-family: "Segoe UI", monospace;
+}
+.ir-tel-head { display: flex; align-items: center; gap: 10px; padding-bottom: 6px; margin-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.ir-tel-head strong { color: #fde68a; font-size: 12px; }
+.ir-tel-sub { font-size: 10.5px; color: #9ab3d0; }
+.ir-tel-body { display: flex; flex-direction: column; gap: 3px; max-height: 120px; overflow-y: auto; }
+.ir-tel-row {
+  display: grid; grid-template-columns: 78px 130px 1fr;
+  gap: 10px; font-size: 10.5px; padding: 2px 0;
+  animation: irTelIn 0.25s ease-out;
+}
+@keyframes irTelIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+.ir-tel-t { color: #fde68a; }
+.ir-tel-svc { color: #7fd1ff; }
+.ir-tel-msg { color: #e6eefb; }
+
+/* Pulse when a gate suggestion is applied */
+@keyframes irSuggApplied {
+  0%   { background: #fff; }
+  30%  { background: #d1f5d7; }
+  100% { background: #fafbfc; }
+}
+.ir-gate.ir-applied { animation: irSuggApplied 1.2s ease-out; }
 </style>
 </head>
 <body>
@@ -7672,6 +8034,29 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         <div class="app-name">Turn Plan Intake</div>
         <div class="app-meta">Ramp turn sheets &rarr; turn plans</div>
         <div class="badge" style="background:linear-gradient(135deg,#0b2545,#0ea5e9);box-shadow:0 2px 4px rgba(10,46,79,0.4);">NEW</div>
+      </div>
+
+      <!-- IROps Cascade — the marquee airline canvas -->
+      <div class="app-tile" data-personas="sarah patel maria cio" onclick="openApp('irops')">
+        <div class="app-icon" style="filter:none;">
+          <div class="tile-logo-box" style="background:linear-gradient(135deg,#0b2545 0%,#1e3a5f 55%,#f59e0b 115%);position:relative;overflow:hidden;">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" style="position:relative;z-index:2;">
+              <!-- Concentric ripple arcs = cascade -->
+              <circle cx="10" cy="15" r="3" fill="#f59e0b"/>
+              <path d="M10 15 Q14 9 18 15" stroke="#fde68a" stroke-width="1.2" fill="none" opacity="0.9"/>
+              <path d="M10 15 Q16 7 22 15" stroke="#fde68a" stroke-width="1" fill="none" opacity="0.6"/>
+              <path d="M10 15 Q18 5 26 15" stroke="#fde68a" stroke-width="0.8" fill="none" opacity="0.4"/>
+              <!-- Downstream dots -->
+              <circle cx="18" cy="10" r="1.3" fill="#14b8a6"/>
+              <circle cx="22" cy="8"  r="1.1" fill="#14b8a6" opacity="0.8"/>
+              <circle cx="24" cy="12" r="1"   fill="#14b8a6" opacity="0.65"/>
+              <circle cx="26" cy="16" r="0.9" fill="#14b8a6" opacity="0.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="app-name">IROps Cascade</div>
+        <div class="app-meta">Disruption + gate productivity</div>
+        <div class="badge" style="background:linear-gradient(135deg,#c50f1f,#f59e0b);box-shadow:0 2px 4px rgba(197,15,31,0.45);animation:kcFabPulse 2.4s ease-in-out infinite;">LIVE</div>
       </div>
       <div class="app-tile" data-personas="cio" onclick="openApp('admin')">
         <div class="app-icon" style="filter:none;">
@@ -10691,6 +11076,367 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
     </div>
   </div>
 
+  <!-- ========== IROPS CASCADE — marquee airline canvas ========== -->
+  <div id="app-irops" class="app-shell">
+    <div class="ir-wrap">
+
+      <!-- Top command bar -->
+      <div class="ir-topbar">
+        <div class="ir-title-group">
+          <svg class="ir-title-mark" width="26" height="26" viewBox="0 0 28 28">
+            <circle cx="9" cy="14" r="3" fill="#f59e0b"/>
+            <path d="M9 14 Q15 7 21 14" stroke="#f59e0b" stroke-width="1.3" fill="none" opacity="0.8"/>
+            <path d="M9 14 Q17 5 25 14" stroke="#f59e0b" stroke-width="1.1" fill="none" opacity="0.5"/>
+            <circle cx="21" cy="9" r="1.3" fill="#14b8a6"/>
+            <circle cx="24" cy="12" r="1.1" fill="#14b8a6" opacity="0.8"/>
+          </svg>
+          <div>
+            <div class="ir-title">IROps Cascade Commander</div>
+            <div class="ir-subtitle">System Operations Center · SEA Hub · grounded on live Sabre AirOps + FAA SWIM + METAR/TAF · <a onclick="showTip('Copilot is running on Foundry with a crew-legality adapter, a network-flow model, and a pax-impact regressor. Every recommendation is traceable.')">how this works</a></div>
+          </div>
+        </div>
+        <div class="ir-topbar-right">
+          <div class="ir-time-chip" id="ir-clock">06:47:00 PT · wx SEA 210/12 10SM BKN040</div>
+          <button class="ir-btn ir-btn-primary" onclick="irRunSimulation()">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M3 2l7 4-7 4z"/></svg>
+            Simulate cascade
+          </button>
+          <button class="ir-btn ir-btn-ghost" onclick="toggleCopilot('irops')">
+            <svg width="13" height="13"><use href="#copilotLogo"/></svg>
+            Ask Copilot
+          </button>
+        </div>
+      </div>
+
+      <!-- Active event banner -->
+      <div class="ir-event-banner" id="ir-event-banner">
+        <div class="ir-event-left">
+          <div class="ir-event-severity" id="ir-event-severity">
+            <span class="ir-event-dot"></span>
+            <span>GROUND STOP</span>
+          </div>
+          <div class="ir-event-body">
+            <div class="ir-event-headline"><strong>KORD · Ground Stop</strong> · thunderstorms / IMC · triggered <strong>06:18 local</strong> · est. duration <strong>2–4 h</strong></div>
+            <div class="ir-event-sub">FAA SWIM · AFP ZAU03 · EDCT in effect for all Cascadia arrivals to ORD · alternates: <strong>KMDW, KMKE, KRFD</strong> available · <strong>47</strong> Cascadia flights in cascade radius over next 6 h · Copilot ran <strong>128</strong> network sims in <strong>81 s</strong></div>
+          </div>
+        </div>
+        <div class="ir-event-meta">
+          <div class="ir-event-kpi"><div class="ir-kpi-v">47</div><div class="ir-kpi-l">flights affected</div></div>
+          <div class="ir-event-kpi"><div class="ir-kpi-v">6,284</div><div class="ir-kpi-l">pax exposed</div></div>
+          <div class="ir-event-kpi"><div class="ir-kpi-v ir-kpi-warn">2</div><div class="ir-kpi-l">FAR 117 risk</div></div>
+          <div class="ir-event-kpi"><div class="ir-kpi-v">$312K</div><div class="ir-kpi-l">DOT exposure</div></div>
+        </div>
+      </div>
+
+      <!-- Main 3-column grid -->
+      <div class="ir-grid">
+
+        <!-- LEFT: cascade tree -->
+        <div class="ir-col ir-col-cascade">
+          <div class="ir-card-head">
+            <div class="ir-card-title">Network ripple · live</div>
+            <div class="ir-card-sub">What a human analyst would miss</div>
+          </div>
+
+          <div class="ir-cascade-viz" id="ir-cascade-viz">
+            <div class="ir-cas-trunk">
+              <div class="ir-cas-node ir-cas-origin">
+                <div class="ir-cas-n-t">ORD · Ground Stop</div>
+                <div class="ir-cas-n-m">triggered 06:18 · wx</div>
+              </div>
+            </div>
+            <div class="ir-cas-branches">
+              <div class="ir-cas-branch" data-branch="downstream">
+                <div class="ir-cas-b-head">
+                  <span class="ir-cas-b-dot" style="background:#c50f1f;"></span>
+                  <strong>Downstream flight delays</strong>
+                  <span class="ir-cas-b-n">23 flights</span>
+                </div>
+                <div class="ir-cas-b-body">
+                  <div class="ir-cas-item"><span class="ir-f">CAS1247</span> SEA→ORD · tail <span class="ir-m">N8421CA</span> · STD <span class="ir-m">07:32</span> · predicted delay <strong class="ir-bad">+2h 14m</strong></div>
+                  <div class="ir-cas-item"><span class="ir-f">CAS1102</span> ORD→DEN · tail <span class="ir-m">N6152CA</span> · STD <span class="ir-m">08:15</span> · cascades to <strong>4 more</strong></div>
+                  <div class="ir-cas-item"><span class="ir-f">CAS1318</span> ORD→SEA · tail <span class="ir-m">N8821CA</span> · STD <span class="ir-m">09:05</span> · may cancel</div>
+                  <div class="ir-cas-item ir-cas-more">+20 more</div>
+                </div>
+              </div>
+              <div class="ir-cas-branch" data-branch="crew">
+                <div class="ir-cas-b-head">
+                  <span class="ir-cas-b-dot" style="background:#f59e0b;"></span>
+                  <strong>Crew legality risk (FAR 117)</strong>
+                  <span class="ir-cas-b-n">2 pairings</span>
+                </div>
+                <div class="ir-cas-b-body">
+                  <div class="ir-cas-item"><span class="ir-f">Pairing P4481</span> · Capt. Moreno + FO Kim · FDP limit <strong class="ir-bad">+28 min</strong> past cushion if delay holds</div>
+                  <div class="ir-cas-item"><span class="ir-f">Pairing P4512</span> · FA crew · rest-window compression <strong class="ir-warn">1h 10m shy</strong> of Part 117 §c</div>
+                </div>
+              </div>
+              <div class="ir-cas-branch" data-branch="pax">
+                <div class="ir-cas-b-head">
+                  <span class="ir-cas-b-dot" style="background:#c50f1f;"></span>
+                  <strong>Passenger connections at risk</strong>
+                  <span class="ir-cas-b-n">1,842 pax</span>
+                </div>
+                <div class="ir-cas-b-body">
+                  <div class="ir-cas-item"><strong>284 misconnects</strong> if Plan A accepted · <strong>612</strong> if nothing changes</div>
+                  <div class="ir-cas-item"><strong>14 UMNRs</strong>, <strong>6 WCHR</strong>, <strong>2 medical</strong> passengers in cascade window</div>
+                  <div class="ir-cas-item">DOT tarmac rule exposure: <strong class="ir-bad">7 flights</strong> within 30m of 2h notify trigger</div>
+                </div>
+              </div>
+              <div class="ir-cas-branch" data-branch="gates">
+                <div class="ir-cas-b-head">
+                  <span class="ir-cas-b-dot" style="background:#0ea5e9;"></span>
+                  <strong>Gate + ramp conflicts</strong>
+                  <span class="ir-cas-b-n">8 gates</span>
+                </div>
+                <div class="ir-cas-b-body">
+                  <div class="ir-cas-item">SEA: <strong>B12</strong>, <strong>B17</strong>, <strong>C3</strong>, <strong>C7</strong> require reassignment</div>
+                  <div class="ir-cas-item">MDW alternate: <strong>4 arrivals</strong> exceed MDW hourly capacity at 11:00 local</div>
+                  <div class="ir-cas-item">SEA curfew: <strong>CAS2118</strong> Seoul inbound at risk of 01:00 curfew breach</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ir-cascade-foot">
+            <span>Cascade graph updated <strong id="ir-graph-age">12 s ago</strong> · source: Sabre AirOps · FAA SWIM · CWT crew · PNR·OAG</span>
+            <a onclick="showTip('Open the full graph in a side panel with every edge, constraint, and probability weight.')">View full graph →</a>
+          </div>
+        </div>
+
+        <!-- MIDDLE: recovery plans -->
+        <div class="ir-col ir-col-plans">
+          <div class="ir-card-head">
+            <div class="ir-card-title">Copilot recovery plans <span class="ir-pill-rank">ranked</span></div>
+            <div class="ir-card-sub">128 sims · 81 s · constraints: FAR 117, DOT tarmac, fuel, curfew, cost</div>
+          </div>
+
+          <!-- Plan A (recommended) -->
+          <div class="ir-plan ir-plan-a">
+            <div class="ir-plan-head">
+              <div class="ir-plan-rank">A</div>
+              <div class="ir-plan-title-wrap">
+                <div class="ir-plan-title">Route around ORD via MDW</div>
+                <div class="ir-plan-score"><span class="ir-score-pill ir-score-good">recommended</span> <span class="ir-plan-meta">net pax delay −47% vs. do-nothing</span></div>
+              </div>
+            </div>
+            <ul class="ir-plan-actions">
+              <li><strong>Divert CAS1247</strong> SEA→ORD → <strong>SEA→MDW</strong> · bus bridge ORD↔MDW (45 min, 184 pax)</li>
+              <li><strong>Swap tails:</strong> N8421CA (737-800) ↔ N6152CA (737-900ER) at MDW to rebalance MDW→DEN leg</li>
+              <li><strong>Deadhead</strong> FO Martinez SEA→DEN on CAS0517 to cover Pairing P4481 expiration</li>
+              <li><strong>Cancel</strong> CAS1318 ORD→SEA (overnight tail rest) · 142 pax rebooked to CAS1322 + CAS1402</li>
+              <li><strong>Pax comms:</strong> 1,482 passengers · EU261 N/A · DOT 2-h tarmac clock OK · $8 meal vouchers to 284 misconnect pax</li>
+            </ul>
+            <div class="ir-plan-kpis">
+              <div class="ir-pk"><div class="ir-pk-l">Misconnects</div><div class="ir-pk-v ir-pk-ok">284</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">Crew legality</div><div class="ir-pk-v ir-pk-ok">✓ all legal</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">DOT exposure</div><div class="ir-pk-v ir-pk-ok">$0</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">Net cost</div><div class="ir-pk-v">$146K</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">On-time rate</div><div class="ir-pk-v ir-pk-ok">81%</div></div>
+            </div>
+            <div class="ir-plan-actions-row">
+              <button class="ir-btn ir-btn-primary" onclick="irAcceptPlan('A')">Accept plan A</button>
+              <button class="ir-btn ir-btn-ghost" onclick="irModifyPlan('A')">Modify</button>
+              <button class="ir-btn ir-btn-link" onclick="irExplainPlan('A')">Why this plan?</button>
+            </div>
+          </div>
+
+          <!-- Plan B -->
+          <div class="ir-plan">
+            <div class="ir-plan-head">
+              <div class="ir-plan-rank">B</div>
+              <div class="ir-plan-title-wrap">
+                <div class="ir-plan-title">Hold SEA, wait out the ground stop</div>
+                <div class="ir-plan-score"><span class="ir-score-pill">conservative</span> <span class="ir-plan-meta">lowest cost · highest DOT exposure</span></div>
+              </div>
+            </div>
+            <ul class="ir-plan-actions">
+              <li><strong>Hold</strong> CAS1247 + 4 other ORD-bound SEA departures at gate</li>
+              <li><strong>No tail swaps</strong> · preserves schedule integrity if GS clears by 08:30</li>
+              <li><strong>Risk:</strong> 7 flights would cross DOT 2-hour tarmac trigger if GS extends to EDCT 10:00</li>
+              <li><strong>Pax comms:</strong> hold messaging only · no rebooking</li>
+            </ul>
+            <div class="ir-plan-kpis">
+              <div class="ir-pk"><div class="ir-pk-l">Misconnects</div><div class="ir-pk-v ir-pk-warn">612</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">Crew legality</div><div class="ir-pk-v ir-pk-warn">2 at risk</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">DOT exposure</div><div class="ir-pk-v ir-pk-bad">$312K</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">Net cost</div><div class="ir-pk-v ir-pk-ok">$38K</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">On-time rate</div><div class="ir-pk-v ir-pk-bad">22%</div></div>
+            </div>
+            <div class="ir-plan-actions-row">
+              <button class="ir-btn ir-btn-ghost" onclick="irAcceptPlan('B')">Accept plan B</button>
+              <button class="ir-btn ir-btn-link" onclick="irExplainPlan('B')">Why this plan?</button>
+            </div>
+          </div>
+
+          <!-- Plan C -->
+          <div class="ir-plan">
+            <div class="ir-plan-head">
+              <div class="ir-plan-rank">C</div>
+              <div class="ir-plan-title-wrap">
+                <div class="ir-plan-title">Cancel 4 · rebuild network from 10:00</div>
+                <div class="ir-plan-score"><span class="ir-score-pill">aggressive</span> <span class="ir-plan-meta">clean recovery · high EU261/comp cost</span></div>
+              </div>
+            </div>
+            <ul class="ir-plan-actions">
+              <li><strong>Cancel</strong> CAS1247, CAS1318, CAS1402, CAS1512 · rebook 728 pax</li>
+              <li><strong>Preserve</strong> afternoon bank · full recovery from 14:00 local</li>
+              <li><strong>Pax comms:</strong> EU261 compensation applies to 96 pax (EU-originating) · $184K comp budget</li>
+              <li><strong>Tail positioning:</strong> N6152CA repositions MDW→SEA overnight to unblock 04/23</li>
+            </ul>
+            <div class="ir-plan-kpis">
+              <div class="ir-pk"><div class="ir-pk-l">Misconnects</div><div class="ir-pk-v ir-pk-ok">118</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">Crew legality</div><div class="ir-pk-v ir-pk-ok">✓ all legal</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">DOT exposure</div><div class="ir-pk-v ir-pk-ok">$0</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">Net cost</div><div class="ir-pk-v ir-pk-bad">$412K</div></div>
+              <div class="ir-pk"><div class="ir-pk-l">On-time rate</div><div class="ir-pk-v">94% (post-recovery)</div></div>
+            </div>
+            <div class="ir-plan-actions-row">
+              <button class="ir-btn ir-btn-ghost" onclick="irAcceptPlan('C')">Accept plan C</button>
+              <button class="ir-btn ir-btn-link" onclick="irExplainPlan('C')">Why this plan?</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Gate productivity (when things DON'T go wrong) -->
+        <div class="ir-col ir-col-gates">
+          <div class="ir-card-head">
+            <div class="ir-card-title">Gate productivity · SEA live</div>
+            <div class="ir-card-sub">Even on a normal day, every turn has minutes on the table</div>
+          </div>
+
+          <div class="ir-gate-grid" id="ir-gate-grid">
+
+            <div class="ir-gate ir-gate-ok">
+              <div class="ir-gate-head">
+                <div class="ir-gate-id">Gate B12</div>
+                <div class="ir-gate-flight">CAS1247 · SEA→MDW</div>
+                <div class="ir-gate-std">STD 07:32 · <span class="ir-gate-pred ir-pk-ok">pred 07:34</span></div>
+              </div>
+              <div class="ir-gate-sugg">
+                <svg class="ir-s-ico" width="12" height="12"><use href="#copilotLogo"/></svg>
+                <div>
+                  <strong>Parallelize fueling + catering</strong> · ground handler 2 free after 06:51 · saves <strong>6 min</strong> · pre-position cabin crew at 07:12 saves <strong>2 min</strong>
+                </div>
+              </div>
+              <div class="ir-gate-actions">
+                <button class="ir-chip ir-chip-ok" onclick="irApplySugg('b12')">Apply</button>
+                <button class="ir-chip ir-chip-ghost" onclick="showTip('Dismiss this suggestion — Copilot will not re-raise for 90 min.')">Not now</button>
+              </div>
+            </div>
+
+            <div class="ir-gate ir-gate-warn">
+              <div class="ir-gate-head">
+                <div class="ir-gate-id">Gate B17</div>
+                <div class="ir-gate-flight">CAS0842 · SEA→LAX</div>
+                <div class="ir-gate-std">STD 07:55 · <span class="ir-gate-pred ir-pk-warn">pred 08:06 (+11)</span></div>
+              </div>
+              <div class="ir-gate-sugg">
+                <svg class="ir-s-ico" width="12" height="12"><use href="#copilotLogo"/></svg>
+                <div>
+                  <strong>Bag loader 2 idle 4 min</strong> · 14 short-connect bags from CAS1102 inbound predicted to miss · shift loader to <strong>B15</strong> now, re-sequence B17 catering to 07:28 recovers the 11 min
+                </div>
+              </div>
+              <div class="ir-gate-actions">
+                <button class="ir-chip ir-chip-ok" onclick="irApplySugg('b17')">Apply</button>
+                <button class="ir-chip ir-chip-ghost" onclick="showTip('Queue this for the SEA ramp supervisor.')">Route to supervisor</button>
+              </div>
+            </div>
+
+            <div class="ir-gate ir-gate-warn">
+              <div class="ir-gate-head">
+                <div class="ir-gate-id">Gate C3 → C7</div>
+                <div class="ir-gate-flight">CAS1102 · ORD→DEN (inbound)</div>
+                <div class="ir-gate-std">ETA +12 min · <span class="ir-gate-pred">gate swap proposed</span></div>
+              </div>
+              <div class="ir-gate-sugg">
+                <svg class="ir-s-ico" width="12" height="12"><use href="#copilotLogo"/></svg>
+                <div>
+                  Inbound delayed 12 min · reassign arrival to <strong>C7</strong>, keep <strong>C3</strong> free for priority <strong>CAS2201</strong> OGG→SEA on-time · avoids 280-pax walk-down
+                </div>
+              </div>
+              <div class="ir-gate-actions">
+                <button class="ir-chip ir-chip-ok" onclick="irApplySugg('c3')">Accept swap</button>
+                <button class="ir-chip ir-chip-ghost" onclick="showTip('Hold on the assignment.')">Hold</button>
+              </div>
+            </div>
+
+            <div class="ir-gate ir-gate-ok">
+              <div class="ir-gate-head">
+                <div class="ir-gate-id">Gate A4</div>
+                <div class="ir-gate-flight">CAS0517 · SEA→DEN</div>
+                <div class="ir-gate-std">STD 08:22 · <span class="ir-gate-pred ir-pk-ok">on time</span></div>
+              </div>
+              <div class="ir-gate-sugg">
+                <svg class="ir-s-ico" width="12" height="12"><use href="#copilotLogo"/></svg>
+                <div>
+                  <strong>3 open F-cabin seats</strong> · 2 high-value loyalty pax on standby (1K / Mosaic) · auto-upgrade predicted NPS lift <strong>+14</strong>
+                </div>
+              </div>
+              <div class="ir-gate-actions">
+                <button class="ir-chip ir-chip-ok" onclick="irApplySugg('a4')">Upgrade both</button>
+                <button class="ir-chip ir-chip-ghost" onclick="showTip('Hold seats for revenue management review.')">Hold for RM</button>
+              </div>
+            </div>
+
+            <div class="ir-gate ir-gate-crit">
+              <div class="ir-gate-head">
+                <div class="ir-gate-id">Gate D11</div>
+                <div class="ir-gate-flight">CAS2118 · ICN→SEA (inbound)</div>
+                <div class="ir-gate-std">ETA 23:58 · <span class="ir-gate-pred ir-pk-bad">curfew risk 01:00</span></div>
+              </div>
+              <div class="ir-gate-sugg">
+                <svg class="ir-s-ico" width="12" height="12"><use href="#copilotLogo"/></svg>
+                <div>
+                  Inbound trans-Pac tracking +40 min · ground handler shift handover at 00:00 local · pre-stage <strong>overnight team</strong> at D11 now and pre-position bus <strong>B-4</strong> · <strong>avoids curfew breach</strong>
+                </div>
+              </div>
+              <div class="ir-gate-actions">
+                <button class="ir-chip ir-chip-ok" onclick="irApplySugg('d11')">Pre-stage overnight team</button>
+                <button class="ir-chip ir-chip-ghost" onclick="showTip('Escalate to SEA Airport Operations.')">Escalate</button>
+              </div>
+            </div>
+
+            <div class="ir-gate ir-gate-ok">
+              <div class="ir-gate-head">
+                <div class="ir-gate-id">Gate N1</div>
+                <div class="ir-gate-flight">CAS4412 · SEA→YVR</div>
+                <div class="ir-gate-std">STD 09:10 · <span class="ir-gate-pred ir-pk-ok">on time</span></div>
+              </div>
+              <div class="ir-gate-sugg">
+                <svg class="ir-s-ico" width="12" height="12"><use href="#copilotLogo"/></svg>
+                <div>
+                  Predicted <strong>82%</strong> load · historical similar days show 7% no-shows · <strong>offer 4 standby pax</strong> now, projected revenue <strong>+$1,842</strong>
+                </div>
+              </div>
+              <div class="ir-gate-actions">
+                <button class="ir-chip ir-chip-ok" onclick="irApplySugg('n1')">Offer standbys</button>
+                <button class="ir-chip ir-chip-ghost" onclick="showTip('Hold seats, do not offer.')">Hold</button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="ir-gate-foot">
+            <strong>Productivity banked today:</strong> <span class="ir-pk-ok">+47 min saved</span> · <span class="ir-pk-ok">$14.2K revenue uplift</span> · 3 curfew breaches avoided this week
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Telemetry footer: live AI actions stream -->
+      <div class="ir-telemetry" id="ir-telemetry">
+        <div class="ir-tel-head">
+          <strong>Live AI actions · last 5 min</strong>
+          <span class="ir-tel-sub">every decision logged to Purview · traceable to the source signal</span>
+        </div>
+        <div class="ir-tel-body" id="ir-tel-body">
+          <!-- seeded at app-open by irSeedTelemetry() -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ========== SOURCE-PREVIEW SIDE SHEET (citations) ========== -->
   <div id="source-sheet" class="source-sheet">
     <div class="ss-head">
@@ -11013,6 +11759,7 @@ function openApp(app, context) {
   if (app === 'word') kcRedactReset();
   if (app === 'pages') setTimeout(startPagesCursors, 200);
   if (app === 'agent365') startAgent365Feed();
+  if (app === 'irops') { irStartClock(); irSeedTelemetry(); }
   // Show tips per app
   const tips = {
     outlook: "In Outlook, click the Copilot logo (top-right) to triage your 147-message SOC inbox. Or click any email to read it.",
@@ -11024,9 +11771,144 @@ function openApp(app, context) {
     admin: "The Admin Center shows Copilot adoption, Copilot deflection, and a live audit log of every prompt — governance your CIO can actually point at.",
     dax:   "The Report Intake agent ambiently listens to the employee-Dispatcher conversation and drafts the case note in real time.",
     pages: "Copilot Pages is a collaborative AI canvas — numbers stay synced with the source Sabre AirOps and deck.",
-    agent365: "Agent 365 is the single pane of glass for every agent in your tenant — Microsoft, partner, or custom. Watch the live feed in the right column."
+    agent365: "Agent 365 is the single pane of glass for every agent in your tenant — Microsoft, partner, or custom. Watch the live feed in the right column.",
+    irops:    "IROps Cascade Commander. Click Simulate cascade to watch Copilot run 128 network sims in 81 s. Three recovery plans ranked. Six gate-productivity suggestions stream in parallel."
   };
   showTip(tips[app]);
+}
+
+// ============ IROPS CASCADE CANVAS ============
+let _irClockInterval = null;
+function irStartClock() {
+  if (_irClockInterval) clearInterval(_irClockInterval);
+  const el = document.getElementById('ir-clock');
+  if (!el) return;
+  const start = Date.now();
+  _irClockInterval = setInterval(() => {
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2,'0');
+    const mm = String(now.getMinutes()).padStart(2,'0');
+    const ss = String(now.getSeconds()).padStart(2,'0');
+    // Stamp the simulated fictional time (06:47 + real seconds elapsed) so it "ticks"
+    const elapsed = Math.floor((Date.now() - start) / 1000);
+    const base = 6*3600 + 47*60;
+    const sim = base + elapsed;
+    const sh = Math.floor(sim/3600), sm = Math.floor((sim%3600)/60), ss2 = sim%60;
+    el.textContent =
+      String(sh).padStart(2,'0') + ':' +
+      String(sm).padStart(2,'0') + ':' +
+      String(ss2).padStart(2,'0') +
+      ' PT · wx SEA 210/12 10SM BKN040';
+    // bump the "graph updated Xs ago" counter too
+    const age = document.getElementById('ir-graph-age');
+    if (age) age.textContent = (elapsed + 12) + ' s ago';
+  }, 1000);
+}
+
+const _irSeedLog = [
+  ['06:47:02','Foundry · GraphModel',   'Rebuilt cascade graph · <strong>47</strong> flights · <strong>128</strong> sim paths · 81 s · $2.14 Azure AI'],
+  ['06:46:58','Sabre AirOps',            'Ingested FAA SWIM update · <strong>AFP ZAU03</strong> · EDCT issued for 23 Cascadia arrivals'],
+  ['06:46:41','Crew Legality Agent',     'Flagged Pairing <strong>P4481</strong> · FDP cushion −28 min if ORD hold ≥ 09:00'],
+  ['06:46:22','Pax Comms Agent',         'Pre-drafted 284 misconnect rebook messages · EN/ES · held for Dispatcher approval'],
+  ['06:46:02','Pred MX Agent',           'Cleared N6152CA for extended utilization · engine trend stable · MX slot moved to 04/24 A-check'],
+  ['06:45:41','Bag Misconnect Agent',    'Short-connect risk re-scored · <strong>14 bags</strong> flagged at SEA B17 · offload sequence generated'],
+  ['06:45:10','Gate Optimizer',          'Proposed gate swap <strong>C3→C7</strong> for CAS1102 inbound · frees C3 for priority CAS2201'],
+  ['06:44:28','Purview',                 '✓ All 128 sim prompts labeled <em>Ops · Decision-Support</em> · tenant Foundry only'],
+];
+function irSeedTelemetry() {
+  const body = document.getElementById('ir-tel-body');
+  if (!body) return;
+  body.innerHTML = '';
+  _irSeedLog.forEach((row, i) => {
+    const div = document.createElement('div');
+    div.className = 'ir-tel-row';
+    div.style.animationDelay = (i * 60) + 'ms';
+    div.innerHTML = `<span class="ir-tel-t">${row[0]}</span><span class="ir-tel-svc">${row[1]}</span><span class="ir-tel-msg">${row[2]}</span>`;
+    body.appendChild(div);
+  });
+}
+function _irTelPush(time, svc, msg) {
+  const body = document.getElementById('ir-tel-body');
+  if (!body) return;
+  const div = document.createElement('div');
+  div.className = 'ir-tel-row';
+  div.innerHTML = `<span class="ir-tel-t">${time}</span><span class="ir-tel-svc">${svc}</span><span class="ir-tel-msg">${msg}</span>`;
+  body.prepend(div);
+}
+
+// Run the network-cascade simulation: a short animated sequence that narrates the work
+let _irSimRunning = false;
+function irRunSimulation() {
+  if (_irSimRunning) return;
+  _irSimRunning = true;
+  showToast({ kind:'copilot', title:'IROps Cascade Commander', text:'Running 128 network sims on Foundry · 47 flights · FAR 117, DOT tarmac, fuel, curfew, and cost constraints…', ttl: 3800 });
+  const steps = [
+    [300,  'Sabre AirOps',         'Fetched current state: <strong>47</strong> flights, <strong>38</strong> tails, <strong>62</strong> pairings in cascade radius'],
+    [900,  'FAA SWIM',              'Updated ORD ground-stop duration prediction · <strong>p50 = 2h 40m</strong>, p90 = 4h 10m'],
+    [1600, 'Foundry · GraphModel', 'Built 128 candidate recovery plans · pruned to 12 feasible · ranked top 3'],
+    [2400, 'Crew Legality',         '✓ All Plan A pairings legal · Plan B breaks 2 pairings at FDP · Plan C legal'],
+    [3100, 'Pax Impact',             'Plan A: 284 misconnects · Plan B: 612 · Plan C: 118 (rebook)'],
+    [3800, 'Cost Model',             'Plan A $146K · Plan B $38K + $312K DOT exposure · Plan C $412K EU261'],
+    [4600, 'Purview',                '✓ Prompts labeled · decision traceable · ready for Dispatcher review'],
+  ];
+  steps.forEach((s) => {
+    setTimeout(() => {
+      const now = new Date();
+      const t = String(now.getHours()).padStart(2,'0') + ':' +
+                String(now.getMinutes()).padStart(2,'0') + ':' +
+                String(now.getSeconds()).padStart(2,'0');
+      _irTelPush(t, s[1], s[2]);
+    }, s[0]);
+  });
+  setTimeout(() => {
+    _irSimRunning = false;
+    showToast({ kind:'copilot', title:'Simulation complete', text:'Three ranked plans ready. Plan A recommended: <strong>−47% net pax delay</strong> vs. do-nothing. Accept, modify, or ask for more alternates.', ttl: 5500 });
+  }, 5100);
+}
+
+function irAcceptPlan(which) {
+  const labels = {
+    A: 'Plan A · Route around ORD via MDW',
+    B: 'Plan B · Hold SEA, wait out the ground stop',
+    C: 'Plan C · Cancel 4, rebuild network from 10:00'
+  };
+  showToast({ kind:'copilot', title:'Recovery plan accepted', text:`${labels[which]} dispatched · Sabre AirOps, Crew Scheduling, Pax Comms, and Ramp Ops notified. Purview audit entry written.`, ttl: 5200 });
+  _irTelPush(_irNow(), 'Dispatcher', `<strong>Accepted ${which}</strong> · S. Chen · all downstream agents notified · irrevocable after 06:50`);
+}
+function irModifyPlan(which) {
+  showToast({ kind:'copilot', title:'Modify plan ' + which, text:'Opens the plan editor so you can swap aircraft, change cancellations, or override crew reassignments. Copilot will re-score in real time.' });
+}
+function irExplainPlan(which) {
+  const explain = {
+    A: "Plan A ranks highest because it hits every hard constraint (FAR 117 crew legality, DOT 2-hour tarmac rule) while keeping the afternoon bank intact. The MDW→ORD bus bridge is a known-good Cascadia playbook used 6 times in 2025 with median pax satisfaction 4.1/5.",
+    B: "Plan B is the cheapest on direct cost but fails if the ground stop extends past 08:30. Copilot assigns p(extend) = 34% based on current CWA radar + FAA AFP history. Two pairings would break FAR 117 §b.",
+    C: "Plan C is clean but expensive — it triggers EU261 compensation for 96 EU-originating pax ($184K) and forfeits the afternoon bank. Recommended only if ground stop ≥ 4h or safety-sensitive mechanical emerges."
+  };
+  showToast({ kind:'copilot', title:`Why plan ${which}?`, text: explain[which], ttl: 7500 });
+}
+
+function irApplySugg(gateKey) {
+  const gate = document.querySelector(`.ir-gate [onclick*="${gateKey}"]`)?.closest('.ir-gate');
+  if (gate) {
+    gate.classList.add('ir-applied');
+    setTimeout(() => gate.classList.remove('ir-applied'), 1400);
+  }
+  const messages = {
+    b12: 'Parallelized fueling + catering on CAS1247 · cabin crew pre-positioned · predicted off-block 07:34',
+    b17: 'Bag loader 2 re-tasked to B15 · B17 catering re-sequenced · 11-min recovery banked',
+    c3:  'Gate swap C3→C7 for CAS1102 inbound · CAS2201 priority preserved · 280-pax walk-down avoided',
+    a4:  'Two standby loyalty pax auto-upgraded to F-cabin · NPS uplift +14 recorded',
+    d11: 'Overnight ground team pre-staged at D11 · bus B-4 positioned · 01:00 curfew breach avoided',
+    n1:  '4 standby pax cleared onto CAS4412 · +$1,842 revenue booked'
+  };
+  showToast({ kind:'copilot', title:'Suggestion applied', text: messages[gateKey] || 'Gate action dispatched.', ttl: 4200 });
+  _irTelPush(_irNow(), 'Gate Optimizer', messages[gateKey] || 'Gate action dispatched');
+}
+function _irNow() {
+  const n = new Date();
+  return String(n.getHours()).padStart(2,'0') + ':' +
+         String(n.getMinutes()).padStart(2,'0') + ':' +
+         String(n.getSeconds()).padStart(2,'0');
 }
 
 // ============ GUIDED TOUR (presenter mode) ============
