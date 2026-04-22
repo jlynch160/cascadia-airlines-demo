@@ -4391,7 +4391,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 .kc-pa-step-ico.purview  { background: linear-gradient(135deg, #2c5ba8, #1a3d73); }
 .kc-pa-step-ico.teams    { background: linear-gradient(135deg, #464775, #2a2b56); }
 .kc-pa-step-ico.outlook  { background: linear-gradient(135deg, #0078d4, #005a9e); }
-.kc-pa-step-ico.sabre-airops  { background: linear-gradient(135deg, #c50f1f, #8a0a15); }
+.kc-pa-step-ico.sabreairops  { background: linear-gradient(135deg, #c50f1f, #8a0a15); }
 .kc-pa-step-ico.fserve   { background: linear-gradient(135deg, #107c10, #0a5a0a); }
 .kc-pa-step-ico.dataverse { background: linear-gradient(135deg, #0078d4, #003c6e); }
 .kc-pa-step-ico.approval { background: linear-gradient(135deg, #c77700, #8a5400); }
@@ -7037,7 +7037,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <ellipse cx="17.25" cy="12" rx="2.6" ry="3.4" fill="none" stroke="#fff" stroke-width="1.4"/>
     </symbol>
 
-    <symbol id="svcSabre AirOps" viewBox="0 0 24 24">
+    <symbol id="svcSabreAirOps" viewBox="0 0 24 24">
       <defs><linearGradient id="gOd" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e06272"/><stop offset="100%" stop-color="#8a0a15"/></linearGradient></defs>
       <rect width="24" height="24" rx="4" fill="url(#gOd)"/>
       <!-- Gavel -->
@@ -8696,7 +8696,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
           <div class="kc-pa-conn-mini" data-svc="openai"><svg class="kc-pa-conn-svg" width="22" height="22"><use href="#svcOpenAI"/></svg>Azure OpenAI<small>gpt-4.1 · private</small></div>
           <div class="kc-pa-conn-mini" data-svc="purview"><svg class="kc-pa-conn-svg" width="22" height="22"><use href="#svcPurview"/></svg>Microsoft Purview<small>tenant-wide</small></div>
           <div class="kc-pa-conn-mini" data-svc="teams"><svg class="kc-pa-conn-svg" width="22" height="22"><use href="#svcTeams"/></svg>Teams + Outlook<small>delegated</small></div>
-          <div class="kc-pa-conn-mini" data-svc="sabre-airops"><svg class="kc-pa-conn-svg" width="22" height="22"><use href="#svcSabre AirOps"/></svg>Sabre AirOps Case Mgmt<small>v5.4 · custom</small></div>
+          <div class="kc-pa-conn-mini" data-svc="sabreairops"><svg class="kc-pa-conn-svg" width="22" height="22"><use href="#svcSabreAirOps"/></svg>Sabre AirOps Case Mgmt<small>v5.4 · custom</small></div>
         </div>
       </div>
       <!-- Canvas -->
@@ -8741,7 +8741,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       </div>
       <div class="kc-efile-steps">
         <div class="kc-efile-step" data-ef="clerk">
-          <svg class="kc-efile-ico-svg" width="30" height="30"><use href="#svcSabre AirOps"/></svg>
+          <svg class="kc-efile-ico-svg" width="30" height="30"><use href="#svcSabreAirOps"/></svg>
           <div>
             <div class="kc-efile-who">FAA Filing Clerk</div>
             <small>clerk@cascadia-air.com · Sabre AirOps dispatch portal</small>
@@ -12721,7 +12721,7 @@ const KC_PA_FLOWS = {
 <span class="k">retention</span>: <span class="s">10 years</span>
 <span class="k">chainOfCustody</span>: <span class="s">preserved</span>`,
           status:'success', statusText:'written' } },
-      { kind:'action', ico:'O', icoCls:'sabre-airops',
+      { kind:'action', ico:'O', icoCls:'sabreairops',
         name:'Attach to Sabre AirOps case file',
         connector:'Sabre AirOps Case Mgmt · eDiscovery module',
         insp: {
@@ -12894,7 +12894,7 @@ const _KC_STEP_SVG = {
   purview:    'svcPurview',
   teams:      'svcTeams',
   outlook:    'svcOutlook',
-  sabre-airops:    'svcSabre AirOps',
+  sabreairops:    'svcSabreAirOps',
   dataverse:  'svcDataverse',
   approval:   'svcApproval',
   language:   'svcLanguage',
@@ -12983,7 +12983,7 @@ function _kcPaStepDur(step) {
     purview:    180,
     teams:      280,
     outlook:    180,
-    sabre-airops:    380,
+    sabreairops:    380,
     dataverse:  120,
     approval:   2200,   // simulated approval wait — compressed for demo
     language:   720,
@@ -13387,7 +13387,7 @@ function kcRunEfileSequence() {
     setTimeout(() => {
       if (stepEl) stepEl.classList.add('running');
       if (statusEl) statusEl.textContent = 'sending…';
-      kcConnPing(s.key === 'clerk' ? 'sabre-airops' : s.key === 'defense' ? 'fserve' : s.key === 'kcso' ? 'kcso' : 'purview', s.time + 200);
+      kcConnPing(s.key === 'clerk' ? 'sabreairops' : s.key === 'defense' ? 'fserve' : s.key === 'kcso' ? 'kcso' : 'purview', s.time + 200);
     }, s.delay);
     setTimeout(() => {
       if (stepEl) { stepEl.classList.remove('running'); stepEl.classList.add('done'); }
