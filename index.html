@@ -7067,10 +7067,961 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 /* Pulse when a gate suggestion is applied */
 @keyframes irSuggApplied {
   0%   { background: #fff; }
-  30%  { background: #d1f5d7; }
+  30%  { background: #d1f5d7; box-shadow: 0 0 0 3px rgba(16,185,129,0.35); }
   100% { background: #fafbfc; }
 }
 .ir-gate.ir-applied { animation: irSuggApplied 1.2s ease-out; }
+
+/* ========== IROps hero map ========== */
+.ir-hero-map {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  height: 240px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(255,255,255,0.05);
+  background: #0b1e38;
+}
+.ir-hero-svg { display: block; width: 100%; height: 100%; }
+.ir-hero-map-overlay {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  padding: 14px 20px;
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.ir-hero-title { display: flex; flex-direction: column; gap: 10px; pointer-events: auto; }
+.ir-hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(197,15,31,0.92);
+  color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  padding: 5px 11px; border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(197,15,31,0.45);
+  backdrop-filter: blur(4px);
+}
+.ir-hero-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: irSevPulse 1.1s ease-in-out infinite; }
+.ir-hero-legend {
+  display: flex; gap: 12px; align-items: center;
+  background: rgba(7, 19, 37, 0.78);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 6px 12px; border-radius: 6px;
+  font-size: 10.5px; color: #c8d9ee;
+}
+.ir-hero-legend span { display: flex; align-items: center; gap: 5px; }
+.ir-lg-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.ir-lg-red   { background: #c50f1f; box-shadow: 0 0 6px rgba(197,15,31,0.7); }
+.ir-lg-amber { background: #f59e0b; box-shadow: 0 0 6px rgba(245,158,11,0.6); }
+.ir-lg-teal  { background: #14b8a6; box-shadow: 0 0 6px rgba(20,184,166,0.6); }
+.ir-lg-green { background: #10b981; box-shadow: 0 0 6px rgba(16,185,129,0.6); }
+
+/* Plan A continuous shimmer */
+@keyframes irPlanAShimmer {
+  0%   { box-shadow: 0 4px 14px rgba(14,165,233,0.14); }
+  50%  { box-shadow: 0 4px 22px rgba(14,165,233,0.32), 0 0 0 1px rgba(20,184,166,0.25); }
+  100% { box-shadow: 0 4px 14px rgba(14,165,233,0.14); }
+}
+.ir-plan.ir-plan-a { animation: irPlanAShimmer 3.2s ease-in-out infinite; position: relative; overflow: hidden; }
+.ir-plan.ir-plan-a::before {
+  content: '';
+  position: absolute; top: 0; left: -60%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(14,165,233,0.12) 50%, transparent 100%);
+  animation: irPlanAStreak 5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes irPlanAStreak {
+  0%   { left: -60%; }
+  60%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+/* Plan A recommended pill — extra glow */
+.ir-score-pill.ir-score-good {
+  background: linear-gradient(135deg,#14b8a6,#0ea5e9);
+  color: #fff; border-color: transparent;
+  box-shadow: 0 1px 4px rgba(14,165,233,0.5), 0 0 0 2px rgba(20,184,166,0.2);
+}
+
+/* Productivity ticker (gate foot) — rich version */
+.ir-gate-foot {
+  margin-top: 12px; padding-top: 10px;
+  border-top: 1px dashed var(--gray-40);
+}
+.ir-prod-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--kc-navy);
+  margin-bottom: 8px;
+}
+.ir-prod-metrics { display: flex; flex-direction: column; gap: 9px; }
+.ir-prod-metric  { display: flex; flex-direction: column; gap: 3px; }
+.ir-prod-v {
+  font-size: 13px; font-weight: 700; color: var(--kc-navy);
+  display: flex; align-items: baseline; gap: 6px;
+}
+.ir-prod-v small { font-size: 10px; color: var(--gray-130); font-weight: 500; letter-spacing: 0.2px; }
+.ir-prod-bar {
+  height: 5px; border-radius: 3px;
+  background: #eef3f8; overflow: hidden;
+}
+.ir-prod-bar span {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, #14b8a6 0%, #0ea5e9 55%, #f59e0b 115%);
+  border-radius: 3px;
+  transition: width 0.6s cubic-bezier(0.22,0.61,0.36,1);
+}
+
+/* Countup tick feedback */
+.ir-countup.ir-tick { animation: irCountTick 0.45s ease-out; }
+@keyframes irCountTick {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.16); color: #14b8a6; }
+  100% { transform: scale(1); }
+}
+
+/* ========== Simulation full-screen overlay ========== */
+.ir-sim-overlay {
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse 900px 700px at 30% 40%, rgba(14,165,233,0.22), transparent 60%),
+              radial-gradient(ellipse 700px 500px at 75% 70%, rgba(245,158,11,0.18), transparent 55%),
+              rgba(6,13,30,0.88);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 9500;
+  animation: irSimFade 0.25s ease-out;
+}
+.ir-sim-overlay.open { display: flex; }
+@keyframes irSimFade { from { opacity: 0; } to { opacity: 1; } }
+.ir-sim-card {
+  width: 520px; max-width: 92vw;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(135deg, #14b8a6, #0ea5e9, #f59e0b, #c50f1f) border-box;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  padding: 22px 26px 20px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(14,165,233,0.18);
+  animation: irSimCardIn 0.35s cubic-bezier(0.22,0.61,0.36,1);
+}
+@keyframes irSimCardIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.ir-sim-head { display: flex; gap: 14px; align-items: center; margin-bottom: 16px; }
+.ir-sim-spark { filter: drop-shadow(0 2px 6px rgba(14,165,233,0.4)); animation: irSparkSpin 3s linear infinite; }
+@keyframes irSparkSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+.ir-sim-title { font-size: 16px; font-weight: 700; color: var(--kc-navy); letter-spacing: -0.1px; }
+.ir-sim-sub   { font-size: 11.5px; color: var(--gray-130); margin-top: 2px; }
+.ir-sim-stage {
+  font-family: "Segoe UI", monospace;
+  font-size: 12px;
+  color: var(--gray-160);
+  background: #f3f6fb;
+  border: 1px solid var(--gray-30);
+  border-radius: 6px;
+  padding: 10px 12px;
+  min-height: 38px;
+  display: flex; align-items: center;
+  margin-bottom: 12px;
+}
+.ir-sim-bar {
+  height: 8px;
+  background: #eef3f8;
+  border-radius: 4px; overflow: hidden;
+  margin-bottom: 10px;
+}
+.ir-sim-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #14b8a6 0%, #0ea5e9 50%, #f59e0b 100%);
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.3s ease-out;
+  box-shadow: 0 0 10px rgba(14,165,233,0.5);
+  animation: irBarShimmer 1.6s linear infinite;
+  background-size: 200% 100%;
+}
+@keyframes irBarShimmer { from { background-position: 0% 0%; } to { background-position: 200% 0%; } }
+.ir-sim-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: "Segoe UI", monospace;
+  font-size: 10.5px; color: var(--gray-130);
+}
+.ir-sim-foot span:nth-child(even) { color: #cbd5e1; }
+
+/* ========== FLEET TRACKER app ========== */
+#app-fleet { overflow-y: auto; background: #f3f6fb; }
+.flt-wrap { padding: 18px 22px 28px; max-width: 1780px; margin: 0 auto; }
+.flt-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray-30);
+  gap: 20px; flex-wrap: wrap;
+}
+.flt-h-title { font-size: 20px; font-weight: 700; color: var(--kc-navy); letter-spacing: -0.2px; }
+.flt-h-sub   { font-size: 12px; color: var(--gray-130); margin-top: 3px; }
+.flt-kpi-strip {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.flt-kpi {
+  background: #fff; border: 1px solid var(--gray-30); border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  position: relative; overflow: hidden;
+}
+.flt-kpi::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+  background: var(--kc-blue);
+}
+.flt-kpi.flt-kpi-good::before { background: #10b981; }
+.flt-kpi.flt-kpi-warn::before { background: #f59e0b; }
+.flt-kpi.flt-kpi-bad::before  { background: #c50f1f; }
+.flt-kpi-v { font-size: 22px; font-weight: 700; color: var(--kc-navy); line-height: 1; }
+.flt-kpi-l { font-size: 11px; color: var(--gray-130); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+.flt-kpi-d { font-size: 10.5px; margin-top: 3px; color: var(--gray-90); }
+.flt-kpi-d.good { color: #10b981; }
+.flt-kpi-d.bad  { color: #c50f1f; }
+
+.flt-grid-wrap {
+  background: #fff; border: 1px solid var(--gray-30); border-radius: 10px;
+  padding: 14px 16px; margin-bottom: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.flt-grid-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.flt-grid-title { font-size: 14px; font-weight: 700; color: var(--kc-navy); }
+.flt-filters { display: flex; gap: 6px; }
+.flt-filter-chip {
+  font-size: 11px; padding: 4px 11px; border-radius: 12px;
+  border: 1px solid var(--gray-40); background: #fff; cursor: pointer;
+  font-family: inherit; color: var(--gray-130); transition: all 0.15s;
+}
+.flt-filter-chip:hover { background: #f3f6fb; }
+.flt-filter-chip.active { background: var(--kc-navy); color: #fff; border-color: transparent; }
+
+.flt-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px;
+}
+.flt-tail {
+  border: 1px solid var(--gray-30);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  border-left: 4px solid #10b981;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+  cursor: pointer;
+}
+.flt-tail:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(11,37,69,0.12); }
+.flt-tail.flt-status-mx    { border-left-color: #f59e0b; background: #fffaf1; }
+.flt-tail.flt-status-aog   { border-left-color: #c50f1f; background: #fff5f5; }
+.flt-tail.flt-status-alert { border-left-color: #c50f1f; background: linear-gradient(to right, #fff6e8, #fff); }
+.flt-tail.flt-status-spare { border-left-color: #8b8b8b; background: #fafafa; opacity: 0.95; }
+
+.flt-t-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.flt-t-reg  { font-family: "Segoe UI", monospace; font-size: 13px; font-weight: 700; color: var(--kc-navy); }
+.flt-t-pill {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 10px;
+  background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0;
+}
+.flt-t-pill.mx    { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.flt-t-pill.aog   { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+.flt-t-pill.alert { background: linear-gradient(135deg,#fecaca,#fde68a); color: #7f1d1d; border-color: #fca5a5; }
+.flt-t-pill.spare { background: #f3f4f6; color: #4b5563; border-color: #d1d5db; }
+.flt-t-body { font-size: 11px; color: var(--gray-130); line-height: 1.5; }
+.flt-t-body strong { color: var(--kc-navy); font-weight: 600; }
+.flt-t-silhouette {
+  font-size: 26px; line-height: 1; margin-right: 6px; color: var(--kc-blue);
+}
+.flt-t-alert {
+  margin-top: 8px; padding: 7px 9px;
+  background: linear-gradient(135deg, #fff5f5, #ffe4e6);
+  border: 1px solid #fecaca; border-radius: 5px;
+  font-size: 10.5px; color: #991b1b; line-height: 1.4;
+  display: flex; gap: 6px; align-items: flex-start;
+}
+.flt-t-alert strong { color: #7f1d1d; }
+
+/* ACARS trend sparkline row */
+.flt-acars {
+  background: #051429;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #c8d9ee;
+  margin-top: 0;
+}
+.flt-acars-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.flt-acars-head strong { color: #fde68a; font-size: 12px; }
+.flt-acars-sub { font-size: 10.5px; color: #9ab3d0; }
+.flt-acars-body { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
+.flt-acars-metric {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+.flt-acars-m-l { font-size: 9.5px; color: #9ab3d0; text-transform: uppercase; letter-spacing: 0.4px; }
+.flt-acars-m-v { font-size: 14px; font-weight: 700; color: #e6eefb; margin-top: 3px; }
+.flt-acars-m-v.warn { color: #fbbf24; }
+.flt-acars-m-v.bad  { color: #f87171; }
+.flt-acars-spark {
+  margin-top: 6px;
+  height: 22px;
+  width: 100%;
+}
+
+/* ========== CREW LEGALITY BOARD app ========== */
+#app-crew { overflow-y: auto; background: #f3f6fb; }
+.crw-wrap { padding: 18px 22px 28px; max-width: 1780px; margin: 0 auto; }
+.crw-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray-30);
+  gap: 20px; flex-wrap: wrap;
+}
+.crw-h-title { font-size: 20px; font-weight: 700; color: var(--kc-navy); }
+.crw-h-sub   { font-size: 12px; color: var(--gray-130); margin-top: 3px; }
+
+.crw-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
+@media (max-width: 1200px) { .crw-grid { grid-template-columns: 1fr; } }
+
+.crw-panel {
+  background: #fff; border: 1px solid var(--gray-30); border-radius: 10px;
+  padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.crw-panel-title { font-size: 14px; font-weight: 700; color: var(--kc-navy); margin-bottom: 6px; }
+.crw-panel-sub   { font-size: 11px; color: var(--gray-130); margin-bottom: 12px; }
+
+.crw-pair {
+  display: grid; grid-template-columns: 170px 1fr 180px;
+  gap: 14px; align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-30);
+}
+.crw-pair:last-child { border-bottom: none; }
+.crw-pair-left { display: flex; flex-direction: column; gap: 3px; font-size: 11.5px; }
+.crw-pair-id { font-weight: 700; font-family: "Segoe UI", monospace; color: var(--kc-navy); }
+.crw-pair-pic { color: var(--gray-130); }
+.crw-pair-meta { font-size: 10.5px; color: var(--gray-90); }
+
+.crw-bar-wrap {
+  position: relative;
+  height: 18px; background: #eef3f8;
+  border-radius: 10px; overflow: hidden;
+}
+.crw-bar-limit {
+  position: absolute; top: 0; bottom: 0;
+  width: 2px; background: #c50f1f; z-index: 2;
+}
+.crw-bar-limit::after {
+  content: 'FAR 117 limit';
+  position: absolute; top: -14px; right: -30px;
+  font-size: 8.5px; color: #c50f1f; font-weight: 700;
+  letter-spacing: 0.3px; white-space: nowrap;
+}
+.crw-bar-fill {
+  height: 100%; border-radius: 10px;
+  background: linear-gradient(90deg, #10b981 0%, #f59e0b 75%, #c50f1f 100%);
+  position: relative;
+  transition: width 0.8s cubic-bezier(0.22,0.61,0.36,1);
+}
+.crw-bar-label {
+  position: absolute; right: 8px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px; color: #fff; font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.crw-bar-risk-ok    { background: linear-gradient(90deg, #10b981, #34d399); }
+.crw-bar-risk-warn  { background: linear-gradient(90deg, #10b981 0%, #f59e0b 85%); }
+.crw-bar-risk-bad   { background: linear-gradient(90deg, #f59e0b 0%, #c50f1f 75%); animation: crwBarPulse 2s ease-in-out infinite; }
+@keyframes crwBarPulse {
+  0%,100% { box-shadow: 0 0 0 rgba(197,15,31,0); }
+  50%     { box-shadow: 0 0 0 3px rgba(197,15,31,0.25); }
+}
+
+.crw-pair-right {
+  display: flex; flex-direction: column; gap: 4px; font-size: 10.5px; text-align: right;
+}
+.crw-action-chip {
+  align-self: flex-end;
+  font-size: 10.5px; font-family: inherit; font-weight: 600;
+  padding: 4px 9px; border-radius: 12px;
+  background: linear-gradient(135deg,#14b8a6,#0ea5e9); color: #fff;
+  border: none; cursor: pointer;
+}
+.crw-action-chip:hover { background: linear-gradient(135deg,#0ea5e9,#14b8a6); }
+.crw-status-ok   { color: #10b981; font-weight: 600; }
+.crw-status-warn { color: #c57f00; font-weight: 600; }
+.crw-status-bad  { color: #c50f1f; font-weight: 700; }
+
+.crw-reserve-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.crw-reserve-n { font-size: 20px; font-weight: 700; color: var(--kc-navy); }
+.crw-reserve-n small { font-size: 10.5px; color: var(--gray-130); font-weight: 500; letter-spacing: 0.3px; margin-left: 4px; }
+
+.crw-reserve {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--gray-30);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  background: #fafbfc;
+  transition: background 0.15s;
+}
+.crw-reserve:hover { background: #f3f6fb; }
+.crw-reserve-av {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg,#14b8a6,#0ea5e9);
+  color: #fff; font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.crw-reserve-m { flex: 1; min-width: 0; font-size: 11.5px; }
+.crw-reserve-n2 { font-weight: 600; color: var(--kc-navy); }
+.crw-reserve-d  { font-size: 10.5px; color: var(--gray-130); }
+.crw-reserve-btn {
+  font-size: 10px; padding: 3px 9px;
+  background: #fff; border: 1px solid var(--gray-40);
+  border-radius: 10px; cursor: pointer;
+  font-family: inherit; color: var(--kc-navy); font-weight: 600;
+}
+.crw-reserve-btn:hover { background: var(--kc-navy); color: #fff; }
+
+/* Heat strip at top of crew page */
+.crw-heat {
+  display: grid;
+  grid-template-columns: 80px repeat(24, 1fr);
+  gap: 2px;
+  background: #fff; border: 1px solid var(--gray-30); border-radius: 8px;
+  padding: 10px 12px; margin-bottom: 14px;
+}
+.crw-heat-label { font-size: 11px; color: var(--gray-130); display: flex; align-items: center; font-weight: 600; }
+.crw-heat-cell {
+  height: 28px;
+  border-radius: 3px;
+  background: #e6f7ea;
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+.crw-heat-cell:hover { transform: scale(1.15); z-index: 5; position: relative; }
+.crw-heat-cell.lvl-1 { background: #d1f5d7; }
+.crw-heat-cell.lvl-2 { background: #a7f3d0; }
+.crw-heat-cell.lvl-3 { background: #fbbf24; }
+.crw-heat-cell.lvl-4 { background: #f59e0b; }
+.crw-heat-cell.lvl-5 { background: #c50f1f; box-shadow: 0 0 0 1.5px rgba(197,15,31,0.35); }
+.crw-heat-foot {
+  display: flex; justify-content: space-between; font-size: 10px; color: var(--gray-130);
+  grid-column: 2 / -1;
+  margin-top: 4px;
+}
+
+/* ========== SEA OPS AI ADVISOR (Power App) ========== */
+#app-opsadvisor { overflow-y: auto; background: #f1f5f9; }
+.oa-wrap { max-width: 1680px; margin: 0 auto; padding: 0 0 28px; }
+
+/* Power-app provenance strip */
+.oa-pwr-strip {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 18px;
+  background: linear-gradient(90deg, rgba(168,85,247,0.08) 0%, rgba(168,85,247,0.02) 100%);
+  border-bottom: 1px solid rgba(168,85,247,0.15);
+  font-size: 11px; color: var(--gray-130);
+}
+.oa-pwr-strip strong { color: #7e22ce; font-weight: 700; }
+.oa-pwr-sp { flex: 1; }
+.oa-pwr-chip {
+  font-size: 10px; letter-spacing: 0.3px;
+  padding: 2px 8px; border-radius: 10px;
+  background: #fff; border: 1px solid var(--gray-30); color: var(--gray-130);
+}
+.oa-pwr-chip-good { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
+
+/* Top nav (app inner chrome) */
+.oa-topnav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 22px;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-30);
+  position: sticky; top: 0; z-index: 5;
+}
+.oa-topnav-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+.oa-tab {
+  border: none; background: transparent;
+  font-family: inherit; font-size: 12.5px; font-weight: 600;
+  color: var(--gray-130);
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.oa-tab:hover { background: #f3f6fb; color: var(--kc-navy); }
+.oa-tab.active {
+  background: #eef4fc; color: var(--kc-navy);
+  box-shadow: inset 0 -2px 0 var(--kc-blue);
+}
+.oa-ai-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12.5px; font-weight: 700; font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(14,165,233,0.4);
+  transition: transform 0.1s, box-shadow 0.15s;
+}
+.oa-ai-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(14,165,233,0.55); }
+.oa-ai-btn:active { transform: translateY(0); }
+
+/* Body grid: main + advisor side panel */
+.oa-body-grid {
+  display: grid; grid-template-columns: 1fr 0px;
+  transition: grid-template-columns 0.35s cubic-bezier(0.22,0.61,0.36,1);
+  min-height: 0;
+}
+.oa-body-grid.oa-open { grid-template-columns: 1fr 460px; }
+
+.oa-main { padding: 18px 22px; min-width: 0; }
+
+/* Page head */
+.oa-page-head { margin-bottom: 14px; }
+.oa-page-title {
+  font-size: 26px; font-weight: 700; color: var(--gray-160); letter-spacing: -0.4px; line-height: 1.15;
+}
+.oa-page-title small { font-size: 20px; color: var(--gray-130); font-weight: 500; margin-left: 2px; }
+.oa-page-meta { font-size: 12px; color: var(--gray-130); margin-top: 4px; }
+.oa-page-meta strong { color: var(--gray-160); font-weight: 600; font-family: "Segoe UI", monospace; }
+
+/* Active alert banner */
+.oa-alert {
+  display: flex; align-items: center; gap: 16px;
+  background: linear-gradient(90deg, #fff8ed 0%, #fffdf8 100%);
+  border: 1px solid #fcd9a8;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(245,158,11,0.12);
+  position: relative; overflow: hidden;
+  animation: oaAlertIn 0.4s ease-out;
+}
+@keyframes oaAlertIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+.oa-alert::before {
+  content: ''; position: absolute; top: 0; left: -80px; width: 80px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(245,158,11,0.18), transparent);
+  animation: oaAlertStreak 3.2s ease-in-out infinite;
+}
+@keyframes oaAlertStreak { 0% { left: -80px; } 100% { left: 100%; } }
+.oa-alert-ico { flex-shrink: 0; animation: oaAlertIcoPulse 1.4s ease-in-out infinite; }
+@keyframes oaAlertIcoPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+.oa-alert-body { flex: 1; }
+.oa-alert-title { font-size: 14.5px; font-weight: 700; color: #7c2d12; margin-bottom: 3px; }
+.oa-alert-desc  { font-size: 12.5px; color: var(--gray-160); }
+.oa-alert-r { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.oa-alert-time {
+  font-family: "Segoe UI", monospace; font-size: 12px;
+  color: var(--gray-130);
+  background: #fff;
+  padding: 4px 10px; border-radius: 4px; border: 1px solid var(--gray-30);
+}
+.oa-alert-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #fff; color: var(--kc-blue);
+  border: 1.5px solid var(--kc-blue);
+  padding: 7px 13px; border-radius: 6px;
+  font-family: inherit; font-weight: 700; font-size: 12px; cursor: pointer;
+  transition: all 0.15s;
+}
+.oa-alert-cta:hover { background: var(--kc-blue); color: #fff; box-shadow: 0 4px 10px rgba(14,165,233,0.35); }
+
+/* KPI row */
+.oa-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+.oa-kpi-card {
+  background: #fff;
+  border: 1px solid var(--gray-30);
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  position: relative; overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.oa-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,37,69,0.08); }
+.oa-kpi-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.oa-kpi-label { font-size: 10.5px; color: var(--gray-130); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.oa-kpi-v { display: flex; align-items: baseline; color: var(--kc-navy); margin-bottom: 2px; }
+.oa-kpi-num { font-size: 34px; font-weight: 700; line-height: 1; }
+.oa-kpi-denom { font-size: 14px; color: var(--gray-130); font-weight: 500; margin-left: 3px; }
+.oa-kpi-v.oa-kpi-alert .oa-kpi-num { color: #c50f1f; }
+.oa-kpi-sub { font-size: 11px; color: var(--gray-130); margin-bottom: 8px; }
+.oa-kpi-meter { height: 4px; border-radius: 3px; background: #eef3f8; overflow: hidden; margin-bottom: 6px; }
+.oa-kpi-meter span { display: block; height: 100%; border-radius: 3px; }
+.oa-kpi-foot { display: flex; justify-content: space-between; font-size: 11px; color: var(--gray-130); }
+.oa-kpi-foot strong { color: var(--gray-160); font-weight: 600; }
+.oa-kpi-alertrow { display: flex; justify-content: space-between; font-size: 11px; color: var(--gray-130); margin-top: 4px; }
+.oa-kpi-alertrow strong { color: #c50f1f; }
+
+/* Map + gate-status row */
+.oa-map-row { display: grid; grid-template-columns: 1.7fr 1fr; gap: 12px; margin-bottom: 14px; }
+@media (max-width: 1200px) { .oa-map-row { grid-template-columns: 1fr; } }
+.oa-map-card {
+  background: #fff; border: 1px solid var(--gray-30); border-radius: 10px;
+  overflow: hidden; padding: 12px 14px 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.oa-map-svg { display: block; width: 100%; height: 260px; background: linear-gradient(135deg, #eef5fd 0%, #e1eefb 100%); border-radius: 6px; }
+.oa-map-legend {
+  display: flex; gap: 16px;
+  font-size: 11px; color: var(--gray-130);
+  margin-top: 8px;
+}
+.oa-map-legend span { display: flex; align-items: center; gap: 5px; }
+.oa-lg { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.oa-lg-ok    { background: #10b981; }
+.oa-lg-busy  { background: #a5bcd9; }
+.oa-lg-alert { background: #c50f1f; }
+
+.oa-gstat-card {
+  background: #fff; border: 1px solid var(--gray-30); border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.oa-gstat-head { font-size: 14px; font-weight: 700; color: var(--kc-navy); margin-bottom: 12px; }
+.oa-gstat-term { margin-bottom: 14px; }
+.oa-gstat-t-head { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-160); margin-bottom: 6px; }
+.oa-gstat-t-head strong { font-weight: 700; }
+.oa-gstat-t-head small { color: var(--gray-130); }
+.oa-gstat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.oa-gs-cell {
+  font-size: 11px; font-weight: 700; color: var(--kc-navy);
+  padding: 8px 6px; border-radius: 6px; text-align: center;
+  border: 1.2px solid;
+}
+.oa-gs-cell small { display: block; font-size: 9.5px; font-weight: 500; margin-top: 2px; color: var(--gray-130); }
+.oa-gs-cell.oa-gs-ok    { background: #ecfdf5; border-color: #a7f3d0; color: #065f46; }
+.oa-gs-cell.oa-gs-ok small { color: #047857; }
+.oa-gs-cell.oa-gs-busy  { background: #f3f4f6; border-color: #d1d5db; color: #4b5563; }
+.oa-gs-cell.oa-gs-alert { background: #fef3c7; border-color: #fbbf24; color: #92400e; animation: oaCellAlert 1.5s ease-in-out infinite; }
+@keyframes oaCellAlert { 0%,100% { box-shadow: 0 0 0 rgba(245,158,11,0); } 50% { box-shadow: 0 0 0 3px rgba(245,158,11,0.35); } }
+.oa-gs-cell.oa-gs-alert small { color: #b45309; font-weight: 700; }
+.oa-gstat-legend { display: flex; gap: 14px; font-size: 10.5px; color: var(--gray-130); padding-top: 10px; border-top: 1px solid var(--gray-30); }
+.oa-gstat-legend span { display: flex; align-items: center; gap: 4px; }
+
+/* Recent activity */
+.oa-activity-card {
+  background: #fff; border: 1px solid var(--gray-30); border-radius: 10px;
+  padding: 12px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.oa-activity-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.oa-activity-head strong { font-size: 13px; color: var(--kc-navy); }
+.oa-activity-head span { font-size: 10.5px; color: var(--gray-130); }
+.oa-act-row {
+  display: grid; grid-template-columns: 70px 1fr; gap: 10px;
+  font-size: 11.5px; padding: 6px 0;
+  border-bottom: 1px solid var(--gray-30);
+}
+.oa-act-row:last-child { border-bottom: none; }
+.oa-act-t { color: var(--gray-130); font-family: "Segoe UI", monospace; font-weight: 600; }
+.oa-act-b { color: var(--gray-160); }
+.oa-act-alert .oa-act-b { color: #c50f1f; font-weight: 600; }
+.oa-act-alert { background: linear-gradient(90deg, #fff6e6, transparent); padding-left: 6px; border-radius: 4px; }
+
+/* ============ ADVISOR SIDE PANEL ============ */
+.oa-advisor {
+  background: #fff;
+  border-left: 1px solid var(--gray-30);
+  height: calc(100vh - 140px);
+  min-height: 0;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: -6px 0 20px rgba(11,37,69,0.08);
+  display: flex; flex-direction: column;
+}
+.oa-body-grid:not(.oa-open) .oa-advisor { display: none; }
+.oa-adv-head {
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--gray-30);
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(#fff,#fff) padding-box, linear-gradient(90deg,#14b8a6,#0ea5e9,#a855f7,#d946ef,#f59e0b) border-box;
+  border-top: 3px solid transparent;
+}
+.oa-adv-head-l { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--kc-navy); }
+.oa-adv-head-l strong { font-weight: 700; }
+.oa-adv-close {
+  background: none; border: none;
+  color: var(--gray-130); cursor: pointer;
+  font-size: 15px; padding: 4px 8px; border-radius: 4px;
+}
+.oa-adv-close:hover { background: var(--gray-20); color: var(--gray-160); }
+
+/* Step rail */
+.oa-adv-steps {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--gray-30);
+  background: #fafbfc;
+  font-size: 9.5px;
+}
+.oa-adv-step {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  color: var(--gray-90);
+  padding: 4px 2px;
+  border-radius: 5px;
+  text-align: center;
+  transition: all 0.25s;
+  position: relative;
+}
+.oa-adv-step span {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #e5e7eb;
+  color: #6b7280; font-weight: 700; font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s;
+}
+.oa-adv-step.active span { background: linear-gradient(135deg,#0ea5e9,#2563eb); color: #fff; box-shadow: 0 2px 8px rgba(14,165,233,0.4); }
+.oa-adv-step.active { color: var(--kc-navy); font-weight: 700; }
+.oa-adv-step.done span { background: #10b981; color: #fff; }
+.oa-adv-step.done::after {
+  content: '✓'; position: absolute; inset: 0;
+  display: flex; align-items: flex-start; justify-content: flex-end;
+  padding: 0 6px; color: #10b981; font-size: 12px; font-weight: 700;
+  pointer-events: none;
+}
+
+/* Advisor body panes */
+.oa-adv-body { padding: 16px 18px; overflow-y: auto; flex: 1; }
+.oa-adv-pane { animation: oaPaneIn 0.3s cubic-bezier(0.22,0.61,0.36,1); }
+@keyframes oaPaneIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.oa-adv-kicker {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.7px;
+  color: #0ea5e9; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.oa-adv-kicker-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.2);
+}
+.oa-adv-intro h3 { font-size: 15.5px; color: var(--gray-160); margin-bottom: 8px; font-weight: 700; line-height: 1.35; }
+.oa-adv-intro p  { font-size: 12.5px; color: var(--gray-130); line-height: 1.6; }
+.oa-adv-pane h3 { font-size: 15px; color: var(--gray-160); margin-bottom: 10px; font-weight: 700; }
+
+/* Step actions */
+.oa-adv-actions { display: flex; justify-content: space-between; gap: 8px; margin-top: 16px; }
+.oa-adv-next, .oa-adv-back, .oa-adv-cta {
+  font-family: inherit; font-size: 12.5px; font-weight: 700;
+  padding: 9px 16px; border-radius: 6px; cursor: pointer;
+  border: 1px solid transparent;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: transform 0.1s, box-shadow 0.15s;
+}
+.oa-adv-next {
+  background: linear-gradient(135deg,#0ea5e9,#2563eb); color: #fff; border: none;
+  box-shadow: 0 3px 10px rgba(14,165,233,0.4);
+  margin-left: auto;
+}
+.oa-adv-next:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(14,165,233,0.55); }
+.oa-adv-cta { background: linear-gradient(135deg,#0ea5e9,#2563eb); color: #fff; border: none; box-shadow: 0 3px 10px rgba(14,165,233,0.4); }
+.oa-adv-cta-exec { background: linear-gradient(135deg,#10b981,#059669); box-shadow: 0 3px 10px rgba(16,185,129,0.4); }
+.oa-adv-cta-exec:hover { box-shadow: 0 5px 14px rgba(16,185,129,0.55); }
+.oa-adv-back {
+  background: #fff; color: var(--gray-130);
+  border: 1px solid var(--gray-40);
+}
+.oa-adv-back:hover { background: var(--gray-20); color: var(--gray-160); }
+
+/* Textarea */
+.oa-adv-ta {
+  width: 100%; box-sizing: border-box;
+  border: 1px solid var(--gray-40);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: inherit; font-size: 12.5px;
+  line-height: 1.55;
+  resize: vertical;
+  margin-bottom: 6px;
+  background: #fff;
+}
+.oa-adv-ta:focus { outline: none; border-color: var(--kc-blue); box-shadow: 0 0 0 3px rgba(14,165,233,0.12); }
+.oa-adv-sample {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--kc-blue); cursor: pointer;
+  padding: 4px 8px; border-radius: 4px;
+  margin-bottom: 10px;
+}
+.oa-adv-sample:hover { background: #eef4fc; }
+.oa-adv-microtip {
+  font-size: 11px; color: var(--gray-130);
+  background: #f3f6fb;
+  border-left: 3px solid var(--kc-blue);
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+/* Chat bubbles */
+.oa-adv-chat-row { display: flex; margin-bottom: 12px; }
+.oa-adv-user { justify-content: flex-end; }
+.oa-adv-ai   { justify-content: flex-start; }
+.oa-adv-bubble {
+  max-width: 92%;
+  padding: 10px 14px;
+  border-radius: 12px 12px 2px 12px;
+  font-size: 12.5px;
+  background: #eef4fc;
+  color: var(--kc-navy);
+  line-height: 1.5;
+}
+.oa-adv-bubble-ai {
+  background: #fff;
+  border: 1px solid var(--gray-30);
+  border-radius: 12px 12px 12px 2px;
+  color: var(--gray-160);
+}
+.oa-adv-subhead { font-size: 10.5px; font-weight: 800; letter-spacing: 0.5px; color: #0ea5e9; text-transform: uppercase; }
+.oa-adv-ul { margin: 6px 0 0 0; padding-left: 18px; font-size: 12px; line-height: 1.65; }
+.oa-adv-ul li strong { color: var(--kc-navy); }
+.oa-adv-pills { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.oa-adv-pill {
+  font-family: inherit; font-size: 11.5px; font-weight: 600;
+  padding: 6px 13px; border-radius: 14px;
+  background: #fff; border: 1px solid #cfd8e8;
+  color: var(--kc-blue);
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.oa-adv-pill:hover { background: #eef4fc; border-color: var(--kc-blue); }
+.oa-adv-pill-sel { background: linear-gradient(135deg,#0ea5e9,#2563eb); color: #fff; border-color: transparent; }
+
+.oa-adv-input-row { display: flex; gap: 6px; margin-top: 4px; padding-top: 10px; border-top: 1px solid var(--gray-30); }
+.oa-adv-input {
+  flex: 1; border: 1px solid var(--gray-40); border-radius: 6px;
+  padding: 8px 12px; font-family: inherit; font-size: 12px;
+}
+.oa-adv-input:focus { outline: none; border-color: var(--kc-blue); box-shadow: 0 0 0 2px rgba(14,165,233,0.1); }
+.oa-adv-send {
+  border: none; background: linear-gradient(135deg,#0ea5e9,#2563eb); color: #fff;
+  width: 34px; height: 34px; border-radius: 6px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.oa-adv-send:hover { box-shadow: 0 3px 10px rgba(14,165,233,0.4); }
+
+/* Ranked option cards */
+.oa-adv-aircraft-chip {
+  display: inline-block;
+  background: #f3f6fb; color: var(--gray-130);
+  border: 1px solid var(--gray-30);
+  padding: 3px 10px; border-radius: 10px;
+  font-size: 10.5px; font-weight: 600;
+  margin-bottom: 4px;
+}
+.oa-adv-p-muted { font-size: 11.5px; color: var(--gray-130); margin-top: 4px; }
+.oa-opt {
+  background: #fff;
+  border: 1.5px solid var(--gray-30);
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.oa-opt:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(11,37,69,0.1); border-color: var(--kc-blue); }
+.oa-opt.oa-opt-rec {
+  border-color: #0ea5e9;
+  box-shadow: 0 6px 16px rgba(14,165,233,0.14);
+  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 35%);
+}
+.oa-opt-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.oa-opt-rank { font-size: 11px; font-weight: 700; color: var(--gray-130); text-transform: uppercase; letter-spacing: 0.5px; }
+.oa-opt-rec-pill {
+  background: linear-gradient(135deg,#10b981,#059669);
+  color: #fff;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.4px;
+  padding: 2px 8px; border-radius: 10px;
+}
+.oa-opt-radio {
+  margin-left: auto;
+  width: 16px; height: 16px; border: 2px solid var(--gray-40); border-radius: 50%;
+  background: #fff;
+}
+.oa-opt.oa-opt-rec .oa-opt-radio { border-color: #10b981; background: radial-gradient(#10b981 40%, transparent 45%); }
+.oa-opt-title { font-size: 15px; font-weight: 700; color: var(--kc-navy); margin-bottom: 4px; }
+.oa-opt-sub   { font-size: 12px; color: var(--gray-130); margin-bottom: 8px; line-height: 1.5; }
+.oa-opt-airline {
+  display: inline-block;
+  background: #eef4fc;
+  border: 1px solid #cfd8e8;
+  color: var(--kc-blue);
+  font-size: 10.5px; font-weight: 600;
+  padding: 3px 10px; border-radius: 10px;
+  margin-bottom: 10px;
+}
+.oa-opt-tradeoffs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.oa-to {
+  background: #fff; border: 1px solid var(--gray-30); border-radius: 6px;
+  padding: 6px 8px; text-align: center;
+}
+.oa-to-l { font-size: 9.5px; color: var(--gray-130); text-transform: uppercase; letter-spacing: 0.3px; }
+.oa-to-v {
+  font-size: 11px; font-weight: 700;
+  margin-top: 3px; padding: 2px 8px; border-radius: 10px; display: inline-block;
+}
+.oa-to-low  { background: #ecfdf5; color: #065f46; }
+.oa-to-med  { background: #fef3c7; color: #92400e; }
+.oa-to-high { background: #fee2e2; color: #991b1b; }
+.oa-to-fast { background: #dbeafe; color: #1e40af; }
+
+/* Review step */
+.oa-adv-selected {
+  background: linear-gradient(135deg,#ecfdf5,#f0fdfa);
+  border: 1px solid #a7f3d0;
+  border-left: 4px solid #10b981;
+  padding: 10px 12px; border-radius: 6px;
+  font-size: 12.5px; color: #065f46;
+  margin-bottom: 14px;
+}
+.oa-adv-rev-h { font-size: 14.5px; font-weight: 700; color: var(--kc-navy); margin-top: 10px; }
+.oa-adv-rev-sub { font-size: 11.5px; color: var(--gray-130); margin-bottom: 8px; }
+.oa-adv-rev-subh { font-size: 12px; font-weight: 700; color: var(--kc-blue); margin-top: 14px; margin-bottom: 4px; }
+.oa-adv-pane p { font-size: 12.5px; color: var(--gray-160); line-height: 1.55; }
+.oa-adv-rev-callout {
+  background: linear-gradient(90deg,#fff8ed 0%, #fffdf8 100%);
+  border: 1px solid #fcd9a8;
+  border-left: 3px solid #f59e0b;
+  padding: 10px 12px;
+  border-radius: 5px;
+  margin: 14px 0 8px;
+  font-size: 11.5px; color: #92400e; line-height: 1.55;
+}
+
+/* Checklists */
+.oa-check-col { margin-top: 12px; }
+.oa-check-cat { font-size: 11.5px; font-weight: 800; color: #ec4899; letter-spacing: 0.3px; margin-bottom: 8px; }
+.oa-check-item {
+  display: flex; align-items: flex-start; gap: 9px;
+  padding: 7px 9px; border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.12s;
+}
+.oa-check-item:hover { background: #eef4fc; }
+.oa-check-item input { margin-top: 3px; flex-shrink: 0; accent-color: #10b981; }
+.oa-check-item input:checked + span { text-decoration: line-through; color: var(--gray-90); }
+.oa-check-item span { color: var(--gray-160); line-height: 1.5; }
+.oa-watch { font-size: 11.5px; color: #7f1d1d; padding: 5px 0; }
 </style>
 </head>
 <body>
@@ -8057,6 +9008,64 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         <div class="app-name">IROps Cascade</div>
         <div class="app-meta">Disruption + gate productivity</div>
         <div class="badge" style="background:linear-gradient(135deg,#c50f1f,#f59e0b);box-shadow:0 2px 4px rgba(197,15,31,0.45);animation:kcFabPulse 2.4s ease-in-out infinite;">LIVE</div>
+      </div>
+
+      <!-- Fleet Tracker -->
+      <div class="app-tile" data-personas="sarah patel maria cio" onclick="openApp('fleet')">
+        <div class="app-icon" style="filter:none;">
+          <div class="tile-logo-box" style="background:linear-gradient(135deg,#1e3a5f 0%,#0b2545 50%,#14b8a6 115%);position:relative;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <!-- Top-down aircraft silhouette, teal -->
+              <path d="M16 3 L17.1 14 L28 16 L28 18 L17.1 17 L17 24 L20 25.5 L20 27 L16 26 L12 27 L12 25.5 L15 24 L14.9 17 L4 18 L4 16 L14.9 14 Z" fill="#fde68a" stroke="#fff" stroke-width="0.6"/>
+              <circle cx="26" cy="6" r="2.5" fill="#c50f1f" opacity="0.92"/>
+              <circle cx="26" cy="6" r="1.2" fill="#fff"/>
+            </svg>
+          </div>
+        </div>
+        <div class="app-name">Fleet Tracker</div>
+        <div class="app-meta">42 tails · ACARS + predictive MX</div>
+        <div class="badge" style="background:linear-gradient(135deg,#f59e0b,#c50f1f);box-shadow:0 2px 4px rgba(245,158,11,0.4);">1 alert</div>
+      </div>
+
+      <!-- Crew Legality Board -->
+      <div class="app-tile" data-personas="sarah patel cio" onclick="openApp('crew')">
+        <div class="app-icon" style="filter:none;">
+          <div class="tile-logo-box" style="background:linear-gradient(135deg,#0b2545 0%,#1e3a5f 60%,#0ea5e9 115%);">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <!-- FAR 117 duty bar graph motif -->
+              <rect x="4"  y="18" width="4" height="8"  fill="#10b981" rx="0.8"/>
+              <rect x="10" y="14" width="4" height="12" fill="#34d399" rx="0.8"/>
+              <rect x="16" y="10" width="4" height="16" fill="#f59e0b" rx="0.8"/>
+              <rect x="22" y="6"  width="4" height="20" fill="#c50f1f" rx="0.8"/>
+              <!-- FAR 117 limit line -->
+              <line x1="2" y1="8" x2="30" y2="8" stroke="#fde68a" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.9"/>
+              <text x="16" y="30" text-anchor="middle" fill="#fde68a" font-size="4.5" font-weight="700" font-family="Segoe UI, sans-serif" letter-spacing="0.5">FAR 117</text>
+            </svg>
+          </div>
+        </div>
+        <div class="app-name">Crew Legality</div>
+        <div class="app-meta">FAR 117 duty-time board</div>
+        <div class="badge" style="background:linear-gradient(135deg,#f59e0b,#c57f00);box-shadow:0 2px 4px rgba(245,158,11,0.4);">2 warn</div>
+      </div>
+
+      <!-- SEA Ops AI Advisor (Power App) — 6-step human-in-the-loop disruption workflow -->
+      <div class="app-tile" data-personas="sarah patel maria cio" onclick="openApp('opsadvisor')">
+        <div class="app-icon" style="filter:none;">
+          <div class="tile-logo-box" style="background:linear-gradient(135deg,#742774 0%,#a855f7 50%,#d946ef 100%);position:relative;overflow:hidden;">
+            <!-- Power Apps facets + advisor spark -->
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M16 3 L28 16 L16 29 L4 16 Z" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+              <path d="M16 8 L23 16 L16 24 L9 16 Z" fill="rgba(255,255,255,0.18)"/>
+              <circle cx="16" cy="16" r="3" fill="#fde68a"/>
+              <circle cx="16" cy="16" r="1.3" fill="#fff"/>
+              <!-- tiny spark mark -->
+              <path d="M24 7 L25 10 L28 11 L25 12 L24 15 L23 12 L20 11 L23 10 Z" fill="#fff" opacity="0.9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="app-name">Ops AI Advisor</div>
+        <div class="app-meta">Power App · 6-step disruption workflow</div>
+        <div class="badge" style="background:linear-gradient(135deg,#a855f7,#d946ef);box-shadow:0 2px 4px rgba(168,85,247,0.4);">PWR</div>
       </div>
       <div class="app-tile" data-personas="cio" onclick="openApp('admin')">
         <div class="app-icon" style="filter:none;">
@@ -11108,6 +12117,209 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         </div>
       </div>
 
+      <!-- ===== HERO CASCADE MAP — animated network visualization ===== -->
+      <div class="ir-hero-map">
+        <div class="ir-hero-map-overlay">
+          <div class="ir-hero-title">
+            <span class="ir-hero-badge">
+              <span class="ir-hero-badge-dot"></span>
+              LIVE · 47 Cascadia flights in cascade radius
+            </span>
+            <div class="ir-hero-legend">
+              <span><span class="ir-lg-dot ir-lg-red"></span>grounded</span>
+              <span><span class="ir-lg-dot ir-lg-amber"></span>delayed</span>
+              <span><span class="ir-lg-dot ir-lg-teal"></span>rerouted</span>
+              <span><span class="ir-lg-dot ir-lg-green"></span>on-time</span>
+            </div>
+          </div>
+        </div>
+        <svg class="ir-hero-svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <radialGradient id="irHeroBg" cx="50%" cy="50%" r="75%">
+              <stop offset="0%"  stop-color="#122747"/>
+              <stop offset="55%" stop-color="#0b1e38"/>
+              <stop offset="100%" stop-color="#061427"/>
+            </radialGradient>
+            <radialGradient id="irPulseRed" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"  stop-color="#ef4444" stop-opacity="0.9"/>
+              <stop offset="70%" stop-color="#c50f1f" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#c50f1f" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="irFlowRed" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"  stop-color="#c50f1f" stop-opacity="0.0"/>
+              <stop offset="50%" stop-color="#ef4444" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#c50f1f" stop-opacity="0.0"/>
+            </linearGradient>
+            <linearGradient id="irFlowTeal" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"  stop-color="#14b8a6" stop-opacity="0.0"/>
+              <stop offset="50%" stop-color="#2dd4bf" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.0"/>
+            </linearGradient>
+            <filter id="irGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Background -->
+          <rect width="1200" height="320" fill="url(#irHeroBg)"/>
+          <!-- Subtle grid -->
+          <g stroke="rgba(255,255,255,0.035)" stroke-width="1">
+            <line x1="0" y1="80"  x2="1200" y2="80"/>
+            <line x1="0" y1="160" x2="1200" y2="160"/>
+            <line x1="0" y1="240" x2="1200" y2="240"/>
+            <line x1="200"  y1="0" x2="200"  y2="320"/>
+            <line x1="400"  y1="0" x2="400"  y2="320"/>
+            <line x1="600"  y1="0" x2="600"  y2="320"/>
+            <line x1="800"  y1="0" x2="800"  y2="320"/>
+            <line x1="1000" y1="0" x2="1000" y2="320"/>
+          </g>
+
+          <!-- ==== FLIGHT ROUTES (behind airports) ==== -->
+          <!-- SEA→ORD (grounded) -->
+          <line x1="180" y1="130" x2="700" y2="150" stroke="#c50f1f" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.55"/>
+          <!-- SEA→MDW reroute (teal) -->
+          <path d="M180 130 Q450 95 690 120" stroke="#14b8a6" stroke-width="1.4" stroke-dasharray="5 3" fill="none" opacity="0.75"/>
+          <!-- ORD→DEN (amber delayed) -->
+          <line x1="700" y1="150" x2="520" y2="205" stroke="#f59e0b" stroke-width="1.2" opacity="0.55"/>
+          <!-- ORD→SEA inbound (amber delayed) -->
+          <line x1="700" y1="150" x2="180" y2="130" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+          <!-- MKE, RFD alternates near ORD -->
+          <line x1="700" y1="150" x2="750" y2="95"  stroke="#14b8a6" stroke-width="1" opacity="0.45"/>
+          <line x1="700" y1="150" x2="680" y2="105" stroke="#14b8a6" stroke-width="1" opacity="0.45"/>
+          <!-- DEN→LAX (on-time) -->
+          <line x1="520" y1="205" x2="320" y2="240" stroke="#10b981" stroke-width="1" opacity="0.6"/>
+          <!-- SEA→LAX -->
+          <line x1="180" y1="130" x2="320" y2="240" stroke="#10b981" stroke-width="1" opacity="0.55"/>
+          <!-- SEA→YVR -->
+          <line x1="180" y1="130" x2="150" y2="60"  stroke="#10b981" stroke-width="1" opacity="0.55"/>
+          <!-- ORD→BOS, ORD→JFK, ORD→ATL (delays, East coast) -->
+          <line x1="700" y1="150" x2="1060" y2="95"  stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
+          <line x1="700" y1="150" x2="1070" y2="140" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
+          <line x1="700" y1="150" x2="960"  y2="230" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
+          <!-- OGG→SEA long route -->
+          <path d="M45 230 Q110 200 180 130" stroke="#10b981" stroke-width="1" fill="none" opacity="0.5"/>
+          <!-- ICN→SEA curfew-risk (amber dashed) -->
+          <path d="M30 90 Q105 110 180 130" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="5 3" fill="none" opacity="0.65"/>
+
+          <!-- ==== ANIMATED FLOW DOTS on routes ==== -->
+          <!-- SEA→MDW reroute dot (teal, moving) -->
+          <circle r="4" fill="#2dd4bf" filter="url(#irGlow)">
+            <animateMotion dur="3.2s" repeatCount="indefinite"
+              path="M180 130 Q450 95 690 120"/>
+          </circle>
+          <circle r="3" fill="#2dd4bf" filter="url(#irGlow)" opacity="0.75">
+            <animateMotion dur="3.2s" repeatCount="indefinite" begin="1s"
+              path="M180 130 Q450 95 690 120"/>
+          </circle>
+          <!-- OGG→SEA (on-time green) -->
+          <circle r="3.5" fill="#34d399" filter="url(#irGlow)">
+            <animateMotion dur="5s" repeatCount="indefinite" path="M45 230 Q110 200 180 130"/>
+          </circle>
+          <!-- ORD→DEN amber delayed -->
+          <circle r="3" fill="#fbbf24" opacity="0.8">
+            <animateMotion dur="4.5s" repeatCount="indefinite"
+              path="M700 150 L520 205"/>
+          </circle>
+          <!-- ICN→SEA transpac curfew risk -->
+          <circle r="3.5" fill="#fbbf24" filter="url(#irGlow)">
+            <animateMotion dur="7s" repeatCount="indefinite"
+              path="M30 90 Q105 110 180 130"/>
+          </circle>
+
+          <!-- ==== ORD PULSING RIPPLES (the cascade origin) ==== -->
+          <circle cx="700" cy="150" r="22" fill="url(#irPulseRed)">
+            <animate attributeName="r"       values="22;95;22"  dur="3.2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.95;0;0.95" dur="3.2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="700" cy="150" r="22" fill="url(#irPulseRed)">
+            <animate attributeName="r"       values="22;70;22" dur="3.2s" repeatCount="indefinite" begin="1.0s"/>
+            <animate attributeName="opacity" values="0.7;0;0.7" dur="3.2s" repeatCount="indefinite" begin="1.0s"/>
+          </circle>
+          <circle cx="700" cy="150" r="22" fill="url(#irPulseRed)">
+            <animate attributeName="r"       values="22;48;22" dur="3.2s" repeatCount="indefinite" begin="2.0s"/>
+            <animate attributeName="opacity" values="0.5;0;0.5" dur="3.2s" repeatCount="indefinite" begin="2.0s"/>
+          </circle>
+
+          <!-- ==== AIRPORT NODES ==== -->
+          <!-- ORD (grounded, red, pulsing) -->
+          <g transform="translate(700 150)">
+            <circle r="11" fill="#c50f1f" stroke="#fff" stroke-width="2" filter="url(#irGlow)"/>
+            <circle r="4" fill="#fff"/>
+            <text y="-18" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Segoe UI, sans-serif" letter-spacing="1">KORD</text>
+            <text y="30" text-anchor="middle" fill="#ff9393" font-size="10" font-weight="600" font-family="Segoe UI, sans-serif">GROUND STOP · wx</text>
+          </g>
+
+          <!-- SEA (origin hub, teal — Cascadia hub) -->
+          <g transform="translate(180 130)">
+            <circle r="10" fill="#14b8a6" stroke="#fff" stroke-width="1.6" filter="url(#irGlow)"/>
+            <circle r="3" fill="#fff"/>
+            <text y="-16" text-anchor="middle" fill="#fff" font-size="12" font-weight="700" font-family="Segoe UI, sans-serif" letter-spacing="0.8">KSEA</text>
+            <text y="26" text-anchor="middle" fill="#9ce8dd" font-size="10" font-family="Segoe UI, sans-serif">Cascadia hub</text>
+          </g>
+
+          <!-- MDW (alternate, teal — being used for reroute) -->
+          <g transform="translate(690 120)">
+            <circle r="7" fill="#14b8a6" stroke="#fff" stroke-width="1.4"/>
+            <circle r="2" fill="#fff"/>
+            <text x="12" y="3" fill="#9ce8dd" font-size="10" font-weight="700" font-family="Segoe UI, sans-serif">KMDW</text>
+            <text x="12" y="15" fill="#9ce8dd" font-size="9" font-family="Segoe UI, sans-serif" opacity="0.8">alt · accepting</text>
+          </g>
+          <!-- MKE alternate -->
+          <g transform="translate(750 95)">
+            <circle r="5" fill="#14b8a6" opacity="0.8"/>
+            <text x="9" y="4" fill="#9ce8dd" font-size="9" font-family="Segoe UI, sans-serif" opacity="0.85">KMKE</text>
+          </g>
+          <!-- RFD alternate -->
+          <g transform="translate(680 105)">
+            <circle r="4" fill="#14b8a6" opacity="0.7"/>
+            <text x="-30" y="-5" fill="#9ce8dd" font-size="9" font-family="Segoe UI, sans-serif" opacity="0.75">KRFD</text>
+          </g>
+
+          <!-- DEN (delayed, amber) -->
+          <g transform="translate(520 205)">
+            <circle r="8" fill="#f59e0b" stroke="#fff" stroke-width="1.3"/>
+            <circle r="2.5" fill="#fff"/>
+            <text y="-14" text-anchor="middle" fill="#fde68a" font-size="11" font-weight="700" font-family="Segoe UI, sans-serif">KDEN</text>
+            <text y="22" text-anchor="middle" fill="#fde68a" font-size="9" font-family="Segoe UI, sans-serif" opacity="0.85">+48m</text>
+          </g>
+          <!-- LAX (on-time green) -->
+          <g transform="translate(320 240)">
+            <circle r="7" fill="#10b981" stroke="#fff" stroke-width="1.2"/>
+            <text y="-13" text-anchor="middle" fill="#a7f3d0" font-size="11" font-weight="700" font-family="Segoe UI, sans-serif">KLAX</text>
+          </g>
+          <!-- YVR -->
+          <g transform="translate(150 60)">
+            <circle r="6" fill="#10b981" stroke="#fff" stroke-width="1"/>
+            <text x="10" y="4" fill="#a7f3d0" font-size="10" font-weight="600" font-family="Segoe UI, sans-serif">CYVR</text>
+          </g>
+          <!-- OGG -->
+          <g transform="translate(45 230)">
+            <circle r="5" fill="#10b981" stroke="#fff" stroke-width="1"/>
+            <text x="9" y="4" fill="#a7f3d0" font-size="10" font-weight="600" font-family="Segoe UI, sans-serif">PHOG</text>
+          </g>
+          <!-- ICN (amber, curfew risk) -->
+          <g transform="translate(30 90)">
+            <circle r="6" fill="#f59e0b" stroke="#fff" stroke-width="1"/>
+            <text x="9" y="4" fill="#fde68a" font-size="10" font-weight="600" font-family="Segoe UI, sans-serif">RKSI</text>
+            <text x="9" y="16" fill="#fde68a" font-size="8" font-family="Segoe UI, sans-serif" opacity="0.85">curfew risk</text>
+          </g>
+          <!-- East coast (small cluster) -->
+          <g transform="translate(1060 95)">
+            <circle r="5" fill="#f59e0b" opacity="0.85"/>
+            <text x="9" y="4" fill="#fde68a" font-size="10" font-family="Segoe UI, sans-serif">KBOS</text>
+          </g>
+          <g transform="translate(1070 140)">
+            <circle r="5" fill="#f59e0b" opacity="0.85"/>
+            <text x="9" y="4" fill="#fde68a" font-size="10" font-family="Segoe UI, sans-serif">KJFK</text>
+          </g>
+          <g transform="translate(960 230)">
+            <circle r="5" fill="#f59e0b" opacity="0.85"/>
+            <text x="9" y="4" fill="#fde68a" font-size="10" font-family="Segoe UI, sans-serif">KATL</text>
+          </g>
+        </svg>
+      </div>
+
       <!-- Active event banner -->
       <div class="ir-event-banner" id="ir-event-banner">
         <div class="ir-event-left">
@@ -11121,10 +12333,10 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
           </div>
         </div>
         <div class="ir-event-meta">
-          <div class="ir-event-kpi"><div class="ir-kpi-v">47</div><div class="ir-kpi-l">flights affected</div></div>
-          <div class="ir-event-kpi"><div class="ir-kpi-v">6,284</div><div class="ir-kpi-l">pax exposed</div></div>
-          <div class="ir-event-kpi"><div class="ir-kpi-v ir-kpi-warn">2</div><div class="ir-kpi-l">FAR 117 risk</div></div>
-          <div class="ir-event-kpi"><div class="ir-kpi-v">$312K</div><div class="ir-kpi-l">DOT exposure</div></div>
+          <div class="ir-event-kpi"><div class="ir-kpi-v ir-countup" data-to="47" data-prefix="" data-suffix="">47</div><div class="ir-kpi-l">flights affected</div></div>
+          <div class="ir-event-kpi"><div class="ir-kpi-v ir-countup" data-to="6284" data-comma="1">6,284</div><div class="ir-kpi-l">pax exposed</div></div>
+          <div class="ir-event-kpi"><div class="ir-kpi-v ir-kpi-warn ir-countup" data-to="2">2</div><div class="ir-kpi-l">FAR 117 risk</div></div>
+          <div class="ir-event-kpi"><div class="ir-kpi-v ir-countup" data-to="312" data-prefix="$" data-suffix="K">$312K</div><div class="ir-kpi-l">DOT exposure</div></div>
         </div>
       </div>
 
@@ -11416,11 +12628,47 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 
           </div>
 
-          <div class="ir-gate-foot">
-            <strong>Productivity banked today:</strong> <span class="ir-pk-ok">+47 min saved</span> · <span class="ir-pk-ok">$14.2K revenue uplift</span> · 3 curfew breaches avoided this week
+          <div class="ir-gate-foot" id="ir-gate-foot">
+            <div class="ir-prod-label">Productivity banked today</div>
+            <div class="ir-prod-metrics">
+              <div class="ir-prod-metric">
+                <div class="ir-prod-v"><span id="ir-prod-min">47</span><small>min saved</small></div>
+                <div class="ir-prod-bar"><span id="ir-prod-min-bar" style="width:47%"></span></div>
+              </div>
+              <div class="ir-prod-metric">
+                <div class="ir-prod-v">$<span id="ir-prod-rev">14.2</span><small>K revenue uplift</small></div>
+                <div class="ir-prod-bar"><span id="ir-prod-rev-bar" style="width:56%"></span></div>
+              </div>
+              <div class="ir-prod-metric">
+                <div class="ir-prod-v"><span id="ir-prod-curfew">3</span><small>curfew breaches avoided · wk</small></div>
+                <div class="ir-prod-bar"><span style="width:60%"></span></div>
+              </div>
+            </div>
           </div>
         </div>
 
+      </div>
+
+      <!-- Full-screen sim processing overlay -->
+      <div class="ir-sim-overlay" id="ir-sim-overlay">
+        <div class="ir-sim-card">
+          <div class="ir-sim-head">
+            <svg class="ir-sim-spark" width="32" height="32"><use href="#copilotLogo"/></svg>
+            <div>
+              <div class="ir-sim-title">Running cascade simulation…</div>
+              <div class="ir-sim-sub">Foundry · 128 recovery paths · FAR 117 / DOT tarmac / fuel / curfew / cost</div>
+            </div>
+          </div>
+          <div class="ir-sim-stage" id="ir-sim-stage">Initializing…</div>
+          <div class="ir-sim-bar"><div class="ir-sim-bar-fill" id="ir-sim-bar-fill"></div></div>
+          <div class="ir-sim-foot">
+            <span id="ir-sim-count">0 / 128 sims</span>
+            <span>·</span>
+            <span id="ir-sim-elapsed">0.0 s</span>
+            <span>·</span>
+            <span id="ir-sim-cost">$0.00 Azure AI</span>
+          </div>
+        </div>
       </div>
 
       <!-- Telemetry footer: live AI actions stream -->
@@ -11431,6 +12679,851 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         </div>
         <div class="ir-tel-body" id="ir-tel-body">
           <!-- seeded at app-open by irSeedTelemetry() -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== FLEET TRACKER ========== -->
+  <div id="app-fleet" class="app-shell">
+    <div class="flt-wrap">
+
+      <div class="flt-head">
+        <div>
+          <div class="flt-h-title">Fleet Tracker · 42 Cascadia tails</div>
+          <div class="flt-h-sub">Live ACARS telemetry · Azure IoT ingest · Predictive MX agent on Foundry · <span style="color:#c50f1f;font-weight:600;">1 emerging anomaly</span> flagged</div>
+        </div>
+        <div class="flt-filters">
+          <button class="flt-filter-chip active" onclick="fltRenderGrid('all', this)">All (42)</button>
+          <button class="flt-filter-chip" onclick="fltRenderGrid('active', this)">Active (38)</button>
+          <button class="flt-filter-chip" onclick="fltRenderGrid('alert', this)">Alert (1)</button>
+          <button class="flt-filter-chip" onclick="fltRenderGrid('mx', this)">In MX (2)</button>
+          <button class="flt-filter-chip" onclick="fltRenderGrid('aog', this)">AOG (0)</button>
+          <button class="flt-filter-chip" onclick="fltRenderGrid('spare', this)">Spare (2)</button>
+        </div>
+      </div>
+
+      <!-- KPI strip -->
+      <div class="flt-kpi-strip">
+        <div class="flt-kpi flt-kpi-good"><div class="flt-kpi-v">98.4<small style="font-size:13px;">%</small></div><div class="flt-kpi-l">Dispatch reliability</div><div class="flt-kpi-d good">▲ 0.3 pts vs MTD</div></div>
+        <div class="flt-kpi"><div class="flt-kpi-v">38</div><div class="flt-kpi-l">In service</div><div class="flt-kpi-d">4 at gate · 34 airborne / turning</div></div>
+        <div class="flt-kpi flt-kpi-warn"><div class="flt-kpi-v">1</div><div class="flt-kpi-l">Emerging anomaly</div><div class="flt-kpi-d">N6152CA · EGT trend</div></div>
+        <div class="flt-kpi"><div class="flt-kpi-v">2</div><div class="flt-kpi-l">Scheduled MX</div><div class="flt-kpi-d">N8821CA A-check · N8421CA line</div></div>
+        <div class="flt-kpi flt-kpi-good"><div class="flt-kpi-v">$428K</div><div class="flt-kpi-l">AOGs avoided · YTD</div><div class="flt-kpi-d good">Pred MX prevented 4 events</div></div>
+      </div>
+
+      <!-- Top-priority ACARS anomaly card (the realistic MX copilot story) -->
+      <div class="flt-grid-wrap" style="border-left:4px solid #c50f1f; padding:14px 18px;">
+        <div class="flt-grid-head">
+          <div>
+            <div class="flt-grid-title" style="color:#c50f1f;">⚠ Emerging anomaly · N6152CA · engine #2 EGT + vibration trend</div>
+            <div style="font-size:11.5px;color:var(--gray-130);margin-top:3px;">Copilot flagged 14 min ago based on 36 h of ACARS telemetry · p(unscheduled removal in next 40 cycles) = <strong>78%</strong></div>
+          </div>
+          <button class="ir-btn ir-btn-primary" onclick="showToast({kind:'copilot',title:'MX slot booked',text:'N6152CA · A-check slot at SEA hangar 4 moved up to 04/24 22:00 local · Rolls-Royce part RB211-T-042 pre-ordered · no impact to schedule (tail swap with N8821CA).',ttl:5500})">Approve MX slot + part order</button>
+        </div>
+        <!-- ACARS dark panel -->
+        <div class="flt-acars">
+          <div class="flt-acars-head">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#7fd1ff"><circle cx="3" cy="7" r="2"/><circle cx="7" cy="7" r="2"/><circle cx="11" cy="7" r="2"/></svg>
+            <strong>ACARS · live feed</strong>
+            <span class="flt-acars-sub">ARINC 620 · 36 h rolling · Azure IoT / Foundry graph model</span>
+          </div>
+          <div class="flt-acars-body">
+            <div class="flt-acars-metric">
+              <div class="flt-acars-m-l">EGT · Eng 2</div>
+              <div class="flt-acars-m-v bad">612 °C <small style="font-size:9px;color:#f87171;">+14 °C vs baseline</small></div>
+              <svg class="flt-acars-spark" viewBox="0 0 120 22" preserveAspectRatio="none">
+                <polyline fill="none" stroke="#f87171" stroke-width="1.4" points="0,16 10,15 20,16 30,14 40,15 50,13 60,12 70,10 80,8 90,6 100,4 110,3 120,2"/>
+                <line x1="0" y1="12" x2="120" y2="12" stroke="rgba(255,255,255,0.12)" stroke-dasharray="2 2"/>
+              </svg>
+            </div>
+            <div class="flt-acars-metric">
+              <div class="flt-acars-m-l">N1 vibration</div>
+              <div class="flt-acars-m-v warn">3.8 mils <small style="font-size:9px;color:#fbbf24;">+0.6 vs 30-day</small></div>
+              <svg class="flt-acars-spark" viewBox="0 0 120 22" preserveAspectRatio="none">
+                <polyline fill="none" stroke="#fbbf24" stroke-width="1.4" points="0,17 10,17 20,16 30,15 40,15 50,14 60,13 70,11 80,10 90,8 100,7 110,6 120,5"/>
+              </svg>
+            </div>
+            <div class="flt-acars-metric">
+              <div class="flt-acars-m-l">Oil temp · Eng 2</div>
+              <div class="flt-acars-m-v">102 °C</div>
+              <svg class="flt-acars-spark" viewBox="0 0 120 22" preserveAspectRatio="none">
+                <polyline fill="none" stroke="#7fd1ff" stroke-width="1.4" points="0,12 10,11 20,12 30,11 40,12 50,10 60,11 70,10 80,11 90,10 100,11 110,10 120,11"/>
+              </svg>
+            </div>
+            <div class="flt-acars-metric">
+              <div class="flt-acars-m-l">Cycles to pred. failure</div>
+              <div class="flt-acars-m-v warn">~40</div>
+              <svg class="flt-acars-spark" viewBox="0 0 120 22" preserveAspectRatio="none">
+                <polyline fill="none" stroke="#2dd4bf" stroke-width="1.4" points="0,2 10,3 20,4 30,5 40,6 50,7 60,8 70,10 80,11 90,13 100,15 110,17 120,19"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tail grid -->
+      <div class="flt-grid-wrap">
+        <div class="flt-grid-head">
+          <div class="flt-grid-title">Fleet · live status</div>
+          <div style="font-size:11px;color:var(--gray-130);">click any tail for full Copilot brief</div>
+        </div>
+        <div class="flt-grid" id="flt-grid"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== CREW LEGALITY BOARD ========== -->
+  <div id="app-crew" class="app-shell">
+    <div class="crw-wrap">
+      <div class="crw-head">
+        <div>
+          <div class="crw-h-title">Crew Legality Board · FAR 117</div>
+          <div class="crw-h-sub">Live duty-time scoring for every active Cascadia pairing · reserve pool live · Copilot proposes reassignments before limits trip</div>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <div class="flt-kpi flt-kpi-good" style="min-width:130px;"><div class="flt-kpi-v" style="font-size:18px;">218</div><div class="flt-kpi-l">Pairings scored</div></div>
+          <div class="flt-kpi flt-kpi-warn" style="min-width:130px;"><div class="flt-kpi-v" style="font-size:18px;">2</div><div class="flt-kpi-l">At risk · 24 h</div></div>
+          <div class="flt-kpi flt-kpi-good" style="min-width:130px;"><div class="flt-kpi-v" style="font-size:18px;">0</div><div class="flt-kpi-l">Breaks · YTD</div></div>
+        </div>
+      </div>
+
+      <!-- 24h heat strip -->
+      <div class="crw-heat" id="crw-heat">
+        <!-- rendered by crwRenderHeat() -->
+      </div>
+
+      <div class="crw-grid">
+        <div class="crw-panel">
+          <div class="crw-panel-title">Active pairings · today</div>
+          <div class="crw-panel-sub">Each bar is today's duty time for that pairing relative to the FAR 117 Part 117 §b limit. Hover or click for the full Copilot legality trail.</div>
+          <div id="crw-pair-list"></div>
+        </div>
+        <div class="crw-panel">
+          <div class="crw-panel-title">Reserve pool · callable</div>
+          <div class="crw-reserve-head">
+            <div class="crw-reserve-n">14<small>reserves available SEA</small></div>
+            <div style="font-size:10.5px;color:var(--gray-130);">of 18 on call</div>
+          </div>
+          <div class="crw-panel-sub">Ranked by Copilot: current duty posture, commute distance, base, and Cascadia-specific fit. Click call-up to notify via Outlook + SMS + Teams.</div>
+          <div id="crw-reserve-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SEA OPS AI ADVISOR — Power App (6-step workflow) ========== -->
+  <div id="app-opsadvisor" class="app-shell">
+    <div class="oa-wrap">
+      <!-- Power App provenance strip -->
+      <div class="oa-pwr-strip">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="none"><path d="M16 3 L28 16 L16 29 L4 16 Z" fill="rgba(168,85,247,0.25)" stroke="#a855f7" stroke-width="1.5"/></svg>
+        <strong>Cascadia.OpsAdvisor</strong>
+        <span>Power App · canvas · v2.4.1 · published 2 h ago by D. Kowalski</span>
+        <span class="oa-pwr-sp"></span>
+        <span class="oa-pwr-chip">Dataverse: casa-prod-us-west-2</span>
+        <span class="oa-pwr-chip">DLP: Confidential · blocked external</span>
+        <span class="oa-pwr-chip oa-pwr-chip-good">● Purview 100% audit</span>
+      </div>
+
+      <!-- Dashboard top-nav -->
+      <div class="oa-topnav">
+        <div class="oa-topnav-tabs">
+          <button class="oa-tab active">Overview</button>
+          <button class="oa-tab">Gate Status</button>
+          <button class="oa-tab">Flight Schedule</button>
+          <button class="oa-tab">Alerts &amp; Events</button>
+          <button class="oa-tab">Resources</button>
+          <button class="oa-tab">Analytics</button>
+          <button class="oa-tab">Settings</button>
+        </div>
+        <button class="oa-ai-btn" id="oa-ai-btn" onclick="oaOpenAdvisor()">
+          <svg width="14" height="14"><use href="#copilotLogo"/></svg>
+          Ask Cascadia Ops AI
+        </button>
+      </div>
+
+      <div class="oa-body-grid">
+        <!-- MAIN dashboard -->
+        <div class="oa-main" id="oa-main">
+
+          <!-- Page header -->
+          <div class="oa-page-head">
+            <div>
+              <h1 class="oa-page-title">Seattle-Tacoma International <small>(KSEA)</small></h1>
+              <div class="oa-page-meta">Illustrative dashboard · data via Sabre AirOps + FAA SWIM · last updated <strong id="oa-updated">06:47:12 PT</strong> · Wednesday, April 22, 2026</div>
+            </div>
+          </div>
+
+          <!-- Active alert (animated) -->
+          <div class="oa-alert" id="oa-alert">
+            <div class="oa-alert-ico">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M11 2 L20 19 L2 19 Z" fill="#f59e0b" stroke="#92400e" stroke-width="0.8"/>
+                <path d="M11 8 L11 13 M11 16 L11 16.5" stroke="#7c2d12" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="oa-alert-body">
+              <div class="oa-alert-title">Active Alert: Gate B12 Equipment Failure</div>
+              <div class="oa-alert-desc">Jet bridge out of service · A320 departure scheduled in <strong>45 minutes</strong> · Flight <strong>CAS1247</strong> SEA → MDW</div>
+            </div>
+            <div class="oa-alert-r">
+              <div class="oa-alert-time">14:32 UTC</div>
+              <button class="oa-alert-cta" onclick="oaOpenAdvisor()">
+                <svg width="11" height="11"><use href="#copilotLogo"/></svg>
+                Ask Cascadia Ops AI
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI tiles -->
+          <div class="oa-kpis">
+            <div class="oa-kpi-card">
+              <div class="oa-kpi-top"><span class="oa-kpi-label">Terminal 2 · N / A</span></div>
+              <div class="oa-kpi-v"><span class="oa-kpi-num">8</span><span class="oa-kpi-denom"> / 18</span></div>
+              <div class="oa-kpi-sub">Available Gates</div>
+              <div class="oa-kpi-meter"><span style="width:55%;background:#10b981;"></span></div>
+              <div class="oa-kpi-foot"><span>In Use <strong>10</strong></span><span>Util <strong>55%</strong></span></div>
+            </div>
+            <div class="oa-kpi-card">
+              <div class="oa-kpi-top"><span class="oa-kpi-label">Terminal 3 · C / D</span></div>
+              <div class="oa-kpi-v"><span class="oa-kpi-num">12</span><span class="oa-kpi-denom"> / 30</span></div>
+              <div class="oa-kpi-sub">Available Gates</div>
+              <div class="oa-kpi-meter"><span style="width:60%;background:#f59e0b;"></span></div>
+              <div class="oa-kpi-foot"><span>In Use <strong>18</strong></span><span>Util <strong>60%</strong></span></div>
+            </div>
+            <div class="oa-kpi-card">
+              <div class="oa-kpi-top"><span class="oa-kpi-label">Active Alerts</span></div>
+              <div class="oa-kpi-v oa-kpi-alert"><span class="oa-kpi-num">1</span></div>
+              <div class="oa-kpi-sub">Critical</div>
+              <div class="oa-kpi-alertrow">
+                <span>Warning <strong>2</strong></span>
+                <span>Total <strong>3</strong></span>
+              </div>
+            </div>
+            <div class="oa-kpi-card">
+              <div class="oa-kpi-top"><span class="oa-kpi-label">Weather · KSEA</span></div>
+              <div class="oa-kpi-v" style="color:#0ea5e9;"><span class="oa-kpi-num" style="font-size:32px;">Clear</span></div>
+              <div class="oa-kpi-sub">Conditions</div>
+              <div class="oa-kpi-foot"><span>Vis <strong>10 mi</strong></span><span>Wind <strong>8 kts</strong></span></div>
+            </div>
+          </div>
+
+          <!-- Map + Gate status grid -->
+          <div class="oa-map-row">
+            <div class="oa-map-card">
+              <svg class="oa-map-svg" viewBox="0 0 600 260" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="oaMapBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#eef5fd"/>
+                    <stop offset="100%" stop-color="#e1eefb"/>
+                  </linearGradient>
+                  <linearGradient id="oaTerm" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#cad8ec"/>
+                    <stop offset="100%" stop-color="#a5bcd9"/>
+                  </linearGradient>
+                </defs>
+                <rect width="600" height="260" fill="url(#oaMapBg)"/>
+                <!-- Subtle grid -->
+                <g stroke="rgba(10,46,79,0.05)" stroke-width="1">
+                  <line x1="0" y1="65" x2="600" y2="65"/><line x1="0" y1="130" x2="600" y2="130"/>
+                  <line x1="0" y1="195" x2="600" y2="195"/>
+                  <line x1="120" y1="0" x2="120" y2="260"/><line x1="260" y1="0" x2="260" y2="260"/>
+                  <line x1="400" y1="0" x2="400" y2="260"/><line x1="540" y1="0" x2="540" y2="260"/>
+                </g>
+                <!-- Runways (16L/16R) -->
+                <rect x="60" y="20" width="20" height="220" fill="#3d3d3d" rx="2"/>
+                <rect x="520" y="20" width="20" height="220" fill="#3d3d3d" rx="2"/>
+                <g fill="#fff" font-family="Segoe UI, sans-serif" font-size="8" text-anchor="middle" font-weight="700">
+                  <text x="70" y="32">16L</text><text x="70" y="232">34R</text>
+                  <text x="530" y="32">16R</text><text x="530" y="232">34L</text>
+                </g>
+                <!-- Taxiways (subtle) -->
+                <g stroke="#8897a8" stroke-width="1.5" stroke-dasharray="4 3" fill="none" opacity="0.5">
+                  <path d="M80 130 L520 130"/>
+                  <path d="M80 75  L250 75"/>
+                  <path d="M350 75 L520 75"/>
+                </g>
+                <!-- Terminal 2 (Concourse A/B) -->
+                <g transform="translate(170 60)">
+                  <rect x="0" y="0" width="130" height="40" fill="url(#oaTerm)" stroke="#8897a8" stroke-width="0.8" rx="5"/>
+                  <text x="65" y="25" fill="#0b2545" font-size="11" text-anchor="middle" font-weight="700" font-family="Segoe UI">Terminal 2 · A / B</text>
+                </g>
+                <!-- Terminal 3 (Concourse C/D) -->
+                <g transform="translate(310 60)">
+                  <rect x="0" y="0" width="150" height="40" fill="url(#oaTerm)" stroke="#8897a8" stroke-width="0.8" rx="5"/>
+                  <text x="75" y="25" fill="#0b2545" font-size="11" text-anchor="middle" font-weight="700" font-family="Segoe UI">Terminal 3 · C / D</text>
+                </g>
+                <!-- North Satellite -->
+                <g transform="translate(200 170)">
+                  <rect x="0" y="0" width="200" height="35" fill="url(#oaTerm)" stroke="#8897a8" stroke-width="0.8" rx="5"/>
+                  <text x="100" y="22" fill="#0b2545" font-size="11" text-anchor="middle" font-weight="700" font-family="Segoe UI">North Satellite (N)</text>
+                </g>
+                <!-- Gate dots scattered around terminals -->
+                <g font-family="Segoe UI" font-size="7" text-anchor="middle" fill="#fff" font-weight="700">
+                  <!-- Row of gates along top of T2 -->
+                  <circle cx="180" cy="55" r="5" fill="#10b981"/><text x="180" y="57">A4</text>
+                  <circle cx="200" cy="55" r="5" fill="#10b981"/><text x="200" y="57">A5</text>
+                  <circle cx="220" cy="55" r="5" fill="#10b981"/><text x="220" y="57">A6</text>
+                  <circle cx="240" cy="55" r="5" fill="#a5bcd9"/><text x="240" y="57">A7</text>
+                  <circle cx="260" cy="55" r="5" fill="#10b981"/><text x="260" y="57">A8</text>
+                  <circle cx="280" cy="55" r="5" fill="#a5bcd9"/><text x="280" y="57">A9</text>
+                  <!-- Row of gates along bottom of T2 (B concourse) -->
+                  <circle cx="180" cy="105" r="5" fill="#10b981"/><text x="180" y="107">B8</text>
+                  <circle cx="200" cy="105" r="5" fill="#10b981"/><text x="200" y="107">B10</text>
+                  <circle cx="220" cy="105" r="5" fill="#a5bcd9"/><text x="220" y="107">B11</text>
+                  <!-- B12 ALERT -->
+                  <g>
+                    <circle cx="240" cy="105" r="12" fill="#f59e0b" opacity="0.25">
+                      <animate attributeName="r" values="12;22;12" dur="1.8s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0.5;0;0.5" dur="1.8s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="240" cy="105" r="8" fill="#c50f1f" stroke="#fff" stroke-width="1.5"/>
+                    <text x="240" y="108" font-size="8">B12</text>
+                  </g>
+                  <circle cx="260" cy="105" r="5" fill="#10b981"/><text x="260" y="107">B15</text>
+                  <circle cx="280" cy="105" r="5" fill="#a5bcd9"/><text x="280" y="107">B17</text>
+                  <!-- Row of gates along top of T3 -->
+                  <circle cx="330" cy="55" r="5" fill="#10b981"/><text x="330" y="57">C3</text>
+                  <circle cx="350" cy="55" r="5" fill="#10b981"/><text x="350" y="57">C5</text>
+                  <circle cx="370" cy="55" r="5" fill="#a5bcd9"/><text x="370" y="57">C7</text>
+                  <circle cx="390" cy="55" r="5" fill="#10b981"/><text x="390" y="57">C9</text>
+                  <circle cx="410" cy="55" r="5" fill="#a5bcd9"/><text x="410" y="57">C11</text>
+                  <circle cx="430" cy="55" r="5" fill="#a5bcd9"/><text x="430" y="57">C14</text>
+                  <circle cx="450" cy="55" r="5" fill="#10b981"/><text x="450" y="57">D3</text>
+                  <!-- Row of gates along bottom of T3 -->
+                  <circle cx="330" cy="105" r="5" fill="#10b981"/><text x="330" y="107">D5</text>
+                  <circle cx="350" cy="105" r="5" fill="#10b981"/><text x="350" y="107">D7</text>
+                  <circle cx="370" cy="105" r="5" fill="#a5bcd9"/><text x="370" y="107">D9</text>
+                  <circle cx="390" cy="105" r="5" fill="#10b981"/><text x="390" y="107">D11</text>
+                  <circle cx="410" cy="105" r="5" fill="#10b981"/><text x="410" y="107">D15</text>
+                  <circle cx="430" cy="105" r="5" fill="#a5bcd9"/><text x="430" y="107">D17</text>
+                  <circle cx="450" cy="105" r="5" fill="#10b981"/><text x="450" y="107">D19</text>
+                  <!-- North Satellite gates -->
+                  <circle cx="220" cy="165" r="4" fill="#10b981"/><text x="220" y="167">N1</text>
+                  <circle cx="240" cy="165" r="4" fill="#10b981"/><text x="240" y="167">N3</text>
+                  <circle cx="260" cy="165" r="4" fill="#a5bcd9"/><text x="260" y="167">N5</text>
+                  <circle cx="280" cy="165" r="4" fill="#10b981"/><text x="280" y="167">N7</text>
+                  <circle cx="300" cy="165" r="4" fill="#a5bcd9"/><text x="300" y="167">N9</text>
+                  <circle cx="320" cy="165" r="4" fill="#10b981"/><text x="320" y="167">N11</text>
+                  <circle cx="340" cy="165" r="4" fill="#10b981"/><text x="340" y="167">N13</text>
+                  <circle cx="360" cy="165" r="4" fill="#a5bcd9"/><text x="360" y="167">N15</text>
+                </g>
+                <!-- Airport compass + title -->
+                <g transform="translate(30 30)">
+                  <circle r="10" fill="none" stroke="#8897a8" stroke-width="1"/>
+                  <text y="-14" text-anchor="middle" font-size="10" font-family="Segoe UI" fill="#0b2545" font-weight="700">N</text>
+                  <line x1="0" y1="-8" x2="0" y2="8" stroke="#0b2545" stroke-width="1"/>
+                </g>
+                <!-- Alert callout over B12 -->
+                <g transform="translate(242 105)">
+                  <rect x="10" y="-14" width="54" height="18" fill="rgba(11,37,69,0.92)" rx="3"/>
+                  <polygon points="6,-4 10,-10 10,-4" fill="rgba(11,37,69,0.92)"/>
+                  <text x="37" y="-1" font-size="8.5" fill="#fff" text-anchor="middle" font-family="Segoe UI" font-weight="700">B12 Alert</text>
+                </g>
+              </svg>
+              <div class="oa-map-legend">
+                <span><span class="oa-lg oa-lg-ok"></span>Available</span>
+                <span><span class="oa-lg oa-lg-busy"></span>Occupied</span>
+                <span><span class="oa-lg oa-lg-alert"></span>Alert</span>
+              </div>
+            </div>
+
+            <div class="oa-gstat-card">
+              <div class="oa-gstat-head">Gate Status</div>
+              <div class="oa-gstat-term">
+                <div class="oa-gstat-t-head"><strong>Terminal 2</strong><small>2 / 6 Available</small></div>
+                <div class="oa-gstat-grid">
+                  <div class="oa-gs-cell oa-gs-busy">A10<br><small>Occupied</small></div>
+                  <div class="oa-gs-cell oa-gs-alert">B12<br><small>Alert</small></div>
+                  <div class="oa-gs-cell oa-gs-ok">A14<br><small>Available</small></div>
+                </div>
+              </div>
+              <div class="oa-gstat-term">
+                <div class="oa-gstat-t-head"><strong>Terminal 3</strong><small>2 / 3 Available</small></div>
+                <div class="oa-gstat-grid">
+                  <div class="oa-gs-cell oa-gs-ok">B6<br><small>Available</small></div>
+                  <div class="oa-gs-cell oa-gs-ok">B8<br><small>Available</small></div>
+                  <div class="oa-gs-cell oa-gs-busy">B10<br><small>Occupied</small></div>
+                </div>
+              </div>
+              <div class="oa-gstat-legend">
+                <span><span class="oa-lg oa-lg-ok"></span>Available</span>
+                <span><span class="oa-lg oa-lg-busy"></span>Occupied</span>
+                <span><span class="oa-lg oa-lg-alert"></span>Alert</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent activity -->
+          <div class="oa-activity-card">
+            <div class="oa-activity-head">
+              <strong>Recent Activity</strong>
+              <span>last 30 min</span>
+            </div>
+            <div class="oa-act-row oa-act-alert">
+              <span class="oa-act-t">14:32</span>
+              <span class="oa-act-b">Gate B12 Alert · Jet bridge malfunction</span>
+            </div>
+            <div class="oa-act-row">
+              <span class="oa-act-t">14:18</span>
+              <span class="oa-act-b">CAS2118 ICN→SEA · trans-Pac tracking +40 min · curfew watch armed</span>
+            </div>
+            <div class="oa-act-row">
+              <span class="oa-act-t">14:02</span>
+              <span class="oa-act-b">CAS4412 SEA→YVR · load 82% · 4 standby pax cleared</span>
+            </div>
+            <div class="oa-act-row">
+              <span class="oa-act-t">13:45</span>
+              <span class="oa-act-b">Crew Reserve R. Patel called up · covering Pairing P4481</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- AI ADVISOR side panel (slides in) -->
+        <div class="oa-advisor" id="oa-advisor" aria-hidden="true">
+          <div class="oa-adv-head">
+            <div class="oa-adv-head-l">
+              <svg width="18" height="18"><use href="#copilotLogo"/></svg>
+              <strong>Cascadia Ops AI Advisor</strong>
+            </div>
+            <button class="oa-adv-close" onclick="oaCloseAdvisor()">✕</button>
+          </div>
+
+          <!-- Step progress rail -->
+          <div class="oa-adv-steps" id="oa-adv-steps">
+            <div class="oa-adv-step active"   data-step="1"><span>1</span>Assess</div>
+            <div class="oa-adv-step"          data-step="2"><span>2</span>Describe</div>
+            <div class="oa-adv-step"          data-step="3"><span>3</span>Confirm</div>
+            <div class="oa-adv-step"          data-step="4"><span>4</span>Options</div>
+            <div class="oa-adv-step"          data-step="5"><span>5</span>Review</div>
+            <div class="oa-adv-step"          data-step="6"><span>6</span>Execute</div>
+          </div>
+
+          <!-- Step body (one section visible at a time) -->
+          <div class="oa-adv-body" id="oa-adv-body">
+
+            <!-- STEP 1 -->
+            <div class="oa-adv-pane" data-pane="1">
+              <div class="oa-adv-intro">
+                <div class="oa-adv-kicker"><span class="oa-adv-kicker-dot"></span>ASSESSMENT · READY</div>
+                <h3>Hi Sarah — I see the B12 alert. Ready to work through this with you.</h3>
+                <p>Active disruption detected: <strong>Gate B12 jet bridge failure</strong>, Flight <strong>CAS1247</strong> A320 SEA→MDW, departing in <strong>45 minutes</strong>. I can generate ranked response options — but I'll reason before I recommend. Tell me the situation in your own words and what you're trying to protect.</p>
+              </div>
+              <div class="oa-adv-actions">
+                <button class="oa-adv-next" onclick="oaAdvStep(2)">Let's go · describe situation <span>→</span></button>
+              </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="oa-adv-pane" data-pane="2" style="display:none;">
+              <div class="oa-adv-kicker"><span class="oa-adv-kicker-dot"></span>DESCRIBE THE INCIDENT</div>
+              <h3>What's the situation — and what are you optimizing for?</h3>
+              <textarea class="oa-adv-ta" id="oa-adv-ta" rows="4" placeholder="Jet bridge at Gate B12 is out of service for an A320 departing in 45 minutes. I want to minimize passenger disruption…"></textarea>
+              <div class="oa-adv-sample" onclick="oaFillSample()"><svg width="12" height="12"><use href="#copilotLogo"/></svg> Fill with the example above</div>
+              <div class="oa-adv-actions">
+                <button class="oa-adv-back" onclick="oaAdvStep(1)"><span>←</span> back</button>
+                <button class="oa-adv-next oa-adv-cta" onclick="oaAdvStep(3)">Generate Options <span>→</span></button>
+              </div>
+              <div class="oa-adv-microtip">The AI will generate ranked response options. You can refine results using priorities and constraints.</div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="oa-adv-pane" data-pane="3" style="display:none;">
+              <div class="oa-adv-chat-row oa-adv-user">
+                <div class="oa-adv-bubble">Jet bridge at Gate B12 is out of service for an A320 departing in 45 minutes. I want to minimize passenger disruption.</div>
+              </div>
+              <div class="oa-adv-chat-row oa-adv-ai">
+                <div class="oa-adv-bubble oa-adv-bubble-ai">
+                  <div class="oa-adv-subhead">SYSTEM ANALYSIS</div>
+                  <p>Here's my understanding of the situation:</p>
+                  <ul class="oa-adv-ul">
+                    <li>Jet bridge outage at <strong>Gate B12</strong></li>
+                    <li>A320 aircraft · narrow-body · <strong>178 pax</strong> booked</li>
+                    <li>Departure in <strong>~45 minutes</strong> (STD 15:17 UTC)</li>
+                    <li>Primary goal: <strong>minimize passenger disruption</strong></li>
+                  </ul>
+                  <p style="margin-top:10px;">I need one more detail to proceed.</p>
+                  <div class="oa-adv-subhead" style="margin-top:10px;">What's the jet bridge MX ETA?</div>
+                  <div class="oa-adv-pills">
+                    <button class="oa-adv-pill" onclick="oaAdvStep(4)">&lt; 15 min</button>
+                    <button class="oa-adv-pill oa-adv-pill-sel" onclick="oaAdvStep(4)">15–60 min</button>
+                    <button class="oa-adv-pill" onclick="oaAdvStep(4)">&gt; 60 min</button>
+                    <button class="oa-adv-pill" onclick="oaAdvStep(4)">Unknown</button>
+                  </div>
+                </div>
+              </div>
+              <div class="oa-adv-input-row">
+                <input class="oa-adv-input" placeholder="Send a message…" />
+                <button class="oa-adv-send"><svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M1 6l10-5-2 10-3-3-5-2z"/></svg></button>
+              </div>
+              <div class="oa-adv-microtip">Chat explains existing options only.</div>
+            </div>
+
+            <!-- STEP 4 — Ranked options -->
+            <div class="oa-adv-pane" data-pane="4" style="display:none;">
+              <div class="oa-adv-aircraft-chip">Aircraft: Narrow-body · MX ETA: 15–60 min</div>
+              <div class="oa-adv-subhead" style="margin-top:12px;">RECOMMENDED OPTIONS</div>
+              <p class="oa-adv-p-muted">Based on the information provided, here are the best response options.</p>
+
+              <!-- Option 1 (recommended) -->
+              <div class="oa-opt oa-opt-rec" onclick="oaAdvStep(5, 1)">
+                <div class="oa-opt-head">
+                  <span class="oa-opt-rank">Option 1</span>
+                  <span class="oa-opt-rec-pill">✓ Recommended</span>
+                  <span class="oa-opt-radio"></span>
+                </div>
+                <div class="oa-opt-title">Reassign to Gate C14</div>
+                <div class="oa-opt-sub">Gate B12 moving to Gate C14 · minimal downstream conflicts · adequate walking distance</div>
+                <div class="oa-opt-airline">Cascadia Airways · No connections affected</div>
+                <div class="oa-opt-tradeoffs">
+                  <div class="oa-to"><div class="oa-to-l">Ops Impact</div><div class="oa-to-v oa-to-low">Low</div></div>
+                  <div class="oa-to"><div class="oa-to-l">Passenger</div><div class="oa-to-v oa-to-low">Low</div></div>
+                  <div class="oa-to"><div class="oa-to-l">Risk</div><div class="oa-to-v oa-to-med">Medium</div></div>
+                  <div class="oa-to"><div class="oa-to-l">Time to execute</div><div class="oa-to-v oa-to-fast">Fast</div></div>
+                </div>
+              </div>
+
+              <!-- Option 2 -->
+              <div class="oa-opt" onclick="oaAdvStep(5, 2)">
+                <div class="oa-opt-head">
+                  <span class="oa-opt-rank">Option 2</span>
+                  <span class="oa-opt-radio"></span>
+                </div>
+                <div class="oa-opt-title">Reassign to Gate D6</div>
+                <div class="oa-opt-sub">Alternative terminal with adequate capacity · longer walk, second-choice compatibility</div>
+                <div class="oa-opt-airline">Cascadia Airways · 4 short connections at risk</div>
+                <div class="oa-opt-tradeoffs">
+                  <div class="oa-to"><div class="oa-to-l">Ops Impact</div><div class="oa-to-v oa-to-low">Low</div></div>
+                  <div class="oa-to"><div class="oa-to-l">Passenger</div><div class="oa-to-v oa-to-med">Medium</div></div>
+                  <div class="oa-to"><div class="oa-to-l">Risk</div><div class="oa-to-v oa-to-low">Low</div></div>
+                  <div class="oa-to"><div class="oa-to-l">Time to execute</div><div class="oa-to-v oa-to-med">Medium</div></div>
+                </div>
+              </div>
+
+              <!-- Option 3 -->
+              <div class="oa-opt" onclick="oaAdvStep(5, 3)">
+                <div class="oa-opt-head">
+                  <span class="oa-opt-rank">Option 3</span>
+                  <span class="oa-opt-radio"></span>
+                </div>
+                <div class="oa-opt-title">Hold at B12 · use bus-gate stairs</div>
+                <div class="oa-opt-sub">Stay at B12, deplane / enplane via air-stairs and ramp bus · preserves schedule if MX ETA &lt; 20m</div>
+                <div class="oa-opt-airline">Cascadia Airways · WCHR/UMNR handling manual</div>
+                <div class="oa-opt-tradeoffs">
+                  <div class="oa-to"><div class="oa-to-l">Ops Impact</div><div class="oa-to-v oa-to-med">Medium</div></div>
+                  <div class="oa-to"><div class="oa-to-l">Passenger</div><div class="oa-to-v oa-to-high">High</div></div>
+                  <div class="oa-to"><div class="oa-to-l">Risk</div><div class="oa-to-v oa-to-med">Medium</div></div>
+                  <div class="oa-to"><div class="oa-to-l">Time to execute</div><div class="oa-to-v oa-to-fast">Fast</div></div>
+                </div>
+              </div>
+
+              <div class="oa-adv-input-row" style="margin-top:14px;">
+                <input class="oa-adv-input" placeholder="Ask a follow-up question about these options or adjust priorities…" />
+                <button class="oa-adv-send"><svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M1 6l10-5-2 10-3-3-5-2z"/></svg></button>
+              </div>
+              <div class="oa-adv-microtip">Chat explains existing options only.</div>
+            </div>
+
+            <!-- STEP 5 — Review -->
+            <div class="oa-adv-pane" data-pane="5" style="display:none;">
+              <div class="oa-adv-selected">Selected <strong>Option 1</strong> — Reassign to Gate C14</div>
+              <div class="oa-adv-subhead">OPTION REVIEW</div>
+              <p class="oa-adv-p-muted">Here's a closer look at this option and why it was recommended.</p>
+              <h4 class="oa-adv-rev-h">Option 1 — Gate C14</h4>
+              <div class="oa-adv-rev-sub">Gate B12 moving to Gate C14</div>
+              <p>Gate C14 offers the best balance between operational feasibility and passenger experience. It minimizes disruption to existing gate assignments while maintaining acceptable walking distances.</p>
+              <div class="oa-adv-rev-subh">Airline Impact</div>
+              <p>Cascadia Airways — No connections affected.</p>
+              <div class="oa-adv-rev-subh">Key Assumptions</div>
+              <ul class="oa-adv-ul">
+                <li>Gate C14 has compatible ground-support equipment available</li>
+                <li>Ramp crew can be repositioned within 15 minutes</li>
+                <li>No inbound delay expected for next scheduled flight at C14</li>
+                <li>Walking distance increase: approximately 200 meters</li>
+              </ul>
+              <div class="oa-adv-rev-subh">Risks &amp; Trade-offs</div>
+              <ul class="oa-adv-ul">
+                <li>Potential downstream conflict if B12 repair takes longer than expected</li>
+                <li>Slight increase in passenger walking distance</li>
+              </ul>
+              <div class="oa-adv-rev-callout">
+                <strong>Important</strong><br>
+                Selecting an option does not apply system changes. Human-in-the-loop by design — execution still requires the checklist on the next step.
+              </div>
+              <div class="oa-adv-actions">
+                <button class="oa-adv-back" onclick="oaAdvStep(4)"><span>←</span> other options</button>
+                <button class="oa-adv-next oa-adv-cta" onclick="oaAdvStep(6)">View Option Checklist <span>→</span></button>
+              </div>
+            </div>
+
+            <!-- STEP 6 — Checklist -->
+            <div class="oa-adv-pane" data-pane="6" style="display:none;">
+              <div class="oa-adv-selected">Selected <strong>Option 1</strong> — Reassign to Gate C14</div>
+              <div class="oa-adv-subhead">EXECUTION CHECKLIST</div>
+              <p class="oa-adv-p-muted">Coordinate across Airport Ops and Airline Ops. Check items as completed — every check writes back to Sabre + Dataverse + Purview.</p>
+
+              <div class="oa-check-col">
+                <div class="oa-check-cat">Airport Operations</div>
+                <label class="oa-check-item"><input type="checkbox"><span>Confirm gate/aircraft compatibility &amp; required services</span></label>
+                <label class="oa-check-item"><input type="checkbox"><span>Coordinate ramp and gate teams on the updated turnaround plan</span></label>
+                <label class="oa-check-item"><input type="checkbox"><span>Update passenger comms (FIDS / PA announcements)</span></label>
+                <label class="oa-check-item"><input type="checkbox"><span>Validate turnaround timing against MDW arrival curfew window</span></label>
+              </div>
+              <div class="oa-check-col">
+                <div class="oa-check-cat">Airline Coordination</div>
+                <label class="oa-check-item"><input type="checkbox"><span>Notify Cascadia Ops and confirm acceptance of the gate move</span></label>
+                <label class="oa-check-item"><input type="checkbox"><span>Align crew and gate agents on new boarding plan</span></label>
+                <label class="oa-check-item"><input type="checkbox"><span>Validate passenger-impact considerations (connections / boarding plan)</span></label>
+                <label class="oa-check-item"><input type="checkbox"><span>Follow escalation path + approvals (IROps policy as applicable)</span></label>
+              </div>
+              <div class="oa-check-col">
+                <div class="oa-check-cat">Watch-Outs</div>
+                <div class="oa-watch">▸ Downstream gate conflicts</div>
+                <div class="oa-watch">▸ Passenger walking distance · WCHR/UMNR accommodations</div>
+                <div class="oa-watch">▸ Repair duration uncertainty — re-run advisor if MX ETA shifts</div>
+              </div>
+
+              <div class="oa-adv-actions">
+                <button class="oa-adv-back" onclick="oaAdvStep(5)"><span>←</span> review option</button>
+                <button class="oa-adv-next oa-adv-cta oa-adv-cta-exec" onclick="oaExecuteOption()">Execute · Dispatch to Sabre <span>→</span></button>
+              </div>
+              <div class="oa-adv-microtip">Roles, not names — can be mapped to airport/airline SOPs for deployment.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== OLD RAMP-TOWER (deprecated, kept hidden for diff) ========== -->
+  <div id="app-ramptower-deprecated" class="app-shell" style="display:none !important;">
+    <div class="rt-wrap">
+
+      <div class="rt-head">
+        <div>
+          <div class="rt-h-title">Ramp Tower Live <span class="rt-chip-pwr">Power App</span></div>
+          <div class="rt-h-sub">Published to 184 ramp-agent iPads across SEA, PDX, DEN · reads Sabre + ACARS + Brueckner bag-belt telemetry · writes back to Sabre in real time · <a onclick="showTip('Maker: D. Kowalski · published 2026-03-11 · DLP: Confidential · approved connectors: Sabre, ACARS, Brueckner, Teams, Outlook')">provenance</a></div>
+        </div>
+        <div class="rt-head-meta">
+          <div class="rt-head-chip rt-head-live">● LIVE · 184 devices</div>
+          <div class="rt-head-chip">v2.4.1 · pushed 2 h ago</div>
+        </div>
+      </div>
+
+      <div class="rt-main">
+        <!-- Left: Power Apps studio context -->
+        <div class="rt-studio">
+          <div class="rt-studio-head">
+            <div class="rt-studio-title">⚡ Cascadia.RampOps canvas app</div>
+            <div class="rt-studio-sub">Power Apps Studio · SEA tenant</div>
+          </div>
+          <ul class="rt-studio-tree">
+            <li class="rt-tree-group">📱 Screens (7)</li>
+            <li class="rt-tree-item active">├ GateListScreen</li>
+            <li class="rt-tree-item">├ TurnDetailScreen</li>
+            <li class="rt-tree-item">├ FuelSheetScreen</li>
+            <li class="rt-tree-item">├ BagScanScreen</li>
+            <li class="rt-tree-item">├ DelayReasonScreen</li>
+            <li class="rt-tree-item">├ CopilotAskScreen</li>
+            <li class="rt-tree-item">└ SettingsScreen</li>
+            <li class="rt-tree-group" style="margin-top:12px;">🔌 Connectors (6)</li>
+            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#0078d4;"></span>SharePoint</li>
+            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#c50f1f;"></span>Sabre AirOps (custom)</li>
+            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#14b8a6;"></span>ACARS (Azure IoT)</li>
+            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#f59e0b;"></span>Brueckner BagBelt</li>
+            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#6264a7;"></span>Teams</li>
+            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#0078d4;"></span>Outlook</li>
+            <li class="rt-tree-group" style="margin-top:12px;">🤖 Copilot skills (3)</li>
+            <li class="rt-tree-item">├ Suggest next action</li>
+            <li class="rt-tree-item">├ Delay-reason coder</li>
+            <li class="rt-tree-item">└ Ask anything</li>
+          </ul>
+        </div>
+
+        <!-- Middle: the phone frame with the live app -->
+        <div class="rt-phone-stage">
+          <div class="rt-phone">
+            <div class="rt-phone-notch"></div>
+            <div class="rt-phone-screen">
+              <!-- App chrome -->
+              <div class="rt-app-chrome">
+                <div class="rt-app-chrome-l">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="color:#fff;"><path d="M8 1l7 7-7 7L1 8z"/></svg>
+                  <span>Ramp Ops</span>
+                </div>
+                <div class="rt-app-chrome-r">
+                  <span class="rt-app-user">MG</span>
+                </div>
+              </div>
+              <!-- App status bar -->
+              <div class="rt-app-statusbar">
+                <span>SEA · Maria Gutierrez</span>
+                <span><span class="rt-dot-live"></span>live</span>
+              </div>
+
+              <!-- Gate list -->
+              <div class="rt-app-title-row">
+                <div class="rt-app-title">My gates · next 2h</div>
+                <div class="rt-app-title-sub">6 of 38 SEA departures</div>
+              </div>
+
+              <div class="rt-gate-list">
+
+                <!-- Gate B12 (on-time) -->
+                <div class="rt-gate-card rt-gate-ok" onclick="rtOpenGate(this, 'B12')">
+                  <div class="rt-gc-l">
+                    <div class="rt-gc-badge">B12</div>
+                  </div>
+                  <div class="rt-gc-m">
+                    <div class="rt-gc-fl">CAS1247 <span class="rt-gc-route">SEA → MDW</span></div>
+                    <div class="rt-gc-std">STD 07:32 · <strong class="rt-gc-pred-ok">pred 07:34</strong></div>
+                    <div class="rt-gc-sugg">
+                      <svg width="10" height="10"><use href="#copilotLogo"/></svg>
+                      Parallelize fueling + catering · save <strong>6 min</strong>
+                    </div>
+                  </div>
+                  <div class="rt-gc-r">
+                    <div class="rt-gc-phase">Boarding</div>
+                    <div class="rt-gc-prog"><span style="width:58%;"></span></div>
+                    <div class="rt-gc-tap">Tap →</div>
+                  </div>
+                </div>
+
+                <!-- Gate B17 (warn) -->
+                <div class="rt-gate-card rt-gate-warn" onclick="rtOpenGate(this, 'B17')">
+                  <div class="rt-gc-l">
+                    <div class="rt-gc-badge">B17</div>
+                  </div>
+                  <div class="rt-gc-m">
+                    <div class="rt-gc-fl">CAS0842 <span class="rt-gc-route">SEA → LAX</span></div>
+                    <div class="rt-gc-std">STD 07:55 · <strong class="rt-gc-pred-warn">pred 08:06</strong> <span class="rt-gc-delay">+11</span></div>
+                    <div class="rt-gc-sugg rt-gc-sugg-warn">
+                      <svg width="10" height="10"><use href="#copilotLogo"/></svg>
+                      <strong>14 short-connect bags</strong> · re-task bag loader 2
+                    </div>
+                  </div>
+                  <div class="rt-gc-r">
+                    <div class="rt-gc-phase">Fueling</div>
+                    <div class="rt-gc-prog"><span style="width:38%;"></span></div>
+                    <div class="rt-gc-tap">Tap →</div>
+                  </div>
+                </div>
+
+                <!-- Gate C3 -->
+                <div class="rt-gate-card rt-gate-warn" onclick="rtOpenGate(this, 'C3')">
+                  <div class="rt-gc-l">
+                    <div class="rt-gc-badge">C3→C7</div>
+                  </div>
+                  <div class="rt-gc-m">
+                    <div class="rt-gc-fl">CAS1102 <span class="rt-gc-route">ORD → DEN (arr)</span></div>
+                    <div class="rt-gc-std">ETA +12 · gate reassign</div>
+                    <div class="rt-gc-sugg">
+                      <svg width="10" height="10"><use href="#copilotLogo"/></svg>
+                      Swap to <strong>C7</strong> · free C3 for CAS2201
+                    </div>
+                  </div>
+                  <div class="rt-gc-r">
+                    <div class="rt-gc-phase">Inbound</div>
+                    <div class="rt-gc-prog"><span style="width:75%;"></span></div>
+                    <div class="rt-gc-tap">Tap →</div>
+                  </div>
+                </div>
+
+                <!-- Gate D11 critical -->
+                <div class="rt-gate-card rt-gate-crit" onclick="rtOpenGate(this, 'D11')">
+                  <div class="rt-gc-l">
+                    <div class="rt-gc-badge">D11</div>
+                  </div>
+                  <div class="rt-gc-m">
+                    <div class="rt-gc-fl">CAS2118 <span class="rt-gc-route">ICN → SEA (arr)</span></div>
+                    <div class="rt-gc-std">ETA 23:58 · <strong class="rt-gc-pred-bad">curfew risk 01:00</strong></div>
+                    <div class="rt-gc-sugg rt-gc-sugg-bad">
+                      <svg width="10" height="10"><use href="#copilotLogo"/></svg>
+                      Pre-stage overnight team · <strong>avoids breach</strong>
+                    </div>
+                  </div>
+                  <div class="rt-gc-r">
+                    <div class="rt-gc-phase">Inbound</div>
+                    <div class="rt-gc-prog"><span style="width:52%;"></span></div>
+                    <div class="rt-gc-tap">Tap →</div>
+                  </div>
+                </div>
+
+                <!-- Gate N1 OK -->
+                <div class="rt-gate-card rt-gate-ok" onclick="rtOpenGate(this, 'N1')">
+                  <div class="rt-gc-l">
+                    <div class="rt-gc-badge">N1</div>
+                  </div>
+                  <div class="rt-gc-m">
+                    <div class="rt-gc-fl">CAS4412 <span class="rt-gc-route">SEA → YVR</span></div>
+                    <div class="rt-gc-std">STD 09:10 · <strong class="rt-gc-pred-ok">on time</strong></div>
+                    <div class="rt-gc-sugg">
+                      <svg width="10" height="10"><use href="#copilotLogo"/></svg>
+                      Predicted 82% load · offer 4 standbys · <strong>+$1,842</strong>
+                    </div>
+                  </div>
+                  <div class="rt-gc-r">
+                    <div class="rt-gc-phase">Prep</div>
+                    <div class="rt-gc-prog"><span style="width:22%;"></span></div>
+                    <div class="rt-gc-tap">Tap →</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Power Apps ask-copilot floating button at bottom of phone -->
+              <div class="rt-app-fab">
+                <button class="rt-app-fab-btn" onclick="showToast({kind:'copilot',title:'Ramp Ops Copilot',text:'Ask me about a gate — I can re-sequence catering, find a bag, or code a delay reason against ATA 51 / flight ops.',ttl:4200});">
+                  <svg width="18" height="18"><use href="#copilotLogo"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Caption under phone -->
+          <div class="rt-phone-caption">
+            Running on iPad · ramp-agent issued · offline-capable · every tap logged to Dataverse + Purview
+          </div>
+        </div>
+
+        <!-- Right: Power Platform runtime + formula peek -->
+        <div class="rt-runtime">
+          <div class="rt-runtime-card">
+            <div class="rt-runtime-title">📊 Runtime · last 24 h</div>
+            <div class="rt-runtime-kpis">
+              <div class="rt-rk"><div class="rt-rk-v">2,482</div><div class="rt-rk-l">app opens</div></div>
+              <div class="rt-rk"><div class="rt-rk-v">184</div><div class="rt-rk-l">active agents</div></div>
+              <div class="rt-rk"><div class="rt-rk-v">1.8 s</div><div class="rt-rk-l">p50 load</div></div>
+              <div class="rt-rk"><div class="rt-rk-v ir-pk-ok">99.7%</div><div class="rt-rk-l">uptime</div></div>
+            </div>
+          </div>
+
+          <div class="rt-runtime-card">
+            <div class="rt-runtime-title">🧮 OnVisible formula · GateListScreen</div>
+            <pre class="rt-formula"><span class="rt-f-kw">ClearCollect</span>(
+  <span class="rt-f-var">colGates</span>,
+  <span class="rt-f-fn">Filter</span>(
+    <span class="rt-f-var">SabreAirOps.Departures</span>(<span class="rt-f-str">"SEA"</span>, <span class="rt-f-n">2</span>),
+    <span class="rt-f-var">AssignedAgent</span> = <span class="rt-f-var">User</span>().<span class="rt-f-var">Email</span>
+  )
+);
+<span class="rt-f-kw">Set</span>(
+  <span class="rt-f-var">varCopilotHints</span>,
+  <span class="rt-f-fn">RampCopilot.SuggestNext</span>(<span class="rt-f-var">colGates</span>)
+)</pre>
+          </div>
+
+          <div class="rt-runtime-card">
+            <div class="rt-runtime-title">🛡 Governance</div>
+            <div class="rt-gov-row"><span>DLP policy</span><strong class="rt-gov-good">Confidential · blocked external</strong></div>
+            <div class="rt-gov-row"><span>Audit log</span><strong class="rt-gov-good">Purview · 100% capture</strong></div>
+            <div class="rt-gov-row"><span>Maker approval</span><strong class="rt-gov-good">D. Kowalski (CAB)</strong></div>
+            <div class="rt-gov-row"><span>Dataverse env</span><strong>casa-prod-us-west-2</strong></div>
+          </div>
         </div>
       </div>
 
@@ -11759,7 +13852,10 @@ function openApp(app, context) {
   if (app === 'word') kcRedactReset();
   if (app === 'pages') setTimeout(startPagesCursors, 200);
   if (app === 'agent365') startAgent365Feed();
-  if (app === 'irops') { irStartClock(); irSeedTelemetry(); }
+  if (app === 'irops') { irStartClock(); irSeedTelemetry(); setTimeout(irAnimateAllKPIs, 250); }
+  if (app === 'fleet') { fltRenderGrid('all'); fltStartACARS(); }
+  if (app === 'crew')  { crwRender(); }
+  if (app === 'opsadvisor') { oaStartApp(); }
   // Show tips per app
   const tips = {
     outlook: "In Outlook, click the Copilot logo (top-right) to triage your 147-message SOC inbox. Or click any email to read it.",
@@ -11772,12 +13868,65 @@ function openApp(app, context) {
     dax:   "The Report Intake agent ambiently listens to the employee-Dispatcher conversation and drafts the case note in real time.",
     pages: "Copilot Pages is a collaborative AI canvas — numbers stay synced with the source Sabre AirOps and deck.",
     agent365: "Agent 365 is the single pane of glass for every agent in your tenant — Microsoft, partner, or custom. Watch the live feed in the right column.",
-    irops:    "IROps Cascade Commander. Click Simulate cascade to watch Copilot run 128 network sims in 81 s. Three recovery plans ranked. Six gate-productivity suggestions stream in parallel."
+    irops:    "IROps Cascade Commander. Click Simulate cascade to watch Copilot run 128 network sims in 81 s. Three recovery plans ranked. Six gate-productivity suggestions stream in parallel.",
+    fleet:    "Fleet Tracker — 42 Cascadia tails with live ACARS telemetry. The Predictive MX agent flagged an EGT/vibration trend on N6152CA (LAX outbound) — pre-ordered the part, booked the MX slot before it becomes an AOG.",
+    crew:     "Crew Legality Board — every active pairing scored against FAR 117 in real time. During IROps, the agent proposes reserve call-ups and deadhead swaps before a pairing trips the limit.",
+    opsadvisor:"Ops AI Advisor — a Power App. Click the 'Ask Cascadia Ops AI' button to walk through the 6-step disruption workflow: assess → describe → confirm → ranked options → review → execution checklists. Human-in-the-loop by design."
   };
   showTip(tips[app]);
 }
 
 // ============ IROPS CASCADE CANVAS ============
+
+// Count-up animation for KPI numbers
+function irCountUp(el, to, opts) {
+  opts = opts || {};
+  const prefix = opts.prefix || el.dataset.prefix || '';
+  const suffix = opts.suffix || el.dataset.suffix || '';
+  const useComma = opts.comma || el.dataset.comma === '1';
+  const dur = opts.dur || 900;
+  const start = performance.now();
+  function frame(ts) {
+    const t = Math.min(1, (ts - start) / dur);
+    // Ease-out cubic
+    const eased = 1 - Math.pow(1 - t, 3);
+    const cur = Math.round(to * eased);
+    const formatted = useComma ? cur.toLocaleString() : cur;
+    el.textContent = prefix + formatted + suffix;
+    if (t < 1) requestAnimationFrame(frame);
+    else { el.classList.add('ir-tick'); setTimeout(() => el.classList.remove('ir-tick'), 500); }
+  }
+  requestAnimationFrame(frame);
+}
+function irAnimateAllKPIs() {
+  document.querySelectorAll('#app-irops .ir-countup').forEach(el => {
+    const to = parseFloat(el.dataset.to);
+    if (!isNaN(to)) irCountUp(el, to);
+  });
+}
+
+// Productivity ticker bumps
+let _irProdMin = 47, _irProdRev = 14.2, _irProdCurfew = 3;
+function irBumpProductivity(gateKey) {
+  const bumps = {
+    b12: { min: 8,  rev: 0,    tip: '+8 min saved (fueling+catering parallelized)' },
+    b17: { min: 11, rev: 2.1,  tip: '+11 min recovered, 14 short-connect bags saved ($2.1K)' },
+    c3:  { min: 6,  rev: 0,    tip: 'Gate swap preserves CAS2201 priority slot' },
+    a4:  { min: 0,  rev: 3.8,  tip: '+$3.8K revenue from 2 loyalty upgrades' },
+    d11: { min: 14, rev: 0,    curfew: 1, tip: 'Curfew breach avoided · ICN inbound' },
+    n1:  { min: 0,  rev: 1.8,  tip: '+$1.8K revenue from 4 standby pax' }
+  };
+  const b = bumps[gateKey]; if (!b) return;
+  _irProdMin += b.min; _irProdRev = Math.round((_irProdRev + b.rev) * 10) / 10;
+  if (b.curfew) _irProdCurfew += b.curfew;
+  const minEl = document.getElementById('ir-prod-min');
+  const revEl = document.getElementById('ir-prod-rev');
+  const curfEl = document.getElementById('ir-prod-curfew');
+  if (minEl) { minEl.textContent = _irProdMin; minEl.closest('.ir-prod-metric').querySelector('.ir-prod-bar span').style.width = Math.min(100, _irProdMin) + '%'; }
+  if (revEl) { revEl.textContent = _irProdRev.toFixed(1); revEl.closest('.ir-prod-metric').querySelector('.ir-prod-bar span').style.width = Math.min(100, _irProdRev * 3) + '%'; }
+  if (curfEl && b.curfew) curfEl.textContent = _irProdCurfew;
+}
+
 let _irClockInterval = null;
 function irStartClock() {
   if (_irClockInterval) clearInterval(_irClockInterval);
@@ -11836,34 +13985,57 @@ function _irTelPush(time, svc, msg) {
   body.prepend(div);
 }
 
-// Run the network-cascade simulation: a short animated sequence that narrates the work
+// Run the network-cascade simulation: full-screen overlay with progress bar + narration stream
 let _irSimRunning = false;
 function irRunSimulation() {
   if (_irSimRunning) return;
   _irSimRunning = true;
-  showToast({ kind:'copilot', title:'IROps Cascade Commander', text:'Running 128 network sims on Foundry · 47 flights · FAR 117, DOT tarmac, fuel, curfew, and cost constraints…', ttl: 3800 });
+  const ov = document.getElementById('ir-sim-overlay');
+  const bar = document.getElementById('ir-sim-bar-fill');
+  const stage = document.getElementById('ir-sim-stage');
+  const countEl = document.getElementById('ir-sim-count');
+  const elapsedEl = document.getElementById('ir-sim-elapsed');
+  const costEl = document.getElementById('ir-sim-cost');
+  if (!ov) return;
+  ov.classList.add('open');
+  bar.style.width = '0%';
+
   const steps = [
-    [300,  'Sabre AirOps',         'Fetched current state: <strong>47</strong> flights, <strong>38</strong> tails, <strong>62</strong> pairings in cascade radius'],
-    [900,  'FAA SWIM',              'Updated ORD ground-stop duration prediction · <strong>p50 = 2h 40m</strong>, p90 = 4h 10m'],
-    [1600, 'Foundry · GraphModel', 'Built 128 candidate recovery plans · pruned to 12 feasible · ranked top 3'],
-    [2400, 'Crew Legality',         '✓ All Plan A pairings legal · Plan B breaks 2 pairings at FDP · Plan C legal'],
-    [3100, 'Pax Impact',             'Plan A: 284 misconnects · Plan B: 612 · Plan C: 118 (rebook)'],
-    [3800, 'Cost Model',             'Plan A $146K · Plan B $38K + $312K DOT exposure · Plan C $412K EU261'],
-    [4600, 'Purview',                '✓ Prompts labeled · decision traceable · ready for Dispatcher review'],
+    { pct: 10,  svc:'Sabre AirOps',         msg:'Fetched current state · <strong>47</strong> flights · <strong>38</strong> tails · <strong>62</strong> pairings', stage:'Ingesting live ops state from Sabre AirOps…' },
+    { pct: 24,  svc:'FAA SWIM',             msg:'ORD ground-stop duration predicted · <strong>p50 = 2h 40m</strong> · p90 = 4h 10m',                              stage:'Pulling FAA SWIM · AFP ZAU03 · EDCT feed…' },
+    { pct: 42,  svc:'Foundry · GraphModel', msg:'Built <strong>128</strong> candidate recovery plans · pruned to <strong>12</strong> feasible',                       stage:'Generating cascade scenarios on Foundry (gpt-4.1 + graph model)…' },
+    { pct: 58,  svc:'Crew Legality',        msg:'✓ Plan A all legal · Plan B <strong>2 breaks</strong> · Plan C all legal',                                            stage:'Scoring FAR 117 compliance for every pairing…' },
+    { pct: 72,  svc:'Pax Impact',           msg:'Misconnects — A: <strong>284</strong> · B: <strong>612</strong> · C: <strong>118</strong>',                              stage:'Running PNR impact regressor across 6,284 pax…' },
+    { pct: 86,  svc:'Cost Model',           msg:'A <strong>$146K</strong> · B <strong>$38K + $312K DOT</strong> · C <strong>$412K</strong>',                              stage:'Pricing each recovery scenario against the constraint set…' },
+    { pct: 100, svc:'Purview',              msg:'✓ Labeled <em>Ops · Decision-Support</em> · 128 prompts · traceable',                                                     stage:'Sealing audit · ready for Dispatcher review.' },
   ];
-  steps.forEach((s) => {
+  const start = Date.now();
+  const cost = (pct) => '$' + (pct/100 * 2.14).toFixed(2) + ' Azure AI';
+  const simCount = (pct) => Math.round(pct/100 * 128) + ' / 128 sims';
+
+  steps.forEach((s, i) => {
     setTimeout(() => {
-      const now = new Date();
-      const t = String(now.getHours()).padStart(2,'0') + ':' +
-                String(now.getMinutes()).padStart(2,'0') + ':' +
-                String(now.getSeconds()).padStart(2,'0');
-      _irTelPush(t, s[1], s[2]);
-    }, s[0]);
+      bar.style.width = s.pct + '%';
+      stage.textContent = s.stage;
+      countEl.textContent = simCount(s.pct);
+      costEl.textContent = cost(s.pct);
+      _irTelPush(_irNow(), s.svc, s.msg);
+    }, (i + 1) * 680);
   });
+
+  // Live elapsed ticker
+  const tick = setInterval(() => {
+    elapsedEl.textContent = ((Date.now() - start) / 1000).toFixed(1) + ' s';
+  }, 90);
+
   setTimeout(() => {
+    clearInterval(tick);
+    ov.classList.remove('open');
     _irSimRunning = false;
-    showToast({ kind:'copilot', title:'Simulation complete', text:'Three ranked plans ready. Plan A recommended: <strong>−47% net pax delay</strong> vs. do-nothing. Accept, modify, or ask for more alternates.', ttl: 5500 });
-  }, 5100);
+    // Re-animate the KPIs with a tick feedback
+    irAnimateAllKPIs();
+    showToast({ kind:'copilot', title:'Simulation complete', text:'Three ranked plans ready. Plan A recommended: <strong>−47% net pax delay</strong> vs. do-nothing. Accept, modify, or ask Copilot for alternates.', ttl: 5500 });
+  }, steps.length * 680 + 300);
 }
 
 function irAcceptPlan(which) {
@@ -11903,12 +14075,221 @@ function irApplySugg(gateKey) {
   };
   showToast({ kind:'copilot', title:'Suggestion applied', text: messages[gateKey] || 'Gate action dispatched.', ttl: 4200 });
   _irTelPush(_irNow(), 'Gate Optimizer', messages[gateKey] || 'Gate action dispatched');
+  irBumpProductivity(gateKey);
 }
 function _irNow() {
   const n = new Date();
   return String(n.getHours()).padStart(2,'0') + ':' +
          String(n.getMinutes()).padStart(2,'0') + ':' +
          String(n.getSeconds()).padStart(2,'0');
+}
+
+// ============ FLEET TRACKER APP ============
+const FLEET_TAILS = [
+  { reg:'N8421CA', type:'738',  status:'active',  leg:'SEA→LAX',    etd:'07:32', cycles:'2,284', age:'6.2y', svc:'L',   mx:'A-check · 04/30' },
+  { reg:'N6152CA', type:'739',  status:'alert',   leg:'LAX→SEA',    etd:'in-flt', cycles:'3,841', age:'9.8y', svc:'RR',  mx:'EGT anomaly · slot 04/24', anomaly:true },
+  { reg:'N8821CA', type:'738',  status:'mx',      leg:'—',          etd:'A-check', cycles:'4,210', age:'10.4y', svc:'L',  mx:'SEA hangar 4 · returns 04/25 09:00' },
+  { reg:'N5512CA', type:'739',  status:'active',  leg:'DEN→SEA',    etd:'08:48', cycles:'1,982', age:'4.8y', svc:'L',   mx:'—' },
+  { reg:'N6084CA', type:'77W',  status:'active',  leg:'NRT→SEA',    etd:'in-flt', cycles:'8,412', age:'12.1y', svc:'GE',  mx:'—' },
+  { reg:'N8182CA', type:'738',  status:'active',  leg:'PHX→SEA',    etd:'09:15', cycles:'2,188', age:'5.9y', svc:'L',   mx:'—' },
+  { reg:'N7721CA', type:'739',  status:'active',  leg:'LAX→ORD',    etd:'08:02', cycles:'3,144', age:'8.4y', svc:'L',   mx:'—' },
+  { reg:'N6691CA', type:'738',  status:'active',  leg:'SFO→SEA',    etd:'09:44', cycles:'1,812', age:'4.3y', svc:'L',   mx:'—' },
+  { reg:'N5502CA', type:'738',  status:'spare',   leg:'SEA stand',  etd:'ready', cycles:'2,901', age:'7.1y', svc:'L',   mx:'—' },
+  { reg:'N8411CA', type:'738',  status:'active',  leg:'SEA→YVR',    etd:'09:10', cycles:'2,608', age:'6.8y', svc:'L',   mx:'—' },
+  { reg:'N5617CA', type:'77W',  status:'active',  leg:'ICN→SEA',    etd:'in-flt', cycles:'8,811', age:'12.5y', svc:'GE',  mx:'—' },
+  { reg:'N8212CA', type:'738',  status:'active',  leg:'OGG→SEA',    etd:'in-flt', cycles:'3,402', age:'8.0y', svc:'L',   mx:'—' },
+  { reg:'N7731CA', type:'739',  status:'active',  leg:'SEA→DEN',    etd:'08:22', cycles:'2,114', age:'5.5y', svc:'L',   mx:'—' },
+  { reg:'N6612CA', type:'738',  status:'mx',      leg:'—',          etd:'line mx', cycles:'3,008', age:'7.4y', svc:'L',  mx:'Ground test · 04/22 16:00' },
+  { reg:'N5118CA', type:'738',  status:'spare',   leg:'PDX stand',  etd:'ready', cycles:'2,488', age:'5.8y', svc:'L',   mx:'—' },
+  { reg:'N6901CA', type:'739',  status:'active',  leg:'SEA→DFW',    etd:'10:18', cycles:'2,742', age:'6.5y', svc:'L',   mx:'—' },
+];
+function fltRenderGrid(filter, btn) {
+  if (btn) { document.querySelectorAll('.flt-filter-chip').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+  const grid = document.getElementById('flt-grid'); if (!grid) return;
+  grid.innerHTML = '';
+  FLEET_TAILS.forEach((t, i) => {
+    if (filter !== 'all' && filter !== t.status && !(filter === 'active' && t.status === 'active')) return;
+    const cls = t.anomaly ? 'flt-status-alert' : ('flt-status-' + t.status);
+    const pillCls = t.anomaly ? 'alert' : t.status;
+    const pillText = t.anomaly ? '⚠ anomaly' : (t.status === 'active' ? '● In service' : t.status === 'mx' ? 'In MX' : t.status === 'aog' ? 'AOG' : 'Spare');
+    const card = document.createElement('div');
+    card.className = 'flt-tail ' + cls;
+    card.style.animationDelay = (i * 25) + 'ms';
+    card.innerHTML = `
+      <div class="flt-t-head">
+        <div class="flt-t-reg">${t.reg}</div>
+        <span class="flt-t-pill ${pillCls}">${pillText}</span>
+      </div>
+      <div class="flt-t-body">
+        <span class="flt-t-silhouette">✈</span> <strong>${t.type === '738' ? 'Boeing 737-800' : t.type === '739' ? 'Boeing 737-900ER' : 'Boeing 777-300ER'}</strong><br>
+        <strong>Leg:</strong> ${t.leg} · ETD ${t.etd}<br>
+        <strong>Cycles:</strong> ${t.cycles} · age ${t.age} · engines <strong>${t.svc}</strong><br>
+        <strong>Next MX:</strong> ${t.mx}
+      </div>
+      ${t.anomaly ? '<div class="flt-t-alert"><span>⚠</span><div><strong>EGT + vibration anomaly</strong> · engine #2 · p(failure in 40 cycles) 78% · Predictive MX agent has pre-ordered part and booked slot 04/24 22:00 — click for details.</div></div>' : ''}
+    `;
+    card.onclick = () => showToast({ kind:'copilot', title:`${t.reg} · Copilot brief`, text:`Tail ${t.reg} is a ${t.type === '738' ? 'Boeing 737-800' : t.type === '739' ? 'Boeing 737-900ER' : 'Boeing 777-300ER'}, currently ${t.leg}. Predictive MX agent says: ${t.anomaly ? 'alert active — see engine telemetry above.' : 'nominal.'}`, ttl: 4500 });
+    grid.appendChild(card);
+  });
+}
+function fltStartACARS() { /* sparklines are static SVGs; no animation needed for v1 */ }
+
+// ============ CREW LEGALITY BOARD ============
+const CREW_PAIRS = [
+  { id:'P4481', pic:'Capt. R. Moreno · FO L. Kim',   meta:'3-day · SEA–ORD–DEN–SEA · day 1 of 3', duty:12.8, lim:14, status:'bad',  action:'Reassign FO' },
+  { id:'P4512', pic:'FA crew (3) · M. Li lead',       meta:'2-day · SEA–LAX–SEA · rest compressed', duty:11.0, lim:14, status:'warn', action:'Extend rest' },
+  { id:'P4488', pic:'Capt. J. Reyes · FO A. Yang',    meta:'1-day · SEA–DEN–SEA', duty:6.5, lim:14, status:'ok',   action:'OK' },
+  { id:'P4573', pic:'Capt. T. Ali · FO H. Brown',     meta:'4-day · SEA–SFO–LAX–DEN–SEA · day 3', duty:9.2, lim:14, status:'ok',   action:'OK' },
+  { id:'P4601', pic:'FA crew (4) · S. Park lead',     meta:'Trans-Pac · ICN–SEA · day 2 of 2',     duty:10.6, lim:14, status:'warn', action:'Reserve call-up' },
+  { id:'P4444', pic:'Capt. M. Obi · FO C. Vu',        meta:'1-day · SEA–PHX–SEA',                   duty:5.0, lim:14, status:'ok',   action:'OK' },
+  { id:'P4519', pic:'Capt. D. Ng · FO P. Suarez',     meta:'2-day · SEA–OGG–SEA',                   duty:8.8, lim:14, status:'ok',   action:'OK' },
+];
+const CREW_RESERVES = [
+  { name:'H. Lee',      role:'FO · 737',  base:'SEA', status:'On-call · 4h callout', score:94 },
+  { name:'K. Williams', role:'Capt · 737', base:'SEA', status:'Ready · 2h callout',   score:91 },
+  { name:'R. Patel',    role:'FA · wide',  base:'SEA', status:'Active reserve',        score:88 },
+  { name:'D. Nakamura', role:'FO · 777',  base:'LAX', status:'Repositioned · standby',score:82 },
+  { name:'E. Garcia',   role:'Capt · 737', base:'SEA', status:'Ready · short-notice',  score:78 },
+];
+function crwRender() {
+  // Heat strip: 24h
+  const heat = document.getElementById('crw-heat');
+  if (heat) {
+    let html = '<div class="crw-heat-label">Network load</div>';
+    const levels = [1,1,2,2,3,3,4,5,4,3,3,2,2,3,3,2,2,3,4,3,2,2,1,1];
+    for (let h = 0; h < 24; h++) html += `<div class="crw-heat-cell lvl-${levels[h]}" title="${String(h).padStart(2,'0')}:00 · ${levels[h]==5?'red':levels[h]>=3?'amber':'green'}"></div>`;
+    html += '<div class="crw-heat-foot"><span>00:00 UTC</span><span>peak 06–09</span><span>23:00 UTC</span></div>';
+    heat.innerHTML = html;
+  }
+
+  // Pairings
+  const pl = document.getElementById('crw-pair-list'); if (pl) {
+    pl.innerHTML = '';
+    CREW_PAIRS.forEach(p => {
+      const pct = Math.min(100, (p.duty / p.lim) * 100);
+      const barCls = p.status === 'bad' ? 'crw-bar-risk-bad' : p.status === 'warn' ? 'crw-bar-risk-warn' : 'crw-bar-risk-ok';
+      const sCls = p.status === 'bad' ? 'crw-status-bad' : p.status === 'warn' ? 'crw-status-warn' : 'crw-status-ok';
+      const sLabel = p.status === 'bad' ? '⚠ AT RISK' : p.status === 'warn' ? '● MONITOR' : '✓ LEGAL';
+      const row = document.createElement('div');
+      row.className = 'crw-pair';
+      row.innerHTML = `
+        <div class="crw-pair-left">
+          <div class="crw-pair-id">${p.id}</div>
+          <div class="crw-pair-pic">${p.pic}</div>
+          <div class="crw-pair-meta">${p.meta}</div>
+        </div>
+        <div>
+          <div class="crw-bar-wrap">
+            <div class="crw-bar-fill ${barCls}" style="width:${pct}%;"><span class="crw-bar-label">${p.duty}h / ${p.lim}h</span></div>
+            <div class="crw-bar-limit" style="left:100%;"></div>
+          </div>
+        </div>
+        <div class="crw-pair-right">
+          <div class="${sCls}">${sLabel}</div>
+          ${p.status !== 'ok' ? `<button class="crw-action-chip" onclick="showToast({kind:'copilot', title:'Reassignment proposed', text:'Copilot has matched Pairing ${p.id} with reserve H. Lee (ranked 94/100). Notification draft ready for your approval in Outlook + Teams.', ttl:5200})">${p.action}</button>` : ''}
+        </div>
+      `;
+      pl.appendChild(row);
+    });
+  }
+
+  // Reserves
+  const rl = document.getElementById('crw-reserve-list'); if (rl) {
+    rl.innerHTML = '';
+    CREW_RESERVES.forEach(r => {
+      const initials = r.name.split(/[.\s]+/).filter(Boolean).map(s=>s[0]).slice(0,2).join('');
+      const row = document.createElement('div');
+      row.className = 'crw-reserve';
+      row.innerHTML = `
+        <div class="crw-reserve-av">${initials}</div>
+        <div class="crw-reserve-m">
+          <div class="crw-reserve-n2">${r.name}</div>
+          <div class="crw-reserve-d">${r.role} · ${r.base} · ${r.status} · match <strong>${r.score}/100</strong></div>
+        </div>
+        <button class="crw-reserve-btn" onclick="showToast({kind:'copilot',title:'Call-up sent',text:'${r.name} notified via Outlook + SMS + Teams. Response expected within SLA (${r.role.includes('Capt')?'2':'4'}h).',ttl:4500})">Call-up</button>
+      `;
+      rl.appendChild(row);
+    });
+  }
+}
+
+// ============ SEA OPS AI ADVISOR (Power App) ============
+function oaStartApp() {
+  // live updated-time ticker in the header
+  if (window._oaClock) clearInterval(window._oaClock);
+  const el = document.getElementById('oa-updated');
+  if (el) {
+    window._oaClock = setInterval(() => {
+      const now = new Date();
+      el.textContent = String(now.getHours()).padStart(2,'0') + ':' +
+                       String(now.getMinutes()).padStart(2,'0') + ':' +
+                       String(now.getSeconds()).padStart(2,'0') + ' PT';
+    }, 1000);
+  }
+  // Reset advisor panel to step 1
+  oaAdvStep(1);
+  // Close if left open
+  document.querySelector('.oa-body-grid')?.classList.remove('oa-open');
+  // After 1.8s, auto-prompt the user to try the AI advisor
+  setTimeout(() => {
+    showToast({ kind:'copilot', title:'Cascadia Ops AI Advisor', text:'There is a <strong>B12 jet bridge alert</strong> on the dashboard. Click <em>Ask Cascadia Ops AI</em> to walk through the 6-step disruption workflow.', ttl: 6500 });
+  }, 1800);
+}
+function oaOpenAdvisor() {
+  const grid = document.querySelector('.oa-body-grid');
+  if (grid) grid.classList.add('oa-open');
+  // Reset to step 1
+  oaAdvStep(1);
+}
+function oaCloseAdvisor() {
+  const grid = document.querySelector('.oa-body-grid');
+  if (grid) grid.classList.remove('oa-open');
+}
+function oaAdvStep(n, optionIdx) {
+  // Step pane visibility
+  document.querySelectorAll('#oa-adv-body .oa-adv-pane').forEach(p => {
+    p.style.display = (parseInt(p.dataset.pane) === n) ? '' : 'none';
+  });
+  // Step rail active state
+  document.querySelectorAll('#oa-adv-steps .oa-adv-step').forEach(s => {
+    const step = parseInt(s.dataset.step);
+    s.classList.toggle('active', step === n);
+    s.classList.toggle('done',   step < n);
+  });
+  if (optionIdx) {
+    // Highlight the selected option on step 5
+    const selected = document.querySelector('.oa-adv-selected');
+    if (selected) {
+      const names = { 1:'Option 1 — Reassign to Gate C14', 2:'Option 2 — Reassign to Gate D6', 3:'Option 3 — Hold at B12 · bus-gate stairs' };
+      selected.innerHTML = `Selected <strong>${names[optionIdx].split(' — ')[0]}</strong> — ${names[optionIdx].split(' — ')[1]}`;
+    }
+  }
+}
+function oaFillSample() {
+  const ta = document.getElementById('oa-adv-ta');
+  if (!ta) return;
+  const text = 'Jet bridge at Gate B12 is out of service for an A320 departing in 45 minutes. I want to minimize passenger disruption.';
+  ta.value = '';
+  // typing animation
+  let i = 0;
+  function type() {
+    if (i < text.length) { ta.value += text[i++]; setTimeout(type, 12); }
+  }
+  type();
+}
+function oaExecuteOption() {
+  showToast({
+    kind: 'copilot',
+    title: '✓ Dispatched',
+    text: 'Option 1 (Reassign to Gate C14) pushed to Sabre AirOps · gate agents notified in Teams · FIDS updated · PA scripts drafted in 2 languages · crew Outlook reassignment sent · Purview audit row written.',
+    ttl: 6500
+  });
+  // Success pulse on the side panel
+  const adv = document.getElementById('oa-advisor');
+  if (adv) {
+    adv.style.boxShadow = '0 0 0 3px rgba(16,185,129,0.4), -6px 0 20px rgba(11,37,69,0.08)';
+    setTimeout(() => { adv.style.boxShadow = ''; }, 1400);
+  }
 }
 
 // ============ GUIDED TOUR (presenter mode) ============
