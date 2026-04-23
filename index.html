@@ -8022,6 +8022,190 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 .oa-check-item input:checked + span { text-decoration: line-through; color: var(--gray-90); }
 .oa-check-item span { color: var(--gray-160); line-height: 1.5; }
 .oa-watch { font-size: 11.5px; color: #7f1d1d; padding: 5px 0; }
+
+/* ========== SLIM APP TOPBAR for new airline apps (IROps, Fleet, Crew, Ops Advisor) ========== */
+.app-topbar.app-topbar-slim {
+  height: 40px;
+  background: linear-gradient(180deg, #0b2545 0%, #0e2d56 100%);
+  padding: 0 18px;
+  gap: 16px;
+}
+.app-topbar.app-topbar-slim .back { color: #fff; font-size: 16px; }
+.app-topbar.app-topbar-slim .app-title { font-size: 13px; font-weight: 600; gap: 9px; color: #fff; }
+.app-topbar.app-topbar-slim .app-title-logo {
+  background: #fff; border-radius: 5px; padding: 3px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+.app-title-pwr {
+  margin-left: 8px; font-size: 10.5px; font-weight: 500; opacity: 0.75;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 2px 8px; border-radius: 10px;
+  letter-spacing: 0.3px;
+}
+.app-breadcrumb {
+  margin-left: auto;
+  font-size: 11px; color: rgba(255,255,255,0.75);
+  display: flex; align-items: center; gap: 6px;
+}
+.app-breadcrumb span { white-space: nowrap; }
+.app-breadcrumb span[onclick] { cursor: pointer; border-bottom: 1px dotted rgba(255,255,255,0.4); transition: color 0.12s; }
+.app-breadcrumb span[onclick]:hover { color: #fff; }
+.app-breadcrumb .app-bc-sep { color: rgba(255,255,255,0.35); margin: 0 -2px; }
+.app-breadcrumb span:last-child { color: #fff; font-weight: 600; }
+
+/* ========== Kill the noisy alert-banner streak (too busy) ========== */
+.oa-alert::before { display: none !important; }
+
+/* ========== Cleaner alert banner (more understated but still attention-grabbing) ========== */
+.oa-alert {
+  box-shadow: 0 1px 3px rgba(245,158,11,0.15);
+  padding: 12px 18px;
+  gap: 14px;
+}
+.oa-alert-title { font-size: 14px; }
+.oa-alert-desc { font-size: 12px; line-height: 1.5; }
+
+/* ========== Consolidated dashboard topnav (cleaner, no provenance strip) ========== */
+.oa-topnav-right {
+  display: flex; align-items: center; gap: 10px;
+}
+.oa-env-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10.5px; font-weight: 600;
+  color: var(--gray-130);
+  background: #f3f6fb;
+  border: 1px solid var(--gray-30);
+  padding: 4px 10px; border-radius: 12px;
+  cursor: help;
+  transition: background 0.15s;
+}
+.oa-env-chip:hover { background: #eef3f8; color: var(--kc-navy); }
+.oa-env-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 2px rgba(16,185,129,0.25);
+  animation: oaEnvDotPulse 1.8s ease-in-out infinite;
+}
+@keyframes oaEnvDotPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* ========== KPI tile refinements ========== */
+.oa-kpi-card {
+  min-height: 116px;
+  display: flex; flex-direction: column;
+  padding: 13px 15px;
+}
+.oa-kpi-label {
+  font-size: 10.5px; color: var(--gray-130);
+  text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;
+  margin-bottom: 7px;
+}
+.oa-kpi-v { margin-bottom: 10px; display: flex; align-items: baseline; gap: 6px; }
+.oa-kpi-num { font-size: 32px; font-weight: 700; color: var(--kc-navy); line-height: 1; }
+.oa-kpi-denom { font-size: 13px; color: var(--gray-130); font-weight: 500; }
+.oa-kpi-card.oa-kpi-attn { border-color: #fcd9a8; background: linear-gradient(180deg,#fff8ed 0%,#fff 45%); }
+.oa-kpi-card.oa-kpi-attn .oa-kpi-meter { background: #fef3c7; }
+.oa-kpi-meter { margin-bottom: 8px; margin-top: auto; }
+.oa-kpi-foot { font-size: 11px; }
+.oa-trend-ok   { color: #10b981; font-weight: 700; }
+.oa-trend-warn { color: #c57f00; font-weight: 700; }
+.oa-trend-bad  { color: #c50f1f; font-weight: 700; }
+
+/* ========== Map card refinements ========== */
+.oa-map-card { padding: 0; overflow: hidden; }
+.oa-map-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--gray-30);
+  background: #fafbfc;
+}
+.oa-map-head-t { font-size: 13px; font-weight: 700; color: var(--kc-navy); }
+.oa-map-head-r { display: flex; gap: 12px; }
+.oa-lg-item {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10.5px; color: var(--gray-130);
+}
+.oa-map-svg { height: 300px; background: transparent; border-radius: 0; }
+
+/* ========== Gate Status list (upgraded from 3-up grid to rich list) ========== */
+.oa-gstat-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.oa-gstat-head small { font-size: 10.5px; color: var(--gray-130); }
+.oa-gstat-list { display: flex; flex-direction: column; gap: 5px; }
+.oa-gs-row {
+  display: grid; grid-template-columns: 42px 1fr auto;
+  gap: 10px; align-items: center;
+  padding: 9px 10px;
+  border: 1px solid var(--gray-30);
+  border-left: 4px solid #a5bcd9;
+  border-radius: 6px;
+  font-size: 11.5px;
+  background: #fafbfc;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.oa-gs-row:hover { transform: translateX(2px); box-shadow: 0 2px 8px rgba(11,37,69,0.06); }
+.oa-gs-row.oa-gs-ok    { border-left-color: #10b981; background: #ecfdf5; }
+.oa-gs-row.oa-gs-busy  { border-left-color: #6b7a8c; }
+.oa-gs-row.oa-gs-alert { border-left-color: #c50f1f; background: #fff5f5; animation: oaGsAlertPulse 2s ease-in-out infinite; }
+.oa-gs-row.oa-gs-reco  { border-left-color: #14b8a6; background: linear-gradient(90deg, #ecfeff 0%, #fff 60%); border-style: solid; border-width: 1px 1px 1px 4px; border-image: linear-gradient(180deg, #14b8a6, #0ea5e9) 1; }
+@keyframes oaGsAlertPulse { 0%,100% { box-shadow: 0 0 0 rgba(197,15,31,0); } 50% { box-shadow: 0 0 0 3px rgba(197,15,31,0.18); } }
+.oa-gs-r-l strong { font-family: "Segoe UI", monospace; color: var(--kc-navy); font-size: 12px; }
+.oa-gs-r-m { color: var(--gray-160); line-height: 1.4; }
+.oa-gs-r-m strong { color: var(--kc-navy); }
+.oa-gs-r-m small { display: block; font-size: 10px; color: var(--gray-130); margin-top: 2px; font-weight: 400; }
+.oa-gs-r-time {
+  font-family: "Segoe UI", monospace;
+  font-size: 11px; font-weight: 600;
+  color: var(--gray-130);
+  background: #fff; border: 1px solid var(--gray-30);
+  padding: 3px 9px; border-radius: 10px;
+  white-space: nowrap;
+}
+.oa-gs-row.oa-gs-alert .oa-gs-r-time { color: #c50f1f; border-color: #fecaca; background: #fee2e2; font-weight: 700; }
+.oa-gs-row.oa-gs-reco  .oa-gs-r-time { color: #065f46; border-color: #a7f3d0; background: #d1fae5; font-weight: 700; }
+
+/* ========== Recent Activity · rich rows with icons ========== */
+.oa-act-row {
+  display: grid;
+  grid-template-columns: 28px 56px 1fr;
+  gap: 10px; align-items: center;
+  padding: 9px 6px;
+  border-bottom: 1px solid var(--gray-30);
+}
+.oa-act-row:last-child { border-bottom: none; }
+.oa-act-ico {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  color: #fff;
+}
+.oa-act-ico-alert { background: linear-gradient(135deg,#ef4444,#c50f1f); box-shadow: 0 2px 6px rgba(197,15,31,0.35); }
+.oa-act-ico-warn  { background: linear-gradient(135deg,#fbbf24,#c57f00); color: #fff; }
+.oa-act-ico-ok    { background: linear-gradient(135deg,#34d399,#10b981); font-size: 11px; }
+.oa-act-ico-crew  { background: linear-gradient(135deg,#a78bfa,#7c3aed); font-size: 11px; }
+.oa-act-row.oa-act-alert { background: linear-gradient(90deg,#fff6e6 0%, transparent 60%); border-radius: 5px; padding-left: 8px; }
+.oa-act-row.oa-act-warn  { background: linear-gradient(90deg,#fffbea 0%, transparent 60%); border-radius: 5px; padding-left: 8px; }
+.oa-act-row.oa-act-ok    { background: linear-gradient(90deg,#ecfdf5 0%, transparent 60%); border-radius: 5px; padding-left: 8px; }
+.oa-act-b strong { color: var(--kc-navy); font-weight: 600; }
+
+/* ========== Advisor step rail · connecting lines between steps ========== */
+.oa-adv-steps {
+  position: relative;
+  padding: 14px 14px 10px;
+}
+.oa-adv-steps::before {
+  content: ''; position: absolute;
+  left: 10%; right: 10%; top: 24px; height: 2px;
+  background: #e5e7eb;
+  z-index: 0;
+}
+.oa-adv-step { position: relative; z-index: 1; }
+.oa-adv-step span { border: 2px solid #e5e7eb; background: #fff; }
+.oa-adv-step.active span { border-color: transparent; }
+.oa-adv-step.done span { border-color: transparent; }
+.oa-adv-step:not(.done):not(.active) span { color: #94a3b8; }
+.oa-adv-step.done::after { display: none; } /* remove the floating checkmark that was clipping */
 </style>
 </head>
 <body>
@@ -12087,6 +12271,14 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 
   <!-- ========== IROPS CASCADE — marquee airline canvas ========== -->
   <div id="app-irops" class="app-shell">
+    <div class="app-topbar app-topbar-slim">
+      <div class="back" onclick="goHome()" title="Back to apps">☰</div>
+      <div class="app-title">
+        <svg class="app-title-logo" width="20" height="20" viewBox="0 0 28 28"><circle cx="9" cy="14" r="3" fill="#f59e0b"/><path d="M9 14 Q15 7 21 14" stroke="#f59e0b" stroke-width="1.3" fill="none" opacity="0.8"/><circle cx="21" cy="9" r="1.3" fill="#14b8a6"/></svg>
+        IROps Cascade Commander
+      </div>
+      <div class="app-breadcrumb"><span onclick="goHome()">Apps</span> <span class="app-bc-sep">›</span> <span>IROps Cascade</span></div>
+    </div>
     <div class="ir-wrap">
 
       <!-- Top command bar -->
@@ -12687,6 +12879,14 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 
   <!-- ========== FLEET TRACKER ========== -->
   <div id="app-fleet" class="app-shell">
+    <div class="app-topbar app-topbar-slim">
+      <div class="back" onclick="goHome()" title="Back to apps">☰</div>
+      <div class="app-title">
+        <svg class="app-title-logo" width="20" height="20" viewBox="0 0 32 32" fill="none"><path d="M16 3 L17.1 14 L28 16 L28 18 L17.1 17 L17 24 L20 25.5 L20 27 L16 26 L12 27 L12 25.5 L15 24 L14.9 17 L4 18 L4 16 L14.9 14 Z" fill="#0b2545"/><circle cx="26" cy="6" r="2.5" fill="#c50f1f"/></svg>
+        Fleet Tracker
+      </div>
+      <div class="app-breadcrumb"><span onclick="goHome()">Apps</span> <span class="app-bc-sep">›</span> <span>Fleet Tracker</span></div>
+    </div>
     <div class="flt-wrap">
 
       <div class="flt-head">
@@ -12777,6 +12977,14 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 
   <!-- ========== CREW LEGALITY BOARD ========== -->
   <div id="app-crew" class="app-shell">
+    <div class="app-topbar app-topbar-slim">
+      <div class="back" onclick="goHome()" title="Back to apps">☰</div>
+      <div class="app-title">
+        <svg class="app-title-logo" width="20" height="20" viewBox="0 0 32 32" fill="none"><rect x="4"  y="18" width="4" height="8"  fill="#10b981" rx="0.8"/><rect x="10" y="14" width="4" height="12" fill="#34d399" rx="0.8"/><rect x="16" y="10" width="4" height="16" fill="#f59e0b" rx="0.8"/><rect x="22" y="6"  width="4" height="20" fill="#c50f1f" rx="0.8"/><line x1="2" y1="8" x2="30" y2="8" stroke="#0b2545" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
+        Crew Legality Board
+      </div>
+      <div class="app-breadcrumb"><span onclick="goHome()">Apps</span> <span class="app-bc-sep">›</span> <span>Crew Legality</span></div>
+    </div>
     <div class="crw-wrap">
       <div class="crw-head">
         <div>
@@ -12816,33 +13024,36 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 
   <!-- ========== SEA OPS AI ADVISOR — Power App (6-step workflow) ========== -->
   <div id="app-opsadvisor" class="app-shell">
-    <div class="oa-wrap">
-      <!-- Power App provenance strip -->
-      <div class="oa-pwr-strip">
-        <svg width="14" height="14" viewBox="0 0 32 32" fill="none"><path d="M16 3 L28 16 L16 29 L4 16 Z" fill="rgba(168,85,247,0.25)" stroke="#a855f7" stroke-width="1.5"/></svg>
-        <strong>Cascadia.OpsAdvisor</strong>
-        <span>Power App · canvas · v2.4.1 · published 2 h ago by D. Kowalski</span>
-        <span class="oa-pwr-sp"></span>
-        <span class="oa-pwr-chip">Dataverse: casa-prod-us-west-2</span>
-        <span class="oa-pwr-chip">DLP: Confidential · blocked external</span>
-        <span class="oa-pwr-chip oa-pwr-chip-good">● Purview 100% audit</span>
+    <!-- Microsoft chrome · back-to-home breadcrumb -->
+    <div class="app-topbar app-topbar-slim">
+      <div class="back" onclick="goHome()" title="Back to apps">☰</div>
+      <div class="app-title">
+        <svg class="app-title-logo" width="20" height="20" viewBox="0 0 32 32" fill="none"><path d="M16 3 L28 16 L16 29 L4 16 Z" fill="rgba(168,85,247,0.15)" stroke="#a855f7" stroke-width="1.5"/><circle cx="16" cy="16" r="3" fill="#a855f7"/></svg>
+        Cascadia Ops Advisor
+        <span class="app-title-pwr">Power App · canvas</span>
       </div>
+      <div class="app-breadcrumb"><span onclick="goHome()">Apps</span> <span class="app-bc-sep">›</span> <span>Ops Advisor</span> <span class="app-bc-sep">›</span> <span>Overview</span></div>
+    </div>
 
-      <!-- Dashboard top-nav -->
+    <div class="oa-wrap">
+      <!-- Consolidated dashboard header: brand + tabs + primary CTA -->
       <div class="oa-topnav">
         <div class="oa-topnav-tabs">
           <button class="oa-tab active">Overview</button>
           <button class="oa-tab">Gate Status</button>
           <button class="oa-tab">Flight Schedule</button>
-          <button class="oa-tab">Alerts &amp; Events</button>
-          <button class="oa-tab">Resources</button>
+          <button class="oa-tab">Alerts</button>
           <button class="oa-tab">Analytics</button>
-          <button class="oa-tab">Settings</button>
         </div>
-        <button class="oa-ai-btn" id="oa-ai-btn" onclick="oaOpenAdvisor()">
-          <svg width="14" height="14"><use href="#copilotLogo"/></svg>
-          Ask Cascadia Ops AI
-        </button>
+        <div class="oa-topnav-right">
+          <span class="oa-env-chip" title="Published 2 h ago · Dataverse: casa-prod-us-west-2 · DLP Confidential · Purview 100% audit">
+            <span class="oa-env-dot"></span>v2.4.1 · live
+          </span>
+          <button class="oa-ai-btn" id="oa-ai-btn" onclick="oaOpenAdvisor()">
+            <svg width="14" height="14"><use href="#copilotLogo"/></svg>
+            Ask Cascadia Ops AI
+          </button>
+        </div>
       </div>
 
       <div class="oa-body-grid">
@@ -12878,206 +13089,263 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             </div>
           </div>
 
-          <!-- KPI tiles -->
+          <!-- KPI tiles (uniform, trend-aware) -->
           <div class="oa-kpis">
             <div class="oa-kpi-card">
-              <div class="oa-kpi-top"><span class="oa-kpi-label">Terminal 2 · N / A</span></div>
-              <div class="oa-kpi-v"><span class="oa-kpi-num">8</span><span class="oa-kpi-denom"> / 18</span></div>
-              <div class="oa-kpi-sub">Available Gates</div>
+              <div class="oa-kpi-label">Terminal 2 · Gates A / B</div>
+              <div class="oa-kpi-v"><span class="oa-kpi-num">8</span><span class="oa-kpi-denom">/ 18</span></div>
               <div class="oa-kpi-meter"><span style="width:55%;background:#10b981;"></span></div>
-              <div class="oa-kpi-foot"><span>In Use <strong>10</strong></span><span>Util <strong>55%</strong></span></div>
+              <div class="oa-kpi-foot"><span>55% util</span><span class="oa-trend-ok">▲ 4%</span></div>
             </div>
             <div class="oa-kpi-card">
-              <div class="oa-kpi-top"><span class="oa-kpi-label">Terminal 3 · C / D</span></div>
-              <div class="oa-kpi-v"><span class="oa-kpi-num">12</span><span class="oa-kpi-denom"> / 30</span></div>
-              <div class="oa-kpi-sub">Available Gates</div>
+              <div class="oa-kpi-label">Terminal 3 · Gates C / D</div>
+              <div class="oa-kpi-v"><span class="oa-kpi-num">12</span><span class="oa-kpi-denom">/ 30</span></div>
               <div class="oa-kpi-meter"><span style="width:60%;background:#f59e0b;"></span></div>
-              <div class="oa-kpi-foot"><span>In Use <strong>18</strong></span><span>Util <strong>60%</strong></span></div>
+              <div class="oa-kpi-foot"><span>60% util</span><span class="oa-trend-warn">▲ 11%</span></div>
+            </div>
+            <div class="oa-kpi-card oa-kpi-attn">
+              <div class="oa-kpi-label">Active Alerts</div>
+              <div class="oa-kpi-v"><span class="oa-kpi-num" style="color:#c50f1f;">1</span><span class="oa-kpi-denom">critical</span></div>
+              <div class="oa-kpi-meter"><span style="width:33%;background:#c50f1f;"></span></div>
+              <div class="oa-kpi-foot"><span>+ 2 warnings</span><span class="oa-trend-bad">Gate B12</span></div>
             </div>
             <div class="oa-kpi-card">
-              <div class="oa-kpi-top"><span class="oa-kpi-label">Active Alerts</span></div>
-              <div class="oa-kpi-v oa-kpi-alert"><span class="oa-kpi-num">1</span></div>
-              <div class="oa-kpi-sub">Critical</div>
-              <div class="oa-kpi-alertrow">
-                <span>Warning <strong>2</strong></span>
-                <span>Total <strong>3</strong></span>
-              </div>
-            </div>
-            <div class="oa-kpi-card">
-              <div class="oa-kpi-top"><span class="oa-kpi-label">Weather · KSEA</span></div>
-              <div class="oa-kpi-v" style="color:#0ea5e9;"><span class="oa-kpi-num" style="font-size:32px;">Clear</span></div>
-              <div class="oa-kpi-sub">Conditions</div>
-              <div class="oa-kpi-foot"><span>Vis <strong>10 mi</strong></span><span>Wind <strong>8 kts</strong></span></div>
+              <div class="oa-kpi-label">KSEA Weather · METAR</div>
+              <div class="oa-kpi-v"><span class="oa-kpi-num" style="color:#0ea5e9;font-size:20px;padding-top:9px;">VFR · BKN 040</span></div>
+              <div class="oa-kpi-meter"><span style="width:90%;background:#0ea5e9;"></span></div>
+              <div class="oa-kpi-foot"><span>10SM · 210/12</span><span class="oa-trend-ok">✓ stable</span></div>
             </div>
           </div>
 
           <!-- Map + Gate status grid -->
           <div class="oa-map-row">
             <div class="oa-map-card">
-              <svg class="oa-map-svg" viewBox="0 0 600 260" preserveAspectRatio="xMidYMid meet">
+              <div class="oa-map-head">
+                <div class="oa-map-head-t">KSEA · airfield map</div>
+                <div class="oa-map-head-r">
+                  <span class="oa-lg-item"><span class="oa-lg oa-lg-ok"></span>Available</span>
+                  <span class="oa-lg-item"><span class="oa-lg oa-lg-busy"></span>Occupied</span>
+                  <span class="oa-lg-item"><span class="oa-lg oa-lg-alert"></span>Alert</span>
+                </div>
+              </div>
+              <svg class="oa-map-svg" viewBox="0 0 640 280" preserveAspectRatio="xMidYMid meet">
                 <defs>
-                  <linearGradient id="oaMapBg" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#eef5fd"/>
-                    <stop offset="100%" stop-color="#e1eefb"/>
+                  <linearGradient id="oaMapBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"  stop-color="#f0f6fd"/>
+                    <stop offset="100%" stop-color="#e3ecf8"/>
                   </linearGradient>
                   <linearGradient id="oaTerm" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#cad8ec"/>
-                    <stop offset="100%" stop-color="#a5bcd9"/>
+                    <stop offset="0%" stop-color="#eff4fb"/>
+                    <stop offset="100%" stop-color="#dbe4f2"/>
                   </linearGradient>
+                  <filter id="oaPinShadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="rgba(11,37,69,0.25)"/>
+                  </filter>
                 </defs>
-                <rect width="600" height="260" fill="url(#oaMapBg)"/>
-                <!-- Subtle grid -->
-                <g stroke="rgba(10,46,79,0.05)" stroke-width="1">
-                  <line x1="0" y1="65" x2="600" y2="65"/><line x1="0" y1="130" x2="600" y2="130"/>
-                  <line x1="0" y1="195" x2="600" y2="195"/>
-                  <line x1="120" y1="0" x2="120" y2="260"/><line x1="260" y1="0" x2="260" y2="260"/>
-                  <line x1="400" y1="0" x2="400" y2="260"/><line x1="540" y1="0" x2="540" y2="260"/>
-                </g>
-                <!-- Runways (16L/16R) -->
-                <rect x="60" y="20" width="20" height="220" fill="#3d3d3d" rx="2"/>
-                <rect x="520" y="20" width="20" height="220" fill="#3d3d3d" rx="2"/>
-                <g fill="#fff" font-family="Segoe UI, sans-serif" font-size="8" text-anchor="middle" font-weight="700">
-                  <text x="70" y="32">16L</text><text x="70" y="232">34R</text>
-                  <text x="530" y="32">16R</text><text x="530" y="232">34L</text>
-                </g>
-                <!-- Taxiways (subtle) -->
-                <g stroke="#8897a8" stroke-width="1.5" stroke-dasharray="4 3" fill="none" opacity="0.5">
-                  <path d="M80 130 L520 130"/>
-                  <path d="M80 75  L250 75"/>
-                  <path d="M350 75 L520 75"/>
-                </g>
-                <!-- Terminal 2 (Concourse A/B) -->
-                <g transform="translate(170 60)">
-                  <rect x="0" y="0" width="130" height="40" fill="url(#oaTerm)" stroke="#8897a8" stroke-width="0.8" rx="5"/>
-                  <text x="65" y="25" fill="#0b2545" font-size="11" text-anchor="middle" font-weight="700" font-family="Segoe UI">Terminal 2 · A / B</text>
-                </g>
-                <!-- Terminal 3 (Concourse C/D) -->
-                <g transform="translate(310 60)">
-                  <rect x="0" y="0" width="150" height="40" fill="url(#oaTerm)" stroke="#8897a8" stroke-width="0.8" rx="5"/>
-                  <text x="75" y="25" fill="#0b2545" font-size="11" text-anchor="middle" font-weight="700" font-family="Segoe UI">Terminal 3 · C / D</text>
-                </g>
-                <!-- North Satellite -->
-                <g transform="translate(200 170)">
-                  <rect x="0" y="0" width="200" height="35" fill="url(#oaTerm)" stroke="#8897a8" stroke-width="0.8" rx="5"/>
-                  <text x="100" y="22" fill="#0b2545" font-size="11" text-anchor="middle" font-weight="700" font-family="Segoe UI">North Satellite (N)</text>
-                </g>
-                <!-- Gate dots scattered around terminals -->
-                <g font-family="Segoe UI" font-size="7" text-anchor="middle" fill="#fff" font-weight="700">
-                  <!-- Row of gates along top of T2 -->
-                  <circle cx="180" cy="55" r="5" fill="#10b981"/><text x="180" y="57">A4</text>
-                  <circle cx="200" cy="55" r="5" fill="#10b981"/><text x="200" y="57">A5</text>
-                  <circle cx="220" cy="55" r="5" fill="#10b981"/><text x="220" y="57">A6</text>
-                  <circle cx="240" cy="55" r="5" fill="#a5bcd9"/><text x="240" y="57">A7</text>
-                  <circle cx="260" cy="55" r="5" fill="#10b981"/><text x="260" y="57">A8</text>
-                  <circle cx="280" cy="55" r="5" fill="#a5bcd9"/><text x="280" y="57">A9</text>
-                  <!-- Row of gates along bottom of T2 (B concourse) -->
-                  <circle cx="180" cy="105" r="5" fill="#10b981"/><text x="180" y="107">B8</text>
-                  <circle cx="200" cy="105" r="5" fill="#10b981"/><text x="200" y="107">B10</text>
-                  <circle cx="220" cy="105" r="5" fill="#a5bcd9"/><text x="220" y="107">B11</text>
-                  <!-- B12 ALERT -->
-                  <g>
-                    <circle cx="240" cy="105" r="12" fill="#f59e0b" opacity="0.25">
-                      <animate attributeName="r" values="12;22;12" dur="1.8s" repeatCount="indefinite"/>
-                      <animate attributeName="opacity" values="0.5;0;0.5" dur="1.8s" repeatCount="indefinite"/>
-                    </circle>
-                    <circle cx="240" cy="105" r="8" fill="#c50f1f" stroke="#fff" stroke-width="1.5"/>
-                    <text x="240" y="108" font-size="8">B12</text>
+                <rect width="640" height="280" fill="url(#oaMapBg)"/>
+
+                <!-- Runways: 16L/34R and 16R/34L -->
+                <g>
+                  <rect x="55"  y="18" width="22" height="244" fill="#3a3a3a" rx="2"/>
+                  <rect x="563" y="18" width="22" height="244" fill="#3a3a3a" rx="2"/>
+                  <!-- Runway stripes (realistic centerline) -->
+                  <g stroke="#fff" stroke-width="1" stroke-dasharray="5 5" opacity="0.75">
+                    <line x1="66"  y1="24" x2="66"  y2="256"/>
+                    <line x1="574" y1="24" x2="574" y2="256"/>
                   </g>
-                  <circle cx="260" cy="105" r="5" fill="#10b981"/><text x="260" y="107">B15</text>
-                  <circle cx="280" cy="105" r="5" fill="#a5bcd9"/><text x="280" y="107">B17</text>
-                  <!-- Row of gates along top of T3 -->
-                  <circle cx="330" cy="55" r="5" fill="#10b981"/><text x="330" y="57">C3</text>
-                  <circle cx="350" cy="55" r="5" fill="#10b981"/><text x="350" y="57">C5</text>
-                  <circle cx="370" cy="55" r="5" fill="#a5bcd9"/><text x="370" y="57">C7</text>
-                  <circle cx="390" cy="55" r="5" fill="#10b981"/><text x="390" y="57">C9</text>
-                  <circle cx="410" cy="55" r="5" fill="#a5bcd9"/><text x="410" y="57">C11</text>
-                  <circle cx="430" cy="55" r="5" fill="#a5bcd9"/><text x="430" y="57">C14</text>
-                  <circle cx="450" cy="55" r="5" fill="#10b981"/><text x="450" y="57">D3</text>
-                  <!-- Row of gates along bottom of T3 -->
-                  <circle cx="330" cy="105" r="5" fill="#10b981"/><text x="330" y="107">D5</text>
-                  <circle cx="350" cy="105" r="5" fill="#10b981"/><text x="350" y="107">D7</text>
-                  <circle cx="370" cy="105" r="5" fill="#a5bcd9"/><text x="370" y="107">D9</text>
-                  <circle cx="390" cy="105" r="5" fill="#10b981"/><text x="390" y="107">D11</text>
-                  <circle cx="410" cy="105" r="5" fill="#10b981"/><text x="410" y="107">D15</text>
-                  <circle cx="430" cy="105" r="5" fill="#a5bcd9"/><text x="430" y="107">D17</text>
-                  <circle cx="450" cy="105" r="5" fill="#10b981"/><text x="450" y="107">D19</text>
-                  <!-- North Satellite gates -->
-                  <circle cx="220" cy="165" r="4" fill="#10b981"/><text x="220" y="167">N1</text>
-                  <circle cx="240" cy="165" r="4" fill="#10b981"/><text x="240" y="167">N3</text>
-                  <circle cx="260" cy="165" r="4" fill="#a5bcd9"/><text x="260" y="167">N5</text>
-                  <circle cx="280" cy="165" r="4" fill="#10b981"/><text x="280" y="167">N7</text>
-                  <circle cx="300" cy="165" r="4" fill="#a5bcd9"/><text x="300" y="167">N9</text>
-                  <circle cx="320" cy="165" r="4" fill="#10b981"/><text x="320" y="167">N11</text>
-                  <circle cx="340" cy="165" r="4" fill="#10b981"/><text x="340" y="167">N13</text>
-                  <circle cx="360" cy="165" r="4" fill="#a5bcd9"/><text x="360" y="167">N15</text>
+                  <g fill="#fff" font-family="Segoe UI, sans-serif" font-size="10" text-anchor="middle" font-weight="800">
+                    <text x="66" y="34">16L</text><text x="66" y="253">34R</text>
+                    <text x="574" y="34">16R</text><text x="574" y="253">34L</text>
+                  </g>
                 </g>
-                <!-- Airport compass + title -->
-                <g transform="translate(30 30)">
-                  <circle r="10" fill="none" stroke="#8897a8" stroke-width="1"/>
-                  <text y="-14" text-anchor="middle" font-size="10" font-family="Segoe UI" fill="#0b2545" font-weight="700">N</text>
-                  <line x1="0" y1="-8" x2="0" y2="8" stroke="#0b2545" stroke-width="1"/>
+
+                <!-- Taxiway network -->
+                <g stroke="#8ea4bc" stroke-width="1.5" stroke-dasharray="5 3" fill="none" opacity="0.55">
+                  <path d="M77 140 L563 140"/>
+                  <path d="M77 80  L260 80"/>
+                  <path d="M360 80 L563 80"/>
+                  <path d="M77 200 L563 200"/>
                 </g>
-                <!-- Alert callout over B12 -->
-                <g transform="translate(242 105)">
-                  <rect x="10" y="-14" width="54" height="18" fill="rgba(11,37,69,0.92)" rx="3"/>
-                  <polygon points="6,-4 10,-10 10,-4" fill="rgba(11,37,69,0.92)"/>
-                  <text x="37" y="-1" font-size="8.5" fill="#fff" text-anchor="middle" font-family="Segoe UI" font-weight="700">B12 Alert</text>
+
+                <!-- Terminal 2 (Concourse A / B) -->
+                <g>
+                  <rect x="160" y="52" width="160" height="48" fill="url(#oaTerm)" stroke="#8ea4bc" stroke-width="1" rx="6"/>
+                  <text x="240" y="82" fill="#0b2545" font-size="13" text-anchor="middle" font-weight="700" font-family="Segoe UI">Terminal 2</text>
+                  <text x="240" y="95" fill="#55708b" font-size="10" text-anchor="middle" font-weight="500" font-family="Segoe UI">Concourse A / B</text>
+                </g>
+
+                <!-- Terminal 3 (Concourse C / D) -->
+                <g>
+                  <rect x="340" y="52" width="180" height="48" fill="url(#oaTerm)" stroke="#8ea4bc" stroke-width="1" rx="6"/>
+                  <text x="430" y="82" fill="#0b2545" font-size="13" text-anchor="middle" font-weight="700" font-family="Segoe UI">Terminal 3</text>
+                  <text x="430" y="95" fill="#55708b" font-size="10" text-anchor="middle" font-weight="500" font-family="Segoe UI">Concourse C / D</text>
+                </g>
+
+                <!-- North Satellite -->
+                <g>
+                  <rect x="190" y="184" width="240" height="42" fill="url(#oaTerm)" stroke="#8ea4bc" stroke-width="1" rx="6"/>
+                  <text x="310" y="209" fill="#0b2545" font-size="13" text-anchor="middle" font-weight="700" font-family="Segoe UI">North Satellite (N)</text>
+                  <text x="310" y="221" fill="#55708b" font-size="10" text-anchor="middle" font-weight="500" font-family="Segoe UI">Gates N1 – N15</text>
+                </g>
+
+                <!-- Gate dots · larger + readable labels -->
+                <!-- Terminal 2 · Concourse A (top row) -->
+                <g font-family="Segoe UI" font-size="8" text-anchor="middle" font-weight="800">
+                  <g><circle cx="178" cy="45" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="178" y="48" fill="#fff">A4</text></g>
+                  <g><circle cx="203" cy="45" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="203" y="48" fill="#fff">A5</text></g>
+                  <g><circle cx="228" cy="45" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="228" y="48" fill="#fff">A6</text></g>
+                  <g><circle cx="253" cy="45" r="7" fill="#9ab1c9" filter="url(#oaPinShadow)"/><text x="253" y="48" fill="#fff">A7</text></g>
+                  <g><circle cx="278" cy="45" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="278" y="48" fill="#fff">A8</text></g>
+                  <g><circle cx="303" cy="45" r="7" fill="#9ab1c9" filter="url(#oaPinShadow)"/><text x="303" y="48" fill="#fff">A9</text></g>
+                </g>
+                <!-- Terminal 2 · Concourse B (bottom row) -->
+                <g font-family="Segoe UI" font-size="8" text-anchor="middle" font-weight="800">
+                  <g><circle cx="178" cy="107" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="178" y="110" fill="#fff">B8</text></g>
+                  <g><circle cx="203" cy="107" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="203" y="110" fill="#fff">B10</text></g>
+                  <g><circle cx="228" cy="107" r="7" fill="#9ab1c9" filter="url(#oaPinShadow)"/><text x="228" y="110" fill="#fff">B11</text></g>
+
+                  <!-- B12 ALERT — subtle pulse, strong callout -->
+                  <g>
+                    <circle cx="253" cy="107" r="14" fill="#f59e0b" opacity="0.18">
+                      <animate attributeName="r" values="14;22;14" dur="2.2s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0.45;0;0.45" dur="2.2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="253" cy="107" r="10" fill="#c50f1f" stroke="#fff" stroke-width="2" filter="url(#oaPinShadow)"/>
+                    <text x="253" y="110" fill="#fff" font-family="Segoe UI" font-size="9" text-anchor="middle" font-weight="800">B12</text>
+                  </g>
+                  <g><circle cx="278" cy="107" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="278" y="110" fill="#fff">B15</text></g>
+                  <g><circle cx="303" cy="107" r="7" fill="#9ab1c9" filter="url(#oaPinShadow)"/><text x="303" y="110" fill="#fff">B17</text></g>
+                </g>
+                <!-- Terminal 3 · Concourse C (top row) -->
+                <g font-family="Segoe UI" font-size="8" text-anchor="middle" font-weight="800">
+                  <g><circle cx="356" cy="45" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="356" y="48" fill="#fff">C3</text></g>
+                  <g><circle cx="381" cy="45" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="381" y="48" fill="#fff">C5</text></g>
+                  <g><circle cx="406" cy="45" r="7" fill="#9ab1c9" filter="url(#oaPinShadow)"/><text x="406" y="48" fill="#fff">C7</text></g>
+                  <g><circle cx="431" cy="45" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="431" y="48" fill="#fff">C9</text></g>
+                  <g><circle cx="456" cy="45" r="7" fill="#9ab1c9" filter="url(#oaPinShadow)"/><text x="456" y="48" fill="#fff">C11</text></g>
+                  <g><circle cx="481" cy="45" r="8" fill="#14b8a6" stroke="#fff" stroke-width="1.5" filter="url(#oaPinShadow)"/><text x="481" y="48" fill="#fff">C14</text></g>
+                  <g><circle cx="506" cy="45" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="506" y="48" fill="#fff">D3</text></g>
+                </g>
+                <!-- Terminal 3 · Concourse D (bottom row) -->
+                <g font-family="Segoe UI" font-size="8" text-anchor="middle" font-weight="800">
+                  <g><circle cx="356" cy="107" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="356" y="110" fill="#fff">D5</text></g>
+                  <g><circle cx="381" cy="107" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="381" y="110" fill="#fff">D7</text></g>
+                  <g><circle cx="406" cy="107" r="7" fill="#9ab1c9" filter="url(#oaPinShadow)"/><text x="406" y="110" fill="#fff">D9</text></g>
+                  <g><circle cx="431" cy="107" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="431" y="110" fill="#fff">D11</text></g>
+                  <g><circle cx="456" cy="107" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="456" y="110" fill="#fff">D15</text></g>
+                  <g><circle cx="481" cy="107" r="7" fill="#9ab1c9" filter="url(#oaPinShadow)"/><text x="481" y="110" fill="#fff">D17</text></g>
+                  <g><circle cx="506" cy="107" r="7" fill="#10b981" filter="url(#oaPinShadow)"/><text x="506" y="110" fill="#fff">D19</text></g>
+                </g>
+                <!-- North Satellite gates -->
+                <g font-family="Segoe UI" font-size="7.5" text-anchor="middle" font-weight="800">
+                  <g><circle cx="210" cy="177" r="6" fill="#10b981"/><text x="210" y="180" fill="#fff">N1</text></g>
+                  <g><circle cx="235" cy="177" r="6" fill="#10b981"/><text x="235" y="180" fill="#fff">N3</text></g>
+                  <g><circle cx="260" cy="177" r="6" fill="#9ab1c9"/><text x="260" y="180" fill="#fff">N5</text></g>
+                  <g><circle cx="285" cy="177" r="6" fill="#10b981"/><text x="285" y="180" fill="#fff">N7</text></g>
+                  <g><circle cx="310" cy="177" r="6" fill="#9ab1c9"/><text x="310" y="180" fill="#fff">N9</text></g>
+                  <g><circle cx="335" cy="177" r="6" fill="#10b981"/><text x="335" y="180" fill="#fff">N11</text></g>
+                  <g><circle cx="360" cy="177" r="6" fill="#10b981"/><text x="360" y="180" fill="#fff">N13</text></g>
+                  <g><circle cx="385" cy="177" r="6" fill="#9ab1c9"/><text x="385" y="180" fill="#fff">N15</text></g>
+                </g>
+
+                <!-- Compass -->
+                <g transform="translate(32 34)">
+                  <circle r="13" fill="#fff" stroke="#8ea4bc" stroke-width="1"/>
+                  <text y="-18" text-anchor="middle" font-size="10" font-family="Segoe UI" fill="#0b2545" font-weight="800">N</text>
+                  <line x1="0" y1="-10" x2="0" y2="10" stroke="#0b2545" stroke-width="1.2"/>
+                  <polygon points="0,-10 -3,-4 3,-4" fill="#c50f1f"/>
+                </g>
+
+                <!-- Alert callout (refined) -->
+                <g transform="translate(256 107)">
+                  <rect x="14" y="-22" width="68" height="22" fill="#0b2545" rx="4" filter="url(#oaPinShadow)"/>
+                  <polygon points="14,-4 18,-12 22,-4" fill="#0b2545"/>
+                  <text x="48" y="-8" font-size="10" fill="#fff" text-anchor="middle" font-family="Segoe UI" font-weight="700">B12 ALERT</text>
+                </g>
+
+                <!-- Map scale bar -->
+                <g transform="translate(520 250)" font-family="Segoe UI" font-size="9" fill="#55708b">
+                  <line x1="0" y1="0" x2="60" y2="0" stroke="#55708b" stroke-width="1"/>
+                  <line x1="0" y1="-3" x2="0" y2="3" stroke="#55708b" stroke-width="1"/>
+                  <line x1="30" y1="-2" x2="30" y2="2" stroke="#55708b" stroke-width="1"/>
+                  <line x1="60" y1="-3" x2="60" y2="3" stroke="#55708b" stroke-width="1"/>
+                  <text x="0" y="14">0</text><text x="60" y="14" text-anchor="middle">500 m</text>
                 </g>
               </svg>
-              <div class="oa-map-legend">
-                <span><span class="oa-lg oa-lg-ok"></span>Available</span>
-                <span><span class="oa-lg oa-lg-busy"></span>Occupied</span>
-                <span><span class="oa-lg oa-lg-alert"></span>Alert</span>
-              </div>
             </div>
 
+            <!-- Gate Status panel (richer) -->
             <div class="oa-gstat-card">
-              <div class="oa-gstat-head">Gate Status</div>
+              <div class="oa-gstat-head">
+                <span>Gate Status</span>
+                <small>34 / 48 gates occupied</small>
+              </div>
               <div class="oa-gstat-term">
-                <div class="oa-gstat-t-head"><strong>Terminal 2</strong><small>2 / 6 Available</small></div>
-                <div class="oa-gstat-grid">
-                  <div class="oa-gs-cell oa-gs-busy">A10<br><small>Occupied</small></div>
-                  <div class="oa-gs-cell oa-gs-alert">B12<br><small>Alert</small></div>
-                  <div class="oa-gs-cell oa-gs-ok">A14<br><small>Available</small></div>
+                <div class="oa-gstat-t-head"><strong>Terminal 2</strong><small>8 / 18 available</small></div>
+                <div class="oa-gstat-list">
+                  <div class="oa-gs-row oa-gs-alert">
+                    <div class="oa-gs-r-l"><strong>B12</strong></div>
+                    <div class="oa-gs-r-m">Alert · jet bridge OTS<br><small>CAS1247 · A320 · STD 07:32</small></div>
+                    <span class="oa-gs-r-time">45 min</span>
+                  </div>
+                  <div class="oa-gs-row oa-gs-busy">
+                    <div class="oa-gs-r-l"><strong>B10</strong></div>
+                    <div class="oa-gs-r-m">Occupied · boarding<br><small>CAS0842 · 739 · STD 07:55</small></div>
+                    <span class="oa-gs-r-time">+8 min</span>
+                  </div>
+                  <div class="oa-gs-row oa-gs-ok">
+                    <div class="oa-gs-r-l"><strong>A14</strong></div>
+                    <div class="oa-gs-r-m">Available · ready<br><small>next CAS0517 · STD 08:22</small></div>
+                  </div>
                 </div>
               </div>
               <div class="oa-gstat-term">
-                <div class="oa-gstat-t-head"><strong>Terminal 3</strong><small>2 / 3 Available</small></div>
-                <div class="oa-gstat-grid">
-                  <div class="oa-gs-cell oa-gs-ok">B6<br><small>Available</small></div>
-                  <div class="oa-gs-cell oa-gs-ok">B8<br><small>Available</small></div>
-                  <div class="oa-gs-cell oa-gs-busy">B10<br><small>Occupied</small></div>
+                <div class="oa-gstat-t-head"><strong>Terminal 3</strong><small>12 / 30 available</small></div>
+                <div class="oa-gstat-list">
+                  <div class="oa-gs-row oa-gs-reco">
+                    <div class="oa-gs-r-l"><strong>C14</strong></div>
+                    <div class="oa-gs-r-m">Available · Copilot-suggested<br><small>A320 compatible · 200 m walk</small></div>
+                    <span class="oa-gs-r-time">✓ fit</span>
+                  </div>
+                  <div class="oa-gs-row oa-gs-busy">
+                    <div class="oa-gs-r-l"><strong>D11</strong></div>
+                    <div class="oa-gs-r-m">Occupied · deplaning<br><small>CAS2118 · 77W · ICN arr 23:58</small></div>
+                    <span class="oa-gs-r-time">+40 min</span>
+                  </div>
+                  <div class="oa-gs-row oa-gs-ok">
+                    <div class="oa-gs-r-l"><strong>D3</strong></div>
+                    <div class="oa-gs-r-m">Available · ready<br><small>RON overnight spare</small></div>
+                  </div>
                 </div>
-              </div>
-              <div class="oa-gstat-legend">
-                <span><span class="oa-lg oa-lg-ok"></span>Available</span>
-                <span><span class="oa-lg oa-lg-busy"></span>Occupied</span>
-                <span><span class="oa-lg oa-lg-alert"></span>Alert</span>
               </div>
             </div>
           </div>
 
-          <!-- Recent activity -->
+          <!-- Recent activity · with icons + type coloring -->
           <div class="oa-activity-card">
             <div class="oa-activity-head">
               <strong>Recent Activity</strong>
-              <span>last 30 min</span>
+              <span>last 30 min · 4 events</span>
             </div>
             <div class="oa-act-row oa-act-alert">
+              <div class="oa-act-ico oa-act-ico-alert">⚠</div>
               <span class="oa-act-t">14:32</span>
-              <span class="oa-act-b">Gate B12 Alert · Jet bridge malfunction</span>
+              <span class="oa-act-b"><strong>Gate B12 alert</strong> · jet bridge malfunction · MX ETA 15–60 min · CAS1247 boarding in 45 min</span>
             </div>
-            <div class="oa-act-row">
+            <div class="oa-act-row oa-act-warn">
+              <div class="oa-act-ico oa-act-ico-warn">◔</div>
               <span class="oa-act-t">14:18</span>
-              <span class="oa-act-b">CAS2118 ICN→SEA · trans-Pac tracking +40 min · curfew watch armed</span>
+              <span class="oa-act-b"><strong>CAS2118 ICN→SEA</strong> · trans-Pac tracking +40 min · curfew watch armed · D11 overnight team pre-staged</span>
             </div>
-            <div class="oa-act-row">
+            <div class="oa-act-row oa-act-ok">
+              <div class="oa-act-ico oa-act-ico-ok">✈</div>
               <span class="oa-act-t">14:02</span>
-              <span class="oa-act-b">CAS4412 SEA→YVR · load 82% · 4 standby pax cleared</span>
+              <span class="oa-act-b"><strong>CAS4412 SEA→YVR</strong> · predicted load 82% · 4 standby pax cleared · +$1,842 revenue booked</span>
             </div>
             <div class="oa-act-row">
+              <div class="oa-act-ico oa-act-ico-crew">👤</div>
               <span class="oa-act-t">13:45</span>
-              <span class="oa-act-b">Crew Reserve R. Patel called up · covering Pairing P4481</span>
+              <span class="oa-act-b"><strong>Crew reserve R. Patel called up</strong> · covering Pairing P4481 (Capt. Moreno FDP) · Outlook + Teams notifications sent</span>
             </div>
           </div>
 
