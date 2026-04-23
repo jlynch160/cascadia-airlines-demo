@@ -7064,6 +7064,240 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 .ir-tel-svc { color: #7fd1ff; }
 .ir-tel-msg { color: #e6eefb; }
 
+/* ============ PLAYBACK OVERLAY ============ */
+.ir-playback-overlay {
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 900px 700px at 35% 40%, rgba(14,165,233,0.2), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 75% 70%, rgba(245,158,11,0.14), transparent 55%),
+    rgba(6,13,30,0.9);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 9750;
+  padding: 24px;
+  animation: irModFade 0.24s ease-out;
+}
+.ir-playback-overlay.open { display: flex; }
+.ir-pb-card {
+  width: min(1100px, 95vw);
+  max-height: 90vh;
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(135deg, #14b8a6, #0ea5e9, #a855f7, #ff5a8c, #ff8a3a) border-box;
+  border: 1.5px solid transparent;
+  border-radius: 14px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.55);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  animation: irModCardIn 0.36s cubic-bezier(0.22,0.61,0.36,1);
+}
+.ir-pb-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--gray-30);
+  background: linear-gradient(90deg, #f7fbff, #fff);
+}
+.ir-pb-head-l { display: flex; align-items: center; gap: 12px; }
+.ir-pb-spark { animation: irSparkSpin 3s linear infinite; filter: drop-shadow(0 2px 6px rgba(14,165,233,0.4)); }
+.ir-pb-title { font-size: 15px; font-weight: 700; color: var(--kc-navy); }
+.ir-pb-sub { font-size: 11.5px; color: var(--gray-130); margin-top: 2px; }
+.ir-pb-head-r { display: flex; gap: 6px; }
+
+.ir-pb-rail { padding: 14px 22px 8px; }
+.ir-pb-axis {
+  display: grid; grid-template-columns: repeat(9, 1fr);
+  font-family: "Segoe UI", monospace;
+  font-size: 10px; color: var(--gray-130);
+  margin-bottom: 6px;
+}
+.ir-pb-track {
+  position: relative;
+  height: 18px;
+  background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+  border-radius: 9px;
+  border: 1px solid var(--gray-30);
+}
+.ir-pb-progress {
+  position: absolute; top: 0; left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #14b8a6, #0ea5e9, #a855f7);
+  border-radius: 9px;
+  width: 0%;
+  box-shadow: 0 0 12px rgba(14,165,233,0.5);
+  transition: width 0.25s ease-out;
+}
+.ir-pb-cursor {
+  position: absolute; top: -4px; bottom: -4px;
+  left: 0%;
+  width: 3px; background: #c50f1f;
+  box-shadow: 0 0 0 1px rgba(197,15,31,0.3), 0 0 12px rgba(197,15,31,0.5);
+  transition: left 0.25s ease-out;
+  z-index: 2;
+}
+.ir-pb-cursor::after {
+  content: ''; position: absolute;
+  top: -6px; left: -7px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #c50f1f;
+}
+.ir-pb-marker { position: absolute; top: -8px; bottom: -8px; }
+.ir-pb-m-dot {
+  position: absolute; top: 1px; left: -6px;
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(11,37,69,0.25);
+}
+.ir-pb-m-crit { background: #c50f1f; }
+.ir-pb-m-ai   { background: linear-gradient(135deg,#7b5bff,#c85bff); }
+.ir-pb-m-act  { background: linear-gradient(135deg,#14b8a6,#0ea5e9); }
+.ir-pb-m-ok   { background: #10b981; }
+
+.ir-pb-event {
+  margin: 14px 22px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(14,165,233,0.06), rgba(168,85,247,0.04));
+  border: 1px solid #dbe4f2;
+  border-left: 4px solid #0ea5e9;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.ir-pb-event.crit { border-left-color: #c50f1f; background: linear-gradient(135deg, #fff5f5, #fff); }
+.ir-pb-event.ai   { border-left-color: #a855f7; background: linear-gradient(135deg, rgba(168,85,247,0.08), #fff); }
+.ir-pb-event.act  { border-left-color: #14b8a6; background: linear-gradient(135deg, rgba(20,184,166,0.08), #fff); }
+.ir-pb-event.ok   { border-left-color: #10b981; background: linear-gradient(135deg, rgba(16,185,129,0.08), #fff); }
+.ir-pb-event-t { font-size: 13.5px; font-weight: 700; color: var(--kc-navy); margin-bottom: 4px; font-family: "Segoe UI", monospace; }
+.ir-pb-event-b { font-size: 12.5px; color: var(--gray-160); line-height: 1.55; }
+
+.ir-pb-log-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 0 22px 6px;
+  font-size: 11px; color: var(--gray-130);
+}
+.ir-pb-log-head strong { color: var(--kc-navy); font-size: 12px; }
+.ir-pb-log {
+  margin: 0 22px;
+  background: #051429; color: #c8d9ee;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: "Segoe UI", monospace;
+  font-size: 11.5px;
+  max-height: 180px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 100px;
+}
+.ir-pb-log-row {
+  display: grid; grid-template-columns: 60px 24px 1fr;
+  gap: 10px;
+  padding: 3px 0;
+  animation: irTelIn 0.3s ease-out;
+  line-height: 1.5;
+}
+.ir-pb-log-t { color: #fde68a; }
+.ir-pb-log-ic { text-align: center; }
+.ir-pb-log-msg { color: #e6eefb; }
+.ir-pb-log-row.crit .ir-pb-log-ic { color: #ff9393; }
+.ir-pb-log-row.ai   .ir-pb-log-ic { color: #c4b5fd; }
+.ir-pb-log-row.act  .ir-pb-log-ic { color: #5eead4; }
+.ir-pb-log-row.ok   .ir-pb-log-ic { color: #6ee7b7; }
+
+.ir-pb-foot {
+  display: flex; justify-content: space-between;
+  padding: 12px 22px;
+  border-top: 1px solid var(--gray-30);
+  background: #fafbfc;
+  font-size: 11.5px;
+  color: var(--gray-130);
+  font-family: "Segoe UI", monospace;
+}
+.ir-pb-foot strong { color: var(--kc-navy); font-weight: 700; }
+
+/* Playback button glow when idle */
+.ir-btn.ir-btn-playback {
+  position: relative;
+  background: linear-gradient(135deg, #ede9fe, #ffedd5);
+  color: #7c3aed;
+  border: 1px solid #ddd6fe;
+}
+.ir-btn.ir-btn-playback:hover {
+  background: linear-gradient(135deg, #ddd6fe, #fed7aa);
+  color: #6d28d9;
+}
+
+/* ============ POST-MORTEM DRAWER ============ */
+.ir-pm-overlay {
+  position: fixed; inset: 0;
+  background: rgba(6,13,30,0.78);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center; justify-content: flex-end;
+  z-index: 9740;
+  animation: irModFade 0.22s ease-out;
+}
+.ir-pm-overlay.open { display: flex; }
+.ir-pm-card {
+  width: min(720px, 94vw);
+  height: 100vh;
+  background: #fff;
+  border-left: 3px solid transparent;
+  background-image: linear-gradient(#fff,#fff), linear-gradient(180deg,#14b8a6,#0ea5e9,#a855f7,#ff5a8c,#ff8a3a);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: -24px 0 64px rgba(0,0,0,0.5);
+  display: flex; flex-direction: column;
+  animation: irPmSlide 0.36s cubic-bezier(0.22,0.61,0.36,1);
+  overflow: hidden;
+}
+@keyframes irPmSlide {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+.ir-pm-head {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--gray-30);
+  background: linear-gradient(90deg, #fafbff, #fff);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.ir-pm-head-l { display: flex; align-items: center; gap: 14px; }
+.ir-pm-badge {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.6px;
+  background: linear-gradient(135deg,#7c3aed,#c026d3);
+  color: #fff;
+  padding: 5px 11px; border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.35);
+}
+.ir-pm-title { font-size: 17px; font-weight: 700; color: var(--kc-navy); }
+.ir-pm-sub { font-size: 12px; color: var(--gray-130); margin-top: 3px; }
+
+.ir-pm-body { padding: 16px 22px 24px; overflow-y: auto; flex: 1; }
+
+.ir-pm-kpis {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: 8px; margin-bottom: 18px;
+}
+.ir-pm-kpi {
+  background: #fff; border: 1px solid var(--gray-30);
+  border-radius: 7px; padding: 10px 8px;
+  text-align: center;
+}
+.ir-pm-k-v { font-size: 18px; font-weight: 700; color: var(--kc-navy); line-height: 1; }
+.ir-pm-k-l { font-size: 9.5px; color: var(--gray-130); text-transform: uppercase; letter-spacing: 0.3px; margin-top: 4px; }
+
+.ir-pm-section {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  background: #fafbfc;
+  border: 1px solid var(--gray-30);
+  border-left: 3px solid #14b8a6;
+  border-radius: 6px;
+}
+.ir-pm-section h4 { font-size: 13px; color: var(--kc-navy); font-weight: 700; margin-bottom: 6px; }
+.ir-pm-section p  { font-size: 12px; color: var(--gray-160); line-height: 1.6; margin-bottom: 6px; }
+.ir-pm-section ul { font-size: 12px; color: var(--gray-160); line-height: 1.6; padding-left: 18px; }
+.ir-pm-section ul li { padding: 2px 0; }
+.ir-pm-section strong { color: var(--kc-navy); }
+
 /* ============ MODIFY-PLAN MODAL ============ */
 .ir-mod-overlay {
   position: fixed; inset: 0;
@@ -11044,7 +11278,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         <span class="kc-pa-crumb-sep">›</span>
         <span class="kc-pa-crumb-p">CASA agents</span>
         <span class="kc-pa-crumb-sep">›</span>
-        <strong id="kc-cs-title">Turn Plan Intake</strong>
+        <strong id="kc-cs-title">IROps Cascade Commander</strong>
         <span class="kc-pa-env">published · cascadia-air.onmicrosoft.com</span>
       </div>
       <div class="kc-pa-cmds">
@@ -11162,7 +11396,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         <span class="kc-pa-crumb-sep">›</span>
         <span class="kc-pa-crumb-p">CASA — Network Operations</span>
         <span class="kc-pa-crumb-sep">›</span>
-        <strong id="kc-pa-title">POA-TurnPlan-Intake-v3.2</strong>
+        <strong id="kc-pa-title">CASA-IROps-Cascade-v2.4</strong>
         <span class="kc-pa-env">default · (cascadia-air.onmicrosoft.com)</span>
       </div>
       <div class="kc-pa-cmds">
@@ -11181,11 +11415,11 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
     <div class="kc-pa-tabs" onclick="event.stopPropagation()">
       <button class="kc-pa-tab active" data-flow="intake" onclick="kcPaSwitch('intake')">
         <svg class="kc-pa-tab-ico-svg" width="28" height="28"><use href="#svcReportIntake"/></svg>
-        <span><strong>POA-TurnPlan-Intake-v3.2</strong><small>Automated · handwritten reports → turn plans</small></span>
+        <span><strong>CASA-TurnPlan-Approval-v3.2</strong><small>Ramp turn sheet OCR → certified turn plan</small></span>
       </button>
       <button class="kc-pa-tab" data-flow="redaction" onclick="kcPaSwitch('redaction')">
         <svg class="kc-pa-tab-ico-svg" width="28" height="28"><use href="#svcPurview"/></svg>
-        <span><strong>POA-IROps-Cascade-v2.1</strong><small>Instant · PII redaction for defense release</small></span>
+        <span><strong>CASA-IROps-Cascade-Sim-v2.4</strong><small>Disruption → 128 sims → 3 ranked recovery plans</small></span>
       </button>
       <div class="kc-pa-tabs-right">
         <span class="kc-pa-health"><span class="kc-conn-dot ok"></span> Flow healthy · last run 47 min ago</span>
@@ -12802,6 +13036,14 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         </div>
         <div class="ir-topbar-right">
           <div class="ir-time-chip" id="ir-clock">06:47:00 PT · wx SEA 210/12 10SM BKN040</div>
+          <button class="ir-btn ir-btn-ghost" onclick="irOpenPostMortem()" title="Review last week's YVR diversion case study">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M1 2h10v2H1z M1 6h10v2H1z M1 10h10v2H1z"/></svg>
+            Post-mortem
+          </button>
+          <button class="ir-btn ir-btn-ghost ir-btn-playback" onclick="irPlayback()">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M3 2l7 4-7 4z"/></svg>
+            Playback incident
+          </button>
           <button class="ir-btn ir-btn-primary" onclick="irRunSimulation()">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M3 2l7 4-7 4z"/></svg>
             Simulate cascade
@@ -13642,6 +13884,138 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
               Apply modified plan
               <span style="margin-left:4px;">✓</span>
             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PLAYBACK OVERLAY ============ -->
+      <div class="ir-playback-overlay" id="ir-playback-overlay">
+        <div class="ir-pb-card">
+          <div class="ir-pb-head">
+            <div class="ir-pb-head-l">
+              <svg class="ir-pb-spark" width="22" height="22"><use href="#copilotLogo"/></svg>
+              <div>
+                <div class="ir-pb-title">Playback · ORD cascade · CAS1247 · 04:00 window</div>
+                <div class="ir-pb-sub">06:00 → 10:00 PT · 4 hours compressed to 40 s · every decision Purview-logged</div>
+              </div>
+            </div>
+            <div class="ir-pb-head-r">
+              <button class="ir-btn ir-btn-ghost" onclick="irPlaybackPauseToggle()" id="ir-pb-pause">⏸ Pause</button>
+              <button class="ir-btn ir-btn-ghost" onclick="irClosePlayback()">✕</button>
+            </div>
+          </div>
+
+          <!-- Timeline rail -->
+          <div class="ir-pb-rail">
+            <div class="ir-pb-axis">
+              <span>06:00</span><span>06:30</span><span>07:00</span><span>07:30</span><span>08:00</span><span>08:30</span><span>09:00</span><span>09:30</span><span>10:00</span>
+            </div>
+            <div class="ir-pb-track">
+              <div class="ir-pb-progress" id="ir-pb-progress"></div>
+              <div class="ir-pb-cursor" id="ir-pb-cursor"></div>
+              <!-- Decision markers (populated by JS) -->
+              <div class="ir-pb-marker" style="left:7.5%;"  data-when="06:18" title="ORD ground stop fires"><span class="ir-pb-m-dot ir-pb-m-crit"></span></div>
+              <div class="ir-pb-marker" style="left:19.6%;" data-when="06:47" title="Copilot completes 128 sims · 3 plans ready"><span class="ir-pb-m-dot ir-pb-m-ai"></span></div>
+              <div class="ir-pb-marker" style="left:29%;"   data-when="07:10" title="Dispatcher accepts Plan A"><span class="ir-pb-m-dot ir-pb-m-act"></span></div>
+              <div class="ir-pb-marker" style="left:46%;"   data-when="07:50" title="B12 jet bridge OTS · Copilot rebooks to C14"><span class="ir-pb-m-dot ir-pb-m-crit"></span></div>
+              <div class="ir-pb-marker" style="left:59%;"   data-when="08:22" title="First recovered flight · CAS0517 off-block on time"><span class="ir-pb-m-dot ir-pb-m-ok"></span></div>
+              <div class="ir-pb-marker" style="left:72%;"   data-when="08:55" title="N6152CA swap at MDW executed"><span class="ir-pb-m-dot ir-pb-m-act"></span></div>
+              <div class="ir-pb-marker" style="left:89%;"   data-when="09:35" title="CAS1247 off-block MDW · bus bridge pax boarded"><span class="ir-pb-m-dot ir-pb-m-ok"></span></div>
+            </div>
+          </div>
+
+          <!-- Current event panel -->
+          <div class="ir-pb-event" id="ir-pb-event">
+            <div class="ir-pb-event-t" id="ir-pb-event-t">06:00 PT · Quiet SOC</div>
+            <div class="ir-pb-event-b" id="ir-pb-event-b">Overnight shift still on console. SEA wx clear (210/12). KORD convective cell building west of the airport on CWA radar but no FAA action yet.</div>
+          </div>
+
+          <!-- Log stream -->
+          <div class="ir-pb-log-head">
+            <strong>Decision trail</strong>
+            <span>▸ red · disruption · 🧠 Copilot action · ✓ dispatcher decision · 🏁 outcome</span>
+          </div>
+          <div class="ir-pb-log" id="ir-pb-log"></div>
+
+          <div class="ir-pb-foot">
+            <span>Score: <strong id="ir-pb-score">—</strong> · Pax saved: <strong id="ir-pb-pax">0</strong> · Cost avoided: <strong id="ir-pb-cost">$0K</strong></span>
+            <span id="ir-pb-progress-label">0:00 / 0:40</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ POST-MORTEM DRAWER ============ -->
+      <div class="ir-pm-overlay" id="ir-pm-overlay">
+        <div class="ir-pm-card">
+          <div class="ir-pm-head">
+            <div class="ir-pm-head-l">
+              <div class="ir-pm-badge">CASE STUDY</div>
+              <div>
+                <div class="ir-pm-title">CYVR diversion · 04/16 · 23:42 PT</div>
+                <div class="ir-pm-sub">CAS2201 OGG→SEA · transpac return · weather-deviation recovery · 2 tails, 186 pax · 1h 47m total disruption</div>
+              </div>
+            </div>
+            <button class="ir-btn ir-btn-ghost" onclick="irClosePostMortem()">✕</button>
+          </div>
+
+          <div class="ir-pm-body">
+            <!-- Summary strip -->
+            <div class="ir-pm-kpis">
+              <div class="ir-pm-kpi"><div class="ir-pm-k-v" style="color:#c50f1f;">186</div><div class="ir-pm-k-l">pax exposed</div></div>
+              <div class="ir-pm-kpi"><div class="ir-pm-k-v ir-pk-ok">172</div><div class="ir-pm-k-l">pax on-time rebook</div></div>
+              <div class="ir-pm-kpi"><div class="ir-pm-k-v">$42K</div><div class="ir-pm-k-l">direct cost</div></div>
+              <div class="ir-pm-kpi"><div class="ir-pm-k-v ir-pk-ok">$184K</div><div class="ir-pm-k-l">EU261 avoided</div></div>
+              <div class="ir-pm-kpi"><div class="ir-pm-k-v ir-pk-ok">✓</div><div class="ir-pm-k-l">curfew preserved</div></div>
+              <div class="ir-pm-kpi"><div class="ir-pm-k-v">9 min</div><div class="ir-pm-k-l">Copilot-to-decision</div></div>
+            </div>
+
+            <!-- Narrative -->
+            <div class="ir-pm-section">
+              <h4>What happened</h4>
+              <p>CAS2201 OGG→SEA (B737-800, tail N8212CA, 172 pax) encountered convective cells 180 nm SW of SEA at 22:48 PT. Captain requested diversion; the CYVR (Vancouver) option was live. Problem: a KSEA 01:00 noise-abatement curfew was closing in, and the aircraft was scheduled to turn on a morning CAS4412 SEA→YVR the next day — which meant diverting OUT of SEA was a positioning nightmare.</p>
+            </div>
+
+            <div class="ir-pm-section">
+              <h4>Copilot's call (22:54)</h4>
+              <p>IROps Cascade Commander ran 96 network sims in 64 s. Three options ranked:</p>
+              <ul>
+                <li><strong>Plan A ✓ recommended</strong> — Divert to CYVR (CAS2201) + position empty CAS4418 SEA→YVR at 04:30 next morning to pick up the stranded tail for its YVR→SEA rotation. 172 of 186 pax on-time via cross-hub rebook. Curfew preserved.</li>
+                <li>Plan B — Hold in the air for 25 min waiting on wx pass. Risk: fuel buffer; risk: curfew breach if hold extends.</li>
+                <li>Plan C — Divert to PDX. Cleanest aircraft positioning but 186 pax misconnect and $184K EU261 exposure (European-origin OGG pax).</li>
+              </ul>
+            </div>
+
+            <div class="ir-pm-section">
+              <h4>What the dispatcher did (23:03)</h4>
+              <p>Dispatcher K. Thompson accepted Plan A at 23:03 (9 minutes after the first alert). Copilot had pre-drafted:</p>
+              <ul>
+                <li>Pax comms · 172 rebook notifications in EN/FR (YVR is bilingual) — tone-reviewed + approved at 23:08</li>
+                <li>Crew legality memo · Capt. Reyes + FO Yang on P4488 stayed legal under §c with a 10 h hotel overnight at YVR</li>
+                <li>Customs pre-clear for the unscheduled YVR arrival · completed through ARINC Direct</li>
+                <li>CAS4418 positioning flight dispatched at 04:30 next morning · rebalanced the rotation</li>
+              </ul>
+            </div>
+
+            <div class="ir-pm-section">
+              <h4>What we learned</h4>
+              <ul>
+                <li>Copilot's "airport-fit" feature caught that CYVR + cross-hub positioning preserves <em>both</em> the curfew AND the next-day YVR rotation. A human analyst would likely have picked Plan C (cleaner positioning) under time pressure.</li>
+                <li>EU261 exposure math was a tie-breaker. The agent pulled PNR origins in 1.2 s — would have taken a dispatcher ~8 min to check manually.</li>
+                <li>One late issue: 4 special-meal pax weren't re-catered at YVR (contract handler limitation). We've since added \"special-meal feasibility\" as a Plan-B constraint in the Foundry scoring model.</li>
+              </ul>
+            </div>
+
+            <div class="ir-pm-section">
+              <h4>Playback the full trail</h4>
+              <p>Every step is in the Purview audit — original ACARS weather data, CWA radar snapshot, Copilot prompt + 96 sims, Dispatcher accept event, all 172 pax comms sent. Export is a one-click PDF for the FAA post-event review.</p>
+              <div style="display:flex; gap:8px; margin-top:10px;">
+                <button class="ir-btn ir-btn-primary" onclick="showToast({kind:'copilot',title:'Exporting full trail…',text:'PDF export of the 04/16 YVR diversion · decision trail · pax-comms audit · crew-legality log · 96 sim transcripts. 18 pages · emailed in 30 s.',ttl:5200})">
+                  <svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor"><path d="M2 1h5l2 2v7H2z M7 1v2h2"/></svg>
+                  Export FAA post-event packet
+                </button>
+                <button class="ir-btn ir-btn-ghost" onclick="irClosePostMortem();irPlayback();">▶ Playback CAS1247 (today)</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -15819,6 +16193,154 @@ function _irNow() {
   return String(n.getHours()).padStart(2,'0') + ':' +
          String(n.getMinutes()).padStart(2,'0') + ':' +
          String(n.getSeconds()).padStart(2,'0');
+}
+
+// =========================================================================
+// PLAYBACK MODE — animate a 4-hour incident window in 40 seconds
+// =========================================================================
+const IR_PLAYBACK_TIMELINE = [
+  // [window-offset-minutes, kind, headline, body, cumPax, cumCostK]
+  { t: 0,   kind:'info', title:'06:00 PT · quiet console',
+    body:'Mid-shift Dispatcher K. Thompson on console. SEA wx clear (210/12). KORD convective cell building on CWA radar but no FAA action yet.' },
+  { t: 18,  kind:'crit', title:'⚠ 06:18 PT · KORD GROUND STOP issued',
+    body:'FAA SWIM pushes AFP ZAU03 / EDCT for all Cascadia arrivals to ORD. Thunderstorms / IMC. Est. duration 2-4h. 23 inbound Cascadia flights immediately affected.',
+    pax: 0, cost: 0 },
+  { t: 22,  kind:'ai',   title:'🧠 06:22 PT · IROps Cascade Commander fires',
+    body:'Copilot detects the SWIM event and begins network ripple simulation. 47 flights in cascade radius over next 6h. 6,284 pax potentially exposed. Three recovery plans queued.',
+    pax: 0, cost: 0 },
+  { t: 33,  kind:'ai',   title:'🧠 06:33 PT · Predictive MX anomaly (parallel)',
+    body:'ACARS flags N6152CA engine #2 EGT +14°C / vibration +0.6 mils — 78% failure-in-40-cycles. Copilot books A-check slot at SEA hangar 4 and pre-orders RB211-T-042. Anomaly review queued for Dispatcher sign-off.',
+    pax: 0, cost: 0 },
+  { t: 47,  kind:'ai',   title:'🧠 06:47 PT · 128 sims complete · 3 plans ranked',
+    body:'Plan A (Route via MDW) — recommended · −47% pax delay · $0 DOT · $146K net. Plan B (Hold SEA) — cheapest but $312K DOT exposure. Plan C (Cancel 4) — clean but $412K EU261. Dispatcher decision pending.',
+    pax: 0, cost: 0 },
+  { t: 49,  kind:'info', title:'06:49 PT · Sarah Chen takes console',
+    body:'Shift change. Thompson briefs Chen: 3 active events staged (ORD cascade · N6152CA anomaly · P4481 FDP cushion). All Copilot work pre-staged for approval.' },
+  { t: 52,  kind:'act',  title:'✓ 06:52 PT · Dispatcher Chen accepts Plan A',
+    body:'One click. Copilot dispatches: tail swap N8421CA ↔ N6152CA scheduled at MDW; deadhead FO Martinez on CAS0517; CAS1318 cancelled and 142 pax auto-rebooked; 284 misconnect pax get $8 meal vouchers queued. Purview audit written.',
+    pax: 142, cost: 38 },
+  { t: 65,  kind:'crit', title:'⚠ 07:05 PT · Gate B12 jet bridge failure',
+    body:'SEA ramp reports B12 jet bridge OTS. MX ETA 15-60 min. CAS1247 (A320, 178 pax) was scheduled to board there at 07:10. Second disruption on top of the ORD cascade.',
+    pax: 142, cost: 38 },
+  { t: 67,  kind:'ai',   title:'🧠 07:07 PT · Gate reassignment proposed',
+    body:'Copilot evaluates 4 open gates in T3. C14 wins — A320-compatible, 200m walk, no downstream conflicts, no inbound delay. Ground-crew reposition takes 15 min. FIDS update + PA script (EN/ES) pre-drafted.',
+    pax: 142, cost: 38 },
+  { t: 82,  kind:'act',  title:'✓ 07:22 PT · CAS1247 relocated to C14',
+    body:'Station Ops Coordinator accepts. Ramp crew on the move. Pax comms triggered on FIDS and gate PA. 178 pax walk 200m to C14 starting 07:35 boarding.',
+    pax: 320, cost: 56 },
+  { t: 102, kind:'ok',   title:'🏁 07:42 PT · first recovery milestone',
+    body:'CAS0517 SEA→DEN off-block at 07:38 — on time. Deadhead FO Martinez onboard. Plan A execution tracking to projections.',
+    pax: 320, cost: 56 },
+  { t: 135, kind:'act',  title:'✓ 08:15 PT · VP SysOps approves Pred MX ticket',
+    body:'Marcus Johnson signs off on the N6152CA A-check move-up (04/24 22:00 SEA hangar 4). Part RB211-T-042 order confirmed with Rolls-Royce. Projected AOG-avoidance $112K.',
+    pax: 320, cost: 168 },
+  { t: 155, kind:'act',  title:'✓ 08:35 PT · tail swap executes at MDW',
+    body:'N8421CA touches MDW; N6152CA pushes from MDW gate to SEA positioning. Both ACARS green. MDW bus bridge gets 184 pax moving toward ORD for onward connections.',
+    pax: 504, cost: 234 },
+  { t: 195, kind:'ok',   title:'🏁 09:15 PT · CAS1247 off-block MDW',
+    body:'CAS1247 pushes from MDW · 178 pax onboard · on-time against rebooked schedule (07:32+2h). Plan A endgame. Bus bridge completes at ORD 10:02 local.',
+    pax: 682, cost: 234 },
+  { t: 240, kind:'ok',   title:'🏁 10:00 PT · full network recovery',
+    body:'All 47 cascade-radius flights closed out · OTP for affected segment 81% (vs. do-nothing projected 22%). Final tally: 682 pax saved from disruption · $234K net cost · $0 DOT exposure · 0 crew-legality breaks.',
+    pax: 682, cost: 234 }
+];
+
+let _irPbState = null;
+function irPlayback() {
+  const ov = document.getElementById('ir-playback-overlay');
+  if (!ov) return;
+  ov.classList.add('open');
+  _irPbState = { idx: 0, tMin: 0, paused: false, runStart: Date.now() - 0 };
+  document.getElementById('ir-pb-log').innerHTML = '';
+  document.getElementById('ir-pb-progress').style.width = '0%';
+  document.getElementById('ir-pb-cursor').style.left = '0%';
+  document.getElementById('ir-pb-score').textContent = '—';
+  document.getElementById('ir-pb-pax').textContent = '0';
+  document.getElementById('ir-pb-cost').textContent = '$0K';
+  document.getElementById('ir-pb-progress-label').textContent = '0:00 / 0:40';
+  const pauseBtn = document.getElementById('ir-pb-pause');
+  if (pauseBtn) pauseBtn.textContent = '⏸ Pause';
+  _irPbTick();
+}
+function _irPbTick() {
+  if (!_irPbState) return;
+  if (_irPbState.paused) { setTimeout(_irPbTick, 200); return; }
+  const totalWindow = 240; // minutes of playback (06:00 → 10:00)
+  const durationMs  = 40000; // compressed to 40 s
+  const elapsedMs = Date.now() - _irPbState.runStart;
+  const pct = Math.min(1, elapsedMs / durationMs);
+  const curMin = pct * totalWindow;
+  // Progress bar + cursor
+  document.getElementById('ir-pb-progress').style.width = (pct * 100) + '%';
+  document.getElementById('ir-pb-cursor').style.left   = (pct * 100) + '%';
+  // Label
+  const secsElapsed = Math.floor(elapsedMs / 1000);
+  const secsFmt = (n) => Math.floor(n/60) + ':' + String(n%60).padStart(2,'0');
+  document.getElementById('ir-pb-progress-label').textContent = secsFmt(secsElapsed) + ' / 0:40';
+  // Advance events
+  while (_irPbState.idx < IR_PLAYBACK_TIMELINE.length && IR_PLAYBACK_TIMELINE[_irPbState.idx].t <= curMin) {
+    const e = IR_PLAYBACK_TIMELINE[_irPbState.idx++];
+    _irPbShowEvent(e);
+  }
+  if (pct >= 1) {
+    // End state
+    document.getElementById('ir-pb-progress-label').textContent = '0:40 / 0:40 · ✓ complete';
+    document.getElementById('ir-pb-score').textContent = '91 / 100';
+    return;
+  }
+  setTimeout(_irPbTick, 150);
+}
+function _irPbShowEvent(e) {
+  const event = document.getElementById('ir-pb-event');
+  const et = document.getElementById('ir-pb-event-t');
+  const eb = document.getElementById('ir-pb-event-b');
+  event.classList.remove('crit','ai','act','ok','info');
+  event.classList.add(e.kind);
+  et.textContent = e.title;
+  eb.textContent = e.body;
+  // Append to log
+  const log = document.getElementById('ir-pb-log');
+  const ico = { crit:'⚠', ai:'🧠', act:'✓', ok:'🏁', info:'•' }[e.kind] || '•';
+  const timeStr = e.title.split('·')[0].trim().replace(/^[⚠🧠✓🏁]*\s*/,'').trim();
+  const row = document.createElement('div');
+  row.className = 'ir-pb-log-row ' + e.kind;
+  row.innerHTML = `<span class="ir-pb-log-t">${timeStr}</span><span class="ir-pb-log-ic">${ico}</span><span class="ir-pb-log-msg">${e.body}</span>`;
+  log.appendChild(row);
+  log.scrollTop = log.scrollHeight;
+  // Update pax + cost counters if provided
+  if (typeof e.pax === 'number') document.getElementById('ir-pb-pax').textContent = e.pax.toLocaleString();
+  if (typeof e.cost === 'number') document.getElementById('ir-pb-cost').textContent = '$' + e.cost + 'K';
+}
+function irPlaybackPauseToggle() {
+  if (!_irPbState) return;
+  _irPbState.paused = !_irPbState.paused;
+  const btn = document.getElementById('ir-pb-pause');
+  if (!_irPbState.paused) {
+    // Adjust runStart so progress resumes from where it paused
+    _irPbState.runStart = Date.now() - _irPbState.runStart_pauseElapsed;
+    btn.textContent = '⏸ Pause';
+    _irPbTick();
+  } else {
+    _irPbState.runStart_pauseElapsed = Date.now() - _irPbState.runStart;
+    btn.textContent = '▶ Resume';
+  }
+}
+function irClosePlayback() {
+  const ov = document.getElementById('ir-playback-overlay');
+  if (ov) ov.classList.remove('open');
+  _irPbState = null;
+}
+
+// =========================================================================
+// POST-MORTEM DRAWER — "last week's YVR diversion"
+// =========================================================================
+function irOpenPostMortem() {
+  const ov = document.getElementById('ir-pm-overlay');
+  if (ov) ov.classList.add('open');
+}
+function irClosePostMortem() {
+  const ov = document.getElementById('ir-pm-overlay');
+  if (ov) ov.classList.remove('open');
 }
 
 // ============ FLEET TRACKER APP ============
