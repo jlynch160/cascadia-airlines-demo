@@ -9028,7 +9028,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       </div>
 
       <!-- Crew Legality Board -->
-      <div class="app-tile" data-personas="sarah patel cio" onclick="openApp('crew')">
+      <div class="app-tile" data-personas="sarah patel maria cio" onclick="openApp('crew')">
         <div class="app-icon" style="filter:none;">
           <div class="tile-logo-box" style="background:linear-gradient(135deg,#0b2545 0%,#1e3a5f 60%,#0ea5e9 115%);">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -11234,7 +11234,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <div class="pv-event bad"><div class="pv-ev-t">12 min ago</div><div class="pv-ev-user">J. Okonkwo</div><div class="pv-ev-desc">Tried to forward Case-file PII to personal gmail</div><div class="pv-ev-status">✕ Blocked</div></div>
             <div class="pv-event"><div class="pv-ev-t">2 h ago</div><div class="pv-ev-user">IT Help Desk</div><div class="pv-ev-desc">Attempted to paste employee list into ChatGPT</div><div class="pv-ev-status">✕ Blocked</div></div>
             <div class="pv-event"><div class="pv-ev-t">Yesterday</div><div class="pv-ev-user">L. Thomas</div><div class="pv-ev-desc">Uploaded certified turn plan to unapproved tool</div><div class="pv-ev-status">✕ Blocked</div></div>
-            <div class="pv-event"><div class="pv-ev-t">Yesterday</div><div class="pv-ev-user">Agent: Ramp Turn Sheet Front Door</div><div class="pv-ev-desc">Accessed out-of-scope (witness records (FAR 117 protected)) SharePoint</div><div class="pv-ev-status">✕ Blocked</div></div>
+            <div class="pv-event"><div class="pv-ev-t">Yesterday</div><div class="pv-ev-user">Agent: Ramp Turn Sheet Front Door</div><div class="pv-ev-desc">Accessed out-of-scope (crew safety records · FAR 193 protected) SharePoint</div><div class="pv-ev-status">✕ Blocked</div></div>
             <div class="pv-event"><div class="pv-ev-t">2 d ago</div><div class="pv-ev-user">M. Gutierrez</div><div class="pv-ev-desc">Shared certified turn plan externally (approved lender)</div><div class="pv-ev-status">✓ Allowed (audit)</div></div>
           </div>
         </div>
@@ -11742,7 +11742,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <div class="a365-card">
               <div class="a365-card-head"><div><div class="a365-card-title">Compliance frameworks</div><div class="a365-card-sub">Mapped to your agent fleet</div></div></div>
               <div class="a365-policies">
-                <div class="a365-policy"><div class="a365-p-name">FAR 117 (Crew Duty) (witness workers)</div><div class="a365-p-val"><span class="pill good">✓ Aligned</span></div></div>
+                <div class="a365-policy"><div class="a365-p-name">FAR 117 (Crew Duty) · pairing records</div><div class="a365-p-val"><span class="pill good">✓ Aligned</span></div></div>
                 <div class="a365-policy"><div class="a365-p-name">State discovery privacy statutes</div><div class="a365-p-val"><span class="pill good">✓ Aligned</span></div></div>
                 <div class="a365-policy"><div class="a365-p-name">SOC 2 Type II</div><div class="a365-p-val"><span class="pill good">✓ Aligned</span></div></div>
                 <div class="a365-policy"><div class="a365-p-name">NIST AI RMF</div><div class="a365-p-val"><span class="pill good">✓ Aligned</span></div></div>
@@ -13301,235 +13301,6 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
   </div>
 
   <!-- ========== OLD RAMP-TOWER (deprecated, kept hidden for diff) ========== -->
-  <div id="app-ramptower-deprecated" class="app-shell" style="display:none !important;">
-    <div class="rt-wrap">
-
-      <div class="rt-head">
-        <div>
-          <div class="rt-h-title">Ramp Tower Live <span class="rt-chip-pwr">Power App</span></div>
-          <div class="rt-h-sub">Published to 184 ramp-agent iPads across SEA, PDX, DEN · reads Sabre + ACARS + Brueckner bag-belt telemetry · writes back to Sabre in real time · <a onclick="showTip('Maker: D. Kowalski · published 2026-03-11 · DLP: Confidential · approved connectors: Sabre, ACARS, Brueckner, Teams, Outlook')">provenance</a></div>
-        </div>
-        <div class="rt-head-meta">
-          <div class="rt-head-chip rt-head-live">● LIVE · 184 devices</div>
-          <div class="rt-head-chip">v2.4.1 · pushed 2 h ago</div>
-        </div>
-      </div>
-
-      <div class="rt-main">
-        <!-- Left: Power Apps studio context -->
-        <div class="rt-studio">
-          <div class="rt-studio-head">
-            <div class="rt-studio-title">⚡ Cascadia.RampOps canvas app</div>
-            <div class="rt-studio-sub">Power Apps Studio · SEA tenant</div>
-          </div>
-          <ul class="rt-studio-tree">
-            <li class="rt-tree-group">📱 Screens (7)</li>
-            <li class="rt-tree-item active">├ GateListScreen</li>
-            <li class="rt-tree-item">├ TurnDetailScreen</li>
-            <li class="rt-tree-item">├ FuelSheetScreen</li>
-            <li class="rt-tree-item">├ BagScanScreen</li>
-            <li class="rt-tree-item">├ DelayReasonScreen</li>
-            <li class="rt-tree-item">├ CopilotAskScreen</li>
-            <li class="rt-tree-item">└ SettingsScreen</li>
-            <li class="rt-tree-group" style="margin-top:12px;">🔌 Connectors (6)</li>
-            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#0078d4;"></span>SharePoint</li>
-            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#c50f1f;"></span>Sabre AirOps (custom)</li>
-            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#14b8a6;"></span>ACARS (Azure IoT)</li>
-            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#f59e0b;"></span>Brueckner BagBelt</li>
-            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#6264a7;"></span>Teams</li>
-            <li class="rt-tree-item"><span class="rt-conn-dot" style="background:#0078d4;"></span>Outlook</li>
-            <li class="rt-tree-group" style="margin-top:12px;">🤖 Copilot skills (3)</li>
-            <li class="rt-tree-item">├ Suggest next action</li>
-            <li class="rt-tree-item">├ Delay-reason coder</li>
-            <li class="rt-tree-item">└ Ask anything</li>
-          </ul>
-        </div>
-
-        <!-- Middle: the phone frame with the live app -->
-        <div class="rt-phone-stage">
-          <div class="rt-phone">
-            <div class="rt-phone-notch"></div>
-            <div class="rt-phone-screen">
-              <!-- App chrome -->
-              <div class="rt-app-chrome">
-                <div class="rt-app-chrome-l">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="color:#fff;"><path d="M8 1l7 7-7 7L1 8z"/></svg>
-                  <span>Ramp Ops</span>
-                </div>
-                <div class="rt-app-chrome-r">
-                  <span class="rt-app-user">MG</span>
-                </div>
-              </div>
-              <!-- App status bar -->
-              <div class="rt-app-statusbar">
-                <span>SEA · Maria Gutierrez</span>
-                <span><span class="rt-dot-live"></span>live</span>
-              </div>
-
-              <!-- Gate list -->
-              <div class="rt-app-title-row">
-                <div class="rt-app-title">My gates · next 2h</div>
-                <div class="rt-app-title-sub">6 of 38 SEA departures</div>
-              </div>
-
-              <div class="rt-gate-list">
-
-                <!-- Gate B12 (on-time) -->
-                <div class="rt-gate-card rt-gate-ok" onclick="rtOpenGate(this, 'B12')">
-                  <div class="rt-gc-l">
-                    <div class="rt-gc-badge">B12</div>
-                  </div>
-                  <div class="rt-gc-m">
-                    <div class="rt-gc-fl">CAS1247 <span class="rt-gc-route">SEA → MDW</span></div>
-                    <div class="rt-gc-std">STD 07:32 · <strong class="rt-gc-pred-ok">pred 07:34</strong></div>
-                    <div class="rt-gc-sugg">
-                      <svg width="10" height="10"><use href="#copilotLogo"/></svg>
-                      Parallelize fueling + catering · save <strong>6 min</strong>
-                    </div>
-                  </div>
-                  <div class="rt-gc-r">
-                    <div class="rt-gc-phase">Boarding</div>
-                    <div class="rt-gc-prog"><span style="width:58%;"></span></div>
-                    <div class="rt-gc-tap">Tap →</div>
-                  </div>
-                </div>
-
-                <!-- Gate B17 (warn) -->
-                <div class="rt-gate-card rt-gate-warn" onclick="rtOpenGate(this, 'B17')">
-                  <div class="rt-gc-l">
-                    <div class="rt-gc-badge">B17</div>
-                  </div>
-                  <div class="rt-gc-m">
-                    <div class="rt-gc-fl">CAS0842 <span class="rt-gc-route">SEA → LAX</span></div>
-                    <div class="rt-gc-std">STD 07:55 · <strong class="rt-gc-pred-warn">pred 08:06</strong> <span class="rt-gc-delay">+11</span></div>
-                    <div class="rt-gc-sugg rt-gc-sugg-warn">
-                      <svg width="10" height="10"><use href="#copilotLogo"/></svg>
-                      <strong>14 short-connect bags</strong> · re-task bag loader 2
-                    </div>
-                  </div>
-                  <div class="rt-gc-r">
-                    <div class="rt-gc-phase">Fueling</div>
-                    <div class="rt-gc-prog"><span style="width:38%;"></span></div>
-                    <div class="rt-gc-tap">Tap →</div>
-                  </div>
-                </div>
-
-                <!-- Gate C3 -->
-                <div class="rt-gate-card rt-gate-warn" onclick="rtOpenGate(this, 'C3')">
-                  <div class="rt-gc-l">
-                    <div class="rt-gc-badge">C3→C7</div>
-                  </div>
-                  <div class="rt-gc-m">
-                    <div class="rt-gc-fl">CAS1102 <span class="rt-gc-route">ORD → DEN (arr)</span></div>
-                    <div class="rt-gc-std">ETA +12 · gate reassign</div>
-                    <div class="rt-gc-sugg">
-                      <svg width="10" height="10"><use href="#copilotLogo"/></svg>
-                      Swap to <strong>C7</strong> · free C3 for CAS2201
-                    </div>
-                  </div>
-                  <div class="rt-gc-r">
-                    <div class="rt-gc-phase">Inbound</div>
-                    <div class="rt-gc-prog"><span style="width:75%;"></span></div>
-                    <div class="rt-gc-tap">Tap →</div>
-                  </div>
-                </div>
-
-                <!-- Gate D11 critical -->
-                <div class="rt-gate-card rt-gate-crit" onclick="rtOpenGate(this, 'D11')">
-                  <div class="rt-gc-l">
-                    <div class="rt-gc-badge">D11</div>
-                  </div>
-                  <div class="rt-gc-m">
-                    <div class="rt-gc-fl">CAS2118 <span class="rt-gc-route">ICN → SEA (arr)</span></div>
-                    <div class="rt-gc-std">ETA 23:58 · <strong class="rt-gc-pred-bad">curfew risk 01:00</strong></div>
-                    <div class="rt-gc-sugg rt-gc-sugg-bad">
-                      <svg width="10" height="10"><use href="#copilotLogo"/></svg>
-                      Pre-stage overnight team · <strong>avoids breach</strong>
-                    </div>
-                  </div>
-                  <div class="rt-gc-r">
-                    <div class="rt-gc-phase">Inbound</div>
-                    <div class="rt-gc-prog"><span style="width:52%;"></span></div>
-                    <div class="rt-gc-tap">Tap →</div>
-                  </div>
-                </div>
-
-                <!-- Gate N1 OK -->
-                <div class="rt-gate-card rt-gate-ok" onclick="rtOpenGate(this, 'N1')">
-                  <div class="rt-gc-l">
-                    <div class="rt-gc-badge">N1</div>
-                  </div>
-                  <div class="rt-gc-m">
-                    <div class="rt-gc-fl">CAS4412 <span class="rt-gc-route">SEA → YVR</span></div>
-                    <div class="rt-gc-std">STD 09:10 · <strong class="rt-gc-pred-ok">on time</strong></div>
-                    <div class="rt-gc-sugg">
-                      <svg width="10" height="10"><use href="#copilotLogo"/></svg>
-                      Predicted 82% load · offer 4 standbys · <strong>+$1,842</strong>
-                    </div>
-                  </div>
-                  <div class="rt-gc-r">
-                    <div class="rt-gc-phase">Prep</div>
-                    <div class="rt-gc-prog"><span style="width:22%;"></span></div>
-                    <div class="rt-gc-tap">Tap →</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Power Apps ask-copilot floating button at bottom of phone -->
-              <div class="rt-app-fab">
-                <button class="rt-app-fab-btn" onclick="showToast({kind:'copilot',title:'Ramp Ops Copilot',text:'Ask me about a gate — I can re-sequence catering, find a bag, or code a delay reason against ATA 51 / flight ops.',ttl:4200});">
-                  <svg width="18" height="18"><use href="#copilotLogo"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Caption under phone -->
-          <div class="rt-phone-caption">
-            Running on iPad · ramp-agent issued · offline-capable · every tap logged to Dataverse + Purview
-          </div>
-        </div>
-
-        <!-- Right: Power Platform runtime + formula peek -->
-        <div class="rt-runtime">
-          <div class="rt-runtime-card">
-            <div class="rt-runtime-title">📊 Runtime · last 24 h</div>
-            <div class="rt-runtime-kpis">
-              <div class="rt-rk"><div class="rt-rk-v">2,482</div><div class="rt-rk-l">app opens</div></div>
-              <div class="rt-rk"><div class="rt-rk-v">184</div><div class="rt-rk-l">active agents</div></div>
-              <div class="rt-rk"><div class="rt-rk-v">1.8 s</div><div class="rt-rk-l">p50 load</div></div>
-              <div class="rt-rk"><div class="rt-rk-v ir-pk-ok">99.7%</div><div class="rt-rk-l">uptime</div></div>
-            </div>
-          </div>
-
-          <div class="rt-runtime-card">
-            <div class="rt-runtime-title">🧮 OnVisible formula · GateListScreen</div>
-            <pre class="rt-formula"><span class="rt-f-kw">ClearCollect</span>(
-  <span class="rt-f-var">colGates</span>,
-  <span class="rt-f-fn">Filter</span>(
-    <span class="rt-f-var">SabreAirOps.Departures</span>(<span class="rt-f-str">"SEA"</span>, <span class="rt-f-n">2</span>),
-    <span class="rt-f-var">AssignedAgent</span> = <span class="rt-f-var">User</span>().<span class="rt-f-var">Email</span>
-  )
-);
-<span class="rt-f-kw">Set</span>(
-  <span class="rt-f-var">varCopilotHints</span>,
-  <span class="rt-f-fn">RampCopilot.SuggestNext</span>(<span class="rt-f-var">colGates</span>)
-)</pre>
-          </div>
-
-          <div class="rt-runtime-card">
-            <div class="rt-runtime-title">🛡 Governance</div>
-            <div class="rt-gov-row"><span>DLP policy</span><strong class="rt-gov-good">Confidential · blocked external</strong></div>
-            <div class="rt-gov-row"><span>Audit log</span><strong class="rt-gov-good">Purview · 100% capture</strong></div>
-            <div class="rt-gov-row"><span>Maker approval</span><strong class="rt-gov-good">D. Kowalski (CAB)</strong></div>
-            <div class="rt-gov-row"><span>Dataverse env</span><strong>casa-prod-us-west-2</strong></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
   <!-- ========== SOURCE-PREVIEW SIDE SHEET (citations) ========== -->
   <div id="source-sheet" class="source-sheet">
     <div class="ss-head">
@@ -13659,11 +13430,11 @@ const INBOX = [
   // Today
   { id:1, from:"Marcus Johnson (VP System Operations)", fromInit:"MJ", subject:"URGENT: 18 overnight ramp turn submissions — turn-plan-review triage before 7 AM", preview:"Sarah, Turn Plan Review Copilot flagged 18 Turn plan submissions from overnight. 4 are curfew-compliance sensitive, 2 involve safety-sensitive incidents, 1 is a possible media-sensitive diversion. Need your read before the 7 AM...", time:"7:42 AM", unread:true, urgent:true, folder:"inbox", body:"<p>Sarah,</p><p>Turn Plan Review Copilot ran the overnight ramp turn submission queue. 18 referrals, of which:</p><ol><li><strong>4 curfew-compliance sensitive</strong> (two 10-year anniversaries next week)</li><li><strong>2 safety-sensitive incidents</strong> — auto-routed through Safety Report Protection for sealing review</li><li><strong>1 possible media-sensitive diversion</strong> — Flight CAS1247, Cascadia comms release already out</li></ol><p>Can you do the first-read before our 7 AM turn plan review? Copilot has already drafted the probable-cause turn plans for the 6 clearest cases — they just need your sign-off.</p><p>— Marcus</p>" },
   { id:2, from:"RAMP Ramp Lead R. Alvarado (#4471)", fromInit:"RA", subject:"Handwritten incident report attached — Flight #CAS-26-04-0218 (gate congestion event)", preview:"Dispatcher Chen — attaching my incident report and two passenger statements from last night's gate congestion event at 4218 35th Ave SW. Handwritten because the MDC was down. Please advise if you need anything before filing...", time:"7:31 AM", unread:true, urgent:true, folder:"inbox", body:"<p>Dispatcher Chen,</p><p>Attaching my incident report (3 pages, handwritten) and two passenger statements from last night's gate congestion event at <em>[redacted street address]</em>. Mobile data terminal was down in unit 4471 so everything is on paper.</p><p><strong>Flight #:</strong> 26-04-0218<br/><strong>Aircraft:</strong> On ramp hold — SEA Station Hold<br/><strong>Cascadia 4-hour curfew clock:</strong> Filing deadline Thursday 4/24 at 02:14<br/><strong>Cargo:</strong> Recovered property logged into RAMP cargo hold under tag 26-4471-A</p><p>Please advise if you need anything before filing. Station Supervisor Nakamura has the originals.</p><p>— Ramp Lead R. Alvarado, Gate Congestion Event/Property</p>" },
-  { id:3, from:"Maria Gutierrez (Station Operations Coordinator, SEA Hub)", fromInit:"MG", subject:"Two passenger manifests pending your redaction sign-off — defense deadline Friday", preview:"Hey Sarah, I ran IROps Cascade Copilot on Flight CAS1247 and Flight CAS2118 overnight. Both are ready for your review. Auto-redaction flagged 47 PII hits across the two...", time:"7:18 AM", unread:true, folder:"inbox", body:"<p>Hey Sarah,</p><p>I ran IROps Cascade Copilot on both packets overnight:</p><ul><li><strong>Flight CAS1247</strong> — 312 pages, 34 PII hits redacted (passenger address, SSN on booking sheet, DOB on the minor witness)</li><li><strong>Flight CAS2118</strong> — 78 pages, 13 PII hits redacted (CI informant identifier on page 42 — needs your call)</li></ul><p>Both are sitting in your \"Pending Sign-off\" queue. Defense discovery deadline is Friday 4/25.</p><p>— Maria</p>" },
+  { id:3, from:"Maria Gutierrez (Station Operations Coordinator, SEA Hub)", fromInit:"MG", subject:"Two turn plans pending your sign-off · ORD cascade + ICN curfew watch", preview:"Hey Sarah, I ran the Turn Plan Intake agent overnight on CAS1247 and CAS2118. Both ready for your approval. Copilot flagged 4 crew-legality checkpoints across the two...", time:"7:18 AM", unread:true, folder:"inbox", body:"<p>Hey Sarah,</p><p>Overnight Turn Plan Intake results:</p><ul><li><strong>CAS1247</strong> SEA→ORD — 12 ramp turn sheets, handwritten by 4 agents, OCR'd and drafted into a single turn plan. One fuel-load discrepancy flagged (LAX inbound) — needs your call.</li><li><strong>CAS2118</strong> ICN→SEA — inbound running +40 min on trans-Pac winds, Copilot pre-staged overnight ramp team and bus B-4 for D11 arrival to avoid 01:00 curfew breach.</li></ul><p>Both sitting in your <em>Pending Sign-off</em> queue. ORD cascade plan still waiting on your Plan A/B/C call too.</p><p>— Maria</p>" },
   { id:4, from:"Priya Raman (Regulatory Response Desk)", fromInit:"PR", subject:"Re: Q2 Board briefing — turn-plan-pattern summary?", preview:"Sarah, VP SysOps's office asked for a one-page summary of Q2 turn plan patterns for the May Board briefing. They want the turn-plan intake time and the manifest-turnaround story front and center...", time:"7:05 AM", unread:true, folder:"inbox", body:"<p>Sarah,</p><p>VP SysOps's office asked for a one-page summary of Q2 turn plan patterns for the Cascadia Airways Board briefing on May 14. They want the turn-plan intake time and the manifest-turnaround story front and center — especially the handwritten-report pilot results since the Board approved the pilot last year.</p><p>Can you draft something warm and clear for them? I'll handle the data pulls from Sabre AirOps. We're aiming to share by Friday.</p><p>Thanks,<br/>Priya</p>" },
   { id:5, from:"Ramp Lead Jessica Huang (RAMP SEA Hub)", fromInit:"JH", subject:"Question about the Passenger Disruption Comms Agent draft", preview:"Hi Sarah, your office sent a EU261 / DOT tarmac rule notification draft to the Reyes passengers overnight but the language feels a touch clinical for this family — they had a dependent onboard. Could you soften the third paragraph before it goes out?...", time:"6:47 AM", unread:true, folder:"inbox", body:"<p>Hi Sarah,</p><p>Your office sent a EU261 / DOT tarmac rule notification draft to the Reyes passengers overnight but the language feels a touch clinical for this family — they had a dependent onboard during the diversion. Could you soften the third paragraph before it goes out?</p><p>They're also asking for a Spanish version. I know the agent can do both; I just wanted you to make the final call on tone.</p><p>— Ramp Lead Huang</p>" },
   { id:6, from:"Cascadia Airways InfoSec", fromInit:"IT", subject:"Mandatory FAR 117 (Crew Duty) + PII redaction training — due April 30", preview:"Annual FAR 117 (Crew Duty) + discovery privacy training module is now available in Relativity Learning. All Dispatchers and paralegals must complete by April 30...", time:"6:30 AM", unread:true, folder:"inbox", body:"<p>Annual FAR 117 (Crew Duty) + discovery privacy training is now live in Relativity Learning. All Dispatchers and paralegal staff must complete by April 30.</p><p>This year's module covers the new IROps Cascade Copilot workflow — required viewing for anyone signing off on redactions before release.</p><p>Estimated time: 45 minutes.</p>" },
-  { id:7, from:"Amanda Kim (Filing Desk)", fromInit:"AK", subject:"Filing receipt — Gate Turn Authorization (Flight CAS0842, 26-1-04218-3)", preview:"Your turn plan was filed with the FAA FSDO clerk at 05:47 AM. Arraignment calendared for Thursday 4/24, 1:30 PM, Dept. 14. E-signed receipt attached...", time:"6:15 AM", unread:true, folder:"inbox", body:"<p>Sarah,</p><p>Your turn plan was filed with the FAA FSDO clerk at 05:47 AM.</p><p><strong>Flight #:</strong> CAS0842 · 2026-04-22<br/><strong>Charge:</strong> Residential Gate Congestion Event (FAR 121.52.025)<br/><strong>Arraignment:</strong> Thursday 4/24, 1:30 PM, Dept. 14<br/><strong>Defense:</strong> Assigned — Seattle SkyLink Ground, T. Voorhees</p><p>E-signed receipt attached. Discovery clock started at filing.</p><p>— Amanda</p>" },
+  { id:7, from:"Amanda Kim (Dispatch Desk)", fromInit:"AK", subject:"Filing receipt — Gate Turn Authorization (Flight CAS0842, 26-1-04218-3)", preview:"Your turn plan was filed with the FAA FSDO clerk at 05:47 AM. Arraignment calendared for Thursday 4/24, 1:30 PM, Dept. 14. E-signed receipt attached...", time:"6:15 AM", unread:true, folder:"inbox", body:"<p>Sarah,</p><p>Your turn plan was filed with the FAA FSDO clerk at 05:47 AM.</p><p><strong>Flight #:</strong> CAS0842 · 2026-04-22<br/><strong>Charge:</strong> Residential Gate Congestion Event (FAR 121.52.025)<br/><strong>Arraignment:</strong> Thursday 4/24, 1:30 PM, Dept. 14<br/><strong>Defense:</strong> Assigned — Seattle SkyLink Ground, T. Voorhees</p><p>E-signed receipt attached. Discovery clock started at filing.</p><p>— Amanda</p>" },
   { id:8, from:"CASA Appellate Research Desk", fromInit:"HP", subject:"Case law update — Court of Appeals Div. I ruling on FAR 117 redaction standards", preview:"Effective immediately, Division I's ruling in Flight Cruz-Martinez (4/18) tightens the test for what counts as 'identifying information' in CI disclosures. Please route IROps cascades through the new checklist...", time:"5:58 AM", unread:false, folder:"inbox" },
   { id:9, from:"Laura Thomas (Sr. Dispatcher, Juvenile)", fromInit:"LT", subject:"Re: Charging review prep — 7 cases confirmed for today", preview:"All 7 cases are prepped for the 7 AM turn plan review. The Chang gate congestion event case just filed (Amanda's email). I'll have case summaries ready by 6:50 AM...", time:"5:40 AM", unread:false, folder:"inbox" },
   { id:10, from:"Marcus Johnson (VP System Operations)", fromInit:"MJ", subject:"FW: Charging-pattern study — Board briefing data needs edits", preview:"Forwarding the policy analyst's comments. They want us to tighten the methodology section and address the scheduled-ops/minor-deviation split for the Board briefing...", time:"5:22 AM", unread:false, folder:"inbox" },
@@ -13673,11 +13444,11 @@ const INBOX = [
   { id:12, from:"Sabre AirOps Case Mgmt", fromInit:"OD", subject:"Filing accepted — Flight CAS0842, CAS0842 · 2026-04-22", preview:"Your filing has been accepted by the FAA FSDO clerk. Case assigned to Dept. 14. Arraignment calendared for Thursday 4/24...", time:"Yesterday 4:30 PM", unread:true, folder:"inbox", body:"<p>Your filing has been accepted by the FAA FSDO clerk on 4/21/2026 at 17:43.</p><p><strong>Flight #:</strong> CAS0842 · 2026-04-22<br/><strong>Department:</strong> 14 (Inspector Nguyen)<br/><strong>Arraignment:</strong> Thursday 4/24, 1:30 PM</p><p>Case file now available in Sabre AirOps.</p>" },
   { id:13, from:"Jensen family (passenger disruption comms)", fromInit:"RJ", subject:"Thank you", preview:"Dispatcher Chen, my family and I want to thank you for everything you've done for us these past few months around the case. The way you handled the delay yesterday...", time:"Yesterday 3:45 PM", unread:true, folder:"inbox", body:"<p>Dispatcher Chen,</p><p>My family and I want to thank you for everything you've done for us these past few months around the case. The way you handled the delay yesterday — with grace, honesty, and compassion — meant more to us than you know.</p><p>We're at peace with the resolution. Thank you for helping us get here.</p><p>— The Jensen family</p>" },
   { id:14, from:"Sofia Ramirez (Station Ops Coordinator, Appeals)", fromInit:"SR", subject:"Legal-research read — Flight CAS0842 — clean filing, no statute issues", preview:"Research came back clean. No curfew-compliance issues, no prior convictions requiring aggravators. Ready for filing...", time:"Yesterday 2:18 PM", unread:false, folder:"inbox" },
-  { id:15, from:"CASA IT Service Desk", fromInit:"ES", subject:"[Scheduled] Sabre AirOps downtime — Saturday April 26, 2-4 AM", preview:"Sabre AirOps will be unavailable for scheduled maintenance. Paper fallback packets distributed to the Filing Desk for any after-hours filings...", time:"Yesterday 1:00 PM", unread:false, folder:"inbox" },
+  { id:15, from:"CASA IT Service Desk", fromInit:"ES", subject:"[Scheduled] Sabre AirOps downtime — Saturday April 26, 2-4 AM", preview:"Sabre AirOps will be unavailable for scheduled maintenance. Paper fallback packets distributed to the Dispatch Desk for any after-hours filings...", time:"Yesterday 1:00 PM", unread:false, folder:"inbox" },
   { id:16, from:"Jenny Park (Onboarding — Network Operations)", fromInit:"JP", subject:"New Dispatcher onboarding — David Kim starts Monday", preview:"Just a reminder that David Kim starts Monday as our new Dispatcher in the Misdemeanor Unit. I'll be his onboarding buddy. Can we grab 15 min to review the first week plan?...", time:"Yesterday 11:30 AM", unread:false, folder:"inbox" },
   { id:17, from:"Marcus Johnson (VP System Operations)", fromInit:"MJ", subject:"Re: Re: Re: Board briefing draft", preview:"Looks good. One more pass and I think we're ready. Can you have revised version by Friday?", time:"Yesterday 10:04 AM", unread:false, folder:"inbox" },
   { id:18, from:"Cascadia Airways Bar Foundation", fromInit:"HF", subject:"Invitation: KCBA members luncheon", preview:"Join us for our Cascadia Airways Bar Association annual luncheon on May 6 at the Rainier Club...", time:"Yesterday 9:15 AM", unread:false, folder:"inbox" },
-  { id:19, from:"Maria Gonzalez (victim, Flight CAS0517)", fromInit:"MG", subject:"When will I be notified about the next hearing?", preview:"Hi — I registered for passenger disruption commss on the Ortega case last week but I still haven't received anything. The next hearing is supposed to be Friday, and my VINE registration shows...", time:"Yesterday 8:50 AM", unread:true, folder:"inbox", body:"<p>Hi,</p><p>I registered for passenger disruption commss on the Ortega case last week but I still haven't received anything. The next hearing is supposed to be Friday, and my VINE registration shows active but no notifications yet. Can someone let me know if I'm set up correctly?</p><p>Thanks,<br/>Maria</p>" },
+  { id:19, from:"Maria Gonzalez (pax, Flight CAS0517)", fromInit:"MG", subject:"Rebook status · CAS0517 SEA→DEN · I opted in for disruption comms", preview:"Hi — I was on CAS0517 that diverted last week and I opted in to disruption comms through the kiosk. My EU261 letter should have arrived by now but my app shows no status...", time:"Yesterday 8:50 AM", unread:true, folder:"inbox", body:"<p>Hi,</p><p>I was on CAS0517 SEA→DEN that diverted last week and I opted in for disruption comms at the rebook kiosk. My EU261 letter should have arrived by now but my Cascadia app shows no status, and my rebook for Friday still isn't confirmed. Can someone let me know my EU261 entitlement was processed correctly?</p><p>Thanks,<br/>Maria Gonzalez · 1K #2284-7712</p>" },
   { id:20, from:"Rachel Goldberg (CLE & Training)", fromInit:"RG", subject:"Re: New Dispatcher training — IROps cascade module", preview:"Training session scheduled for Thursday. 5-week new-Dispatcher training protocol now includes the IROps Cascade Copilot workflow as a required module...", time:"Yesterday 7:45 AM", unread:false, folder:"inbox" },
   // More filler
   { id:21, from:"CASA Legal Library", fromInit:"HL", subject:"New ATP CLE resources available — April 2026", preview:"ATP Continuing Legal Education updates...", time:"Mon 3:30 PM", unread:false, folder:"inbox" },
@@ -13735,7 +13506,7 @@ const fillerSubjects = [
 const fillerFroms = [
   ["CASA Procurement","SC"], ["Maria Gutierrez (Station Ops Coordinator)","MG"], ["Marcus Johnson (VP System Operations)","MJ"],
   ["CASA Facilities","HF"], ["Cascadia Airways InfoSec","IC"], ["Priya Raman (Regulatory Response Desk)","PR"],
-  ["SOC Training","CM"], ["Filing Desk","BB"], ["Sabre AirOps Tips","ET"], ["Office Experience","PE"],
+  ["SOC Training","CM"], ["Dispatch Desk","BB"], ["Sabre AirOps Tips","ET"], ["Office Experience","PE"],
   ["Appeals Unit","HP"], ["Appellate Research Desk","RO"], ["Vendor Management","VM"],
   ["Network Analytics","QS"], ["Volunteer Services","VS"], ["Courthouse Services","CN"],
   ["EAP","CH"], ["Passenger Services Committee","PT"], ["Office Advisory Council","SG"], ["Implicit Bias Training","MC"],
@@ -15764,7 +15535,7 @@ const KC_PA_FLOWS = {
             connector:'Microsoft Teams · post adaptive card',
             insp: {
               title:'Post adaptive card',
-              sub:'Microsoft Teams · post adaptive card in chat · @channel Criminal-Division-Intake',
+              sub:'Microsoft Teams · post adaptive card in chat · @channel Network-Ops-Intake',
               in: [['Recipient','Dispatcher on-call (S. Chen)'], ['Channel','Network-Ops-Intake'], ['Card','field-verify · RAMP-26-04-0218'], ['Priority','High']],
               out:`<span class="k">status</span>: <span class="s">delivered</span>
 <span class="k">cardId</span>: <span class="s">19:f8e…@thread.v2</span>
@@ -15787,7 +15558,7 @@ const KC_PA_FLOWS = {
           sub:'Sabre Crew+Ops custom connector · gated · throttle 12/min',
           in: [['Last name','Chang'], ['First name','Li-Wei'], ['DOB','1997-03-14'], ['Scope','priors + warrants + NCIC']],
           out:`<span class="k">priors</span>: [
-  { "<span class="k">operation</span>": "<span class="s">criminal trespass</span>", "<span class="k">year</span>": <span class="n">2022</span>, "<span class="k">class</span>": "<span class="s">minor-deviation</span>" }
+  { "<span class="k">operation</span>": "<span class="s">apron deviation</span>", "<span class="k">year</span>": <span class="n">2022</span>, "<span class="k">class</span>": "<span class="s">minor-deviation</span>" }
 ],
 <span class="k">activeWarrants</span>: [],
 <span class="k">ncic</span>: "<span class="s">clear</span>"`,
@@ -16012,7 +15783,7 @@ const KC_PA_FLOWS = {
         insp: {
           title:'Notify completion',
           sub:'Teams card + Outlook email to requester + Dispatcher',
-          in: [['Recipient','sarah.chen@cascadia-air.com + Criminal-Division-Discovery channel'], ['Card','redaction-complete · DRC-2026-04218-R'], ['Links','redacted file, audit record, Sabre AirOps case']],
+          in: [['Recipient','sarah.chen@cascadia-air.com + Network-Ops-Cascade channel'], ['Card','redaction-complete · DRC-2026-04218-R'], ['Links','redacted file, audit record, Sabre AirOps case']],
           out:'<span class="k">delivered</span>: <span class="s">true</span>',
           status:'success', statusText:'delivered' } },
       { kind:'terminate', ico:'✓', icoCls:'condition',
@@ -17711,7 +17482,7 @@ function generateEmailDraft(em) {
 const OD_FILES = [
   { type:'folder', name:'Employee Cases',                       label:'phi',      modified:'Today, 9:12 AM',   by:'Sarah Chen',      size:'—',        share:{kind:'team',  label:'Network Operations team'} },
   { type:'folder', name:'Morning Turn Plan Review — April 2026',          label:'phi',      modified:'Today, 7:18 AM',   by:'Marcus Johnson',  size:'—',        share:{kind:'team',  label:'Network Operations'} },
-  { type:'folder', name:'Turn Plans of Probable Cause',                 label:'conf',     modified:'Yesterday',        by:'Sarah Chen',      size:'—',        share:{kind:'team',  label:'Filing Desk'} },
+  { type:'folder', name:'Turn Plans of Probable Cause',                 label:'conf',     modified:'Yesterday',        by:'Sarah Chen',      size:'—',        share:{kind:'team',  label:'Dispatch Desk'} },
   { type:'folder', name:'Q2 Council Briefings',                     label:'internal', modified:'Apr 18, 2026',     by:'Marcus Johnson',  size:'—',        share:{kind:'team',  label:'Network Operations'} },
   { type:'word',   name:'Gate Turn Authorization — Flight CAS0842 (DRAFT).docx', label:'phi', modified:'2 h ago', by:'Sarah Chen', size:'48.3 KB', share:{kind:'private', label:'Only you'}, tag:'jensen' },
   { type:'word',   name:'Flight CAS0842 ops notes — plain language.docx',         label:'phi', modified:'Yesterday, 4:55 PM', by:'Sarah Chen', size:'31.1 KB', share:{kind:'shared', label:'Shared with 3'}, tag:'jensen' },
@@ -18599,7 +18370,7 @@ function getResponse(app, key) {
       </div>
     `,
     'teams|gocnote': `
-      <h4>charging memo drafted</h4>
+      <h4>Turn plan drafted</h4>
       <p>Sabre AirOps-ready case log including: participants, crew's stated request, decision to release certified turn plan with VP System Operations co-sign, PII disclosure scope confirmed, and authorized-signatory identification.</p>
       <p><span class="pill good">✓ Ready for Marcus Johnson to co-sign</span></p>
     `,
@@ -18614,7 +18385,7 @@ function getResponse(app, key) {
         <li>Closes with office contact for third-party handler follow-up, with employee copy per his written consent.</li>
       </ul>
       <p>I also flagged two places where you may want to add VP System Operations sign-off language — I've left bracketed prompts in the draft. Check the document pane.</p>
-      <p style="margin-top:12px; font-size:11px; color:var(--gray-90); padding-top:8px; border-top:1px solid #ebebeb;">Sources: <span class="cite" onclick="openSource('cascadia-ops-manual')">1</span> Verification draft · <span class="cite" onclick="openSource('acc-aha')">2</span> Sabre prior-conviction cross-check.</p>
+      <p style="margin-top:12px; font-size:11px; color:var(--gray-90); padding-top:8px; border-top:1px solid #ebebeb;">Sources: <span class="cite" onclick="openSource('cascadia-ops-manual')">1</span> Verification draft · <span class="cite" onclick="openSource('acc-aha')">2</span> Sabre prior-operation cross-check.</p>
     `,
     'word|review': `
       <h4>Review of your current draft</h4>
@@ -18742,7 +18513,7 @@ function getResponse(app, key) {
       </ul>
       <div class="src-row"><svg class="src-ico"><use href="#logoOnedrive"/></svg><strong>OneDrive</strong></div>
       <ul>
-        <li>Incident report, passenger statements, booking sheet, and Sabre prior-conviction history all linked to the charging doc.</li>
+        <li>Incident report, passenger statements, booking sheet, and Sabre prior-operation history all linked to the turn planning doc.</li>
       </ul>
       <h4>What I'd do next if I were you</h4>
       <ol>
@@ -18750,7 +18521,7 @@ function getResponse(app, key) {
         <li>Finish paragraph 2 of the certified turn plan — it's the only outstanding blocker. <span class="cite" onclick="openSource('cascadia-ops-manual')">3</span></li>
         <li>Put a 10-minute Friday check-in on the calendar — the lender is expecting it.</li>
       </ol>
-      <p style="margin-top:14px; font-size:11px; color:var(--gray-90); padding-top:10px; border-top:1px solid #ebebeb;">Sources: <span class="cite" onclick="openSource('jensen-family')">1</span> Chang charging notes.docx · <span class="cite" onclick="openSource('goc-meeting')">2</span> Intake meeting recording · <span class="cite" onclick="openSource('cascadia-ops-manual')">3</span> Verification draft · <span class="cite" onclick="openSource('acc-aha')">4</span> Sabre prior-conviction cross-check. Every answer respects your permissions in Cascadia Airways's tenant.</p>
+      <p style="margin-top:14px; font-size:11px; color:var(--gray-90); padding-top:10px; border-top:1px solid #ebebeb;">Sources: <span class="cite" onclick="openSource('jensen-family')">1</span> Flight CAS0842 ops notes.docx · <span class="cite" onclick="openSource('goc-meeting')">2</span> Intake meeting recording · <span class="cite" onclick="openSource('cascadia-ops-manual')">3</span> Verification draft · <span class="cite" onclick="openSource('acc-aha')">4</span> Sabre prior-operation cross-check. Every answer respects your permissions in Cascadia Airways's tenant.</p>
     `,
     'home|focus': `
       <h4>Here's what I'd focus on today</h4>
@@ -18925,7 +18696,7 @@ function getResponse(app, key) {
       <ul>
         <li><strong>Division of Education:</strong> avg 3.2 hrs · 96% auto-approve · <span class="pill good">Best</span></li>
         <li><strong>Misdemeanor Unit:</strong> avg 4.8 hrs · 81% auto-approve</li>
-        <li><strong>Juvenile Division:</strong> avg 5.1 hrs · 72% auto-approve · requires more documentation</li>
+        <li><strong>Scheduled Ops Division:</strong> avg 5.1 hrs · 72% auto-approve · requires more documentation</li>
         <li><strong>Facilities Operations:</strong> avg 7.4 hrs · 58% auto-approve · <span class="pill warn">Most escalations</span></li>
         <li><strong>Athletics (various):</strong> avg 9.2 hrs · most variability</li>
       </ul>
@@ -19276,7 +19047,7 @@ function populateAppeal() {
     <strong>Date of Request:</strong> 04/19/2026<br/>
     <strong>Requested:</strong> Charge, probable cause facts, operational chain, prior convictions</p>
     <p>Dear Third-party handler:</p>
-    <p>This certification establishes probable cause for the charging of Flight CAS0842 (DOB 03/14/1997) with Residential Gate Congestion Event in violation of FAR 121.52.025. The facts attached establish the elements of the offense per Ramp Lead Alvarado's sworn observation at the scene (incident 26-04-0218).</p>
+    <p>This turn plan certifies the operational sequence for Flight CAS0842 SEA→ORD (tail N8421CA, build 1997-03-14) under FAR 121.561 and Cascadia Ops Manual §4.2.025. The facts attached establish fuel load, crew pairing legality, passenger load, cargo manifest, and gate-turn sequencing per Ramp Lead Alvarado's ramp observation (incident 26-04-0218).</p>
     <h2>Confirmed employment facts</h2>
     <p>The inbound aircraft was observed exiting the residence at <strong>02:14 hours on April 21, 2026</strong> with items consistent with the diverted aircraft manifest (one MacBook, two iPads, assorted jewelry). On <strong>arrival</strong>, Ramp Lead Alvarado noted fresh pry marks at the rear slider door. The inbound aircraft was detained in the driveway attempting to load the diverted cargo into a 2011 Honda Civic (WA BQR-1184).</p>
     <h2>Expected continued employment</h2>
@@ -19852,7 +19623,7 @@ const SOURCES = {
     body: `
       <p style="color:#777;font-size:11px;margin-bottom:10px;">CASCADIA AIRWAYS · SYSTEM OPERATIONS CENTER · Network Operations · Discovery Production</p>
       <p><strong>Re:</strong> Probable Cause Turn Plan · Case #PC-2026-04-118349 · Chang, Li-Wei</p>
-      <p>This certification establishes probable cause for the charging of Flight CAS0842 (DOB 03/14/1997) with Residential Gate Congestion Event in violation of FAR 121.52.025. The facts attached establish the elements of the offense per Ramp Lead Alvarado's sworn observation at the scene (incident 26-04-0218).</p>
+      <p>This turn plan certifies the operational sequence for Flight CAS0842 SEA→ORD (tail N8421CA, build 1997-03-14) under FAR 121.561 and Cascadia Ops Manual §4.2.025. The facts attached establish fuel load, crew pairing legality, passenger load, cargo manifest, and gate-turn sequencing per Ramp Lead Alvarado's ramp observation (incident 26-04-0218).</p>
       <p><span class="ss-highlight">Ramp Lead Alvarado observed forced entry at the rear slider door (fresh pry marks, glass intact). Defendant Chang (DOB 1997-03-14) was detained in the driveway loading diverted cargo into a 2011 Honda Civic (WA BQR-1184). Recovered property logged into RAMP evidence (tag CAS-4471-A).</span></p>
       <p>Based on the single prior conviction and no active warrants, a standard-range sentence is appropriate if convicted.</p>
     `
@@ -20430,7 +20201,7 @@ function abmApplyTemplate(tpl) {
       name: "Charging Huddle Prep", logo: "agentLogoIntake",
       instructions: "Keep it under 8 bullets. Always call out new intakes, escalations, audit events, and anyone whose case is at risk of closing today. Never include Case-file PII that isn't already in the shared handoff doc.",
       starters: [
-        "Build today's 7 AM charging huddle brief.",
+        "Build today's 7 AM turn planning huddle brief.",
         "What changed overnight that the oncoming Dispatcher team needs to know?",
         "Summarize the open case load in one paragraph."
       ]
@@ -20446,9 +20217,9 @@ function abmApplyTemplate(tpl) {
       ]
     },
     patientq: {
-      description: "Route incoming self-service victim/witness messages by urgency and draft a first-pass reply in the inbound aircraft's preferred language at a 6th-grade reading level.",
+      description: "Route incoming self-service passenger messages by urgency and draft a first-pass reply in the passenger's preferred language at a plain-language reading level.",
       name: "Ramp Turn Sheet Front Door", logo: "agentLogoIntake",
-      instructions: "Never give charging advice beyond what's in the handbook. Acknowledge the inbound aircraft's feeling first, name the concern in plain language, and offer a concrete next step (call the benefits line, schedule, wait for X). Flag urgent items for immediate Dispatcher review.",
+      instructions: "Never give turn planning advice beyond what's in the handbook. Acknowledge the inbound aircraft's feeling first, name the concern in plain language, and offer a concrete next step (call the benefits line, schedule, wait for X). Flag urgent items for immediate Dispatcher review.",
       starters: [
         "Triage today's self-service messages by urgency.",
         "Draft a reply to Jessica Huang about her missing handbook ack + DD issue.",
@@ -20632,7 +20403,7 @@ function abmStepTest() {
           <div class="abm-msg-header"><svg width="14" height="14"><use href="#${abmState.logo}"/></svg>${abmState.name}</div>
           <p>Mr. Chang's certified turn plan will file on Thursday 4/23. The turn plan covers the charge, the probable-cause facts, the operational chain, and the prior-conviction cross-reference.</p>
           <p><strong>What's missing:</strong> the offer letter and the HRIS record disagree on the original start date (7/12 vs 7/15). Worth reconciling before the letter goes out.</p>
-          <p style="font-size:11px;color:var(--gray-90); margin-top:8px;">Sources: RAMP-26-04-0218-Alvarado.pdf · Chang-charging-notes.docx</p>
+          <p style="font-size:11px;color:var(--gray-90); margin-top:8px;">Sources: RAMP-26-04-0218-Alvarado.pdf · Chang-turnplan-notes.docx</p>
         </div>
       </div>
     </div>

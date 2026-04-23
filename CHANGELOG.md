@@ -1,6 +1,13 @@
 # Changelog
 
-## 2026-04-22 — IROps Cascade Commander canvas (marquee airline UC)
+## 2026-04-22 — Cleanup pass
+
+- **Removed 229 lines of dead code**: the half-built phone-frame Ramp Tower app-shell was left hidden in the DOM after the pivot to the SEA Ops AI Advisor. Fully deleted along with all its `rt-*` markup.
+- **Cleaned residual legal narrative** from the deep views that users click into: Maria Gutierrez's email rewritten from "passenger manifests pending your redaction sign-off" (legal) to "two turn plans pending your sign-off · ORD cascade + ICN curfew watch"; Maria Gonzalez rewritten from a victim-notification VINE registration into a Cascadia-app EU261 rebook inquiry; the Word canvas "probable cause certification" paragraphs retargeted to turn-plan operational certifications under FAR 121.561 / Cascadia Ops Manual §4.2.025; Purview events retargeted from "witness records" to "crew safety records · FAR 193 protected"; Copilot Studio agent descriptions rewritten ("victim/witness messages" → "passenger messages"); "charging memo drafted" → "Turn plan drafted"; "Case Strategy Brief" → "CAS1247 Diversion Brief (ops floor)"; "Criminal-Division-Intake" Teams channel → "Network-Ops-Intake"; "Chang charging notes.docx" → "Flight CAS0842 ops notes.docx"; "criminal trespass" → "apron deviation"; "Ortega case" → "CAS0517 diversion"; "VINE registration" → "Cascadia app disruption alert"; "Juvenile Division caseload" → "Scheduled Ops Division caseload"; "elements of the offense" → "elements of the operation"; "charging doc" → "turn plan doc". 24 total narrative substitutions.
+- **Crew Legality tile** now shows for Maria too (station coordinators care about FAR 117 at the gate).
+- **JS still parses clean** (`node --check`). File now 20,502 lines · 1.14 MB · 19 tiles · 19 app-shells. Final commit on top of the marquee work.
+
+## 2026-04-22 — 3 new airline apps + IROps visual upgrade
 
 Built the centerpiece interactive canvas that hits the "cascading-disruption + gate-productivity" brief head-on.
 
