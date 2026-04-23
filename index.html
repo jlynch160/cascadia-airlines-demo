@@ -7641,6 +7641,389 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
   width: 100%;
 }
 
+/* ========== FLEET TRACKER · Copilot integration ========== */
+.flt-head-r { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+
+.flt-copilot-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #36c5f0 0%, #7b5bff 40%, #c85bff 65%, #ff5a8c 85%, #ff8a3a 100%);
+  color: #fff; border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-family: inherit; font-size: 13px; font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(116,65,232,0.32), 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.1s, box-shadow 0.15s;
+}
+.flt-copilot-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(116,65,232,0.45); }
+.flt-copilot-btn:active { transform: translateY(0); }
+.flt-copilot-kbd {
+  font-family: "Segoe UI", monospace;
+  font-size: 10px; font-weight: 600;
+  background: rgba(255,255,255,0.22);
+  padding: 2px 6px; border-radius: 4px;
+  margin-left: 2px;
+}
+
+/* Insights strip */
+.flt-copilot-insights {
+  background: linear-gradient(180deg, #fff 0%, #fafbff 100%);
+  border: 1px solid var(--gray-30);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 0 0 3px rgba(116,65,232,0.04);
+  position: relative; overflow: hidden;
+}
+.flt-copilot-insights::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #36c5f0, #7b5bff 40%, #c85bff 65%, #ff5a8c 85%, #ff8a3a);
+}
+.flt-ci-head {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--gray-30);
+}
+.flt-ci-spark {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: linear-gradient(135deg,#7b5bff,#c85bff);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(123,91,255,0.4);
+  flex-shrink: 0;
+}
+.flt-ci-title { font-size: 13.5px; font-weight: 700; color: var(--kc-navy); }
+.flt-ci-sub   { font-size: 11px; color: var(--gray-130); margin-top: 2px; }
+.flt-ci-sub strong { color: var(--gray-160); font-weight: 600; }
+.flt-ci-refresh {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: inherit; font-size: 11px; font-weight: 600;
+  padding: 5px 10px; border-radius: 5px;
+  background: #fff; border: 1px solid var(--gray-40); color: var(--gray-130);
+  cursor: pointer;
+}
+.flt-ci-refresh:hover { background: var(--gray-20); color: var(--gray-160); }
+
+.flt-ci-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+.flt-ci-card {
+  background: #fff;
+  border: 1px solid var(--gray-30);
+  border-left: 3px solid var(--kc-blue);
+  border-radius: 8px;
+  padding: 11px 13px;
+  cursor: pointer;
+  transition: transform 0.14s, box-shadow 0.14s;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.flt-ci-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(11,37,69,0.1); }
+.flt-ci-card.flt-ci-alert { border-left-color: #c50f1f; background: linear-gradient(180deg,#fff5f5 0%, #fff 60%); }
+.flt-ci-card.flt-ci-warn  { border-left-color: #f59e0b; }
+.flt-ci-card.flt-ci-good  { border-left-color: #10b981; }
+.flt-ci-card.flt-ci-info  { border-left-color: #7b5bff; }
+.flt-ci-c-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.flt-ci-chip {
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase;
+  background: #fee2e2; color: #991b1b;
+  padding: 2px 7px; border-radius: 10px;
+  border: 1px solid #fecaca;
+}
+.flt-ci-chip.flt-ci-chip-warn { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.flt-ci-chip.flt-ci-chip-good { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
+.flt-ci-chip.flt-ci-chip-info { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+.flt-ci-conf { font-size: 10px; color: var(--gray-130); font-weight: 600; font-family: "Segoe UI", monospace; }
+.flt-ci-c-t { font-size: 12.5px; color: var(--gray-160); line-height: 1.45; }
+.flt-ci-c-t strong { color: var(--kc-navy); font-weight: 700; }
+.flt-ci-c-d { font-size: 11px; color: var(--gray-130); line-height: 1.5; }
+.flt-ci-c-d strong { color: var(--kc-navy); font-weight: 600; }
+.flt-ci-c-cta { font-size: 11px; color: var(--kc-blue); font-weight: 700; margin-top: 4px; }
+
+/* Slide-in Copilot panel */
+.flt-copilot-panel {
+  position: fixed;
+  top: 90px; right: 20px;
+  width: 400px; max-width: 92vw;
+  max-height: calc(100vh - 110px);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.28), 0 4px 12px rgba(123,91,255,0.2);
+  border-top: 3px solid transparent;
+  background-image: linear-gradient(#fff,#fff), linear-gradient(90deg, #36c5f0, #7b5bff, #c85bff, #ff5a8c, #ff8a3a);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  transform: translateX(120%);
+  transition: transform 0.35s cubic-bezier(0.22,0.61,0.36,1);
+  z-index: 400;
+  display: flex; flex-direction: column;
+  pointer-events: none;
+}
+.flt-copilot-panel.open { transform: translateX(0); pointer-events: auto; }
+.flt-cp-head {
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--gray-30);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.flt-cp-head-l { display: flex; align-items: center; gap: 10px; }
+.flt-cp-head-l strong { font-size: 14px; color: var(--kc-navy); font-weight: 700; }
+.flt-cp-sub { font-size: 10.5px; color: var(--gray-130); margin-top: 2px; }
+.flt-cp-close {
+  background: none; border: none;
+  width: 28px; height: 28px; border-radius: 5px;
+  cursor: pointer; font-size: 14px; color: var(--gray-130);
+}
+.flt-cp-close:hover { background: var(--gray-20); color: var(--gray-160); }
+.flt-cp-body { padding: 14px 18px; overflow-y: auto; flex: 1; }
+
+.flt-cp-msg { display: flex; gap: 10px; margin-bottom: 12px; }
+.flt-cp-ava {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg,#7b5bff,#c85bff);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(123,91,255,0.4);
+}
+.flt-cp-bubble {
+  background: linear-gradient(135deg, rgba(123,91,255,0.06), rgba(200,91,255,0.04));
+  border: 1px solid #e0dcf8;
+  border-radius: 10px 10px 10px 2px;
+  padding: 10px 12px;
+  font-size: 12.5px; color: var(--gray-160);
+  line-height: 1.55;
+  flex: 1; min-width: 0;
+}
+.flt-cp-bubble p { margin: 0; }
+.flt-cp-bubble p + p { margin-top: 6px; }
+.flt-cp-bubble strong { color: var(--kc-navy); font-weight: 700; }
+.flt-cp-bubble ul { margin: 6px 0 0 0; padding-left: 18px; }
+.flt-cp-bubble li { font-size: 12px; padding: 2px 0; line-height: 1.5; }
+
+.flt-cp-sugg-head {
+  font-size: 10.5px; font-weight: 800; letter-spacing: 0.5px;
+  color: var(--gray-90); text-transform: uppercase;
+  margin: 8px 0 6px;
+}
+.flt-cp-sugg-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+.flt-cp-sugg {
+  background: #f7faff;
+  border: 1px solid #cfd9eb;
+  border-radius: 7px;
+  padding: 9px 12px;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.flt-cp-sugg:hover { background: #eaf2fb; border-color: var(--kc-blue); transform: translateX(2px); }
+.flt-cp-sugg strong { display: block; font-size: 12px; color: var(--kc-navy); font-weight: 600; }
+.flt-cp-sugg small { display: block; font-size: 10.5px; color: var(--gray-130); margin-top: 2px; }
+
+.flt-cp-input {
+  display: flex; gap: 6px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--gray-30);
+}
+.flt-cp-input input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--gray-40);
+  border-radius: 6px;
+  font-size: 12.5px; font-family: inherit;
+  outline: none;
+}
+.flt-cp-input input:focus { border-color: var(--copilot-border); box-shadow: 0 0 0 2px rgba(167,139,250,0.2); }
+.flt-cp-send {
+  background: linear-gradient(135deg,#7b5bff,#c85bff);
+  color: #fff; border: none;
+  width: 36px; height: 36px; border-radius: 6px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.flt-cp-send:hover { box-shadow: 0 3px 10px rgba(123,91,255,0.4); }
+.flt-cp-foot {
+  padding: 7px 14px;
+  background: #faf9f8;
+  font-size: 10px; color: var(--gray-90);
+  display: flex; justify-content: space-between;
+  border-top: 1px solid var(--gray-30);
+  border-radius: 0 0 9px 9px;
+}
+
+/* ========== CREW LEGALITY BOARD — rich upgrade elements ========== */
+.crw-h-rule {
+  display: inline-block;
+  margin-left: 8px;
+  background: #eef4fc; color: var(--kc-blue);
+  font-size: 10.5px; font-weight: 700;
+  padding: 3px 9px; border-radius: 10px;
+  letter-spacing: 0.2px;
+  vertical-align: middle;
+}
+.crw-kpi-strip { display: flex; gap: 10px; flex-wrap: wrap; }
+.crw-kpi-card {
+  background: #fff; border: 1px solid var(--gray-30);
+  border-left: 3px solid var(--kc-blue);
+  border-radius: 8px;
+  padding: 11px 14px;
+  min-width: 130px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.crw-kpi-card.crw-kpi-warn { border-left-color: #f59e0b; }
+.crw-kpi-card.crw-kpi-good { border-left-color: #10b981; }
+.crw-kpi-v { font-size: 20px; font-weight: 700; color: var(--kc-navy); line-height: 1; }
+.crw-kpi-l { font-size: 10px; color: var(--gray-130); text-transform: uppercase; letter-spacing: 0.4px; margin-top: 4px; font-weight: 600; }
+.crw-kpi-d { font-size: 10.5px; color: var(--gray-90); margin-top: 3px; }
+.crw-kpi-d.good { color: #10b981; font-weight: 600; }
+.crw-kpi-d.warn { color: #c57f00; font-weight: 600; }
+
+/* Copilot recommendations banner */
+.crw-reco {
+  display: grid; grid-template-columns: 40px 1fr; gap: 12px;
+  background: linear-gradient(90deg, rgba(123,91,255,0.08) 0%, rgba(14,165,233,0.04) 50%, #fff 100%);
+  border: 1px solid #d8d0f5;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(123,91,255,0.1);
+}
+.crw-reco-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg,#7b5bff,#c85bff);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(123,91,255,0.35);
+}
+.crw-reco-title { font-size: 12.5px; color: var(--gray-160); margin-bottom: 8px; }
+.crw-reco-title strong { color: var(--kc-navy); font-weight: 700; }
+.crw-reco-row {
+  display: grid; grid-template-columns: 70px 1fr auto;
+  gap: 10px; align-items: center;
+  padding: 7px 0;
+  border-top: 1px dotted var(--gray-30);
+  font-size: 11.5px;
+}
+.crw-reco-pill {
+  font-family: "Segoe UI", monospace;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.3px;
+  padding: 4px 10px; border-radius: 10px;
+  text-align: center;
+}
+.crw-reco-pill.crw-reco-bad  { background: #fee2e2; color: #991b1b; }
+.crw-reco-pill.crw-reco-warn { background: #fef3c7; color: #92400e; }
+.crw-reco-pill.crw-reco-good { background: #ecfdf5; color: #065f46; }
+.crw-reco-text { color: var(--gray-160); line-height: 1.45; }
+.crw-reco-text strong { color: var(--kc-navy); font-weight: 700; }
+.crw-reco-btn {
+  font-family: inherit; font-size: 11px; font-weight: 700;
+  padding: 6px 12px; border-radius: 5px;
+  background: linear-gradient(135deg,#0ea5e9,#2563eb);
+  color: #fff; border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(14,165,233,0.35);
+}
+.crw-reco-btn:hover { box-shadow: 0 4px 10px rgba(14,165,233,0.5); transform: translateY(-1px); }
+
+/* Filters toolbar */
+.crw-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 14px; flex-wrap: wrap;
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid var(--gray-30);
+  border-radius: 8px;
+}
+.crw-filters { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
+.crw-fchip {
+  font-family: inherit; font-size: 11.5px; font-weight: 600;
+  padding: 5px 11px; border-radius: 12px;
+  background: #fff; border: 1px solid var(--gray-40);
+  color: var(--gray-130);
+  cursor: pointer;
+}
+.crw-fchip:hover { background: #f3f6fb; color: var(--kc-navy); }
+.crw-fchip.active { background: var(--kc-navy); color: #fff; border-color: transparent; }
+.crw-fchip span {
+  margin-left: 5px; font-size: 10px; opacity: 0.75;
+  background: rgba(255,255,255,0.2); padding: 1px 6px; border-radius: 8px;
+}
+.crw-fchip.active span { background: rgba(255,255,255,0.25); }
+.crw-fchip:not(.active) span { background: var(--gray-20); }
+.crw-fsep { width: 1px; height: 20px; background: var(--gray-30); margin: 0 4px; }
+.crw-toolbar-r { display: flex; gap: 6px; }
+.crw-tool-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: inherit; font-size: 11.5px; font-weight: 600;
+  padding: 5px 11px; border-radius: 5px;
+  background: #fff; border: 1px solid var(--gray-40); color: var(--kc-navy);
+  cursor: pointer;
+}
+.crw-tool-btn:hover { background: var(--kc-navy); color: #fff; border-color: transparent; }
+
+/* Panel head enhanced */
+.crw-panel-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-30); }
+.crw-legend { display: flex; gap: 10px; font-size: 10.5px; color: var(--gray-130); }
+.crw-legend span { display: flex; align-items: center; gap: 4px; }
+.crw-leg { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.crw-leg-ok   { background: #10b981; }
+.crw-leg-warn { background: #f59e0b; }
+.crw-leg-bad  { background: #c50f1f; }
+
+/* Trend SVG */
+.crw-trend-svg { width: 100%; height: 70px; display: block; margin-top: 8px; }
+.crw-trend-v { font-size: 18px; font-weight: 700; color: #f59e0b; }
+.crw-trend-v small { font-size: 10.5px; color: var(--gray-130); font-weight: 500; margin-left: 4px; }
+
+/* Rule reference card */
+.crw-rule-card {
+  margin-top: 14px;
+  background: #f7faff;
+  border: 1px solid #cfd9eb;
+  border-radius: 7px;
+  padding: 10px 12px;
+}
+.crw-rule-t { font-size: 11px; font-weight: 700; color: var(--kc-blue); display: flex; align-items: center; gap: 5px; margin-bottom: 6px; letter-spacing: 0.2px; }
+.crw-rule-r { font-size: 11px; color: var(--gray-130); padding: 3px 0; line-height: 1.45; }
+.crw-rule-r strong { color: var(--kc-navy); font-family: "Segoe UI", monospace; font-weight: 700; }
+
+/* Pairing row upgrades */
+.crw-pair-expand { cursor: pointer; }
+.crw-pair-expand:hover { background: #fafbfc; }
+.crw-pair.crw-at-risk {
+  background: linear-gradient(90deg, #fff5f5 0%, transparent 60%);
+  border-radius: 6px; padding-left: 8px;
+  animation: crwAtRiskPulse 2.2s ease-in-out infinite;
+}
+@keyframes crwAtRiskPulse { 0%,100% { box-shadow: 0 0 0 rgba(197,15,31,0); } 50% { box-shadow: 0 0 0 2px rgba(197,15,31,0.18); } }
+.crw-pair-countdown {
+  font-size: 10.5px;
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 3px 9px;
+  border-radius: 10px;
+  font-family: "Segoe UI", monospace;
+  font-weight: 700;
+  border: 1px solid #fecaca;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+/* Reserve score bar */
+.crw-reserve-score {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 4px;
+  font-size: 10px;
+}
+.crw-reserve-score-bar {
+  flex: 1; height: 4px;
+  background: #eef3f8;
+  border-radius: 2px; overflow: hidden;
+}
+.crw-reserve-score-bar span {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, #10b981, #14b8a6);
+  border-radius: 2px;
+}
+
 /* ========== CREW LEGALITY BOARD app ========== */
 #app-crew { overflow-y: auto; background: #f3f6fb; }
 .crw-wrap { padding: 18px 22px 28px; max-width: 1780px; margin: 0 auto; }
@@ -13650,13 +14033,120 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
           <div class="flt-h-title">Fleet Tracker · 42 Cascadia tails</div>
           <div class="flt-h-sub">Live ACARS telemetry · Azure IoT ingest · Predictive MX agent on Foundry · <span style="color:#c50f1f;font-weight:600;">1 emerging anomaly</span> flagged</div>
         </div>
-        <div class="flt-filters">
-          <button class="flt-filter-chip active" onclick="fltRenderGrid('all', this)">All (42)</button>
-          <button class="flt-filter-chip" onclick="fltRenderGrid('active', this)">Active (38)</button>
-          <button class="flt-filter-chip" onclick="fltRenderGrid('alert', this)">Alert (1)</button>
-          <button class="flt-filter-chip" onclick="fltRenderGrid('mx', this)">In MX (2)</button>
-          <button class="flt-filter-chip" onclick="fltRenderGrid('aog', this)">AOG (0)</button>
-          <button class="flt-filter-chip" onclick="fltRenderGrid('spare', this)">Spare (2)</button>
+        <div class="flt-head-r">
+          <div class="flt-filters">
+            <button class="flt-filter-chip active" onclick="fltRenderGrid('all', this)">All (42)</button>
+            <button class="flt-filter-chip" onclick="fltRenderGrid('active', this)">Active (38)</button>
+            <button class="flt-filter-chip" onclick="fltRenderGrid('alert', this)">Alert (1)</button>
+            <button class="flt-filter-chip" onclick="fltRenderGrid('mx', this)">In MX (2)</button>
+            <button class="flt-filter-chip" onclick="fltRenderGrid('aog', this)">AOG (0)</button>
+            <button class="flt-filter-chip" onclick="fltRenderGrid('spare', this)">Spare (2)</button>
+          </div>
+          <button class="flt-copilot-btn" onclick="fltOpenCopilot()">
+            <svg width="14" height="14"><use href="#copilotLogo"/></svg>
+            Ask Copilot about the fleet
+            <span class="flt-copilot-kbd">⌘K</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Copilot insights strip -->
+      <div class="flt-copilot-insights">
+        <div class="flt-ci-head">
+          <div class="flt-ci-spark"><svg width="16" height="16"><use href="#copilotLogo"/></svg></div>
+          <div>
+            <div class="flt-ci-title">Copilot insights · right now</div>
+            <div class="flt-ci-sub">Predictive MX + fleet-ops patterns · grounded on 36 h of ACARS telemetry + Sabre · refreshed <strong>2 min ago</strong></div>
+          </div>
+          <button class="flt-ci-refresh" onclick="showToast({kind:'copilot',title:'Refreshing insights…',text:'Copilot re-scanned all 42 tails across ACARS, Sabre AirOps, and MX-slot calendar. No new anomalies.',ttl:3800})">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1.5 3.5 A4 4 0 1 1 2 8" stroke="currentColor" stroke-width="1.3" fill="none"/><polygon points="1.5,0.5 1.5,4 5,4" fill="currentColor"/></svg>
+            Refresh
+          </button>
+        </div>
+        <div class="flt-ci-grid">
+          <div class="flt-ci-card flt-ci-alert" onclick="fltTailDetail('N6152CA')">
+            <div class="flt-ci-c-head"><span class="flt-ci-chip">Emerging risk</span><span class="flt-ci-conf">82% confidence</span></div>
+            <div class="flt-ci-c-t"><strong>N6152CA</strong> engine #2 · EGT +14 °C vs 30-day baseline</div>
+            <div class="flt-ci-c-d">Copilot booked A-check slot 04/24 22:00 and pre-ordered RB211-T-042 · <strong>avoids projected AOG in 40 cycles</strong></div>
+            <div class="flt-ci-c-cta">Review + approve →</div>
+          </div>
+          <div class="flt-ci-card flt-ci-warn">
+            <div class="flt-ci-c-head"><span class="flt-ci-chip flt-ci-chip-warn">Utilization trending</span><span class="flt-ci-conf">72% confidence</span></div>
+            <div class="flt-ci-c-t">3 tails approaching <strong>A-check threshold</strong> in next 7 days</div>
+            <div class="flt-ci-c-d">N8821CA, N8411CA, N6084CA · sequencing suggests staggered slots to avoid capacity crunch at SEA hangar 4</div>
+            <div class="flt-ci-c-cta">See MX plan →</div>
+          </div>
+          <div class="flt-ci-card flt-ci-good">
+            <div class="flt-ci-c-head"><span class="flt-ci-chip flt-ci-chip-good">Optimization</span><span class="flt-ci-conf">91% confidence</span></div>
+            <div class="flt-ci-c-t">Fleet dispatch reliability <strong>▲ 0.3 pts</strong> vs MTD</div>
+            <div class="flt-ci-c-d">Predictive MX prevented 4 unscheduled removals YTD · $428K AOGs avoided · $118K projected Q2 if pattern holds</div>
+            <div class="flt-ci-c-cta">View attribution →</div>
+          </div>
+          <div class="flt-ci-card flt-ci-info">
+            <div class="flt-ci-c-head"><span class="flt-ci-chip flt-ci-chip-info">Fleet swap opportunity</span><span class="flt-ci-conf">live</span></div>
+            <div class="flt-ci-c-t">IROps Cascade flagged <strong>N8421CA ↔ N6152CA</strong> swap at MDW</div>
+            <div class="flt-ci-c-d">Rebalances MDW→DEN leg in Plan A · negligible MX impact · <strong>aligns with N6152CA A-check move-up</strong></div>
+            <div class="flt-ci-c-cta">Open in IROps →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copilot slide-in panel (right) -->
+      <div class="flt-copilot-panel" id="flt-copilot-panel" aria-hidden="true">
+        <div class="flt-cp-head">
+          <div class="flt-cp-head-l">
+            <svg width="20" height="20"><use href="#copilotLogo"/></svg>
+            <div>
+              <strong>Fleet Copilot</strong>
+              <div class="flt-cp-sub">Grounded on your tenant · ACARS, Sabre, MX calendar, Dataverse</div>
+            </div>
+          </div>
+          <button class="flt-cp-close" onclick="fltCloseCopilot()">✕</button>
+        </div>
+        <div class="flt-cp-body">
+          <!-- Greeting -->
+          <div class="flt-cp-msg flt-cp-msg-ai">
+            <div class="flt-cp-ava">✨</div>
+            <div class="flt-cp-bubble">
+              <p>Hi Sarah — I'm watching all <strong>42 tails</strong>. Right now I'm most concerned about <strong>N6152CA</strong> (engine #2 EGT + vibration trend). Ask me anything, or try one of these:</p>
+            </div>
+          </div>
+          <!-- Suggested prompts -->
+          <div class="flt-cp-sugg-head">Suggested</div>
+          <div class="flt-cp-sugg-list">
+            <button class="flt-cp-sugg" onclick="fltAskCopilot('Which tails are at risk of AOG in the next 30 days?')">
+              <strong>Which tails are at risk of AOG in the next 30 days?</strong>
+              <small>scans ACARS + cycles + MX history</small>
+            </button>
+            <button class="flt-cp-sugg" onclick="fltAskCopilot('Walk me through the N6152CA anomaly and what you\\'ve already done.')">
+              <strong>Walk me through the N6152CA anomaly</strong>
+              <small>and what you've already done</small>
+            </button>
+            <button class="flt-cp-sugg" onclick="fltAskCopilot('Propose an MX-slot schedule that avoids capacity crunch at SEA hangar 4.')">
+              <strong>Propose an MX-slot schedule</strong>
+              <small>avoid capacity crunch at SEA hangar 4</small>
+            </button>
+            <button class="flt-cp-sugg" onclick="fltAskCopilot('What would the dispatch reliability impact be if I defer N8821CA A-check by 7 days?')">
+              <strong>If I defer N8821CA A-check by 7 days…</strong>
+              <small>what's the dispatch reliability impact?</small>
+            </button>
+            <button class="flt-cp-sugg" onclick="fltAskCopilot('Draft an email to the VP SysOps summarizing fleet status.')">
+              <strong>Draft an email to the VP SysOps</strong>
+              <small>summarizing fleet status for this morning's brief</small>
+            </button>
+          </div>
+          <!-- Response-stream area -->
+          <div id="flt-cp-stream"></div>
+        </div>
+        <div class="flt-cp-input">
+          <input id="flt-cp-input" type="text" placeholder="Ask about a tail, trend, or MX plan…" onkeydown="if(event.key==='Enter'){fltAskCopilot(this.value);this.value='';}"/>
+          <button class="flt-cp-send" onclick="const i=document.getElementById('flt-cp-input');fltAskCopilot(i.value);i.value='';">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M1 6l10-5-2 10-3-3-5-2z"/></svg>
+          </button>
+        </div>
+        <div class="flt-cp-foot">
+          <span>✓ Purview-audited · 100% of prompts</span>
+          <span>gpt-4.1 · casa-ops-private</span>
         </div>
       </div>
 
@@ -13742,15 +14232,61 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <div class="app-breadcrumb"><span onclick="goHome()">Apps</span> <span class="app-bc-sep">›</span> <span>Crew Legality</span></div>
     </div>
     <div class="crw-wrap">
+      <!-- Header with rich KPI strip -->
       <div class="crw-head">
         <div>
-          <div class="crw-h-title">Crew Legality Board · FAR 117</div>
-          <div class="crw-h-sub">Live duty-time scoring for every active Cascadia pairing · reserve pool live · Copilot proposes reassignments before limits trip</div>
+          <div class="crw-h-title">Crew Legality Board <span class="crw-h-rule">FAR 117 Parts §b (FDP) · §c (Rest) · §e (Reserves) · §g (Acclimation)</span></div>
+          <div class="crw-h-sub">Live duty-time scoring for every active Cascadia pairing · Copilot proposes reassignments <strong>before</strong> limits trip · all decisions traceable to Purview audit</div>
         </div>
-        <div style="display:flex; gap:10px;">
-          <div class="flt-kpi flt-kpi-good" style="min-width:130px;"><div class="flt-kpi-v" style="font-size:18px;">218</div><div class="flt-kpi-l">Pairings scored</div></div>
-          <div class="flt-kpi flt-kpi-warn" style="min-width:130px;"><div class="flt-kpi-v" style="font-size:18px;">2</div><div class="flt-kpi-l">At risk · 24 h</div></div>
-          <div class="flt-kpi flt-kpi-good" style="min-width:130px;"><div class="flt-kpi-v" style="font-size:18px;">0</div><div class="flt-kpi-l">Breaks · YTD</div></div>
+        <div class="crw-kpi-strip">
+          <div class="crw-kpi-card"><div class="crw-kpi-v">218</div><div class="crw-kpi-l">Pairings scored</div><div class="crw-kpi-d good">▲ 12 vs yesterday</div></div>
+          <div class="crw-kpi-card crw-kpi-warn"><div class="crw-kpi-v">2</div><div class="crw-kpi-l">At-risk · 24 h</div><div class="crw-kpi-d warn">P4481 · P4512</div></div>
+          <div class="crw-kpi-card"><div class="crw-kpi-v">14 / 18</div><div class="crw-kpi-l">Reserves available</div><div class="crw-kpi-d good">SEA + LAX base</div></div>
+          <div class="crw-kpi-card crw-kpi-good"><div class="crw-kpi-v">0</div><div class="crw-kpi-l">Breaks · YTD</div><div class="crw-kpi-d good">vs 7 prev year</div></div>
+          <div class="crw-kpi-card crw-kpi-good"><div class="crw-kpi-v">$1.8M</div><div class="crw-kpi-l">Enforcement cost avoided</div><div class="crw-kpi-d good">YTD · FAA + comp</div></div>
+        </div>
+      </div>
+
+      <!-- Copilot recommendations banner -->
+      <div class="crw-reco">
+        <div class="crw-reco-icon"><svg width="18" height="18"><use href="#copilotLogo"/></svg></div>
+        <div class="crw-reco-body">
+          <div class="crw-reco-title">Copilot is watching <strong>2 at-risk pairings</strong> and has pre-matched <strong>3 reserves</strong> ready to call-up.</div>
+          <div class="crw-reco-row">
+            <span class="crw-reco-pill crw-reco-bad">P4481</span>
+            <span class="crw-reco-text">FDP +28 min past cushion if ORD hold extends past 09:00 → <strong>match FO H. Lee (94/100)</strong> · 4h callout, ready now</span>
+            <button class="crw-reco-btn" onclick="crwAutoReassign('P4481', 'H. Lee')">One-click reassign →</button>
+          </div>
+          <div class="crw-reco-row">
+            <span class="crw-reco-pill crw-reco-warn">P4512</span>
+            <span class="crw-reco-text">Rest-window 1h 10m shy of §c · propose <strong>extend rest + delay CAS0842 to 08:40</strong> (preserves crew rest, no pax rebook)</span>
+            <button class="crw-reco-btn" onclick="crwAutoReassign('P4512', 'delay 45m')">Extend rest 45 min</button>
+          </div>
+          <div class="crw-reco-row">
+            <span class="crw-reco-pill crw-reco-good">P4601</span>
+            <span class="crw-reco-text">Trans-Pac crew acclimation §g — pre-stage overnight reserve R. Patel at SEA hotel for CAS2118 ICN inbound</span>
+            <button class="crw-reco-btn" onclick="crwAutoReassign('P4601', 'R. Patel standby')">Pre-stage R. Patel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters + heat strip -->
+      <div class="crw-toolbar">
+        <div class="crw-filters">
+          <button class="crw-fchip active" onclick="crwFilter('all', this)">All pairings <span>218</span></button>
+          <button class="crw-fchip" onclick="crwFilter('risk', this)">⚠ At risk <span>2</span></button>
+          <button class="crw-fchip" onclick="crwFilter('monitor', this)">● Monitor <span>4</span></button>
+          <button class="crw-fchip" onclick="crwFilter('legal', this)">✓ Legal <span>212</span></button>
+          <span class="crw-fsep"></span>
+          <button class="crw-fchip">Base: SEA</button>
+          <button class="crw-fchip">Base: LAX</button>
+          <button class="crw-fchip">Fleet: 737</button>
+          <button class="crw-fchip">Fleet: 777</button>
+          <button class="crw-fchip">FA crews</button>
+        </div>
+        <div class="crw-toolbar-r">
+          <button class="crw-tool-btn" onclick="crwWhatIf()"><svg width="11" height="11"><use href="#copilotLogo"/></svg> What if…</button>
+          <button class="crw-tool-btn">Export roster</button>
         </div>
       </div>
 
@@ -13759,20 +14295,62 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         <!-- rendered by crwRenderHeat() -->
       </div>
 
+      <!-- Main grid -->
       <div class="crw-grid">
         <div class="crw-panel">
-          <div class="crw-panel-title">Active pairings · today</div>
-          <div class="crw-panel-sub">Each bar is today's duty time for that pairing relative to the FAR 117 Part 117 §b limit. Hover or click for the full Copilot legality trail.</div>
+          <div class="crw-panel-head">
+            <div>
+              <div class="crw-panel-title">Active pairings · today</div>
+              <div class="crw-panel-sub">Each bar shows duty-time vs FAR 117 §b 14h limit. Click a pairing to expand the per-leg view with rest windows + buffer.</div>
+            </div>
+            <div class="crw-legend">
+              <span><span class="crw-leg crw-leg-ok"></span>Legal (≥4 h cushion)</span>
+              <span><span class="crw-leg crw-leg-warn"></span>Monitor (2–4 h)</span>
+              <span><span class="crw-leg crw-leg-bad"></span>At risk (&lt;2 h)</span>
+            </div>
+          </div>
           <div id="crw-pair-list"></div>
         </div>
+
         <div class="crw-panel">
-          <div class="crw-panel-title">Reserve pool · callable</div>
-          <div class="crw-reserve-head">
-            <div class="crw-reserve-n">14<small>reserves available SEA</small></div>
-            <div style="font-size:10.5px;color:var(--gray-130);">of 18 on call</div>
+          <!-- Weekly trend sparkline -->
+          <div class="crw-panel-head">
+            <div>
+              <div class="crw-panel-title">At-risk pairings · 7-day</div>
+              <div class="crw-panel-sub">Copilot deflection · weather + IROps-weighted</div>
+            </div>
+            <div class="crw-trend-v">2 <small>today</small></div>
           </div>
-          <div class="crw-panel-sub">Ranked by Copilot: current duty posture, commute distance, base, and Cascadia-specific fit. Click call-up to notify via Outlook + SMS + Teams.</div>
+          <svg class="crw-trend-svg" viewBox="0 0 280 60" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="crwTrendFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.35"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/></linearGradient>
+            </defs>
+            <g stroke="#eef3f8" stroke-width="1"><line x1="0" y1="20" x2="280" y2="20"/><line x1="0" y1="40" x2="280" y2="40"/></g>
+            <path d="M0 35 L40 40 L80 30 L120 45 L160 15 L200 35 L240 42 L280 38 L280 60 L0 60 Z" fill="url(#crwTrendFill)"/>
+            <path d="M0 35 L40 40 L80 30 L120 45 L160 15 L200 35 L240 42 L280 38" fill="none" stroke="#f59e0b" stroke-width="2"/>
+            <g fill="#f59e0b"><circle cx="0" cy="35" r="3"/><circle cx="40" cy="40" r="3"/><circle cx="80" cy="30" r="3"/><circle cx="120" cy="45" r="3"/><circle cx="160" cy="15" r="3.5"/><circle cx="200" cy="35" r="3"/><circle cx="240" cy="42" r="3"/><circle cx="280" cy="38" r="4" stroke="#fff" stroke-width="1.5"/></g>
+            <g font-family="Segoe UI" font-size="9" fill="#55708b" text-anchor="middle"><text x="0" y="58">Thu</text><text x="40" y="58">Fri</text><text x="80" y="58">Sat</text><text x="120" y="58">Sun</text><text x="160" y="58">Mon</text><text x="200" y="58">Tue</text><text x="240" y="58">Wed</text><text x="280" y="58" font-weight="700" fill="#c50f1f">Thu</text></g>
+            <text x="160" y="10" font-family="Segoe UI" font-size="9" fill="#c50f1f" font-weight="700" text-anchor="middle">7 peak · wx</text>
+          </svg>
+
+          <!-- Reserve pool -->
+          <div class="crw-panel-head" style="margin-top:16px;">
+            <div>
+              <div class="crw-panel-title">Reserve pool · callable</div>
+              <div class="crw-panel-sub">Ranked by Copilot · duty posture · commute · Cascadia-specific fit</div>
+            </div>
+            <div class="crw-reserve-n">14<small>of 18 on-call SEA</small></div>
+          </div>
           <div id="crw-reserve-list"></div>
+
+          <!-- Compliance drawer -->
+          <div class="crw-rule-card">
+            <div class="crw-rule-t"><svg width="12" height="12" viewBox="0 0 12 12" fill="#0ea5e9"><path d="M6 1 L11 6 L6 11 L1 6 Z" fill="none" stroke="#0ea5e9" stroke-width="1"/><circle cx="6" cy="6" r="1.5" fill="#0ea5e9"/></svg> FAR 117 reference</div>
+            <div class="crw-rule-r"><strong>§b</strong> FDP max 14 h for 2-pilot ops · scales with report time + segments</div>
+            <div class="crw-rule-r"><strong>§c</strong> Rest min 10 h between FDPs · §c(1) scheduled, §c(2) actual</div>
+            <div class="crw-rule-r"><strong>§e</strong> Reserve availability max 14 h · callout window defined</div>
+            <div class="crw-rule-r"><strong>§g</strong> Acclimation (trans-Pac): ≥36 h in new time zone reset</div>
+          </div>
         </div>
       </div>
     </div>
@@ -15651,6 +16229,126 @@ function fltRenderGrid(filter, btn) {
 }
 function fltStartACARS() { /* sparklines are static SVGs; no animation needed for v1 */ }
 
+// Fleet Copilot side panel
+function fltOpenCopilot() {
+  const p = document.getElementById('flt-copilot-panel');
+  if (p) p.classList.add('open');
+  document.getElementById('flt-cp-stream').innerHTML = '';
+}
+function fltCloseCopilot() {
+  const p = document.getElementById('flt-copilot-panel');
+  if (p) p.classList.remove('open');
+}
+function fltAskCopilot(prompt) {
+  if (!prompt || !prompt.trim()) return;
+  const stream = document.getElementById('flt-cp-stream');
+  if (!stream) return;
+  // User message
+  const userMsg = document.createElement('div');
+  userMsg.className = 'flt-cp-msg';
+  userMsg.style.justifyContent = 'flex-end';
+  userMsg.innerHTML = `<div class="flt-cp-bubble" style="background:#eef4fc;border-color:#cfd9eb;border-radius:10px 10px 2px 10px;max-width:85%;"><p>${prompt.replace(/</g,'&lt;')}</p></div>`;
+  stream.appendChild(userMsg);
+  // Canned AI response per topic
+  const p = prompt.toLowerCase();
+  let answer;
+  if (p.includes('aog') || p.includes('30 days')) {
+    answer = `<p>Scanning 42 tails × ACARS + cycles + MX history…</p>
+      <p><strong>3 tails at risk of AOG in the next 30 days:</strong></p>
+      <ul>
+        <li><strong>N6152CA</strong> · 78% · engine #2 EGT + vibration · A-check slot already booked 04/24 22:00 ✓</li>
+        <li><strong>N8821CA</strong> · 34% · hydraulic pump #2 trending · recommend advancing scheduled A-check from 05/12 to 05/06</li>
+        <li><strong>N5617CA</strong> · 22% · APU cycles high (trans-Pac duty) · low-priority watch, no action yet</li>
+      </ul>
+      <p>Want me to draft the A-check schedule change for N8821CA?</p>`;
+  } else if (p.includes('n6152ca') || p.includes('anomaly')) {
+    answer = `<p>Here's what I know about the <strong>N6152CA</strong> anomaly:</p>
+      <ul>
+        <li><strong>Detected 14 min ago</strong> from 36 h ACARS rolling window</li>
+        <li>Engine #2 EGT <strong>+14 °C</strong> vs. baseline · N1 vibration <strong>+0.6 mils</strong> vs. 30-day</li>
+        <li>p(unscheduled removal in next 40 cycles) = <strong>78%</strong></li>
+      </ul>
+      <p><strong>What I've already done:</strong></p>
+      <ul>
+        <li>Booked A-check slot at SEA hangar 4 · 04/24 22:00 local</li>
+        <li>Pre-ordered part <strong>RB211-T-042</strong> from Rolls-Royce · expected 04/24 14:00</li>
+        <li>Proposed tail swap N8421CA ↔ N6152CA at MDW to IROps Cascade (aligns with Plan A)</li>
+      </ul>
+      <p>Needs your <strong>Approve MX slot + part order</strong> sign-off. Projected AOG-avoidance: <strong>$112K</strong>.</p>`;
+  } else if (p.includes('mx-slot') || p.includes('schedule') || p.includes('hangar')) {
+    answer = `<p>Proposed staggered A-check sequence for SEA hangar 4 (capacity: 2 tails at once):</p>
+      <ul>
+        <li><strong>04/24 22:00</strong> — N6152CA (moved up) · 18 h slot</li>
+        <li><strong>04/28 08:00</strong> — N8821CA (advanced from 05/12) · 20 h slot</li>
+        <li><strong>05/03 22:00</strong> — N8411CA (on schedule) · 16 h slot</li>
+        <li><strong>05/08 22:00</strong> — N6084CA (on schedule) · 20 h slot</li>
+      </ul>
+      <p>Avoids hangar capacity crunch · keeps dispatch reliability above 98%. Approve?</p>`;
+  } else if (p.includes('defer') || p.includes('7 days')) {
+    answer = `<p>Deferring <strong>N8821CA</strong> A-check by 7 days (05/12 → 05/19):</p>
+      <ul>
+        <li>Dispatch reliability impact: <strong>−0.4 pts</strong> (98.4% → 98.0%)</li>
+        <li>Increased p(unscheduled removal): <strong>+14%</strong></li>
+        <li>Projected AOG risk cost: <strong>+$84K</strong></li>
+        <li>Does not free up meaningful hangar capacity (other tails dominate)</li>
+      </ul>
+      <p><strong>Not recommended.</strong> Defer only if a higher-priority tail enters the queue.</p>`;
+  } else if (p.includes('email') || p.includes('vp')) {
+    answer = `<p>Draft ready — review before sending:</p>
+      <div style="background:#fafbfc;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;margin-top:6px;font-size:11.5px;">
+      <strong>To:</strong> Marcus Johnson<br>
+      <strong>Subject:</strong> Fleet readiness · 06:45 SOC brief<br><br>
+      Marcus — fleet is <strong>38 of 42 in service</strong>, 98.4% dispatch reliability (▲ 0.3 pts vs MTD). One emerging ACARS anomaly on N6152CA engine #2 — Predictive MX booked an A-check slot for 04/24 22:00 and pre-ordered the part (RB211-T-042). Your approval needed on the slot move. Rest of fleet trending clean.</div>
+      <p>Open in Outlook?</p>`;
+  } else {
+    answer = `<p>I can help with:</p>
+      <ul>
+        <li>Which tails are trending toward an AOG</li>
+        <li>ACARS telemetry for any specific tail</li>
+        <li>MX-slot sequencing + hangar capacity</li>
+        <li>Dispatch-reliability impact of deferring MX</li>
+        <li>Drafting messages about the fleet</li>
+      </ul>
+      <p>Or ask me anything else — I have your fleet, ACARS, Sabre, and MX calendar in view.</p>`;
+  }
+  const aiMsg = document.createElement('div');
+  aiMsg.className = 'flt-cp-msg flt-cp-msg-ai';
+  aiMsg.innerHTML = `<div class="flt-cp-ava">✨</div><div class="flt-cp-bubble">${answer}</div>`;
+  stream.appendChild(aiMsg);
+  stream.scrollIntoView({ behavior:'smooth', block:'end' });
+}
+function fltTailDetail(reg) {
+  fltOpenCopilot();
+  setTimeout(() => fltAskCopilot(`Walk me through the ${reg} anomaly and what you've already done.`), 220);
+}
+
+// Crew Legality · filter + what-if + auto-reassign
+function crwFilter(level, btn) {
+  if (btn) { document.querySelectorAll('.crw-fchip').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+  document.querySelectorAll('#crw-pair-list .crw-pair').forEach(row => {
+    if (level === 'all') { row.style.display = ''; return; }
+    const s = row.dataset.status;
+    const match = (level === 'risk' && s === 'bad') || (level === 'monitor' && s === 'warn') || (level === 'legal' && s === 'ok');
+    row.style.display = match ? '' : 'none';
+  });
+}
+function crwWhatIf() {
+  showToast({
+    kind: 'copilot',
+    title: 'What-if simulation',
+    text: "What happens if the ORD hold extends to 11:00? Copilot runs 128 sims and shows how each pairing's FDP cushion evolves. Try: <em>&quot;What if CAS1247 goes +90 min?&quot;</em>",
+    ttl: 6000
+  });
+}
+function crwAutoReassign(pair, action) {
+  showToast({
+    kind: 'copilot',
+    title: `Reassigned · ${pair}`,
+    text: `${action} dispatched · Outlook notification to crew · SMS via Sabre Crew+Ops · Teams channel updated · Purview audit row written. FDP cushion restored to <strong>legal</strong>.`,
+    ttl: 5200
+  });
+}
+
 // ============ CREW LEGALITY BOARD ============
 const CREW_PAIRS = [
   { id:'P4481', pic:'Capt. R. Moreno · FO L. Kim',   meta:'3-day · SEA–ORD–DEN–SEA · day 1 of 3', duty:12.8, lim:14, status:'bad',  action:'Reassign FO' },
@@ -15688,12 +16386,16 @@ function crwRender() {
       const sCls = p.status === 'bad' ? 'crw-status-bad' : p.status === 'warn' ? 'crw-status-warn' : 'crw-status-ok';
       const sLabel = p.status === 'bad' ? '⚠ AT RISK' : p.status === 'warn' ? '● MONITOR' : '✓ LEGAL';
       const row = document.createElement('div');
-      row.className = 'crw-pair';
+      row.className = 'crw-pair' + (p.status === 'bad' ? ' crw-at-risk' : '');
+      row.dataset.status = p.status;
+      // Simulate a live countdown for AT RISK pairings
+      const countdown = p.status === 'bad' ? '<div class="crw-pair-countdown">⏱ breaks in 2h 12m if no action</div>' : '';
       row.innerHTML = `
         <div class="crw-pair-left">
           <div class="crw-pair-id">${p.id}</div>
           <div class="crw-pair-pic">${p.pic}</div>
           <div class="crw-pair-meta">${p.meta}</div>
+          ${countdown}
         </div>
         <div>
           <div class="crw-bar-wrap">
@@ -15703,7 +16405,7 @@ function crwRender() {
         </div>
         <div class="crw-pair-right">
           <div class="${sCls}">${sLabel}</div>
-          ${p.status !== 'ok' ? `<button class="crw-action-chip" onclick="showToast({kind:'copilot', title:'Reassignment proposed', text:'Copilot has matched Pairing ${p.id} with reserve H. Lee (ranked 94/100). Notification draft ready for your approval in Outlook + Teams.', ttl:5200})">${p.action}</button>` : ''}
+          ${p.status !== 'ok' ? `<button class="crw-action-chip" onclick="crwAutoReassign('${p.id}','${p.action}')">${p.action}</button>` : ''}
         </div>
       `;
       pl.appendChild(row);
@@ -15721,7 +16423,11 @@ function crwRender() {
         <div class="crw-reserve-av">${initials}</div>
         <div class="crw-reserve-m">
           <div class="crw-reserve-n2">${r.name}</div>
-          <div class="crw-reserve-d">${r.role} · ${r.base} · ${r.status} · match <strong>${r.score}/100</strong></div>
+          <div class="crw-reserve-d">${r.role} · ${r.base} · ${r.status}</div>
+          <div class="crw-reserve-score">
+            <div class="crw-reserve-score-bar"><span style="width:${r.score}%;"></span></div>
+            <span style="font-weight:700;color:#0b2545;font-family:'Segoe UI',monospace;">${r.score}/100</span>
+          </div>
         </div>
         <button class="crw-reserve-btn" onclick="showToast({kind:'copilot',title:'Call-up sent',text:'${r.name} notified via Outlook + SMS + Teams. Response expected within SLA (${r.role.includes('Capt')?'2':'4'}h).',ttl:4500})">Call-up</button>
       `;
