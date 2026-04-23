@@ -7064,6 +7064,268 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 .ir-tel-svc { color: #7fd1ff; }
 .ir-tel-msg { color: #e6eefb; }
 
+/* ============ MODIFY-PLAN MODAL ============ */
+.ir-mod-overlay {
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 900px 700px at 35% 40%, rgba(14,165,233,0.24), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 75% 70%, rgba(168,85,247,0.18), transparent 55%),
+    rgba(6,13,30,0.86);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 9700;
+  padding: 24px;
+  animation: irModFade 0.22s ease-out;
+}
+.ir-mod-overlay.open { display: flex; }
+@keyframes irModFade { from { opacity: 0; } to { opacity: 1; } }
+
+.ir-mod-card {
+  width: min(1100px, 95vw);
+  max-height: 88vh;
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(135deg, #14b8a6, #0ea5e9, #a855f7, #f59e0b) border-box;
+  border: 1.5px solid transparent;
+  border-radius: 14px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 12px 30px rgba(14,165,233,0.2);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  animation: irModCardIn 0.36s cubic-bezier(0.22,0.61,0.36,1);
+}
+@keyframes irModCardIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Header */
+.ir-mod-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--gray-30);
+  background: linear-gradient(90deg, #f7fbff 0%, #ffffff 100%);
+}
+.ir-mod-head-l { display: flex; align-items: center; gap: 14px; }
+.ir-mod-rank {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg,#14b8a6,#0ea5e9);
+  color: #fff;
+  font-weight: 800; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px rgba(14,165,233,0.45);
+}
+.ir-mod-h-title { font-size: 17px; font-weight: 700; color: var(--kc-navy); letter-spacing: -0.2px; }
+.ir-mod-h-sub   { font-size: 12px; color: var(--gray-130); margin-top: 3px; max-width: 640px; }
+.ir-mod-close {
+  background: none; border: 1px solid var(--gray-40); border-radius: 8px;
+  width: 34px; height: 34px; font-size: 15px; cursor: pointer;
+  color: var(--gray-130);
+  transition: all 0.12s;
+}
+.ir-mod-close:hover { background: var(--gray-20); color: var(--gray-160); transform: scale(1.06); }
+
+/* Body grid */
+.ir-mod-body {
+  display: grid; grid-template-columns: 1fr 360px;
+  gap: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+@media (max-width: 900px) { .ir-mod-body { grid-template-columns: 1fr; } }
+
+.ir-mod-actions-col { padding: 18px 24px; overflow-y: auto; }
+.ir-mod-kpi-col {
+  padding: 18px 22px;
+  background: linear-gradient(180deg, #f7fbff 0%, #f1f8ff 100%);
+  border-left: 1px solid var(--gray-30);
+}
+
+/* Section heads */
+.ir-mod-section-head {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 800; color: var(--kc-navy);
+  text-transform: uppercase; letter-spacing: 0.6px;
+  margin-bottom: 10px;
+}
+.ir-mod-count {
+  margin-left: auto;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
+  background: #ecfdf5; color: #065f46;
+  padding: 3px 8px; border-radius: 10px; text-transform: none;
+}
+
+/* Action cards */
+.ir-mod-action {
+  background: #fff;
+  border: 1px solid var(--gray-30);
+  border-left: 3px solid #14b8a6;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  transition: all 0.18s;
+}
+.ir-mod-action:has(input[data-act-toggle]:not(:checked)) {
+  border-left-color: #cbd5e1;
+  opacity: 0.55;
+  background: #fafbfc;
+}
+.ir-mod-act-head { display: flex; gap: 12px; align-items: flex-start; }
+.ir-mod-act-t { flex: 1; min-width: 0; }
+.ir-mod-act-name { font-size: 13px; font-weight: 600; color: var(--kc-navy); line-height: 1.4; }
+.ir-mod-act-name strong { color: #0b2545; font-weight: 700; }
+.ir-mod-act-meta { font-size: 11px; color: var(--gray-130); margin-top: 3px; line-height: 1.45; }
+
+/* Toggle switch */
+.ir-mod-toggle { position: relative; display: inline-block; width: 36px; height: 20px; flex-shrink: 0; cursor: pointer; }
+.ir-mod-toggle input { opacity: 0; width: 0; height: 0; }
+.ir-mod-slider {
+  position: absolute; inset: 0;
+  background: #cbd5e1; border-radius: 10px;
+  transition: background 0.22s;
+}
+.ir-mod-slider::before {
+  content: ''; position: absolute;
+  width: 16px; height: 16px;
+  left: 2px; top: 2px;
+  background: #fff; border-radius: 50%;
+  transition: transform 0.22s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.ir-mod-toggle input:checked + .ir-mod-slider { background: linear-gradient(90deg,#14b8a6,#0ea5e9); }
+.ir-mod-toggle input:checked + .ir-mod-slider::before { transform: translateX(16px); }
+
+/* Param rows (select + slider) */
+.ir-mod-act-params { display: flex; flex-direction: column; gap: 7px; margin-top: 10px; padding-left: 48px; }
+.ir-mod-pl { display: flex; align-items: center; gap: 10px; font-size: 11.5px; color: var(--gray-130); }
+.ir-mod-pl > span { min-width: 170px; }
+.ir-mod-pl.ir-mod-pl-slider > span { flex: 1; }
+.ir-mod-pv { color: var(--kc-navy); font-family: "Segoe UI", monospace; }
+.ir-mod-sel {
+  flex: 1;
+  font-family: inherit; font-size: 11.5px;
+  padding: 5px 8px; border-radius: 5px;
+  border: 1px solid var(--gray-40);
+  background: #fff;
+  color: var(--gray-160);
+}
+.ir-mod-sel:focus { outline: none; border-color: var(--kc-blue); box-shadow: 0 0 0 2px rgba(14,165,233,0.1); }
+
+/* Range slider */
+.ir-mod-range {
+  -webkit-appearance: none; appearance: none;
+  width: 180px; height: 6px;
+  background: linear-gradient(90deg, #14b8a6, #0ea5e9);
+  border-radius: 3px; cursor: pointer;
+}
+.ir-mod-range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #fff;
+  border: 2px solid #0ea5e9;
+  box-shadow: 0 2px 6px rgba(14,165,233,0.4);
+  cursor: pointer;
+}
+.ir-mod-range.ir-mod-range-purple {
+  background: linear-gradient(90deg, #a855f7, #d946ef);
+}
+.ir-mod-range.ir-mod-range-purple::-webkit-slider-thumb {
+  border-color: #a855f7;
+  box-shadow: 0 2px 6px rgba(168,85,247,0.4);
+}
+
+/* Priorities */
+.ir-mod-priorities { background: #fafbfc; border: 1px solid var(--gray-30); border-radius: 8px; padding: 10px 14px; }
+.ir-mod-prio {
+  display: grid; grid-template-columns: 1fr 180px 30px;
+  gap: 10px; align-items: center;
+  padding: 6px 0;
+  font-size: 11.5px; color: var(--gray-160);
+  border-bottom: 1px dotted var(--gray-30);
+}
+.ir-mod-prio:last-child { border-bottom: none; }
+.ir-mod-prio-v { font-family: "Segoe UI", monospace; font-weight: 700; color: #a855f7; text-align: right; }
+
+/* KPI col · score dial */
+.ir-mod-kpi-head {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--kc-navy);
+}
+.ir-mod-kpi-head strong { font-weight: 700; }
+.ir-mod-kpi-sub { font-size: 11px; color: var(--gray-130); margin-top: 2px; margin-bottom: 12px; }
+.ir-mod-score {
+  display: flex; gap: 14px; align-items: center;
+  background: #fff;
+  border: 1px solid var(--gray-30);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 6px rgba(14,165,233,0.08);
+}
+.ir-mod-score-d { position: relative; width: 72px; height: 72px; flex-shrink: 0; }
+.ir-mod-score-svg { width: 100%; height: 100%; }
+.ir-mod-score-c {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.ir-mod-score-v { font-size: 22px; font-weight: 800; color: var(--kc-navy); line-height: 1; }
+.ir-mod-score-l { font-size: 9px; color: var(--gray-130); letter-spacing: 0.4px; text-transform: uppercase; }
+.ir-mod-score-r { flex: 1; min-width: 0; }
+.ir-mod-score-delta {
+  font-size: 12px; font-weight: 700; color: #10b981;
+  margin-bottom: 3px;
+}
+.ir-mod-score-delta.bad { color: #c50f1f; }
+.ir-mod-score-why { font-size: 11px; color: var(--gray-130); line-height: 1.4; }
+
+/* KPI list */
+.ir-mod-kpis { display: flex; flex-direction: column; gap: 8px; }
+.ir-mod-kpi {
+  background: #fff;
+  border: 1px solid var(--gray-30);
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: box-shadow 0.15s;
+}
+.ir-mod-kpi:hover { box-shadow: 0 2px 8px rgba(11,37,69,0.06); }
+.ir-mod-kpi-l {
+  font-size: 10px; font-weight: 700; color: var(--gray-130);
+  text-transform: uppercase; letter-spacing: 0.4px;
+  margin-bottom: 2px;
+}
+.ir-mod-kpi-v { font-size: 18px; font-weight: 700; color: var(--kc-navy); line-height: 1; margin-bottom: 5px; transition: color 0.2s; }
+.ir-mod-kpi-v.flash { animation: irModKpiFlash 0.5s ease-out; }
+@keyframes irModKpiFlash {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.12); color: #14b8a6; }
+  100% { transform: scale(1); }
+}
+.ir-mod-kpi-bar { height: 4px; background: #eef3f8; border-radius: 3px; overflow: hidden; margin-bottom: 5px; }
+.ir-mod-kpi-bar span { display: block; height: 100%; border-radius: 3px; transition: width 0.4s cubic-bezier(0.22,0.61,0.36,1); }
+.ir-mod-kpi-d { font-size: 10.5px; color: var(--gray-130); line-height: 1.4; }
+.ir-mod-kpi-d strong { color: var(--kc-navy); font-weight: 600; }
+
+.ir-mod-purview {
+  margin-top: 12px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 10.5px; color: var(--gray-130);
+  padding: 7px 10px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 6px;
+}
+
+/* Footer */
+.ir-mod-foot {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 24px;
+  border-top: 1px solid var(--gray-30);
+  background: #fafbfc;
+}
+.ir-btn.ir-btn-xl {
+  padding: 9px 22px;
+  font-size: 13.5px;
+}
+
 /* Pulse when a gate suggestion is applied */
 @keyframes irSuggApplied {
   0%   { background: #fff; }
@@ -13078,6 +13340,285 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         </div>
       </div>
 
+      <!-- ============ MODIFY-PLAN MODAL (IROps) ============ -->
+      <div class="ir-mod-overlay" id="ir-mod-overlay">
+        <div class="ir-mod-card">
+          <!-- Header -->
+          <div class="ir-mod-head">
+            <div class="ir-mod-head-l">
+              <div class="ir-mod-rank" id="ir-mod-rank">A</div>
+              <div>
+                <div class="ir-mod-h-title" id="ir-mod-h-title">Modify Plan A</div>
+                <div class="ir-mod-h-sub" id="ir-mod-h-sub">Route around ORD via MDW · toggle actions + adjust parameters · Copilot will re-score in real time</div>
+              </div>
+            </div>
+            <button class="ir-mod-close" onclick="irCloseModifyModal()">✕</button>
+          </div>
+
+          <!-- Body -->
+          <div class="ir-mod-body">
+
+            <!-- LEFT: action list -->
+            <div class="ir-mod-actions-col">
+              <div class="ir-mod-section-head">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="#0ea5e9"><path d="M2 2h9v9H2z" fill="none" stroke="#0ea5e9" stroke-width="1.2"/><path d="M4 6.5 L5.8 8.3 L9 4.8" stroke="#0ea5e9" stroke-width="1.4" fill="none"/></svg>
+                Recovery actions
+                <span class="ir-mod-count" id="ir-mod-count">5 of 5 active</span>
+              </div>
+
+              <!-- Action 1: Divert -->
+              <div class="ir-mod-action" data-act="divert">
+                <div class="ir-mod-act-head">
+                  <label class="ir-mod-toggle">
+                    <input type="checkbox" checked data-act-toggle onchange="irModRecompute()"/>
+                    <span class="ir-mod-slider"></span>
+                  </label>
+                  <div class="ir-mod-act-t">
+                    <div class="ir-mod-act-name">Divert CAS1247 SEA→ORD to <strong>SEA→MDW</strong></div>
+                    <div class="ir-mod-act-meta">Bus bridge ORD↔MDW · 45 min · 184 pax · alternate MKE also available</div>
+                  </div>
+                </div>
+                <div class="ir-mod-act-params">
+                  <label class="ir-mod-pl">
+                    <span>Alternate airport</span>
+                    <select class="ir-mod-sel" onchange="irModRecompute()">
+                      <option selected>KMDW · Midway (recommended)</option>
+                      <option>KMKE · Milwaukee</option>
+                      <option>KRFD · Rockford</option>
+                    </select>
+                  </label>
+                  <label class="ir-mod-pl">
+                    <span>Ground transport</span>
+                    <select class="ir-mod-sel" onchange="irModRecompute()">
+                      <option selected>Bus bridge (45 min, $6K)</option>
+                      <option>Rail (80 min, $3K)</option>
+                      <option>Rental / ride-share voucher ($84/pax)</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Action 2: Tail swap -->
+              <div class="ir-mod-action" data-act="tailswap">
+                <div class="ir-mod-act-head">
+                  <label class="ir-mod-toggle">
+                    <input type="checkbox" checked data-act-toggle onchange="irModRecompute()"/>
+                    <span class="ir-mod-slider"></span>
+                  </label>
+                  <div class="ir-mod-act-t">
+                    <div class="ir-mod-act-name">Swap tails <strong>N8421CA ↔ N6152CA</strong> at MDW</div>
+                    <div class="ir-mod-act-meta">738 ↔ 739ER · rebalances MDW→DEN leg · MX cycle impact negligible</div>
+                  </div>
+                </div>
+                <div class="ir-mod-act-params">
+                  <label class="ir-mod-pl">
+                    <span>Swap pair</span>
+                    <select class="ir-mod-sel" onchange="irModRecompute()">
+                      <option selected>N8421CA (738) ↔ N6152CA (739ER)</option>
+                      <option>N8421CA (738) ↔ N7721CA (739) — SEA based</option>
+                      <option>No swap · keep tails on original legs</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Action 3: Deadhead -->
+              <div class="ir-mod-action" data-act="deadhead">
+                <div class="ir-mod-act-head">
+                  <label class="ir-mod-toggle">
+                    <input type="checkbox" checked data-act-toggle onchange="irModRecompute()"/>
+                    <span class="ir-mod-slider"></span>
+                  </label>
+                  <div class="ir-mod-act-t">
+                    <div class="ir-mod-act-name">Deadhead <strong>FO Martinez</strong> SEA→DEN on CAS0517</div>
+                    <div class="ir-mod-act-meta">Covers Pairing P4481 FDP expiration · crew sched auto-paired</div>
+                  </div>
+                </div>
+                <div class="ir-mod-act-params">
+                  <label class="ir-mod-pl">
+                    <span>Cover crew</span>
+                    <select class="ir-mod-sel" onchange="irModRecompute()">
+                      <option selected>FO R. Martinez (deadhead CAS0517)</option>
+                      <option>FO H. Lee (reserve, 4h callout)</option>
+                      <option>FO K. Williams (active reserve)</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Action 4: Cancel CAS1318 -->
+              <div class="ir-mod-action" data-act="cancel">
+                <div class="ir-mod-act-head">
+                  <label class="ir-mod-toggle">
+                    <input type="checkbox" checked data-act-toggle onchange="irModRecompute()"/>
+                    <span class="ir-mod-slider"></span>
+                  </label>
+                  <div class="ir-mod-act-t">
+                    <div class="ir-mod-act-name">Cancel <strong>CAS1318</strong> ORD→SEA (overnight tail rest)</div>
+                    <div class="ir-mod-act-meta">142 pax rebooked to CAS1322 + CAS1402 · 6 EU261-eligible</div>
+                  </div>
+                </div>
+                <div class="ir-mod-act-params">
+                  <label class="ir-mod-pl">
+                    <span>Rebook sequence</span>
+                    <select class="ir-mod-sel" onchange="irModRecompute()">
+                      <option selected>Auto · split CAS1322 + CAS1402</option>
+                      <option>All to CAS1322 (standby required)</option>
+                      <option>Partner-airline reaccommodation</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Action 5: Pax comms -->
+              <div class="ir-mod-action" data-act="paxcomms">
+                <div class="ir-mod-act-head">
+                  <label class="ir-mod-toggle">
+                    <input type="checkbox" checked data-act-toggle onchange="irModRecompute()"/>
+                    <span class="ir-mod-slider"></span>
+                  </label>
+                  <div class="ir-mod-act-t">
+                    <div class="ir-mod-act-name">Pax comms · <strong>1,482 passengers</strong> · EU261 N/A · DOT tarmac OK</div>
+                    <div class="ir-mod-act-meta">EN/ES side-by-side · tone-calibrated for med/MIL/UMNR/VIP segments</div>
+                  </div>
+                </div>
+                <div class="ir-mod-act-params">
+                  <label class="ir-mod-pl ir-mod-pl-slider">
+                    <span>Meal-voucher amount <strong class="ir-mod-pv"><span id="ir-mod-voucher">$8</span> / pax</strong></span>
+                    <input type="range" min="0" max="25" value="8" step="1" class="ir-mod-range"
+                           oninput="document.getElementById('ir-mod-voucher').textContent='$'+this.value; irModRecompute();"/>
+                  </label>
+                  <label class="ir-mod-pl ir-mod-pl-slider">
+                    <span>Hotel accommodation offer <strong class="ir-mod-pv"><span id="ir-mod-hotel">25</span>% of pax</strong></span>
+                    <input type="range" min="0" max="100" value="25" step="5" class="ir-mod-range"
+                           oninput="document.getElementById('ir-mod-hotel').textContent=this.value; irModRecompute();"/>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Priority weights -->
+              <div class="ir-mod-section-head" style="margin-top:18px;">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 11 L6.5 2 L11 11" stroke="#a855f7" stroke-width="1.3" fill="none" stroke-linejoin="round"/></svg>
+                Optimization priorities
+                <span class="ir-mod-count" style="background:#ede9fe;color:#6d28d9;">re-rank Copilot</span>
+              </div>
+              <div class="ir-mod-priorities">
+                <label class="ir-mod-prio">
+                  <span>Minimize passenger disruption</span>
+                  <input type="range" min="0" max="10" value="8" class="ir-mod-range ir-mod-range-purple" oninput="irModRecompute()"/>
+                  <span class="ir-mod-prio-v">8</span>
+                </label>
+                <label class="ir-mod-prio">
+                  <span>Minimize cost</span>
+                  <input type="range" min="0" max="10" value="5" class="ir-mod-range ir-mod-range-purple" oninput="irModRecompute()"/>
+                  <span class="ir-mod-prio-v">5</span>
+                </label>
+                <label class="ir-mod-prio">
+                  <span>Preserve on-time performance</span>
+                  <input type="range" min="0" max="10" value="7" class="ir-mod-range ir-mod-range-purple" oninput="irModRecompute()"/>
+                  <span class="ir-mod-prio-v">7</span>
+                </label>
+                <label class="ir-mod-prio">
+                  <span>Protect crew rest / legality</span>
+                  <input type="range" min="0" max="10" value="9" class="ir-mod-range ir-mod-range-purple" oninput="irModRecompute()"/>
+                  <span class="ir-mod-prio-v">9</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- RIGHT: live KPI panel -->
+            <div class="ir-mod-kpi-col">
+              <div class="ir-mod-kpi-head">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="#14b8a6"><path d="M1 11 L4 7 L7 9 L12 2" stroke="#14b8a6" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="12" cy="2" r="1.3" fill="#14b8a6"/></svg>
+                <strong>Live impact · Copilot score</strong>
+              </div>
+              <div class="ir-mod-kpi-sub">Re-scored as you toggle · 128 sims refreshed in background</div>
+
+              <!-- Score summary dial -->
+              <div class="ir-mod-score">
+                <div class="ir-mod-score-d">
+                  <svg viewBox="0 0 42 42" class="ir-mod-score-svg">
+                    <circle cx="21" cy="21" r="15.915" fill="none" stroke="#eef3f8" stroke-width="4"/>
+                    <circle id="ir-mod-score-ring" cx="21" cy="21" r="15.915" fill="none" stroke="url(#irModScoreGrad)" stroke-width="4" stroke-dasharray="87 13" stroke-dashoffset="25" transform="rotate(-90 21 21)" stroke-linecap="round"/>
+                    <defs>
+                      <linearGradient id="irModScoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#14b8a6"/>
+                        <stop offset="100%" stop-color="#0ea5e9"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div class="ir-mod-score-c">
+                    <div id="ir-mod-score-v" class="ir-mod-score-v">87</div>
+                    <div class="ir-mod-score-l">score</div>
+                  </div>
+                </div>
+                <div class="ir-mod-score-r">
+                  <div class="ir-mod-score-delta" id="ir-mod-score-delta">▲ vs. baseline +12 pts</div>
+                  <div class="ir-mod-score-why">recommended · crew legal · DOT clean</div>
+                </div>
+              </div>
+
+              <!-- KPI grid -->
+              <div class="ir-mod-kpis">
+                <div class="ir-mod-kpi">
+                  <div class="ir-mod-kpi-l">Misconnects</div>
+                  <div class="ir-mod-kpi-v" id="ir-mod-k-misc">284</div>
+                  <div class="ir-mod-kpi-bar"><span id="ir-mod-k-misc-bar" style="width:47%;background:#10b981;"></span></div>
+                  <div class="ir-mod-kpi-d" id="ir-mod-k-misc-d">vs. do-nothing 612 · <strong>-47%</strong></div>
+                </div>
+                <div class="ir-mod-kpi">
+                  <div class="ir-mod-kpi-l">Crew legality</div>
+                  <div class="ir-mod-kpi-v" id="ir-mod-k-crew" style="color:#10b981;">✓ all legal</div>
+                  <div class="ir-mod-kpi-bar"><span id="ir-mod-k-crew-bar" style="width:100%;background:#10b981;"></span></div>
+                  <div class="ir-mod-kpi-d" id="ir-mod-k-crew-d">Pairing P4481 covered by deadhead</div>
+                </div>
+                <div class="ir-mod-kpi">
+                  <div class="ir-mod-kpi-l">DOT exposure</div>
+                  <div class="ir-mod-kpi-v" id="ir-mod-k-dot" style="color:#10b981;">$0</div>
+                  <div class="ir-mod-kpi-bar"><span id="ir-mod-k-dot-bar" style="width:0%;background:#10b981;"></span></div>
+                  <div class="ir-mod-kpi-d" id="ir-mod-k-dot-d">DOT tarmac clock preserved on all flights</div>
+                </div>
+                <div class="ir-mod-kpi">
+                  <div class="ir-mod-kpi-l">Net cost</div>
+                  <div class="ir-mod-kpi-v" id="ir-mod-k-cost">$146K</div>
+                  <div class="ir-mod-kpi-bar"><span id="ir-mod-k-cost-bar" style="width:36%;background:#f59e0b;"></span></div>
+                  <div class="ir-mod-kpi-d" id="ir-mod-k-cost-d">bus $6K · swaps · vouchers · comp</div>
+                </div>
+                <div class="ir-mod-kpi">
+                  <div class="ir-mod-kpi-l">On-time rate</div>
+                  <div class="ir-mod-kpi-v" id="ir-mod-k-otp" style="color:#10b981;">81%</div>
+                  <div class="ir-mod-kpi-bar"><span id="ir-mod-k-otp-bar" style="width:81%;background:#10b981;"></span></div>
+                  <div class="ir-mod-kpi-d" id="ir-mod-k-otp-d">D0 OTP after recovery · goal 90%</div>
+                </div>
+              </div>
+
+              <div class="ir-mod-purview">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="#10b981"><path d="M1 5.5 L4 8.5 L10 2" stroke="#10b981" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+                Every modification logged to Purview · traceable to Dispatcher S. Chen
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="ir-mod-foot">
+            <button class="ir-btn ir-btn-ghost" onclick="irCloseModifyModal()">Cancel</button>
+            <button class="ir-btn ir-btn-ghost" onclick="irModReset()">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1.5 3.5 A4 4 0 1 1 2 8" stroke="currentColor" stroke-width="1.3" fill="none"/><polygon points="1.5,0.5 1.5,4 5,4" fill="currentColor"/></svg>
+                Reset to Copilot defaults
+            </button>
+            <div style="flex:1;"></div>
+            <button class="ir-btn ir-btn-ghost" onclick="irModRerun()">
+              <svg width="11" height="11"><use href="#copilotLogo"/></svg>
+              Re-run 128 sims
+            </button>
+            <button class="ir-btn ir-btn-primary ir-btn-xl" onclick="irModApply()">
+              Apply modified plan
+              <span style="margin-left:4px;">✓</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Telemetry footer: live AI actions stream -->
       <div class="ir-telemetry" id="ir-telemetry">
         <div class="ir-tel-head">
@@ -14848,7 +15389,183 @@ function irAcceptPlan(which) {
   _irTelPush(_irNow(), 'Dispatcher', `<strong>Accepted ${which}</strong> · S. Chen · all downstream agents notified · irrevocable after 06:50`);
 }
 function irModifyPlan(which) {
-  showToast({ kind:'copilot', title:'Modify plan ' + which, text:'Opens the plan editor so you can swap aircraft, change cancellations, or override crew reassignments. Copilot will re-score in real time.' });
+  const ov = document.getElementById('ir-mod-overlay');
+  if (!ov) return;
+  // Update header for the plan being modified
+  const titles = {
+    A: ['A', 'Modify Plan A', 'Route around ORD via MDW · toggle actions + adjust parameters · Copilot will re-score in real time'],
+    B: ['B', 'Modify Plan B', 'Hold SEA + wait out the ground stop · toggle actions + adjust parameters'],
+    C: ['C', 'Modify Plan C', 'Cancel 4 · rebuild network from 10:00 · toggle actions + adjust parameters']
+  };
+  const [r, t, s] = titles[which] || titles.A;
+  document.getElementById('ir-mod-rank').textContent = r;
+  document.getElementById('ir-mod-h-title').textContent = t;
+  document.getElementById('ir-mod-h-sub').textContent = s;
+  ov.classList.add('open');
+  // Wire priority slider labels
+  document.querySelectorAll('#ir-mod-overlay .ir-mod-prio input[type=range]').forEach(r => {
+    const v = r.closest('.ir-mod-prio').querySelector('.ir-mod-prio-v');
+    r.oninput = () => { v.textContent = r.value; irModRecompute(); };
+  });
+  // First recompute after render
+  setTimeout(irModRecompute, 60);
+}
+function irCloseModifyModal() {
+  const ov = document.getElementById('ir-mod-overlay');
+  if (ov) ov.classList.remove('open');
+}
+
+// Live recompute of the KPIs based on the toggled actions + parameter values
+function irModRecompute() {
+  const get = id => document.getElementById(id);
+  const acts = {};
+  document.querySelectorAll('#ir-mod-overlay .ir-mod-action').forEach(a => {
+    const t = a.querySelector('input[data-act-toggle]');
+    acts[a.dataset.act] = t ? t.checked : true;
+  });
+  const voucher = parseInt(get('ir-mod-voucher')?.textContent.replace('$','') || '8');
+  const hotel   = parseInt(get('ir-mod-hotel')?.textContent || '25');
+
+  // Counts active actions
+  const activeN = Object.values(acts).filter(Boolean).length;
+  document.getElementById('ir-mod-count').textContent = `${activeN} of 5 active`;
+
+  // Recompute each KPI with simple deterministic model
+  // Misconnects: 612 baseline, divert saves 328, cancel saves 170, paxcomms saves 30 via rebook,
+  //              tailswap saves 15 by preserving MDW→DEN leg, deadhead saves 65 by avoiding another divert
+  let miscBase = 612;
+  let misc = miscBase
+    - (acts.divert    ? 328 : 0)
+    - (acts.cancel    ? (acts.divert ? 0 : 170) : 0) // cancel only helps if we didn't divert
+    - (acts.paxcomms  ? 30  : 0)
+    - (acts.tailswap  ? 15  : 0)
+    - (acts.deadhead  ? 65  : 0);
+  misc = Math.max(0, misc);
+
+  // Crew legality
+  let crewOk = acts.deadhead || !acts.divert; // deadhead covers P4481; if we don't divert, legality isn't stressed
+  const crewEl = get('ir-mod-k-crew');
+  const crewDEl = get('ir-mod-k-crew-d');
+  if (crewOk) {
+    crewEl.textContent = '✓ all legal'; crewEl.style.color = '#10b981';
+    get('ir-mod-k-crew-bar').style.width = '100%';
+    get('ir-mod-k-crew-bar').style.background = '#10b981';
+    crewDEl.textContent = acts.deadhead ? 'Pairing P4481 covered by deadhead' : 'No crew legality stress (no divert)';
+  } else {
+    crewEl.textContent = '⚠ P4481 breaks'; crewEl.style.color = '#c50f1f';
+    get('ir-mod-k-crew-bar').style.width = '35%';
+    get('ir-mod-k-crew-bar').style.background = '#c50f1f';
+    crewDEl.textContent = 'Pairing P4481 FDP +28 min past limit · needs reserve';
+  }
+
+  // DOT exposure
+  let dot = 0;
+  if (!acts.divert && !acts.cancel) dot = 312; // doing nothing
+  else if (!acts.divert && acts.cancel) dot = 58;
+  else if (acts.divert && !acts.paxcomms) dot = 42;
+  const dotEl = get('ir-mod-k-dot');
+  dotEl.textContent = '$' + dot + 'K';
+  dotEl.style.color = dot === 0 ? '#10b981' : dot < 100 ? '#c57f00' : '#c50f1f';
+  get('ir-mod-k-dot-bar').style.width = Math.min(100, dot / 3) + '%';
+  get('ir-mod-k-dot-bar').style.background = dot === 0 ? '#10b981' : dot < 100 ? '#f59e0b' : '#c50f1f';
+  get('ir-mod-k-dot-d').textContent = dot === 0 ? 'DOT tarmac clock preserved on all flights'
+    : dot < 100 ? `${Math.round(dot/52)} flights within 60 min of trigger`
+    : `7 flights cross DOT 2-h tarmac trigger`;
+
+  // Net cost
+  let cost = 0;
+  if (acts.divert)   cost += 86;  // divert ops + bus
+  if (acts.tailswap) cost += 22;  // reposition + mx-ish
+  if (acts.deadhead) cost += 14;  // deadhead pay + empty seat
+  if (acts.cancel)   cost += 18;  // comp for 142 pax
+  if (acts.paxcomms) cost += Math.round(voucher * 284 / 1000) + Math.round(hotel * 1.1);
+  get('ir-mod-k-cost').textContent = '$' + cost + 'K';
+  get('ir-mod-k-cost-bar').style.width = Math.min(100, cost / 2) + '%';
+  get('ir-mod-k-cost-d').textContent = `bus $${acts.divert?6:0}K · swaps $${acts.tailswap?22:0}K · vouchers $${Math.round(voucher*284/1000)}K · crew $${acts.deadhead?14:0}K`;
+
+  // On-time rate
+  let otp = 22; // baseline do-nothing
+  if (acts.divert)   otp += 42;
+  if (acts.cancel)   otp += 12;
+  if (acts.tailswap) otp += 5;
+  if (acts.deadhead) otp += 4;
+  otp = Math.min(94, otp);
+  const otpEl = get('ir-mod-k-otp');
+  otpEl.textContent = otp + '%';
+  otpEl.style.color = otp >= 75 ? '#10b981' : otp >= 50 ? '#c57f00' : '#c50f1f';
+  get('ir-mod-k-otp-bar').style.width = otp + '%';
+  get('ir-mod-k-otp-bar').style.background = otp >= 75 ? '#10b981' : otp >= 50 ? '#f59e0b' : '#c50f1f';
+  get('ir-mod-k-otp-d').textContent = `D0 OTP after recovery · goal 90%${otp >= 90 ? ' ✓' : ''}`;
+
+  // Misc count rendering (animated)
+  const mEl = get('ir-mod-k-misc');
+  const oldMisc = parseInt(mEl.textContent.replace(/,/g, '')) || misc;
+  mEl.textContent = misc.toLocaleString();
+  get('ir-mod-k-misc-bar').style.width = Math.max(0, 100 - (misc / miscBase) * 100) + '%';
+  get('ir-mod-k-misc-d').innerHTML = `vs. do-nothing ${miscBase} · <strong>-${Math.round(100 - (misc / miscBase) * 100)}%</strong>`;
+  if (oldMisc !== misc) { mEl.classList.remove('flash'); void mEl.offsetWidth; mEl.classList.add('flash'); }
+
+  // Score: weighted composite
+  const score = Math.round(
+    (crewOk ? 25 : 5) +
+    (100 - Math.min(100, misc / miscBase * 100)) * 0.25 +
+    (100 - Math.min(100, dot / 3.12)) * 0.20 +
+    Math.max(0, 100 - cost / 2.5) * 0.15 +
+    otp * 0.15
+  );
+  const scoreEl = get('ir-mod-score-v');
+  scoreEl.textContent = score;
+  const ring = get('ir-mod-score-ring');
+  if (ring) ring.setAttribute('stroke-dasharray', `${score} ${100-score}`);
+  const delta = score - 75; // baseline score
+  const dEl = get('ir-mod-score-delta');
+  dEl.textContent = (delta >= 0 ? '▲' : '▼') + ' vs. baseline ' + (delta >= 0 ? '+' : '') + delta + ' pts';
+  dEl.classList.toggle('bad', delta < 0);
+}
+
+function irModReset() {
+  // Reset all toggles back on
+  document.querySelectorAll('#ir-mod-overlay input[data-act-toggle]').forEach(c => c.checked = true);
+  // Reset sliders
+  document.querySelectorAll('#ir-mod-overlay .ir-mod-range').forEach((r) => {
+    if (r.id === '' && !r.classList.contains('ir-mod-range-purple')) {
+      r.value = r.max === '25' ? 8 : r.max === '100' ? 25 : r.value; // voucher or hotel
+    }
+  });
+  // Reset voucher/hotel labels
+  const v = document.getElementById('ir-mod-voucher'); if (v) v.textContent = '$8';
+  const h = document.getElementById('ir-mod-hotel');   if (h) h.textContent = '25';
+  // Reset voucher/hotel ranges
+  document.querySelectorAll('#ir-mod-overlay .ir-mod-range').forEach((r) => {
+    if (r.max === '25')  r.value = 8;
+    if (r.max === '100') r.value = 25;
+  });
+  // Reset priority sliders + labels to baseline
+  const prios = [8, 5, 7, 9];
+  document.querySelectorAll('#ir-mod-overlay .ir-mod-prio').forEach((el, i) => {
+    const r = el.querySelector('input[type=range]');
+    const v = el.querySelector('.ir-mod-prio-v');
+    if (r && prios[i] !== undefined) { r.value = prios[i]; v.textContent = prios[i]; }
+  });
+  irModRecompute();
+  showToast({ kind:'copilot', title:'Reset', text:'Plan parameters restored to Copilot defaults.', ttl: 2800 });
+}
+
+function irModRerun() {
+  showToast({ kind:'copilot', title:'Re-running simulations…', text:'128 Monte-Carlo paths regenerated with your modified constraints. New ranking in 4 s.', ttl: 4200 });
+  // Brief visual feedback on the score dial
+  const ring = document.getElementById('ir-mod-score-ring');
+  if (ring) {
+    ring.style.transition = 'stroke-dashoffset 1.2s ease-in-out';
+    ring.setAttribute('stroke-dashoffset', '0');
+    setTimeout(() => { ring.setAttribute('stroke-dashoffset', '25'); irModRecompute(); }, 1300);
+  }
+}
+
+function irModApply() {
+  irCloseModifyModal();
+  showToast({ kind:'copilot', title:'Modified plan applied', text:'Your modifications dispatched to Sabre AirOps · Crew Scheduling · Pax Comms · Ramp Ops · Purview audit row written. Plan ID <strong>IR-MOD-0422-A'+Math.floor(Math.random()*999)+'</strong>.', ttl: 6500 });
+  _irTelPush(_irNow(), 'Dispatcher', '<strong>Applied modified plan</strong> · S. Chen · custom constraints · downstream agents notified');
 }
 function irExplainPlan(which) {
   const explain = {
