@@ -7597,8 +7597,10 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 .flt-t-body { font-size: 11px; color: var(--gray-130); line-height: 1.5; }
 .flt-t-body strong { color: var(--kc-navy); font-weight: 600; }
 .flt-t-silhouette {
-  font-size: 26px; line-height: 1; margin-right: 6px; color: var(--kc-blue);
+  display: inline-block; vertical-align: -2px;
+  margin-right: 6px; color: var(--kc-blue);
 }
+.flt-t-silhouette svg { display: inline-block; }
 .flt-t-alert {
   margin-top: 8px; padding: 7px 9px;
   background: linear-gradient(135deg, #fff5f5, #ffe4e6);
@@ -7664,6 +7666,15 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
   padding: 2px 6px; border-radius: 4px;
   margin-left: 2px;
 }
+.flt-copilot-btn-ico {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+  padding: 2px;
+}
+.flt-copilot-btn-ico img { display: block; width: 100%; height: 100%; }
 
 /* Insights strip */
 .flt-copilot-insights {
@@ -7686,12 +7697,15 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
   border-bottom: 1px solid var(--gray-30);
 }
 .flt-ci-spark {
-  width: 30px; height: 30px; border-radius: 8px;
-  background: linear-gradient(135deg,#7b5bff,#c85bff);
+  width: 36px; height: 36px; border-radius: 8px;
+  background: #fff;
+  border: 1px solid #e9e4ff;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 2px 8px rgba(123,91,255,0.4);
+  box-shadow: 0 2px 8px rgba(123,91,255,0.18), 0 0 0 1px rgba(123,91,255,0.08);
   flex-shrink: 0;
+  padding: 4px;
 }
+.flt-ci-spark img, .flt-ci-spark svg { width: 100%; height: 100%; display: block; }
 .flt-ci-title { font-size: 13.5px; font-weight: 700; color: var(--kc-navy); }
 .flt-ci-sub   { font-size: 11px; color: var(--gray-130); margin-top: 2px; }
 .flt-ci-sub strong { color: var(--gray-160); font-weight: 600; }
@@ -14126,7 +14140,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <button class="flt-filter-chip" onclick="fltRenderGrid('spare', this)">Spare (2)</button>
           </div>
           <button class="flt-copilot-btn" onclick="fltOpenCopilot()">
-            <svg width="14" height="14"><use href="#copilotLogo"/></svg>
+            <span class="flt-copilot-btn-ico"><img src="copilot-logo.png" alt="Copilot" width="18" height="18"/></span>
             Ask Copilot about the fleet
             <span class="flt-copilot-kbd">⌘K</span>
           </button>
@@ -14136,7 +14150,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <!-- Copilot insights strip -->
       <div class="flt-copilot-insights">
         <div class="flt-ci-head">
-          <div class="flt-ci-spark"><svg width="16" height="16"><use href="#copilotLogo"/></svg></div>
+          <div class="flt-ci-spark"><img src="copilot-logo.png" alt="Copilot" width="26" height="26"/></div>
           <div>
             <div class="flt-ci-title">Copilot insights · right now</div>
             <div class="flt-ci-sub">Predictive MX + fleet-ops patterns · grounded on 36 h of ACARS telemetry + Sabre · refreshed <strong>2 min ago</strong></div>
@@ -16299,7 +16313,7 @@ function fltRenderGrid(filter, btn) {
         <span class="flt-t-pill ${pillCls}">${pillText}</span>
       </div>
       <div class="flt-t-body">
-        <span class="flt-t-silhouette">✈</span> <strong>${t.type === '738' ? 'Boeing 737-800' : t.type === '739' ? 'Boeing 737-900ER' : 'Boeing 777-300ER'}</strong><br>
+        <span class="flt-t-silhouette"><svg width="18" height="14" viewBox="0 0 32 24" fill="currentColor"><path d="M16 1 L17.1 10 L31 12 L31 13.2 L17.1 11.5 L17 17 L21 19.5 L21 20.5 L16 19 L11 20.5 L11 19.5 L15 17 L14.9 11.5 L1 13.2 L1 12 L14.9 10 Z"/></svg></span><strong>${t.type === '738' ? 'Boeing 737-800' : t.type === '739' ? 'Boeing 737-900ER' : 'Boeing 777-300ER'}</strong><br>
         <strong>Leg:</strong> ${t.leg} · ETD ${t.etd}<br>
         <strong>Cycles:</strong> ${t.cycles} · age ${t.age} · engines <strong>${t.svc}</strong><br>
         <strong>Next MX:</strong> ${t.mx}
@@ -20413,28 +20427,34 @@ const APP_CONTEXT = {
     messagePlaceholder: 'Message Copilot — ask about any employee, meeting, or document'
   },
   agent_bedcoord: {
-    chipIcon: '<svg viewBox="0 0 16 16" fill="#0078d4"><path d="M2 12V4h2v4h10V6h2v6h-2v-2H4v2H2zm6-5a2 2 0 100-4 2 2 0 000 4z"/></svg>',
-    chipText: "File Validator · Agent · 6 divisions connected",
-    tryPrompt: "'what file-exception picture right now?'",
-    messagePlaceholder: 'Ask the File Validator agent'
+    chipIcon: '<svg viewBox="0 0 16 16" fill="#c50f1f"><circle cx="4" cy="8" r="2"/><path d="M4 8 Q7 4 10 8" stroke="#c50f1f" stroke-width="1.2" fill="none"/><path d="M4 8 Q8 2 12 8" stroke="#f59e0b" stroke-width="1" fill="none"/><circle cx="10" cy="5" r="0.8" fill="#14b8a6"/><circle cx="12" cy="6.5" r="0.7" fill="#14b8a6"/></svg>',
+    chipText: "IROps Cascade Commander · ORD ground stop · 47 flights in cascade · 3 plans ready",
+    tryPrompt: "'what cascade is ORD creating right now?'",
+    messagePlaceholder: 'Ask the IROps Cascade Commander'
   },
   agent_intake: {
-    chipIcon: '<svg viewBox="0 0 16 16" fill="#6264a7"><path d="M10 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5l-4-4zM9 6V2l4 4H9z"/></svg>',
-    chipText: "Ramp Turn Sheet Front Door · 3 new intakes",
-    tryPrompt: "'review today's new report intakes'",
-    messagePlaceholder: 'Ask the Ramp Turn Sheet Front Door agent'
+    chipIcon: '<svg viewBox="0 0 16 16" fill="#0ea5e9"><rect x="3" y="2" width="10" height="12" rx="1" fill="#fff" stroke="#0ea5e9" stroke-width="1"/><line x1="5" y1="5" x2="11" y2="5" stroke="#0ea5e9"/><line x1="5" y1="7" x2="11" y2="7" stroke="#0ea5e9"/><line x1="5" y1="9" x2="9" y2="9" stroke="#0ea5e9"/><circle cx="13" cy="3" r="2" fill="#f59e0b"/></svg>',
+    chipText: "Gate Turnaround Optimizer · 6 ramp turn sheets queued · 4 scanned overnight",
+    tryPrompt: "'review tonight's turn sheets and flag any fuel-load discrepancies'",
+    messagePlaceholder: 'Ask the Gate Turnaround Optimizer'
   },
   agent_priorauth: {
-    chipIcon: '<svg viewBox="0 0 16 16" fill="#0b8043"><path d="M8 1l6 2.5v4c0 3.5-2.5 6.5-6 7-3.5-0.5-6-3.5-6-7v-4L8 1z"/></svg>',
-    chipText: "PTO Assistant · 2 pending &gt;48h · 14 active",
-    tryPrompt: "'what's stuck this week?'",
-    messagePlaceholder: 'Ask the PTO Assistant agent'
+    chipIcon: '<svg viewBox="0 0 16 16" fill="#10b981"><path d="M8 1l6 2.5v4c0 3.5-2.5 6.5-6 7-3.5-0.5-6-3.5-6-7v-4L8 1z" fill="#fff" stroke="#10b981" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="#10b981" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>',
+    chipText: "Predictive Maintenance Copilot · N6152CA anomaly · A-check slot booked · awaiting sign-off",
+    tryPrompt: "'walk me through the N6152CA anomaly'",
+    messagePlaceholder: 'Ask the Predictive MX Copilot'
   },
   agent_trial: {
-    chipIcon: '<svg viewBox="0 0 16 16" fill="#a68340"><path d="M5 2h6l1 2h2a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V5a1 1 0 011-1h2l1-2zm3 9a3 3 0 100-6 3 3 0 000 6z"/></svg>',
-    chipText: "Onboarding Nudge · today's 7 new-hire checkpoints",
-    tryPrompt: "'whose onboarding is off-track at day 30?'",
-    messagePlaceholder: 'Ask the Onboarding Nudge agent'
+    chipIcon: '<svg viewBox="0 0 16 16" fill="#f59e0b"><rect x="1" y="10" width="2" height="4" rx="0.3"/><rect x="4" y="7" width="2" height="7" rx="0.3"/><rect x="7" y="5" width="2" height="9" rx="0.3" fill="#c57f00"/><rect x="10" y="2" width="2" height="12" rx="0.3" fill="#c50f1f"/><line x1="0" y1="3.5" x2="16" y2="3.5" stroke="#fde68a" stroke-dasharray="2 1"/></svg>',
+    chipText: "Crew Legality &amp; Reassignment · 2 pairings at risk · 14 reserves ready SEA",
+    tryPrompt: "'which pairings are closest to a FAR 117 break?'",
+    messagePlaceholder: 'Ask the Crew Legality agent'
+  },
+  agent_readmit: {
+    chipIcon: '<svg viewBox="0 0 16 16" fill="#0ea5e9"><path d="M1 3 Q1 2 2 2 L10 2 Q11 2 11 3 L11 9 Q11 10 10 10 L6 10 L4 12 L4.5 10 L2 10 Q1 10 1 9 Z" fill="#0ea5e9"/><path d="M14 8 L14 12 L12 12 L11 13 L11 12 L10 12 L10 9 L14 9 Z" fill="#3dd9d4" opacity="0.7"/></svg>',
+    chipText: "Passenger Disruption Comms · EU261 + DOT tarmac rule · EN/ES · 142 pax messaged today",
+    tryPrompt: "'draft EU261 comp letters for the CAS0517 diversion'",
+    messagePlaceholder: 'Ask the Passenger Disruption Comms agent'
   },
   outlook: {
     chipIcon: '<svg viewBox="0 0 16 16" fill="#0078d4"><path d="M2 3h12v10H2V3zm1 1v1.5l5 3 5-3V4H3zm10 2.7L8 9.5 3 6.7V12h10V6.7z"/></svg>',
@@ -20578,21 +20598,25 @@ function getSuggestions(app, context) {
     },
     agent: {
       items: context === 'bedcoord' ? [
-        { shortLabel: "What's the file-exception picture right now?", label: "What's the file-validation picture right now across all 6 divisions?", key: "status" },
-        { shortLabel: "Who's clear for ATP currency re-verify today?", label: "Who's clear for ATP currency re-verification today, and what's blocking them?", key: "discharge" },
-        { shortLabel: "Predict this week's file-exception backlog", label: "Predict how many file exceptions we'll have this week given the state audit.", key: "predict" }
+        { shortLabel: "What cascade is ORD creating right now?", label: "What cascade is the ORD ground stop creating right now? Walk me through downstream flights, crew legality, pax connections, and gate conflicts.", key: "status" },
+        { shortLabel: "Which recovery plan do you recommend?", label: "Which of the 3 recovery plans do you recommend, and why? Show the tradeoffs.", key: "discharge" },
+        { shortLabel: "What if ORD extends to 11:00?", label: "What if the ORD ground stop extends to 11:00 local? Re-run the cascade and show which plan wins.", key: "predict" }
       ] : context === 'intake' ? [
-        { shortLabel: "Review today's new report intakes", label: "Review today's 3 new Ramp Turn Sheet Front Door intakes. Flag anything urgent.", key: "intake" },
-        { shortLabel: "Pre-stage case file + approvals", label: "Pre-stage case file lookups and manager approval loops for the new requests.", key: "stage" },
-        { shortLabel: "Draft acknowledgment messages", label: "Draft friendly acknowledgment messages for each new intake.", key: "welcome" }
+        { shortLabel: "Review tonight's ramp turn sheets", label: "Review the 6 ramp turn sheets that came in overnight. Flag any fuel-load discrepancies, crew-change issues, or catering conflicts that need my attention.", key: "intake" },
+        { shortLabel: "Predict off-block for CAS1247", label: "Predict off-block time for CAS1247 SEA→ORD at gate B12 given the current turn plan + ORD ground stop.", key: "stage" },
+        { shortLabel: "Draft the gate supervisor's sign-off packet", label: "Draft the gate supervisor's sign-off packet for tonight's turn plans (certified on Cascadia letterhead).", key: "welcome" }
       ] : context === 'priorauth' ? [
-        { shortLabel: "What's stuck this week?", label: "What PTO approvals are stuck &gt; 48 hours in a manager queue this week?", key: "scan" },
-        { shortLabel: "Draft the manager escalation", label: "Draft the manager escalation for the Tom Reilly (Safety Review investigator) pending-PTO case.", key: "packet" },
-        { shortLabel: "Show college-by-college turnaround", label: "Show this quarter's college-by-college PTO approval turnaround times.", key: "payer" }
+        { shortLabel: "Walk me through the N6152CA anomaly", label: "Walk me through the N6152CA engine #2 anomaly, what you're predicting, and what you've already scheduled.", key: "scan" },
+        { shortLabel: "Draft the MX approval packet", label: "Draft the MX slot + part-order approval packet for N6152CA so Marcus Johnson can sign off in one click.", key: "packet" },
+        { shortLabel: "Show fleet-wide anomaly trends", label: "Show fleet-wide ACARS anomaly trends for the last 30 days across engine, hydraulic, and APU systems.", key: "payer" }
       ] : context === 'trial' ? [
-        { shortLabel: "Whose onboarding is off-track at day 30?", label: "Proactively flag new hires at 30/60/90 days whose onboarding checklists are incomplete, and nudge their manager with the specific outstanding items before they fall off track.", key: "match" },
-        { shortLabel: "Summarize best-match hire story", label: "Summarize the best Onboarding Nudge success story for Ms. Chang in plain language.", key: "summarize" },
-        { shortLabel: "Draft manager 30/60/90 worksheet", label: "Draft a 30/60/90 checklist worksheet for Marcus Johnson.", key: "worksheet" }
+        { shortLabel: "Which pairings are closest to a FAR 117 break?", label: "Which crew pairings are closest to tripping a FAR 117 break in the next 24 hours? Rank by minutes of FDP cushion remaining.", key: "match" },
+        { shortLabel: "Propose a reserve call-up for P4481", label: "Propose a reserve call-up for Pairing P4481 (Moreno + Kim) and draft the notification in plain language.", key: "summarize" },
+        { shortLabel: "What if the ORD hold extends 90 min?", label: "What if the ORD hold extends by 90 min? Which pairings break, which need reassignment, and who's available?", key: "worksheet" }
+      ] : context === 'readmit' ? [
+        { shortLabel: "Draft EU261 letters for CAS0517 diversion", label: "Draft EU261-compliant compensation letters for the 96 EU-origin passengers on the CAS0517 diversion. English + Spanish side-by-side.", key: "match" },
+        { shortLabel: "Which pax need human review?", label: "Which passenger messages need my review before send? Flag any with medical, UMNR, WCHR, or VIP handling codes.", key: "summarize" },
+        { shortLabel: "Tone-check the CAS1247 rebook message", label: "Tone-check the CAS1247 rebook messaging for the Reyes family — they had a dependent onboard. Soften paragraph 3 if needed.", key: "worksheet" }
       ] : []
     },
     outlook: {
@@ -21318,160 +21342,168 @@ function getResponse(app, key) {
     `,
 
     // ========= CUSTOM AGENTS =========
+    // ========= IROPS CASCADE COMMANDER (ctx: bedcoord) =========
     'agent|status': `
-      <h4>File-exception status · 7:42 AM</h4>
-      <p><span class="pill urgent">237 open exceptions</span> <span class="pill warn">14 missing ATP-Dispatcher currencies</span> <span class="pill good">62 handbook acks cleared</span></p>
-      <h4>Exceptions by college / unit</h4>
+      <h4>ORD cascade · right now</h4>
+      <p><span class="pill urgent">⚠ ORD ground stop since 06:18</span> <span class="pill warn">47 flights in radius</span> <span class="pill">6,284 pax exposed</span></p>
+      <h4>What a human analyst would miss</h4>
       <ul>
-        <li><strong>Network Operations (Station Ops Coordinator desk):</strong> 28/28 · 2 pending · clearing today</li>
-        <li><strong>Facilities Operations:</strong> 24/26 · 3 pending · 2 closing by noon</li>
-        <li><strong>Network Operations:</strong> 18/18 · 1 pending · audit has 3 flags for this college</li>
-        <li><strong>Research Office:</strong> 12/14 · 2 re-verify candidates · blocked by vendor delay</li>
-        <li><strong>Athletics:</strong> 16/16 · 2 transfers to Office Ops by noon</li>
+        <li><strong>Downstream flight delays · 23 flights</strong> — CAS1247 SEA→ORD (+2h 14m), CAS1102 ORD→DEN cascades to 4 more, CAS1318 ORD→SEA may cancel overnight.</li>
+        <li><strong>Crew legality risk · 2 pairings</strong> — Pairing P4481 (Capt. Moreno + FO Kim) at <strong>+28 min past FDP cushion</strong> if hold extends past 09:00 · Pairing P4512 FA rest window <strong>1h 10m shy</strong> of §c.</li>
+        <li><strong>Pax connections · 1,842 at risk</strong> — 284 misconnects on Plan A vs 612 if nothing changes · 14 UMNRs, 6 WCHR, 2 medical in cascade window.</li>
+        <li><strong>Gate/ramp conflicts · 8 gates</strong> — SEA B12/B17/C3/C7 need reassignment · MDW hourly capacity exceeded at 11:00 · CAS2118 ICN inbound at 01:00 SEA curfew risk.</li>
       </ul>
-      <h4>Biggest blockers</h4>
-      <ol>
-        <li>Facilities exceptions waiting on manager sign-off (2 new-hire ATP currencys, 1 terminated-case file close).</li>
-        <li>Research Office re-verifies waiting on Facilities.</li>
-        <li>Two audit flags need Network Operations — state auditor is on campus May 8.</li>
-      </ol>
+      <p>I've already run 128 network sims (81 s, $2.14 Azure AI). Three ranked recovery plans are ready for your review.</p>
     `,
     'agent|discharge': `
-      <h4>Cleared for ATP currency re-verify today — 11 cases, 4 blockers</h4>
+      <h4>Recommended · Plan A · Route around ORD via MDW</h4>
+      <p><span class="pill good">−47% net pax delay</span> <span class="pill good">✓ all crew legal</span> <span class="pill good">$0 DOT exposure</span> <span class="pill">$146K net cost</span></p>
+      <h4>Why Plan A wins</h4>
       <ul>
-        <li><strong>Facilities:</strong> Rodriguez (docs received) · Lee (docs received) — clear</li>
-        <li><strong>Facilities:</strong> Park (ATP backup needed) — <span class="pill warn">waiting Dispatcher confirm</span></li>
-        <li><strong>Facilities:</strong> Hernandez (ATP currency Section 3 pending) — <span class="pill warn">waiting doc delivery</span></li>
-        <li><strong>Engineering:</strong> Cohen (docs received) — clear, pending manager sign-off</li>
-        <li><strong>6 more:</strong> clear, pending scan-to-Sabre AirOps</li>
+        <li><strong>Hard constraints</strong> — hits every one (FAR 117 legality, DOT 2-h tarmac, fuel, MDW capacity, curfew).</li>
+        <li><strong>Proven playbook</strong> — MDW↔ORD bus bridge used 6 times in 2025, median pax CSAT 4.1/5.</li>
+        <li><strong>Afternoon bank preserved</strong> — Plan C would forfeit it; Plan A rebuilds from 11:00.</li>
       </ul>
-      <h4>What I'd unblock first</h4>
-      <p>Park — calling Maria Gutierrez now unblocks an audit flag for Network Operations's state audit. Biggest downstream impact.</p>
+      <h4>Why not Plan B or C</h4>
+      <ul>
+        <li><strong>Plan B (hold)</strong> — cheapest ($38K) but fails if GS extends past 08:30. p(extend) = 34% per CWA radar + FAA AFP history. Breaks 2 pairings at FAR 117 §b.</li>
+        <li><strong>Plan C (cancel 4)</strong> — clean but triggers EU261 for 96 EU-origin pax ($184K). Only right if GS ≥ 4h or safety-sensitive MX emerges.</li>
+      </ul>
     `,
     'agent|predict': `
-      <h4>This week's file-exception forecast</h4>
-      <p>Based on the last 6 weeks of audits + today's intake pace, current flags, and projected remediations:</p>
+      <h4>What if ORD extends to 11:00?</h4>
+      <p>Re-ran 128 sims with the extended hold. The ranking shifts:</p>
       <ul>
-        <li><strong>Expected new exceptions this week: 8–11</strong> (vs 14-day avg of 6).</li>
-        <li><strong>Biggest pressure:</strong> Network Operations (audit) — flags outpacing remediations by 2.</li>
-        <li><strong>Least pressure:</strong> Office Ops — flat.</li>
+        <li><strong>Plan A still wins</strong> (score 91, ▲ 4 vs. baseline) — MDW reroute absorbs most of the load. No additional pairings break FAR 117.</li>
+        <li><strong>Plan B falls off</strong> (score 41, ▼ 18) — DOT tarmac exposure jumps to <strong>$612K</strong>. 4 flights cross 2-h notify. Plan B no longer viable.</li>
+        <li><strong>Plan C becomes defensible</strong> (score 68, ▲ 6) — the afternoon bank is lost either way if GS lasts ≥ 4h. Cancelling 4 now contains EU261 exposure.</li>
       </ul>
-      <h4>Options to soften</h4>
-      <ul>
-        <li>Redirect one Network Analytics FTE to accept audit-adjacent overflow.</li>
-        <li>Push Facilities Dispatcher to finalize 2 re-verify placements by 4 PM.</li>
-        <li>Alert Dispatcher in Network Operations to plan for 2 expected audit flags.</li>
-      </ul>
+      <h4>My recommendation</h4>
+      <p>Stay on Plan A. Watch CWA 11:00 update; if p(extend past 13:00) rises above 40%, pivot to Plan C. I'll alert you at the re-check point.</p>
     `,
+
+    // ========= GATE TURNAROUND OPTIMIZER (ctx: intake) =========
     'agent|intake': `
-      <h4>3 new Ramp Turn Sheet Front Door intakes — triaged</h4>
+      <h4>6 ramp turn sheets · overnight · triaged</h4>
       <ul>
-        <li><strong>Chang, Li-Wei (new hire → Engineering)</strong> — 54, new Sr. Research Coordinator. Offer signed, background clean. Docs current. <span class="pill good">Ready for onboarding Monday.</span></li>
-        <li><strong>Okonkwo, D.</strong> — 71, probable cause turn plan request, prior-conviction records incomplete. <span class="pill warn">Need prior-jurisdiction conviction records requested.</span></li>
-        <li><strong>Garcia, E.</strong> — 39, address change + family emergency leave intake. <span class="pill urgent">passenger leave intake + Sabre payroll update needed this week.</span></li>
+        <li><strong>CAS1247 SEA→ORD · Gate B12</strong> · handwritten by R. Alvarado, OCR 94% confidence · <span class="pill urgent">⚠ Jet bridge OTS</span> — feeds IROps cascade · see Ops Advisor.</li>
+        <li><strong>CAS0842 SEA→LAX · Gate B17</strong> · fuel slip mismatch — turn sheet shows 18,200 lb, fuel truck ticket shows 17,800 lb. <span class="pill warn">Needs your call.</span></li>
+        <li><strong>CAS0517 SEA→DEN · Gate A4</strong> · <span class="pill good">✓ clean · predicted off-block 08:22 on time.</span></li>
+        <li><strong>CAS1102 ORD→DEN inbound · Gate C3→C7</strong> · Copilot proposed gate swap to C7 to preserve CAS2201 priority.</li>
+        <li><strong>CAS4412 SEA→YVR · Gate N1</strong> · predicted load 82% · revenue mgmt suggests 4 standbys.</li>
+        <li><strong>CAS2118 ICN→SEA inbound · Gate D11</strong> · +40 min trans-Pac · <span class="pill warn">curfew watch armed.</span></li>
       </ul>
-      <h4>What I already staged</h4>
-      <ul>
-        <li>Prior-conviction records requested for Okonkwo (Sabre Criminal History Records).</li>
-        <li>passenger leave + address change forms drafted for Garcia — awaiting Marcus Johnson sign-off.</li>
-        <li>Case-review slot requested for Chang next Tuesday.</li>
-      </ul>
+      <p>One fuel-load discrepancy needs human judgment. Everything else is ready for sign-off.</p>
     `,
     'agent|stage': `
-      <h4>Pre-staged approval routing drafted</h4>
+      <h4>Predicted off-block · CAS1247 SEA→ORD · Gate B12</h4>
+      <p><span class="pill urgent">Jet bridge OTS</span> — scheduled 07:32 · predicted without action <strong>09:46 (+2h 14m)</strong></p>
+      <h4>If Plan A is accepted</h4>
       <ul>
-        <li><strong>Chang:</strong> ATP currency, W-4, handbook ack, direct deposit, background check, license/cert verify.</li>
-        <li><strong>Okonkwo:</strong> certified turn plan scope, operational chain, prior-conviction cross-reference, signatory.</li>
-        <li><strong>Garcia:</strong> address change update, passenger leave WH-380-F, Sabre payroll, benefits counseling referral.</li>
+        <li>Rebook to <strong>Gate C14</strong> (A320-compatible, 200 m walk)</li>
+        <li>New off-block prediction: <strong>07:38</strong> (+6 min)</li>
+        <li>Ramp crew reposition: 15 min · no inbound delay for next C14 flight</li>
+        <li>Boarding plan drafted · FIDS update queued · PA script ready (EN + ES)</li>
       </ul>
-      <p>All routes are drafts awaiting Marcus Johnson's co-sign. I've grouped them by employee in the approvals queue.</p>
+      <h4>Alternate (bus-gate stairs)</h4>
+      <p>Stay at B12, air-stairs deplane/enplane. Off-block 07:42 but WCHR/UMNR handling becomes manual. Higher pax impact.</p>
     `,
     'agent|welcome': `
-      <h4>Acknowledgment messages drafted (3)</h4>
-      <p>Each message:</p>
+      <h4>Gate supervisor sign-off packet · drafted</h4>
+      <p>Each turn plan has been rendered on Cascadia letterhead and staged for supervisor e-sign. The packet includes:</p>
       <ul>
-        <li>Uses the inbound aircraft's preferred name + language (Garcia → Spanish).</li>
-        <li>Names their specific Dispatcher and direct line.</li>
-        <li>Lists the next 2 touchpoints with location + parking.</li>
-        <li>Includes a one-paragraph "what to expect on your first week" block.</li>
+        <li><strong>Certified Gate Turn Plan (CGTP)</strong> — fuel load, cargo manifest, pax count, crew pairing, predicted off-block.</li>
+        <li><strong>Fuel slip + OCR confidence</strong> — highlighted if below 90%.</li>
+        <li><strong>Crew acknowledgment line</strong> — captain signs under ATP certificate authority.</li>
+        <li><strong>Audit trail</strong> — Purview-labeled, linked back to the handwritten source.</li>
       </ul>
-      <p>Ready to route via self-service portal as soon as you approve.</p>
+      <p><span class="pill good">✓ Ready for Station Supervisor Nakamura to e-sign · 6 packets queued</span></p>
     `,
+
+    // ========= PREDICTIVE MAINTENANCE COPILOT (ctx: priorauth) =========
     'agent|scan': `
-      <h4>PTO approval stuck scan · 14 pending · 2 at risk</h4>
-      <h4>🚨 At risk this week</h4>
+      <h4>N6152CA · engine #2 anomaly · 78% confidence</h4>
+      <p><span class="pill urgent">⚠ Emerging risk</span> detected 14 min ago from 36 h of ACARS telemetry.</p>
+      <h4>The signal</h4>
       <ul>
-        <li><strong>Garcia, E. — 4 day PTO</strong> · manager T. Reilly · submitted 4/15 · turnaround avg 6 hrs · <strong>stuck 3 days</strong>, no approval yet. Escalate to backup approver now.</li>
-        <li><strong>Okonkwo, D. — coverage request</strong> · supervisor Inspector Nguyen's calendar · submitted 4/12 · missing coverage plan attachment. Will auto-deny if not corrected by Wednesday.</li>
+        <li><strong>EGT · Engine 2:</strong> 612 °C · <strong>+14 °C</strong> vs. 30-day baseline</li>
+        <li><strong>N1 vibration:</strong> 3.8 mils · <strong>+0.6 mils</strong> vs. 30-day baseline</li>
+        <li><strong>Oil temp:</strong> 102 °C · trending up but within limits</li>
+        <li><strong>Cycles to predicted failure:</strong> ~40 · p(unscheduled removal) = <strong>78%</strong></li>
       </ul>
-      <h4>⚠ Watch</h4>
+      <h4>What I've already done</h4>
       <ul>
-        <li><strong>Castillo, P. — passenger leave intermittent extension</strong> · Facilities manager · VP System Operations approval expected tomorrow.</li>
+        <li><span class="pill good">✓ Booked A-check slot</span> SEA hangar 4 · 04/24 22:00 local · 18 h duration</li>
+        <li><span class="pill good">✓ Pre-ordered part</span> RB211-T-042 from Rolls-Royce · ETA 04/24 14:00 · $18.4K</li>
+        <li><span class="pill good">✓ Proposed tail swap</span> N8421CA ↔ N6152CA at MDW (aligns with IROps Plan A)</li>
+        <li><span class="pill warn">⏳ Awaiting sign-off</span> on the MX slot + part order</li>
       </ul>
-      <h4>On track (11)</h4>
-      <p>Standard PTO, parental leave, and single-day requests. No action needed.</p>
+      <p>Projected AOG-avoidance: <strong>$112K</strong>.</p>
     `,
     'agent|packet': `
-      <h4>Manager escalation packet drafted</h4>
-      <p>Packet includes:</p>
-      <ul>
-        <li>Cover note citing CASA leave policy + ATP exempt/non-exempt distinction.</li>
-        <li>Employee history, case context, and prior approval record.</li>
-        <li>Manager-specific criteria mapping table (per college PTO policy).</li>
-        <li>Backup-approver talking points in case of initial denial.</li>
-      </ul>
-      <p><span class="pill good">✓ Ready for Marcus Johnson to sign and submit</span></p>
+      <h4>N6152CA MX approval packet · for Marcus</h4>
+      <p>Summary that Marcus can approve in one click:</p>
+      <div style="background:#fafbfc;border:1px solid var(--gray-30);border-radius:6px;padding:12px;font-size:12.5px;line-height:1.6;">
+        <p><strong>Ask:</strong> Approve advancing N6152CA engine #2 A-check from 05/18 to <strong>04/24 22:00 SEA hangar 4</strong>, and approve pre-order of part RB211-T-042 ($18.4K).</p>
+        <p><strong>Why now:</strong> ACARS shows EGT +14 °C / vibration +0.6 mils trend. Predictive model: 78% chance of unscheduled removal within 40 cycles.</p>
+        <p><strong>Without action:</strong> p(AOG event) 78% · avg ground-time 22 h · pax-disruption cost ~$112K · ops cost ~$38K.</p>
+        <p><strong>With this action:</strong> planned 18 h at SEA hangar 4 · zero pax impact (IROps tail swap covers) · <strong>net $112K avoided.</strong></p>
+        <p><strong>Risk of approval:</strong> minimal — cycles already at 3,841, interval shift is 24 days early.</p>
+      </div>
+      <p><span class="pill good">✓ Ready to send to Marcus in Outlook + Teams</span></p>
     `,
     'agent|payer': `
-      <h4>Q1 + April PTO turnaround by college</h4>
+      <h4>Fleet-wide ACARS anomaly trends · 30 days</h4>
       <ul>
-        <li><strong>Division of Education:</strong> avg 3.2 hrs · 96% auto-approve · <span class="pill good">Best</span></li>
-        <li><strong>Misdemeanor Unit:</strong> avg 4.8 hrs · 81% auto-approve</li>
-        <li><strong>Scheduled Ops Division:</strong> avg 5.1 hrs · 72% auto-approve · requires more documentation</li>
-        <li><strong>Facilities Operations:</strong> avg 7.4 hrs · 58% auto-approve · <span class="pill warn">Most escalations</span></li>
-        <li><strong>Athletics (various):</strong> avg 9.2 hrs · most variability</li>
+        <li><strong>Engine systems:</strong> 3 emerging · N6152CA (active · EGT), N8821CA (watch · oil analysis), N5617CA (low-priority · APU cycles)</li>
+        <li><strong>Hydraulics:</strong> 1 emerging · N8411CA pump #2 trending · A-check 05/06 will catch</li>
+        <li><strong>Flight controls:</strong> 0 active — clean month</li>
+        <li><strong>APU:</strong> 1 flagged · N6084CA trans-Pac cycles · non-urgent</li>
       </ul>
-      <h4>What I notice</h4>
-      <p>Facilities' escalation rate has crept from 31% in Jan to 42% in April. Two of three escalations cite "coverage plan incomplete." Worth a workflow review with the Facilities Dispatcher.</p>
+      <h4>Pattern I notice</h4>
+      <p>Engine-side anomalies cluster on Rolls-Royce tails doing trans-Pac duty. If the pattern holds, recommend adding a Rolls-specific ACARS rule to catch EGT drift earlier (8-cycle window vs. current 15).</p>
+      <p>Fleet dispatch reliability ▲ 0.3 pts MTD · $428K AOGs avoided YTD (4 events).</p>
     `,
+
+    // ========= CREW LEGALITY & REASSIGNMENT (ctx: trial) =========
     'agent|match': `
-      <h4>Onboarding screening · 7 new hires at day-30</h4>
-      <p><span class="pill good">2 strong performers</span> <span class="pill">3 off-track at day 30</span> <span class="pill">2 on-track</span></p>
-      <h4>Off-track — needs manager nudge</h4>
+      <h4>FAR 117 cushion ranking · next 24 h</h4>
+      <p><span class="pill urgent">2 at risk</span> <span class="pill warn">4 monitor</span> <span class="pill good">212 legal</span></p>
+      <h4>At risk — need action</h4>
       <ul>
-        <li><strong>Chang, L. (Sr. Research Coord, Engineering)</strong> — handbook ack signed, ATP currency done, but <strong>benefits enrollment + 30-day manager 1:1 not yet scheduled</strong>. Risk of drift.</li>
-        <li><strong>Rodriguez, M. (Academic Advisor, Business)</strong> — if manager 30-day check-in doesn't happen this week, matches pattern of our 90-day attrition cohort. Pending 1:1.</li>
+        <li><strong>Pairing P4481</strong> · Capt. R. Moreno + FO L. Kim · 12.8h / 14h FDP · <strong>+28 min past cushion</strong> if ORD hold holds past 09:00. Copilot matched reserve H. Lee (94/100).</li>
+        <li><strong>Pairing P4512</strong> · FA crew (3) · M. Li lead · rest window <strong>1h 10m shy</strong> of Part 117 §c. Propose extend rest + delay CAS0842 by 45 min.</li>
       </ul>
-      <h4>On-track but watch</h4>
+      <h4>Monitor</h4>
       <ul>
-        <li><strong>Castillo, P.</strong> — Facilities, active ATP currency re-verify, disqualifies from standard day-30 path. Re-screen after docs clear.</li>
-        <li>2 others — need updated checklist status.</li>
+        <li><strong>P4601</strong> · trans-Pac FA crew · §g acclimation applies · pre-stage R. Patel overnight.</li>
+        <li>3 others · within 2-4 h cushion · no immediate action.</li>
       </ul>
     `,
     'agent|summarize': `
-      <h4>For Ms. Chang — onboarding nudge (plain language)</h4>
-      <div style="background:#fff;border:1px solid var(--gray-30);border-radius:6px;padding:12px;font-size:12.5px;line-height:1.7;">
-        <p>There are two quick items left on your onboarding checklist we want to make sure happen in week 4. Here's what and why, in plain terms:</p>
-        <ul>
-          <li><strong>What's needed:</strong> schedule your 30-day 1:1 with your manager and pick your benefits.</li>
-          <li><strong>What's different:</strong> you'd do this before week 4 ends (Friday) instead of later. This unlocks your full benefits.</li>
-          <li><strong>What's the same:</strong> your direct-deposit and payroll setup stay the same.</li>
-          <li><strong>What's required:</strong> 30 min with your manager and 20 min in the benefits portal.</li>
-          <li><strong>What it costs you:</strong> nothing — both are on work time.</li>
-        </ul>
-        <p>You can do this at any time this week. Your Dispatcher will follow up if you'd like a walk-through of benefits.</p>
+      <h4>Reserve call-up · P4481 · H. Lee</h4>
+      <p>Best match by Copilot: <strong>FO H. Lee · 94/100</strong> · SEA base · on-call 4h callout · 737 current · clean duty posture.</p>
+      <h4>Notification drafted</h4>
+      <div style="background:#fafbfc;border:1px solid var(--gray-30);border-radius:6px;padding:12px;font-size:12.5px;line-height:1.7;">
+        <p>Hi Hailey,</p>
+        <p>You're being called up to cover FO L. Kim on <strong>Pairing P4481</strong>. Report at SEA crew room by <strong>10:30 PT</strong>. Estimated 3-day pairing · SEA–MDW–DEN–SEA.</p>
+        <p>FAR 117 posture: fresh · FDP starts at scheduled report · no acclimation needed (domestic).</p>
+        <p>Confirm receipt in Crew+Ops app within 90 minutes per §e callout SLA. Questions? Reply here or call Crew Sched.</p>
+        <p>— Cascadia Crew Scheduling (automated via Copilot · S. Chen approved)</p>
       </div>
+      <p><span class="pill good">✓ Ready to send via Outlook + SMS + Teams · SLA timer starts on send</span></p>
     `,
     'agent|worksheet': `
-      <h4>30/60/90 checklist worksheet · Ms. Chang · Network Operations</h4>
+      <h4>What if ORD hold extends +90 min?</h4>
+      <p>Ran the sim. Crew-legality impact at the new +90 delay:</p>
       <ul>
-        <li><span class="pill good">✓ ATP currency complete</span> <span class="pill good">✓ W-4 filed</span> <span class="pill good">✓ Background check clear</span></li>
-        <li><span class="pill good">✓ Offer letter signed</span> <span class="pill good">✓ Direct deposit setup</span></li>
-        <li><span class="pill good">✓ Handbook acknowledged</span></li>
-        <li><span class="pill warn">? Benefits enrollment (due day 30 — 4 days remaining)</span></li>
-        <li><span class="pill">Pending: manager 30-day 1:1, 60-day goal-setting</span></li>
+        <li><strong>P4481</strong> (already at risk) · breaks FAR 117 §b by 58 min · <strong>must reassign now</strong> · reserve H. Lee matches best (94/100).</li>
+        <li><strong>P4512</strong> (already monitor) · rest window now <strong>2h 20m shy</strong> of §c · extend rest + delay CAS0842 by 80 min.</li>
+        <li><strong>P4601</strong> (trans-Pac) · §g acclimation still holds · no change.</li>
+        <li><strong>P4573</strong> (new risk) · now within 2 h of FDP limit · monitor.</li>
+        <li><strong>P4488, P4444, P4519</strong> · unchanged · legal.</li>
       </ul>
-      <p>Worksheet saved to the Chang new-hire file and shared with Marcus Johnson + onboarding lead.</p>
+      <p>Reserve availability at SEA: 14 ready, 4 more in callout window. Capacity is fine. Recommend reassign P4481 now, don't wait for the re-check.</p>
     `,
 
     // ========= NEW OUTLOOK KEYS =========
