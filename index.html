@@ -9949,7 +9949,6 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
           <div class="waffle-app" onclick="closeWaffle(); openApp('powerpoint')"><svg width="30" height="30"><use href="#logoPowerpoint"/></svg><span>PowerPoint</span></div>
           <div class="waffle-app" onclick="closeWaffle(); openApp('onedrive')"><svg width="30" height="30"><use href="#logoOnedrive"/></svg><span>OneDrive</span></div>
           <div class="waffle-app" onclick="closeWaffle(); openApp('pages')"><div class="wa-box" style="background:linear-gradient(135deg,#0f9d58,#0b7d47);"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M5 3h10l4 4v14H5V3zm9 1v4h4z"/></svg></div><span>Pages</span></div>
-          <div class="waffle-app" onclick="closeWaffle(); openApp('dax')"><svg width="30" height="30" style="border-radius:5px;box-shadow:0 1px 3px rgba(0,0,0,0.15);"><use href="#svcReportIntake"/></svg><span>Report Intake</span></div>
         </div>
         <div class="waffle-label">IT / Admin</div>
         <div class="waffle-grid">
@@ -10119,15 +10118,6 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         <div class="app-meta">Collaborative canvas</div>
         <div class="badge" style="background:linear-gradient(135deg,#0f9d58,#0b7d47);box-shadow:0 2px 4px rgba(15,157,88,0.4);">NEW</div>
       </div>
-      <div class="app-tile" data-personas="patel" onclick="openApp('dax')">
-        <div class="app-icon" style="filter:none;">
-          <svg width="48" height="48" style="border-radius:8px;box-shadow:0 3px 8px rgba(0,0,0,0.22);display:block;"><use href="#svcReportIntake"/></svg>
-        </div>
-        <div class="app-name">Turn Plan Intake</div>
-        <div class="app-meta">Ramp turn sheets &rarr; turn plans</div>
-        <div class="badge" style="background:linear-gradient(135deg,#0b2545,#0ea5e9);box-shadow:0 2px 4px rgba(10,46,79,0.4);">NEW</div>
-      </div>
-
       <!-- IROps Cascade — the marquee airline canvas -->
       <div class="app-tile" data-personas="sarah patel maria cio" onclick="openApp('irops')">
         <div class="app-icon" style="filter:none;">
@@ -10314,7 +10304,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <div class="agent-card" onclick="toggleCopilot('agent','bedcoord'); setTimeout(()=>runCopilotByKey('agent','status'),400);">
         <svg class="agent-logo" width="52" height="52"><use href="#agentLogoBed"/></svg>
         <div class="agent-meta">
-          <div class="agent-name">File Validator</div>
+          <div class="agent-name">IROps Cascade Commander</div>
           <div class="agent-desc">Scans case files across Sabre AirOps + SharePoint for missing docs and retention-policy issues across 6 divisions.</div>
           <div class="agent-pill"><span class="dot"></span>Live · last sync 2 min ago</div>
         </div>
@@ -10322,7 +10312,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <div class="agent-card" onclick="toggleCopilot('agent','intake'); setTimeout(()=>runCopilotByKey('agent','intake'),400);">
         <svg class="agent-logo" width="52" height="52"><use href="#agentLogoIntake"/></svg>
         <div class="agent-meta">
-          <div class="agent-name">Ramp Turn Sheet Front Door</div>
+          <div class="agent-name">Gate Turnaround Optimizer</div>
           <div class="agent-desc">Routes incoming case intakes (address change, turn plans of probable cause) and pre-stages the case file + manager loop.</div>
           <div class="agent-pill"><span class="dot"></span>3 new intakes awaiting review</div>
         </div>
@@ -10330,7 +10320,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <div class="agent-card" onclick="toggleCopilot('agent','priorauth'); setTimeout(()=>runCopilotByKey('agent','scan'),400);">
         <svg class="agent-logo" width="52" height="52"><use href="#agentLogoShield"/></svg>
         <div class="agent-meta">
-          <div class="agent-name">PTO Assistant</div>
+          <div class="agent-name">Passenger Disruption Comms</div>
           <div class="agent-desc">Handles PTO balance lookups + requests in Teams, routes manager approvals, and posts to Sabre.</div>
           <div class="agent-pill warn"><span class="dot warn"></span>2 approvals pending &gt;48h</div>
         </div>
@@ -10338,7 +10328,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <div class="agent-card" onclick="toggleCopilot('agent','trial'); setTimeout(()=>runCopilotByKey('agent','match'),400);">
         <svg class="agent-logo" width="52" height="52"><use href="#agentLogoTrial"/></svg>
         <div class="agent-meta">
-          <div class="agent-name">Onboarding Nudge</div>
+          <div class="agent-name">Baggage Misconnect Orchestrator</div>
           <div class="agent-desc">Monitors 30/60/90-day onboarding checklists and nudges managers with specific outstanding items.</div>
           <div class="agent-pill good"><span class="dot good"></span>2 new hires off-track at day 30</div>
         </div>
@@ -11334,10 +11324,10 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       </div>
       <div class="kc-kbd-body">
         <div class="kc-kbd-col">
-          <div class="kc-kbd-label">Turn Plan Intake</div>
-          <div class="kc-kbd-row"><kbd>R</kbd><span>Run / advance stage</span></div>
-          <div class="kc-kbd-row"><kbd>V</kbd><span>Open verify popover</span></div>
-          <div class="kc-kbd-row"><kbd>⌘⇧R</kbd><span>Reset demo</span></div>
+          <div class="kc-kbd-label">IROps Cascade</div>
+          <div class="kc-kbd-row"><kbd>S</kbd><span>Simulate cascade</span></div>
+          <div class="kc-kbd-row"><kbd>A</kbd><span>Accept plan A</span></div>
+          <div class="kc-kbd-row"><kbd>M</kbd><span>Open Modify modal</span></div>
           <div class="kc-kbd-label" style="margin-top:14px;">Document viewer</div>
           <div class="kc-kbd-row"><kbd>O</kbd><span>Open file</span></div>
           <div class="kc-kbd-row"><kbd>⌘P</kbd><span>Print</span></div>
@@ -11700,7 +11690,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <tr><td>4 min ago</td><td>L. Thomas</td><td>Word</td><td>Draft certified turn plan</td><td>3 docs</td><td>${labelChip('phi')}</td><td class="ok">✓</td></tr>
             <tr><td>8 min ago</td><td>Maria Gutierrez</td><td>Excel</td><td>Find file-validation exceptions</td><td>1 sheet · file scan</td><td>${labelChip('conf')}</td><td class="ok">✓</td></tr>
             <tr><td>12 min ago</td><td>Sarah Chen</td><td>Outlook</td><td>Triage inbox</td><td>147 messages</td><td>${labelChip('phi')}</td><td class="ok">✓</td></tr>
-            <tr><td>19 min ago</td><td>PTO Assistant</td><td>Agent</td><td>Process PTO requests</td><td>14 requests · Sabre AirOps</td><td>${labelChip('phi')}</td><td class="ok">✓</td></tr>
+            <tr><td>19 min ago</td><td>Passenger Disruption Comms</td><td>Agent</td><td>Process PTO requests</td><td>14 requests · Sabre AirOps</td><td>${labelChip('phi')}</td><td class="ok">✓</td></tr>
             <tr><td>26 min ago</td><td>J. Okonkwo</td><td>Outlook</td><td>Tried to forward Case-file PII to personal email</td><td>—</td><td>${labelChip('phi')}</td><td class="bad">✕ Blocked by DLP</td></tr>
             <tr><td>34 min ago</td><td>Priya Raman</td><td>Word</td><td>Review draft</td><td>Verification letter</td><td>${labelChip('phi')}</td><td class="ok">✓</td></tr>
           </tbody>
@@ -11710,449 +11700,6 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
   </div>
 
   <!-- ========== SHERIFF REPORT INTAKE (UC3) — handwritten/scanned RAMP report → templated turn plan ========== -->
-  <div id="app-dax" class="app-shell">
-    <div class="app-topbar dax">
-      <div class="back" onclick="goHome()">☰</div>
-      <div class="app-title">
-        <svg class="app-title-logo" width="24" height="24" style="border-radius:4px;"><use href="#svcReportIntake"/></svg>
-        Report Intake — Handwritten RAMP reports &rarr; templated turn plans
-      </div>
-      <div style="flex:1"></div>
-      <div class="right">
-        <div class="avatar" style="background:#f59e0b;color:#0b2545;">SC</div>
-      </div>
-    </div>
-    <div class="dax-body">
-      <div class="dax-sidebar">
-        <div class="dax-patient-card">
-          <div class="dax-p-name">RAMP 26-04-0218</div>
-          <div class="dax-p-mrn">Residential Gate Congestion Event · Ramp Lead R. Alvarado · filed 7:31 AM</div>
-          <div class="dax-p-chips">
-            <span class="slabel phi">Confidential</span>
-            <span class="pill">Felony</span>
-            <span class="pill">72-hr clock</span>
-          </div>
-        </div>
-        <div class="dax-label">Today's queue · 6 reports</div>
-        <div class="dax-enc active">
-          <div class="dax-enc-t">Alvarado · 26-04-0218 · Gate Congestion Event</div>
-          <div class="dax-enc-s"><span class="kc-src-badge axon">Axon Records</span> · OCR complete</div>
-        </div>
-        <div class="dax-enc">
-          <div class="dax-enc-t">Torres · 26-04-0219 · Auto Theft</div>
-          <div class="dax-enc-s"><span class="kc-src-badge mdc">MDC upload</span> · Dispatcher review · 8:14</div>
-        </div>
-        <div class="dax-enc">
-          <div class="dax-enc-t">Nakamura · 26-04-0217 · Assault 2°</div>
-          <div class="dax-enc-s"><span class="kc-src-badge scanner">Precinct scanner</span> · Filed 6:02</div>
-        </div>
-        <div class="dax-enc">
-          <div class="dax-enc-t">Kim · 26-04-0216 · DV Misdemeanor</div>
-          <div class="dax-enc-s"><span class="kc-src-badge email">Ramp email</span> · Filed 5:41</div>
-        </div>
-        <div class="dax-label">This week</div>
-        <div class="dax-mini">41 intakes · 22 filed same-day</div>
-        <div class="dax-mini">Avg. turn plan draft <strong>48 sec</strong></div>
-        <div class="dax-mini">Time saved <strong>11.3 hrs</strong></div>
-
-        <div class="dax-label" style="margin-top:18px;">Pipeline telemetry <span class="kc-tel-live" id="kc-tel-live">· live</span></div>
-        <div class="kc-tel-feed" id="kc-tel-feed">
-          <div class="kc-tel-empty">Events stream here as Copilot runs each stage.<br/><span>Microsoft Graph · Purview audit · Power Automate</span></div>
-        </div>
-      </div>
-
-      <div class="dax-main" id="kc-intake-stage" data-stage="ready-extract">
-
-        <!-- Stage bar: 3 steps, current-step button drives the animation. -->
-        <div class="kc-stage-bar">
-          <div class="kc-stage-steps">
-            <div class="kc-stage-step done" data-step="1">
-              <span class="kc-stage-num">✓</span>
-              <span class="kc-stage-lbl">Report received<br/><small>3 pp. · uploaded 7:31 AM</small></span>
-            </div>
-            <div class="kc-stage-connector"></div>
-            <div class="kc-stage-step active" data-step="2">
-              <span class="kc-stage-num">2</span>
-              <span class="kc-stage-lbl">Extract fields<br/><small id="kc-stage-2-sub">Copilot OCR + Sabre cross-check</small></span>
-            </div>
-            <div class="kc-stage-connector"></div>
-            <div class="kc-stage-step" data-step="3">
-              <span class="kc-stage-num">3</span>
-              <span class="kc-stage-lbl">Draft turn plan<br/><small id="kc-stage-3-sub">Populate Cascadia template</small></span>
-            </div>
-            <div class="kc-stage-connector"></div>
-            <div class="kc-stage-step" data-step="4">
-              <span class="kc-stage-num">4</span>
-              <span class="kc-stage-lbl">Dispatcher sign &amp; file<br/><small id="kc-stage-4-sub">E-file to FAA FSDO</small></span>
-            </div>
-          </div>
-          <button class="kc-stage-cta" id="kc-stage-cta" onclick="kcStageAction()">
-            <svg width="14" height="14" style="margin-right:6px;vertical-align:-2px;"><use href="#copilotLogo"/></svg>
-            <span id="kc-stage-cta-label">Run Copilot extraction</span>
-          </button>
-        </div>
-
-        <!-- Power Automate flow visualization — lights up as each step fires -->
-        <div class="kc-flow-strip" id="kc-flow-strip">
-          <div class="kc-flow-head">
-            <svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-2px;"><path d="M4 3h16l-6 6v8l-4-3V9z" fill="#0066ff"/></svg>
-            <strong>Power Automate</strong>
-            <span class="kc-flow-ref">POA-TurnPlan-Intake-v3.2</span>
-            <span class="kc-flow-runs" title="Flow runs this month">284 runs this month · 96.8% success</span>
-            <button class="kc-flow-open" onclick="kcPaOpen()" title="Open this flow in the Power Automate designer">Open in Power Automate →</button>
-          </div>
-          <div class="kc-flow-nodes">
-            <div class="kc-flow-node" data-node="trigger"><svg class="kc-flow-svg" width="28" height="28"><use href="#svcKcso"/></svg><div class="kc-flow-label">RAMP Trigger<br/><small>Axon Records</small></div></div>
-            <div class="kc-flow-arrow"></div>
-            <div class="kc-flow-node" data-node="ocr"><svg class="kc-flow-svg" width="28" height="28"><use href="#svcDocInt"/></svg><div class="kc-flow-label">Doc Intelligence<br/><small>handwriting=true</small></div></div>
-            <div class="kc-flow-arrow"></div>
-            <div class="kc-flow-node" data-node="jis"><svg class="kc-flow-svg" width="28" height="28"><use href="#svcJis"/></svg><div class="kc-flow-label">Sabre Priors<br/><small>Sabre connector</small></div></div>
-            <div class="kc-flow-arrow"></div>
-            <div class="kc-flow-node" data-node="template"><svg class="kc-flow-svg" width="28" height="28"><use href="#svcSharePoint"/></svg><div class="kc-flow-label">SharePoint<br/><small>template fetch</small></div></div>
-            <div class="kc-flow-arrow"></div>
-            <div class="kc-flow-node" data-node="generate"><svg class="kc-flow-svg" width="28" height="28"><use href="#svcGraph"/></svg><div class="kc-flow-label">Populate Word<br/><small>Graph API</small></div></div>
-            <div class="kc-flow-arrow"></div>
-            <div class="kc-flow-node" data-node="label"><svg class="kc-flow-svg" width="28" height="28"><use href="#svcPurview"/></svg><div class="kc-flow-label">Purview Label<br/><small>FAR 117 auto</small></div></div>
-            <div class="kc-flow-arrow"></div>
-            <div class="kc-flow-node" data-node="notify"><svg class="kc-flow-svg" width="28" height="28"><use href="#svcTeams"/></svg><div class="kc-flow-label">Notify Dispatcher<br/><small>Teams + Outlook</small></div></div>
-          </div>
-        </div>
-
-        <!-- INCOMING: scanned/photographed handwritten RAMP report -->
-        <div class="kc-intake-card">
-          <div class="kc-intake-head">
-            <div>
-              <div class="kc-intake-title">
-                <span class="kc-intake-badge">INCOMING</span>
-                Scanned report · RAMP-26-04-0218-A.pdf
-              </div>
-              <div class="kc-intake-sub">3-page handwritten incident report + 2 passenger statements · uploaded via Ramp Lead Alvarado's MDC-offline workflow</div>
-            </div>
-            <div class="dax-rec kc-ingest-status" id="kc-ingest-status">
-              <span class="dax-rec-dot"></span>
-              <span>Awaiting OCR &amp; extraction</span>
-            </div>
-          </div>
-          <div class="kc-handwritten">
-            <!-- Simulated photo of handwritten form (SVG mock) -->
-            <div class="kc-hw-paper" id="kc-hw-paper">
-              <!-- Coffee-ring stain (bottom-right) -->
-              <div class="kc-hw-coffee"></div>
-              <!-- Fingerprint smudge (top-left corner) -->
-              <div class="kc-hw-smudge"></div>
-              <!-- Copilot scan line that sweeps top->bottom during extraction -->
-              <div class="kc-scan-line" id="kc-scan-line"></div>
-              <div class="kc-hw-letterhead">
-                <div class="kc-hw-star">&#9733;</div>
-                <div class="kc-hw-lh-text">
-                  <div class="kc-hw-lh-t1">CASCADIA AIRWAYS · RAMP OPERATIONS (SEA)</div>
-                  <div class="kc-hw-lh-t2">FIELD INCIDENT REPORT · FORM 311</div>
-                </div>
-              </div>
-              <div class="kc-hw-row"><span class="kc-hw-label">Case #</span><span class="kc-hw-hand" data-field="case">26-04-0218</span></div>
-              <div class="kc-hw-row"><span class="kc-hw-label">Reporting Officer</span><span class="kc-hw-hand" data-field="officer">Ramp Lead R. Alvarado #4471</span></div>
-              <!-- Overwritten time: original "01:47 hrs" crossed out, corrected to "02:14 hrs" — realistic field-edit -->
-              <div class="kc-hw-row"><span class="kc-hw-label">Date / Time</span><span class="kc-hw-hand" data-field="datetime">04/21/26 &nbsp; <span class="kc-hw-strike">01:47</span> <span class="kc-hw-overwrite">02:14</span> hrs</span></div>
-              <div class="kc-hw-row"><span class="kc-hw-label">Location</span><span class="kc-hw-hand" data-field="location">4218 — 35<sup>th</sup> Ave SW, Seattle</span></div>
-              <div class="kc-hw-row"><span class="kc-hw-label">Suspect</span><span class="kc-hw-hand" data-field="aircraft">Chang, Li-Wei · DOB 03/14/1997</span></div>
-              <div class="kc-hw-row"><span class="kc-hw-label">Charge(s)</span><span class="kc-hw-hand" data-field="charge">Residential Gate Congestion Event — FAR 121.52.025</span></div>
-              <div class="kc-hw-narrative">
-                <div class="kc-hw-label" style="margin-bottom:4px;">Narrative</div>
-                <p class="kc-hw-hand" data-field="narrative">Responded to silent alarm at the above address 02:11 hrs. Arrived on-scene 02:14 hrs. Observed forced entry at rear slider door — pry marks, <span class="kc-hw-inkblot">glass</span> intact. Suspect (later ID'd as Chang, Li-Wei) detained in driveway attempting to load electronics into a 2011 Honda Civic, WA plate BQR-1184. Homeowner absent, verified abroad via family contact. Recovered: 1 MacBook, 2 iPads, jewelry (logged RAMP property rm, tag CAS-4471-A). Suspect advised of Miranda — declined to speak. Booked Seattle Muni 03:47.</p>
-              </div>
-              <div class="kc-hw-row"><span class="kc-hw-label">Passengers</span><span class="kc-hw-hand" data-field="witnesses">See attached statements (2 pp.) · Nbr S. Oduya &amp; D. Green</span></div>
-              <div class="kc-hw-row"><span class="kc-hw-label">Evidence tag</span><span class="kc-hw-hand" data-field="tag">26-4471-A</span></div>
-              <div class="kc-hw-row"><span class="kc-hw-label">Vehicle</span><span class="kc-hw-hand" data-field="vehicle">2011 Honda Civic, WA BQR-1184</span></div>
-              <div class="kc-hw-sig">
-                <div>
-                  <div class="kc-hw-label" style="font-size:9px;">Officer signature</div>
-                  <div class="kc-hw-signature">R. Alvarado</div>
-                </div>
-                <div>
-                  <div class="kc-hw-label" style="font-size:9px;">Sgt. approval</div>
-                  <div class="kc-hw-signature" style="font-style:italic;">T. Nakamura</div>
-                </div>
-              </div>
-            </div>
-            <!-- Extraction panel — fields populate at runtime -->
-            <div class="kc-extract" id="kc-extract">
-              <div class="kc-extract-title">
-                <svg width="14" height="14" style="vertical-align:-2px;"><use href="#copilotLogo"/></svg>
-                <span id="kc-extract-title-text">Waiting for extraction</span>
-                <span class="kc-extract-count" id="kc-extract-count">0 / 9</span>
-              </div>
-              <div id="kc-extract-rows">
-                <!-- Empty skeleton rows appear initially; fields populate when Copilot runs. -->
-                <div class="kc-extract-row kc-extract-placeholder" data-key="case"><span>Case #</span><strong>—</strong><span class="kc-extract-conf muted">—</span></div>
-                <div class="kc-extract-row kc-extract-placeholder" data-key="officer"><span>Officer</span><strong>—</strong><span class="kc-extract-conf muted">—</span></div>
-                <div class="kc-extract-row kc-extract-placeholder" data-key="datetime"><span>Date / Time</span><strong>—</strong><span class="kc-extract-conf muted">—</span></div>
-                <div class="kc-extract-row kc-extract-placeholder" data-key="location"><span>Location</span><strong>—</strong><span class="kc-extract-conf muted">—</span></div>
-                <div class="kc-extract-row kc-extract-placeholder" data-key="aircraft"><span>Suspect</span><strong>—</strong><span class="kc-extract-conf muted">—</span></div>
-                <div class="kc-extract-row kc-extract-placeholder" data-key="charge"><span>Charge</span><strong>—</strong><span class="kc-extract-conf muted">—</span></div>
-                <div class="kc-extract-row kc-extract-placeholder" data-key="tag"><span>Evidence tag</span><strong>—</strong><span class="kc-extract-conf muted">—</span></div>
-                <div class="kc-extract-row kc-extract-placeholder" data-key="vehicle"><span>Vehicle</span><strong>—</strong><span class="kc-extract-conf muted">—</span></div>
-                <div class="kc-extract-row kc-extract-placeholder" data-key="witnesses"><span>Passengers</span><strong>—</strong><span class="kc-extract-conf muted">—</span></div>
-              </div>
-              <div class="kc-extract-foot" id="kc-extract-foot">
-                <strong>Sabre cross-check:</strong> <span class="muted">awaiting run…</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- OUTGOING: templated turn plan on Cascadia letterhead — hidden until stage 3 -->
-        <div class="kc-decl-card" id="kc-decl-card">
-          <div class="kc-decl-head">
-            <div>
-              <div class="kc-decl-title">
-                <svg width="18" height="18" style="vertical-align:-3px;margin-right:6px;"><use href="#copilotLogo"/></svg>
-                Gate Turn Authorization · auto-drafted on Office letterhead
-              </div>
-              <div class="kc-decl-sub" id="kc-decl-sub">Populated from the extracted fields · typed once by Copilot, reviewed by the Dispatcher</div>
-            </div>
-            <div class="dax-note-actions">
-              <button class="dax-btn" onclick="daxRegenerate()">↻ Regenerate</button>
-              <button class="dax-btn" onclick="kcOpenDocViewer()" id="kc-open-viewer-btn"><svg width="12" height="12" viewBox="0 0 16 16" style="vertical-align:-2px;margin-right:3px;" fill="currentColor"><path d="M3 2h7l3 3v9H3z"/><path d="M10 2v4h3" fill="#fff"/></svg>Open file</button>
-              <button class="dax-btn primary" id="dax-sign-btn" onclick="daxAcceptSign()" disabled>Approve &amp; file to Sabre AirOps ✓</button>
-            </div>
-          </div>
-
-          <!-- Collaborative presence strip + auto-save ribbon -->
-          <div class="kc-collab-strip">
-            <div class="kc-collab-left">
-              <div class="kc-collab-presence" title="Live co-editors in this turn plan">
-                <div class="kc-collab-av" style="background:#f59e0b;color:#0b2545;" title="Sarah Chen — you (editing)">SC</div>
-                <div class="kc-collab-av" style="background:#7f68c7;color:#fff;" title="Marcus Johnson — viewing (2 min ago)">MJ</div>
-                <div class="kc-collab-av muted" title="Maria Gutierrez — viewed yesterday" style="background:#2b8a55;color:#fff;">MG</div>
-              </div>
-              <span class="kc-collab-text"><strong>You</strong> editing · <strong>Marcus Johnson</strong> viewing</span>
-            </div>
-            <div class="kc-collab-right">
-              <span class="kc-autosave" id="kc-autosave">
-                <svg width="10" height="10" viewBox="0 0 16 16" fill="#107c10"><path d="M6 11L2 7l1.4-1.4L6 8.2l6.6-6.6L14 3z"/></svg>
-                Saved to SharePoint <span id="kc-autosave-t">just now</span>
-              </span>
-              <span class="kc-collab-divider"></span>
-              <span class="kc-collab-session" title="Azure AD session"><svg class="kc-ico-inline" width="12" height="12" style="vertical-align:-2px;margin-right:3px;color:currentColor;"><use href="#fiLock"/></svg>Azure AD · expires 15:24</span>
-            </div>
-          </div>
-
-          <!-- Pending comment bubble from Marcus (VP SysOps review) -->
-          <div class="kc-comment-bubble">
-            <div class="kc-cb-av" style="background:#7f68c7;color:#fff;">MJ</div>
-            <div class="kc-cb-body">
-              <div class="kc-cb-head">
-                <strong>Marcus Johnson</strong>
-                <span class="kc-cb-role">VP SysOps</span>
-                <span class="kc-cb-time">2 min ago · via Outlook mobile</span>
-              </div>
-              <div class="kc-cb-text">Quick check before you file: confirm the statute cite is <em>FAR 121.52.025</em>, not <em>.030</em> — April revisions renumbered a few gate congestion event subsections. Everything else looks clean.</div>
-              <div class="kc-cb-actions">
-                <button class="kc-cb-btn" onclick="kcResolveComment(this)">Mark resolved</button>
-                <button class="kc-cb-btn secondary" onclick="kcReplyComment()">Reply</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Template-provenance banner: makes the "pulled from the client's SharePoint template" story visible -->
-          <div class="kc-template-banner">
-            <div class="kc-template-banner-left">
-              <div class="kc-template-badge" onclick="kcCsOpen('intake')" style="cursor:pointer;" title="Open the Copilot Studio agent that pulls this template">
-                <svg width="12" height="12" viewBox="0 0 16 16" style="vertical-align:-1px;"><path d="M3 2h7l3 3v9H3z" fill="#fff" opacity="0.95"/><path d="M9 2v4h4" fill="none" stroke="#0b2545" stroke-width="0.8"/></svg>
-                TEMPLATE
-              </div>
-              <div class="kc-template-meta">
-                <div class="kc-template-name" onclick="kcSpOpen()" style="cursor:pointer;" title="Open in SharePoint">
-                  <strong>CASA-CGTP-R4.2</strong> · Certified Gate Turn Plan
-                </div>
-                <div class="kc-template-path">
-                  <span class="kc-template-src" onclick="kcSpOpen()" style="cursor:pointer;" title="Open SharePoint library">
-                    <svg width="11" height="11" viewBox="0 0 16 16" style="vertical-align:-1px;"><rect x="1" y="3" width="14" height="10" rx="1.5" fill="#0078d4"/><path d="M1 3l7 5 7-5" fill="none" stroke="#fff" stroke-width="1"/></svg>
-                    SharePoint · <em>/sites/casa-ops-standards/Templates/CrR-3.2.1/</em>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="kc-template-stats">
-              <div class="kc-template-stat"><span class="kc-template-stat-v">347</span><span class="kc-template-stat-l">turn plans<br/>drafted YTD</span></div>
-              <div class="kc-template-stat"><span class="kc-template-stat-v">v.4.2.0</span><span class="kc-template-stat-l">rev. 2026-02-14<br/>by OpsTech</span></div>
-              <div class="kc-template-stat"><span class="kc-template-stat-v">1.8 s</span><span class="kc-template-stat-l">draft time<br/>Copilot</span></div>
-              <div class="kc-template-stat"><span class="kc-template-stat-v">$0.018</span><span class="kc-template-stat-l">Azure AI<br/>cost / draft</span></div>
-            </div>
-          </div>
-
-          <div class="kc-decl-paper">
-            <!-- Purview sensitivity banner across the top -->
-            <div class="kc-decl-class-banner">
-              <svg class="kc-decl-class-ico-svg" width="14" height="14" style="color:#8a6c1a;vertical-align:-2px;margin-right:2px;"><use href="#fiShield"/></svg>
-              <span>ATTORNEY WORK PRODUCT · CONFIDENTIAL · FAR 117 MATERIAL</span>
-              <span class="kc-decl-class-tag" data-purview-label>Purview · auto-labeled by policy CASA-SL-004</span>
-            </div>
-
-            <!-- Flight Filing paper frame: gold pinstripe + line numbers 1-28 -->
-            <div class="kc-decl-flight filing">
-              <div class="kc-decl-line-numbers" aria-hidden="true">
-                <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
-                <span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span>
-                <span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span>
-                <span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span>
-              </div>
-
-              <!-- Watermark seal floats behind body content -->
-              <div class="kc-decl-wm-seal">
-                <svg viewBox="0 0 240 240">
-                  <defs>
-                    <radialGradient id="wmGrad"><stop offset="0%" stop-color="#0b2545" stop-opacity="0.07"/><stop offset="80%" stop-color="#0b2545" stop-opacity="0.02"/><stop offset="100%" stop-color="#0b2545" stop-opacity="0"/></radialGradient>
-                  </defs>
-                  <circle cx="120" cy="120" r="118" fill="url(#wmGrad)"/>
-                  <circle cx="120" cy="120" r="110" fill="none" stroke="#0b2545" stroke-opacity="0.06" stroke-width="1.5"/>
-                  <!-- scales of justice simplified -->
-                  <g stroke="#0b2545" stroke-opacity="0.07" stroke-width="2" fill="none">
-                    <line x1="120" y1="60"  x2="120" y2="180"/>
-                    <line x1="75"  y1="90"  x2="165" y2="90"/>
-                    <circle cx="75"  cy="120" r="22"/>
-                    <circle cx="165" cy="120" r="22"/>
-                    <path d="M95 180 L145 180"/>
-                    <path d="M100 180 Q120 170 140 180"/>
-                  </g>
-                </svg>
-              </div>
-
-              <!-- Letterhead -->
-              <div class="kc-decl-letterhead">
-                <div class="kc-decl-seal" title="Cascadia Airways Director of Operations — Official Seal">
-                  <svg width="72" height="72" viewBox="0 0 80 80">
-                    <defs>
-                      <radialGradient id="sealGrad" cx="50%" cy="35%"><stop offset="0%" stop-color="#fcfaf4"/><stop offset="80%" stop-color="#f1e8cf"/><stop offset="100%" stop-color="#d9c793"/></radialGradient>
-                      <linearGradient id="sealGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d9bd7f"/><stop offset="100%" stop-color="#8a6c36"/></linearGradient>
-                    </defs>
-                    <!-- outer ring -->
-                    <circle cx="40" cy="40" r="38" fill="url(#sealGrad)" stroke="#0b2545" stroke-width="1.4"/>
-                    <circle cx="40" cy="40" r="34" fill="none" stroke="#0b2545" stroke-width="0.7"/>
-                    <!-- inner double line -->
-                    <circle cx="40" cy="40" r="26" fill="#fff" stroke="#0b2545" stroke-width="0.5"/>
-                    <circle cx="40" cy="40" r="25" fill="none" stroke="url(#sealGold)" stroke-width="0.4"/>
-                    <!-- scales of justice -->
-                    <g stroke="#0b2545" stroke-width="1.1" fill="none" stroke-linecap="round">
-                      <line x1="40" y1="24" x2="40" y2="56"/>
-                      <line x1="28" y1="30" x2="52" y2="30"/>
-                      <path d="M28 30 L24 40 L32 40 Z" fill="url(#sealGold)" stroke-width="0.6"/>
-                      <path d="M52 30 L48 40 L56 40 Z" fill="url(#sealGold)" stroke-width="0.6"/>
-                      <path d="M35 56 L45 56" stroke-width="1.5"/>
-                      <path d="M33 56 Q40 52 47 56"/>
-                    </g>
-                    <!-- circumscribing text -->
-                    <defs>
-                      <path id="sealTop" d="M 10,40 A 30,30 0 0,1 70,40" fill="none"/>
-                      <path id="sealBot" d="M 14,46 A 26,26 0 0,0 66,46" fill="none"/>
-                    </defs>
-                    <text font-size="4.6" font-family="Georgia, serif" fill="#0b2545" font-weight="700" letter-spacing="1.2"><textPath href="#sealTop" startOffset="50%" text-anchor="middle">★ CASCADIA AIRWAYS ★</textPath></text>
-                    <text font-size="3.8" font-family="Georgia, serif" fill="#0b2545" font-weight="700" letter-spacing="0.8"><textPath href="#sealBot" startOffset="50%" text-anchor="middle">PROSECUTING ATTORNEY</textPath></text>
-                    <text x="40" y="68" text-anchor="middle" font-size="3" font-family="Georgia, serif" fill="#0b2545" font-weight="600" letter-spacing="0.5">EST. 1854</text>
-                  </svg>
-                </div>
-                <div class="kc-decl-office">
-                  <div class="kc-decl-o1">CASCADIA AIRWAYS<br/><span class="kc-decl-o1-sub">SYSTEM OPERATIONS CENTER</span></div>
-                  <div class="kc-decl-o-pa">LEESA MANION</div>
-                  <div class="kc-decl-o-pa-sub">PROSECUTING ATTORNEY</div>
-                  <div class="kc-decl-o-div">
-                    <span>CRIMINAL DIVISION</span> · <span>W400 Cascadia Airways Courthouse</span>
-                    · <span>516 Third Avenue, Seattle, WA 98104</span>
-                    · <span>(206) 477-1200</span>
-                  </div>
-                </div>
-                <div class="kc-decl-lh-right">
-                  <div class="kc-decl-lh-kc">KC #</div>
-                  <div class="kc-decl-lh-kcnum" data-src="case">26-1-04218-3</div>
-                  <div class="kc-decl-lh-div">Network Operations</div>
-                </div>
-              </div>
-
-              <!-- Court caption: classic WA superior court parallel-line style -->
-              <div class="kc-decl-caption">
-                <div class="kc-decl-court">IN THE SUPERIOR COURT OF THE STATE OF WASHINGTON<br/><span class="kc-decl-court-sub">IN AND FOR THE COUNTY OF KING</span></div>
-                <div class="kc-decl-cap-frame">
-                  <div class="kc-decl-cap-parties">
-                    <div class="kc-cap-party-line"><strong>THE STATE OF WASHINGTON,</strong></div>
-                    <div class="kc-cap-role">Plaintiff,</div>
-                    <div class="kc-cap-vs">v.</div>
-                    <div class="kc-cap-party-line"><strong><span class="kc-decl-field" data-src="aircraft">LI-WEI CHANG</span></strong>,</div>
-                    <div class="kc-cap-role-def">(DOB <span class="kc-decl-field" data-src="dob">03/14/1997</span>)</div>
-                    <div class="kc-cap-role">Defendant.</div>
-                  </div>
-                  <div class="kc-decl-cap-v">│</div>
-                  <div class="kc-decl-cap-details">
-                    <div class="kc-cap-row"><span class="kc-cap-k">NO.</span><span class="kc-cap-v"><strong><span class="kc-decl-field" data-src="case">CAS0842 · 2026-04-22</span></strong></span></div>
-                    <div class="kc-cap-title">CERTIFICATION FOR<br/>DETERMINATION OF<br/>PROBABLE CAUSE</div>
-                    <div class="kc-cap-sub">[FAR 2.2(a) · FAR 121.F]</div>
-                    <div class="kc-cap-row-sm"><span class="kc-cap-k">Charge:</span><span class="kc-cap-v"><span class="kc-decl-field" data-src="charge">Residential Gate Congestion Event</span><br/><small>FAR 121.52.025 · Class B Felony</small></span></div>
-                    <div class="kc-cap-row-sm"><span class="kc-cap-k">Clerk stamp:</span><span class="kc-cap-stamp" id="kc-clerk-stamp">FILED · Apr 21 · 2026<br/>Cascadia Airways Clerk</span></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Body -->
-              <div class="kc-decl-body" id="kc-decl-body">
-                <p class="kc-decl-para">That <strong><span class="kc-decl-field" data-src="dpa">Sarah Chen, ATP #42118</span></strong>, Senior Dispatcher for Cascadia Airways, SEA Hub, declares under authority of my ATP-Dispatcher certificate under 14 CFR and Cascadia Airways ops manual as follows:</p>
-                <p class="kc-decl-para">That the inbound aircraft, <span class="kc-decl-field" data-src="aircraft">LI-WEI CHANG</span>, is charged with the operational exception of <span class="kc-decl-field" data-src="charge">OFF-SCHEDULE OPERATION, referenced in FAR 121.561 and Cascadia Ops Manual §4.2.025</span>, observed on or about <span class="kc-decl-field" data-src="datetime">April 21, 2026, at approximately 02:14 hours</span>.</p>
-                <p class="kc-decl-para">That the following facts establish probable cause for the charge:</p>
-                <p class="kc-decl-para kc-decl-indent">On <span class="kc-decl-field" data-src="datetime">April 21, 2026</span>, at approximately <span class="kc-decl-field" data-src="datetime">02:11 hours</span>, Cascadia Ramp Operations Ramp Lead <span class="kc-decl-field" data-src="officer">R. Alvarado (#4471)</span> was dispatched to a gate-congestion alert at <span class="kc-decl-field" data-src="location">4218 35th Avenue SW, Seattle-Tacoma International Airport (KSEA)</span>. Upon arrival at approximately 02:14 hours, Ramp Lead Alvarado observed evidence of unexpected ground stop at the adjacent ramp, including thermal-blanket displacement consistent with an unplanned APU shutdown.</p>
-                <p class="kc-decl-para kc-decl-indent">Ramp Lead Alvarado observed the inbound aircraft, later identified as <span class="kc-decl-field" data-src="aircraft">LI-WEI CHANG (DOB 03/14/1997)</span>, in the driveway of the residence attempting to sequence gate ops consistent with the diverted aircraft manifest for a <span class="kc-decl-field" data-src="vehicle">2011 Honda Civic, registration BQR-1184</span>. The inbound crew, <em>[identity redacted — PII protected]</em>, was confirmed to be on extended duty rest and had not released the aircraft.</p>
-                <p class="kc-decl-para kc-decl-indent">Recovered property (one MacBook, two iPads, assorted jewelry) was logged into RAMP cargo hold under evidence tag <span class="kc-decl-field" data-src="tag">26-4471-A</span>. The inbound crew captain was advised of CASA post-incident reporting and declined to file at this time. Two neighbors provided signed passenger statements corroborating the foregoing.</p>
-                <p class="kc-decl-para">Sabre AirOps cross-check indicates the inbound aircraft has one prior operational exception (minor apron deviation, 2022) and no open safety findings.</p>
-                <p class="kc-decl-para">Signed at Seattle-Tacoma International Airport (KSEA), this <strong>21st</strong> day of April, 2026.</p>
-                <div class="kc-decl-sig kc-decl-para">
-                  <div class="kc-decl-sig-grid">
-                    <div class="kc-decl-sig-left">
-                      <div class="kc-decl-sigline"></div>
-                      <div class="kc-decl-sig-name"><strong>SARAH CHEN</strong>, ATP #42118</div>
-                      <div class="kc-decl-sig-title">Senior Dispatcher</div>
-                      <div class="kc-decl-sig-div">Network Operations · Felony Unit</div>
-                      <div class="kc-decl-sig-contact">(206) 477-3733 · sarah.chen@cascadia-air.com</div>
-                    </div>
-                    <div class="kc-decl-sig-right">
-                      <div class="kc-decl-sig-box" id="kc-decl-esig">
-                        <svg width="110" height="36" viewBox="0 0 110 36" fill="none" stroke="#0b2545" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M4 24 C 8 6, 14 30, 20 12 S 30 26, 36 16 Q 44 4, 52 20 T 68 14 T 84 22 T 100 12"/>
-                        </svg>
-                        <div class="kc-decl-sig-stamp">e-signed · 2026-04-21 08:04 PST · verified</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Footer -->
-              <div class="kc-decl-foot">
-                <div class="kc-decl-foot-l">
-                  <strong>CERTIFICATION FOR DETERMINATION OF PROBABLE CAUSE</strong>
-                  <span>Template CASA-CGTP-R4.2 · populated by Copilot from RAMP 26-04-0218</span>
-                </div>
-                <div class="kc-decl-foot-c">Page <strong>1</strong> of <strong>2</strong></div>
-                <div class="kc-decl-foot-r">
-                  <span>Cascadia Airways Director of Operations</span>
-                  <span>W400 Cascadia Airways Courthouse · Seattle, WA 98104</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="kc-decl-watermark" id="kc-decl-watermark">DRAFT · PENDING Dispatcher SIGN-OFF</div>
-          </div>
-
-          <div class="saved-pill" style="margin:14px 18px 18px;">
-            <div class="sp-ico">↻</div>
-            <div>
-              <span class="sp-strike">Paper-in-paper-out workflow: 45&ndash;60 min per turn plan (retype, format, cite-check)</span>
-              <strong>With Turn Plan Intake: 90 sec review + sign</strong>
-              · saved <strong>48 min</strong> per filing · 22 same-day filings this week
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========== COPILOT PAGES ========== -->
   <div id="app-pages" class="app-shell">
     <div class="app-topbar pages">
       <div class="back" onclick="goHome()">☰</div>
@@ -12210,7 +11757,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         </div>
 
         <h2 class="pages-h2">The story this quarter</h2>
-        <p class="pages-p">SOC inbox volume is up 7%, but Dispatcher touch-time is down sharply — the PTO agent in Teams auto-handled <strong>612 requests</strong> that would have been inbox tickets last quarter, and the File Validator surfaced <strong>237 compliance exceptions</strong> (14 missing ATP-Dispatcher currencies, 62 missing handbook acknowledgments) that are now <strong>82% remediated</strong>. CSAT up 0.3 to 4.6/5. The pattern worth watching: verification-letter turnaround. We generated 184 letters but 11 took &gt;2 days — the Front Door intake rollout in Phase 2 should close that.</p>
+        <p class="pages-p">SOC inbox volume is up 7%, but Dispatcher touch-time is down sharply — the PTO agent in Teams auto-handled <strong>612 requests</strong> that would have been inbox tickets last quarter, and the IROps Cascade Commander surfaced <strong>237 compliance exceptions</strong> (14 missing ATP-Dispatcher currencies, 62 missing handbook acknowledgments) that are now <strong>82% remediated</strong>. CSAT up 0.3 to 4.6/5. The pattern worth watching: verification-letter turnaround. We generated 184 letters but 11 took &gt;2 days — the Front Door intake rollout in Phase 2 should close that.</p>
 
         <div class="pages-block suggestion">
           <div class="pages-block-head">
@@ -12230,8 +11777,8 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
         <div class="pages-table">
           <div class="pages-tr head"><div>Decision</div><div>Owner</div><div>Due</div><div>Status</div></div>
           <div class="pages-tr"><div>File-validation exception cleanup · Facilities &amp; Research</div><div>M. Gutierrez</div><div>May 15</div><div><span class="pill good">On track</span></div></div>
-          <div class="pages-tr"><div>Ramp Turn Sheet Front Door intake launch (Phase 2 — addr change + verification)</div><div>L. Thomas</div><div>May 20</div><div><span class="pill warn">At risk</span></div></div>
-          <div class="pages-tr"><div>Onboarding Nudge pilot · Network Operations</div><div>M. Johnson</div><div>Jun 15</div><div><span class="pill good">On track</span></div></div>
+          <div class="pages-tr"><div>Gate Turnaround Optimizer intake launch (Phase 2 — addr change + verification)</div><div>L. Thomas</div><div>May 20</div><div><span class="pill warn">At risk</span></div></div>
+          <div class="pages-tr"><div>Baggage Misconnect Orchestrator pilot · Network Operations</div><div>M. Johnson</div><div>Jun 15</div><div><span class="pill good">On track</span></div></div>
         </div>
 
         <div class="pages-comments">
@@ -12375,7 +11922,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <div class="pv-event bad"><div class="pv-ev-t">12 min ago</div><div class="pv-ev-user">J. Okonkwo</div><div class="pv-ev-desc">Tried to forward Case-file PII to personal gmail</div><div class="pv-ev-status">✕ Blocked</div></div>
             <div class="pv-event"><div class="pv-ev-t">2 h ago</div><div class="pv-ev-user">IT Help Desk</div><div class="pv-ev-desc">Attempted to paste employee list into ChatGPT</div><div class="pv-ev-status">✕ Blocked</div></div>
             <div class="pv-event"><div class="pv-ev-t">Yesterday</div><div class="pv-ev-user">L. Thomas</div><div class="pv-ev-desc">Uploaded certified turn plan to unapproved tool</div><div class="pv-ev-status">✕ Blocked</div></div>
-            <div class="pv-event"><div class="pv-ev-t">Yesterday</div><div class="pv-ev-user">Agent: Ramp Turn Sheet Front Door</div><div class="pv-ev-desc">Accessed out-of-scope (crew safety records · FAR 193 protected) SharePoint</div><div class="pv-ev-status">✕ Blocked</div></div>
+            <div class="pv-event"><div class="pv-ev-t">Yesterday</div><div class="pv-ev-user">Agent: Gate Turnaround Optimizer</div><div class="pv-ev-desc">Accessed out-of-scope (crew safety records · FAR 193 protected) SharePoint</div><div class="pv-ev-status">✕ Blocked</div></div>
             <div class="pv-event"><div class="pv-ev-t">2 d ago</div><div class="pv-ev-user">M. Gutierrez</div><div class="pv-ev-desc">Shared certified turn plan externally (approved lender)</div><div class="pv-ev-status">✓ Allowed (audit)</div></div>
           </div>
         </div>
@@ -12473,7 +12020,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <div class="studio-head">
         <div>
           <h1>Cascadia Airways Copilot Studio <span style="font-weight:400;color:var(--gray-90);">· Production environment</span></h1>
-          <p>For IT — the full-fat agent builder. Publish as standalone Teams bots, connect to Sabre AirOps Ops Management or Sabre (Aquera), trigger Power Automate flows.</p>
+          <p>For IT — the full-fat agent builder. Publish as standalone Teams bots, connect to Sabre AirOps Ops Management or Sabre Crew+Ops, trigger Power Automate flows.</p>
         </div>
         <div class="studio-actions">
           <button class="shifts-btn">↓ Export</button>
@@ -12488,11 +12035,11 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       </div>
       <div class="studio-agents">
         <div class="studio-row head"><div>Agent</div><div>Channel</div><div>Connectors</div><div>Conversations (30d)</div><div>Status</div></div>
-        <div class="studio-row"><div><svg width="28" height="28" style="vertical-align:-8px;margin-right:8px;"><use href="#agentLogoShield"/></svg><strong>PTO Assistant</strong><span style="display:block;font-size:11px;color:var(--gray-90);margin-left:36px;">Passenger Services & Station Ops Coordinators · prod</span></div><div>Teams + Web</div><div><span class="sb-pill">Sabre (Aquera)</span><span class="sb-pill">Sabre AirOps Ops Management</span></div><div>12,482</div><div><span class="pill good">● Live</span></div></div>
-        <div class="studio-row"><div><svg width="28" height="28" style="vertical-align:-8px;margin-right:8px;"><use href="#agentLogoBed"/></svg><strong>File Validator</strong><span style="display:block;font-size:11px;color:var(--gray-90);margin-left:36px;">Network Operations · prod</span></div><div>Teams</div><div><span class="sb-pill">Sabre AirOps Ops Management</span><span class="sb-pill">SharePoint</span></div><div>8,115</div><div><span class="pill good">● Live</span></div></div>
-        <div class="studio-row"><div><svg width="28" height="28" style="vertical-align:-8px;margin-right:8px;"><use href="#agentLogoTrial"/></svg><strong>Onboarding Nudge</strong><span style="display:block;font-size:11px;color:var(--gray-90);margin-left:36px;">Network Operations · pilot</span></div><div>Teams + Mobile</div><div><span class="sb-pill">Sabre AirOps Ops Management</span><span class="sb-pill">Outlook</span></div><div>2,310</div><div><span class="pill warn">● Pilot (Engineering)</span></div></div>
-        <div class="studio-row"><div><svg width="28" height="28" style="vertical-align:-8px;margin-right:8px;"><use href="#agentLogoIntake"/></svg><strong>Ramp Turn Sheet Front Door</strong><span style="display:block;font-size:11px;color:var(--gray-90);margin-left:36px;">Network Operations · prod</span></div><div>Web + Email</div><div><span class="sb-pill">Sabre AirOps Ops Management</span><span class="sb-pill">Power Automate</span></div><div>4,602</div><div><span class="pill good">● Live</span></div></div>
-        <div class="studio-row"><div><svg width="28" height="28" style="vertical-align:-8px;margin-right:8px;"><use href="#agentLogoReadmit"/></svg><strong>Policy RAG (Filing & Disposition Manual)</strong><span style="display:block;font-size:11px;color:var(--gray-90);margin-left:36px;">Network Operations · staging</span></div><div>Teams</div><div><span class="sb-pill">SharePoint</span><span class="sb-pill">Dataverse</span></div><div>142</div><div><span class="pill warn">● Staging</span></div></div>
+        <div class="studio-row"><div><svg width="28" height="28" style="vertical-align:-8px;margin-right:8px;"><use href="#agentLogoShield"/></svg><strong>Passenger Disruption Comms</strong><span style="display:block;font-size:11px;color:var(--gray-90);margin-left:36px;">Network Operations · prod</span></div><div>Teams + Web</div><div><span class="sb-pill">Sabre Crew+Ops</span><span class="sb-pill">Sabre AirOps Ops Management</span></div><div>12,482</div><div><span class="pill good">● Live</span></div></div>
+        <div class="studio-row"><div><svg width="28" height="28" style="vertical-align:-8px;margin-right:8px;"><use href="#agentLogoBed"/></svg><strong>IROps Cascade Commander</strong><span style="display:block;font-size:11px;color:var(--gray-90);margin-left:36px;">Network Operations · prod</span></div><div>Teams</div><div><span class="sb-pill">Sabre AirOps Ops Management</span><span class="sb-pill">SharePoint</span></div><div>8,115</div><div><span class="pill good">● Live</span></div></div>
+        <div class="studio-row"><div><svg width="28" height="28" style="vertical-align:-8px;margin-right:8px;"><use href="#agentLogoTrial"/></svg><strong>Baggage Misconnect Orchestrator</strong><span style="display:block;font-size:11px;color:var(--gray-90);margin-left:36px;">Network Operations · pilot</span></div><div>Teams + Mobile</div><div><span class="sb-pill">Sabre AirOps Ops Management</span><span class="sb-pill">Outlook</span></div><div>2,310</div><div><span class="pill warn">● Pilot (Engineering)</span></div></div>
+        <div class="studio-row"><div><svg width="28" height="28" style="vertical-align:-8px;margin-right:8px;"><use href="#agentLogoIntake"/></svg><strong>Gate Turnaround Optimizer</strong><span style="display:block;font-size:11px;color:var(--gray-90);margin-left:36px;">Network Operations · prod</span></div><div>Web + Email</div><div><span class="sb-pill">Sabre AirOps Ops Management</span><span class="sb-pill">Power Automate</span></div><div>4,602</div><div><span class="pill good">● Live</span></div></div>
+        <div class="studio-row"><div><svg width="28" height="28" style="vertical-align:-8px;margin-right:8px;"><use href="#agentLogoReadmit"/></svg><strong>Regulatory Response Desk</strong><span style="display:block;font-size:11px;color:var(--gray-90);margin-left:36px;">Network Operations · staging</span></div><div>Teams</div><div><span class="sb-pill">SharePoint</span><span class="sb-pill">Dataverse</span></div><div>142</div><div><span class="pill warn">● Staging</span></div></div>
       </div>
       <div class="studio-note">
         <strong>Note:</strong> The in-app agents on the home page for Dispatchers and managers were built with the lightweight agent builder included with M365 Copilot. This view shows the full Copilot Studio — same starting point, more connectors (Sabre AirOps, Sabre AirOps, state retirement systems), channels, and flow triggers.
@@ -12604,7 +12151,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             </thead>
             <tbody>
               <tr>
-                <td class="a-name"><svg width="22" height="22"><use href="#agentLogoShield"/></svg><div><strong>PTO Assistant</strong><span>Passenger Services & Station Ops Coordinators · prod</span></div></td>
+                <td class="a-name"><svg width="22" height="22"><use href="#agentLogoShield"/></svg><div><strong>Passenger Disruption Comms</strong><span>Network Operations · prod</span></div></td>
                 <td><span class="src-badge ms">Copilot Studio</span></td>
                 <td>M. Gutierrez</td>
                 <td><span class="id-chip"><svg class="kc-ico-inline" width="12" height="12" style="vertical-align:-2px;margin-right:3px;color:currentColor;"><use href="#fiLock"/></svg>Entra ID</span></td>
@@ -12613,7 +12160,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
                 <td><span class="pill good">● Live</span></td>
               </tr>
               <tr>
-                <td class="a-name"><svg width="22" height="22"><use href="#agentLogoBed"/></svg><div><strong>File Validator</strong><span>Network Operations · prod</span></div></td>
+                <td class="a-name"><svg width="22" height="22"><use href="#agentLogoBed"/></svg><div><strong>IROps Cascade Commander</strong><span>Network Operations · prod</span></div></td>
                 <td><span class="src-badge ms">Copilot Studio</span></td>
                 <td>M. Johnson</td>
                 <td><span class="id-chip"><svg class="kc-ico-inline" width="12" height="12" style="vertical-align:-2px;margin-right:3px;color:currentColor;"><use href="#fiLock"/></svg>Entra ID</span></td>
@@ -12622,7 +12169,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
                 <td><span class="pill good">● Live</span></td>
               </tr>
               <tr>
-                <td class="a-name"><svg width="22" height="22"><use href="#agentLogoIntake"/></svg><div><strong>Ramp Turn Sheet Front Door</strong><span>Network Operations · prod</span></div></td>
+                <td class="a-name"><svg width="22" height="22"><use href="#agentLogoIntake"/></svg><div><strong>Gate Turnaround Optimizer</strong><span>Network Operations · prod</span></div></td>
                 <td><span class="src-badge ms">Copilot Studio</span></td>
                 <td>S. Chen</td>
                 <td><span class="id-chip"><svg class="kc-ico-inline" width="12" height="12" style="vertical-align:-2px;margin-right:3px;color:currentColor;"><use href="#fiLock"/></svg>Entra ID</span></td>
@@ -12631,7 +12178,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
                 <td><span class="pill good">● Live</span></td>
               </tr>
               <tr>
-                <td class="a-name"><svg width="22" height="22"><use href="#agentLogoTrial"/></svg><div><strong>Onboarding Nudge</strong><span>Network Operations · pilot</span></div></td>
+                <td class="a-name"><svg width="22" height="22"><use href="#agentLogoTrial"/></svg><div><strong>Baggage Misconnect Orchestrator</strong><span>Network Operations · pilot</span></div></td>
                 <td><span class="src-badge ms">Copilot Studio</span></td>
                 <td>S. Chen</td>
                 <td><span class="id-chip"><svg class="kc-ico-inline" width="12" height="12" style="vertical-align:-2px;margin-right:3px;color:currentColor;"><use href="#fiLock"/></svg>Entra ID</span></td>
@@ -12640,7 +12187,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
                 <td><span class="pill warn">● Pilot</span></td>
               </tr>
               <tr>
-                <td class="a-name"><svg width="22" height="22"><use href="#agentLogoReadmit"/></svg><div><strong>Probable Cause Turn Plan</strong><span>Network Operations · prod</span></div></td>
+                <td class="a-name"><svg width="22" height="22"><use href="#agentLogoReadmit"/></svg><div><strong>Predictive Maintenance Copilot</strong><span>Network Operations · prod</span></div></td>
                 <td><span class="src-badge ms">Declarative agent</span></td>
                 <td>S. Chen</td>
                 <td><span class="id-chip"><svg class="kc-ico-inline" width="12" height="12" style="vertical-align:-2px;margin-right:3px;color:currentColor;"><use href="#fiLock"/></svg>Entra ID</span></td>
@@ -12726,16 +12273,16 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
               <span class="adm-live"><span class="adm-live-dot"></span>Live</span>
             </div>
             <div class="a365-feed" id="a365-feed">
-              <div class="a365-feed-row"><span class="a365-feed-t">just now</span><span class="a365-feed-a">PTO Assistant</span><span class="a365-feed-d">Drafted PTO request for Garcia, E. (Facilities) → routed to T. Reilly for approval</span></div>
-              <div class="a365-feed-row"><span class="a365-feed-t">4s ago</span><span class="a365-feed-a">File Validator</span><span class="a365-feed-d">Queried Sabre AirOps file repo for Network Operations (read-only)</span></div>
-              <div class="a365-feed-row bad"><span class="a365-feed-t">9s ago</span><span class="a365-feed-a">Agentforce (SF)</span><span class="a365-feed-d">⚠ Attempted to read an HR-PII-labeled field outside scope — <strong>DLP block</strong></span></div>
-              <div class="a365-feed-row"><span class="a365-feed-t">12s ago</span><span class="a365-feed-a">Ramp Turn Sheet Front Door</span><span class="a365-feed-d">Routed address-change request for Garcia, E. to Benefits queue</span></div>
-              <div class="a365-feed-row"><span class="a365-feed-t">18s ago</span><span class="a365-feed-a">Cascadia GPT</span><span class="a365-feed-d">Summarized ATP overtime section for Sarah Chen</span></div>
-              <div class="a365-feed-row"><span class="a365-feed-t">22s ago</span><span class="a365-feed-a">Sabre AirOps Ops Management agent</span><span class="a365-feed-d">Flagged Castillo, P. missing handbook ack — routed to M. Gutierrez</span></div>
-              <div class="a365-feed-row"><span class="a365-feed-t">28s ago</span><span class="a365-feed-a">Onboarding Nudge</span><span class="a365-feed-d">Screened 7 new hires at day-30 · 2 checklists behind</span></div>
-              <div class="a365-feed-row"><span class="a365-feed-t">34s ago</span><span class="a365-feed-a">Probable Cause Turn Plan</span><span class="a365-feed-d">Generated 3 probable-cause turn plans · all 4-hour turnaround</span></div>
+              <div class="a365-feed-row"><span class="a365-feed-t">just now</span><span class="a365-feed-a">Passenger Disruption Comms</span><span class="a365-feed-d">Drafted 284 EU261 letters for CAS0517 SEA→DEN diversion · EN/ES · queued for Dispatcher review</span></div>
+              <div class="a365-feed-row"><span class="a365-feed-t">4s ago</span><span class="a365-feed-a">IROps Cascade Commander</span><span class="a365-feed-d">Ran 128 network sims for ORD ground stop · 47 flights in cascade · 3 ranked plans ready</span></div>
+              <div class="a365-feed-row bad"><span class="a365-feed-t">9s ago</span><span class="a365-feed-a">Agentforce (SF)</span><span class="a365-feed-d">⚠ Attempted to read a passenger-PII field outside scope — <strong>DLP block</strong></span></div>
+              <div class="a365-feed-row"><span class="a365-feed-t">12s ago</span><span class="a365-feed-a">Gate Turnaround Optimizer</span><span class="a365-feed-d">OCR'd 6 ramp turn sheets overnight · fuel-load discrepancy flagged at gate B17</span></div>
+              <div class="a365-feed-row"><span class="a365-feed-t">18s ago</span><span class="a365-feed-a">Cascadia GPT</span><span class="a365-feed-d">Summarized FAR 117 §b cushion status for Sarah Chen</span></div>
+              <div class="a365-feed-row"><span class="a365-feed-t">22s ago</span><span class="a365-feed-a">Sabre AirOps Ops Management agent</span><span class="a365-feed-d">Cross-checked N6152CA prior MX history · 2 prior engine events · routed to Pred MX</span></div>
+              <div class="a365-feed-row"><span class="a365-feed-t">28s ago</span><span class="a365-feed-a">Baggage Misconnect Orchestrator</span><span class="a365-feed-d">Predicted 14 short-connect bags at SEA B17 · re-sequenced bag loader 2 to B15</span></div>
+              <div class="a365-feed-row"><span class="a365-feed-t">34s ago</span><span class="a365-feed-a">Predictive Maintenance Copilot</span><span class="a365-feed-d">Booked A-check slot 04/24 22:00 SEA hangar 4 · pre-ordered RB211-T-042 · awaiting VP sign-off</span></div>
               <div class="a365-feed-row bad"><span class="a365-feed-t">39s ago</span><span class="a365-feed-a">"PolicyGPT v2"</span><span class="a365-feed-d">⚠ Unapproved endpoint contact attempt — <strong>Conditional Access blocked</strong></span></div>
-              <div class="a365-feed-row"><span class="a365-feed-t">45s ago</span><span class="a365-feed-a">Now Assist (SN)</span><span class="a365-feed-d">Resolved ticket HD-4412 (password reset)</span></div>
+              <div class="a365-feed-row"><span class="a365-feed-t">45s ago</span><span class="a365-feed-a">Crew Legality &amp; Reassignment</span><span class="a365-feed-d">Matched reserve FO H. Lee to Pairing P4481 (score 94/100) · call-up draft ready</span></div>
             </div>
           </div>
 
@@ -12817,10 +12364,10 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
                 <tr><th>Agent</th><th>Entra Agent ID</th><th>Scopes granted</th><th>Last rotated</th><th>Conditional Access</th></tr>
               </thead>
               <tbody>
-                <tr><td class="a-name"><svg width="22" height="22"><use href="#agentLogoShield"/></svg><div><strong>PTO Assistant</strong><span>Passenger Services & Station Ops Coordinators</span></div></td><td><code class="a365-code">ai-pto-assist-01</code></td><td><span class="src-badge ms">Graph.Files.Read</span> <span class="src-badge ms">Mail.Send</span></td><td>14 d ago</td><td><span class="pill good">✓ Restricted</span></td></tr>
-                <tr><td class="a-name"><svg width="22" height="22"><use href="#agentLogoBed"/></svg><div><strong>File Validator</strong><span>Network Operations</span></div></td><td><code class="a365-code">ai-file-val-01</code></td><td><span class="src-badge ms">Graph.Read</span> <span class="src-badge partner">Sabre AirOps.Files.Read</span></td><td>2 d ago</td><td><span class="pill good">✓ Restricted</span></td></tr>
-                <tr><td class="a-name"><svg width="22" height="22"><use href="#agentLogoIntake"/></svg><div><strong>Ramp Turn Sheet Front Door</strong><span>Network Operations</span></div></td><td><code class="a365-code">ai-hr-frontdoor-01</code></td><td><span class="src-badge ms">Graph.Files.ReadWrite</span> <span class="src-badge ms">Mail.Draft</span></td><td>21 d ago</td><td><span class="pill good">✓ Restricted</span></td></tr>
-                <tr><td class="a-name"><svg width="22" height="22"><use href="#agentLogoTrial"/></svg><div><strong>Onboarding Nudge</strong><span>Network Operations</span></div></td><td><code class="a365-code">ai-onboard-nudge-01</code></td><td><span class="src-badge ms">Graph.Read</span> <span class="src-badge partner">Sabre AirOps.NewHires.Read</span></td><td>7 d ago</td><td><span class="pill good">✓ Restricted</span></td></tr>
+                <tr><td class="a-name"><svg width="22" height="22"><use href="#agentLogoShield"/></svg><div><strong>Passenger Disruption Comms</strong><span>Passenger Services & Station Ops Coordinators</span></div></td><td><code class="a365-code">ai-pto-assist-01</code></td><td><span class="src-badge ms">Graph.Files.Read</span> <span class="src-badge ms">Mail.Send</span></td><td>14 d ago</td><td><span class="pill good">✓ Restricted</span></td></tr>
+                <tr><td class="a-name"><svg width="22" height="22"><use href="#agentLogoBed"/></svg><div><strong>IROps Cascade Commander</strong><span>Network Operations</span></div></td><td><code class="a365-code">ai-file-val-01</code></td><td><span class="src-badge ms">Graph.Read</span> <span class="src-badge partner">Sabre AirOps.Files.Read</span></td><td>2 d ago</td><td><span class="pill good">✓ Restricted</span></td></tr>
+                <tr><td class="a-name"><svg width="22" height="22"><use href="#agentLogoIntake"/></svg><div><strong>Gate Turnaround Optimizer</strong><span>Network Operations</span></div></td><td><code class="a365-code">ai-hr-frontdoor-01</code></td><td><span class="src-badge ms">Graph.Files.ReadWrite</span> <span class="src-badge ms">Mail.Draft</span></td><td>21 d ago</td><td><span class="pill good">✓ Restricted</span></td></tr>
+                <tr><td class="a-name"><svg width="22" height="22"><use href="#agentLogoTrial"/></svg><div><strong>Baggage Misconnect Orchestrator</strong><span>Network Operations</span></div></td><td><code class="a365-code">ai-onboard-nudge-01</code></td><td><span class="src-badge ms">Graph.Read</span> <span class="src-badge partner">Sabre AirOps.NewHires.Read</span></td><td>7 d ago</td><td><span class="pill good">✓ Restricted</span></td></tr>
                 <tr><td class="a-name"><span class="ext-ico" style="background:#00a1e0;">SF</span><div><strong>Agentforce (Salesforce)</strong><span>Witness Services</span></div></td><td><code class="a365-code">ai-sf-agentforce-01</code></td><td><span class="src-badge partner">SF.Read</span> <span class="src-badge ms">Graph.Files.Read</span></td><td>45 d ago · <span style="color:#c77700;font-weight:600;">rotate recommended</span></td><td><span class="pill warn">Attested</span></td></tr>
                 <tr><td class="a-name"><span class="ext-ico" style="background:#ff5a3c;">W</span><div><strong>Sabre AirOps Ops Management agent</strong><span>HRIS</span></div></td><td><code class="a365-code">ai-workday-hcm-01</code></td><td><span class="src-badge partner">Sabre AirOps.Read</span></td><td>9 d ago</td><td><span class="pill good">✓ Restricted</span></td></tr>
               </tbody>
@@ -12840,12 +12387,12 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <div class="a365-card">
               <div class="a365-card-head"><div><div class="a365-card-title">Who can invoke what</div><div class="a365-card-sub">Role-to-agent mapping · top 6</div></div></div>
               <div class="a365-feed" style="max-height:none;">
-                <div class="a365-feed-row"><span class="a365-feed-t">Dispatchers</span><span class="a365-feed-a">File Val, Front Door, Onboarding</span><span class="a365-feed-d">428 users</span></div>
-                <div class="a365-feed-row"><span class="a365-feed-t">Managers</span><span class="a365-feed-a">PTO, Onboarding Nudge</span><span class="a365-feed-d">340 users</span></div>
-                <div class="a365-feed-row"><span class="a365-feed-t">Benefits</span><span class="a365-feed-a">PTO Assistant, Verification</span><span class="a365-feed-d">62 users</span></div>
-                <div class="a365-feed-row"><span class="a365-feed-t">Witness Svcs</span><span class="a365-feed-a">Agentforce</span><span class="a365-feed-d">48 users</span></div>
+                <div class="a365-feed-row"><span class="a365-feed-t">SOC Dispatchers</span><span class="a365-feed-a">IROps Cascade, Crew Legality, Pax Comms</span><span class="a365-feed-d">84 users</span></div>
+                <div class="a365-feed-row"><span class="a365-feed-t">Station Ops (hubs)</span><span class="a365-feed-a">Gate Turnaround, Baggage Misconnect</span><span class="a365-feed-d">412 users</span></div>
+                <div class="a365-feed-row"><span class="a365-feed-t">MX Control</span><span class="a365-feed-a">Predictive MX Copilot</span><span class="a365-feed-d">58 users</span></div>
+                <div class="a365-feed-row"><span class="a365-feed-t">Pax Experience</span><span class="a365-feed-a">Passenger Disruption Comms</span><span class="a365-feed-d">96 users</span></div>
                 <div class="a365-feed-row"><span class="a365-feed-t">IT</span><span class="a365-feed-a">Cascadia GPT, Now Assist</span><span class="a365-feed-d">124 users</span></div>
-                <div class="a365-feed-row"><span class="a365-feed-t">Network Analytics</span><span class="a365-feed-a">Policy RAG</span><span class="a365-feed-d">22 users</span></div>
+                <div class="a365-feed-row"><span class="a365-feed-t">Regulatory</span><span class="a365-feed-a">Regulatory Response Desk</span><span class="a365-feed-d">22 users</span></div>
               </div>
             </div>
           </div>
@@ -12945,7 +12492,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <div class="a365-inc" style="border-left-color:#107c10;background:linear-gradient(90deg,#eef9f1,#fff);">
               <div class="a365-inc-sev" style="background:#107c10;">RESOLVED</div>
               <div class="a365-inc-main">
-                <div class="a365-inc-t">PTO Assistant hit rate-limit on Sabre (Aquera) API</div>
+                <div class="a365-inc-t">Passenger Disruption Comms hit rate-limit on Sabre Crew+Ops API</div>
                 <div class="a365-inc-s">Resolved 4d ago · backoff + retry logic pushed · Owner: M. Gutierrez</div>
               </div>
               <div class="a365-inc-actions"><button class="adm-f">Post-mortem</button></div>
@@ -12953,7 +12500,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <div class="a365-inc" style="border-left-color:#107c10;background:linear-gradient(90deg,#eef9f1,#fff);">
               <div class="a365-inc-sev" style="background:#107c10;">RESOLVED</div>
               <div class="a365-inc-main">
-                <div class="a365-inc-t">Ramp Turn Sheet Front Door — misclassified urgent ER case as routine</div>
+                <div class="a365-inc-t">Gate Turnaround Optimizer — misclassified urgent ER case as routine</div>
                 <div class="a365-inc-s">Resolved 9d ago · instructions updated · manual re-review of 14 past triages · all clear</div>
               </div>
               <div class="a365-inc-actions"><button class="adm-f">Post-mortem</button></div>
@@ -12983,12 +12530,12 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <div class="a365-card-head"><div><div class="a365-card-title">Spend by agent · MTD</div><div class="a365-card-sub">Top 8 · all others rolled up</div></div></div>
             <div class="adm-uc" style="margin-top:8px;">
               <div class="adm-uc-row"><span class="adm-uc-name">Cascadia GPT (custom)</span><div class="adm-uc-bar"><span style="width:92%;background:#7441e8;"></span></div><span class="adm-uc-n">$3,120</span></div>
-              <div class="adm-uc-row"><span class="adm-uc-name">PTO Assistant</span><div class="adm-uc-bar"><span style="width:58%;background:#1b4aa8;"></span></div><span class="adm-uc-n">$1,642</span></div>
-              <div class="adm-uc-row"><span class="adm-uc-name">File Validator</span><div class="adm-uc-bar"><span style="width:42%;background:#1b4aa8;"></span></div><span class="adm-uc-n">$1,088</span></div>
-              <div class="adm-uc-row"><span class="adm-uc-name">Ramp Turn Sheet Front Door</span><div class="adm-uc-bar"><span style="width:28%;background:#1b4aa8;"></span></div><span class="adm-uc-n">$712</span></div>
+              <div class="adm-uc-row"><span class="adm-uc-name">Passenger Disruption Comms</span><div class="adm-uc-bar"><span style="width:58%;background:#1b4aa8;"></span></div><span class="adm-uc-n">$1,642</span></div>
+              <div class="adm-uc-row"><span class="adm-uc-name">IROps Cascade Commander</span><div class="adm-uc-bar"><span style="width:42%;background:#1b4aa8;"></span></div><span class="adm-uc-n">$1,088</span></div>
+              <div class="adm-uc-row"><span class="adm-uc-name">Gate Turnaround Optimizer</span><div class="adm-uc-bar"><span style="width:28%;background:#1b4aa8;"></span></div><span class="adm-uc-n">$712</span></div>
               <div class="adm-uc-row"><span class="adm-uc-name">Sabre AirOps Ops Management agent</span><div class="adm-uc-bar"><span style="width:22%;background:#ff5a3c;"></span></div><span class="adm-uc-n">$548</span></div>
               <div class="adm-uc-row"><span class="adm-uc-name">Agentforce (SF)</span><div class="adm-uc-bar"><span style="width:16%;background:#00a1e0;"></span></div><span class="adm-uc-n">$402</span></div>
-              <div class="adm-uc-row"><span class="adm-uc-name">Onboarding Nudge</span><div class="adm-uc-bar"><span style="width:12%;background:#1b4aa8;"></span></div><span class="adm-uc-n">$310</span></div>
+              <div class="adm-uc-row"><span class="adm-uc-name">Baggage Misconnect Orchestrator</span><div class="adm-uc-bar"><span style="width:12%;background:#1b4aa8;"></span></div><span class="adm-uc-n">$310</span></div>
               <div class="adm-uc-row"><span class="adm-uc-name">Now Assist</span><div class="adm-uc-bar"><span style="width:9%;background:#62d84e;"></span></div><span class="adm-uc-n">$218</span></div>
               <div class="adm-uc-row"><span class="adm-uc-name">All others (39)</span><div class="adm-uc-bar"><span style="width:7%;background:var(--gray-90);"></span></div><span class="adm-uc-n">$200</span></div>
             </div>
@@ -13007,7 +12554,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
               <div class="a365-card-head"><div><div class="a365-card-title">Optimization tips</div><div class="a365-card-sub">From Agent 365 recommendations</div></div></div>
               <div class="a365-feed" style="max-height:none;">
                 <div class="a365-feed-row"><span class="a365-feed-t">−$420/mo</span><span class="a365-feed-a">Caching</span><span class="a365-feed-d">Cascadia GPT — enable prompt caching for repeat handbook lookups</span></div>
-                <div class="a365-feed-row"><span class="a365-feed-t">−$180/mo</span><span class="a365-feed-a">Model tier</span><span class="a365-feed-d">Ramp Turn Sheet Front Door — route simple queries to cheaper model</span></div>
+                <div class="a365-feed-row"><span class="a365-feed-t">−$180/mo</span><span class="a365-feed-a">Model tier</span><span class="a365-feed-d">Gate Turnaround Optimizer — route simple queries to cheaper model</span></div>
                 <div class="a365-feed-row"><span class="a365-feed-t">−$90/mo</span><span class="a365-feed-a">Idle agents</span><span class="a365-feed-d">3 agents below 50 runs/wk — archive candidates</span></div>
               </div>
             </div>
@@ -13033,18 +12580,18 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
           <table class="a365-table" style="font-size:12px;">
             <thead><tr><th>Time</th><th>Agent</th><th>Invoked by</th><th>Prompt / action</th><th>Sources</th><th>Label</th><th>Outcome</th></tr></thead>
             <tbody>
-              <tr><td>09:14:22</td><td>File Validator</td><td>M. Gutierrez</td><td>"What's the file-exception picture right now?"</td><td>Sabre AirOps files · read</td><td>—</td><td class="ok">✓ OK</td></tr>
-              <tr><td>09:14:11</td><td>PTO Assistant</td><td>T. Reilly</td><td>Approve PTO requests for Facilities</td><td>Sabre (Aquera) · 14 requests</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
-              <tr><td>09:13:58</td><td>Ramp Turn Sheet Front Door</td><td>S. Chen</td><td>Route 3 new intakes</td><td>Intake folder</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
+              <tr><td>09:14:22</td><td>IROps Cascade Commander</td><td>M. Gutierrez</td><td>"What's the file-exception picture right now?"</td><td>Sabre AirOps files · read</td><td>—</td><td class="ok">✓ OK</td></tr>
+              <tr><td>09:14:11</td><td>Passenger Disruption Comms</td><td>T. Reilly</td><td>Approve PTO requests for Facilities</td><td>Sabre Crew+Ops · 14 requests</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
+              <tr><td>09:13:58</td><td>Gate Turnaround Optimizer</td><td>S. Chen</td><td>Route 3 new intakes</td><td>Intake folder</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
               <tr><td>09:13:42</td><td>Cascadia GPT</td><td>P. Raman</td><td>"Summarize ATP overtime Section 4.1"</td><td>Reference · public</td><td>Public</td><td class="ok">✓ OK</td></tr>
               <tr><td>09:13:20</td><td>Agentforce (SF)</td><td>L. Nguyen</td><td>Fetch passenger employment record</td><td>SF · CDP</td><td>Case-file PII</td><td class="bad">✕ DLP block</td></tr>
-              <tr><td>09:12:58</td><td>Onboarding Nudge</td><td>M. Johnson</td><td>Screen new hires at day-30 checkpoint</td><td>Sabre AirOps · Outlook</td><td>Confidential</td><td class="ok">✓ OK</td></tr>
+              <tr><td>09:12:58</td><td>Baggage Misconnect Orchestrator</td><td>M. Johnson</td><td>Screen new hires at day-30 checkpoint</td><td>Sabre AirOps · Outlook</td><td>Confidential</td><td class="ok">✓ OK</td></tr>
               <tr><td>09:12:41</td><td>Sabre AirOps Ops Management agent</td><td>D. Kowalski</td><td>Pending file exceptions for Network Operations</td><td>Sabre AirOps · REST</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
-              <tr><td>09:12:19</td><td>Probable Cause Turn Plan</td><td>(scheduled)</td><td>Nightly letter queue</td><td>3 open requests · Policy v4</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
+              <tr><td>09:12:19</td><td>Predictive Maintenance Copilot</td><td>(scheduled)</td><td>Nightly letter queue</td><td>3 open requests · Policy v4</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
               <tr><td>09:11:47</td><td>"PolicyGPT v2"</td><td>r.smith@cascadia-air.com</td><td>Unapproved endpoint POST</td><td>—</td><td>—</td><td class="bad">✕ CA blocked</td></tr>
               <tr><td>09:11:12</td><td>Now Assist</td><td>IT Ops</td><td>Resolve ticket HD-4412</td><td>ServiceNow</td><td>Internal</td><td class="ok">✓ OK</td></tr>
-              <tr><td>09:10:58</td><td>File Validator</td><td>M. Gutierrez</td><td>"Who's missing an ATP currency this week?"</td><td>Sabre AirOps files · read</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
-              <tr><td>09:10:30</td><td>PTO Assistant</td><td>(scheduled)</td><td>Manager approval reminder scan</td><td>Sabre · 14 pending</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
+              <tr><td>09:10:58</td><td>IROps Cascade Commander</td><td>M. Gutierrez</td><td>"Who's missing an ATP currency this week?"</td><td>Sabre AirOps files · read</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
+              <tr><td>09:10:30</td><td>Passenger Disruption Comms</td><td>(scheduled)</td><td>Manager approval reminder scan</td><td>Sabre · 14 pending</td><td>Case-file PII</td><td class="ok">✓ OK</td></tr>
             </tbody>
           </table>
         </div>
@@ -13105,7 +12652,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
           <div class="rm-wave-body">
             <div class="rm-wave-col">
               <div class="rm-col-label">Scope</div>
-              <p><strong>SOC×IT AI operating model</strong>, governance baseline, Teams entry point decision (dedicated Network Operations channel), document repos + retention owners named. Quick wins: <strong>File Validator</strong> (1A) + <strong>PTO Assistant in Teams</strong> (1B, Sabre via Aquera).</p>
+              <p><strong>SOC×IT AI operating model</strong>, governance baseline, Teams entry point decision (dedicated Network Operations channel), document repos + retention owners named. Quick wins: <strong>IROps Cascade Commander</strong> (1A) + <strong>Passenger Disruption Comms in Teams</strong> (1B, Sabre via Aquera).</p>
             </div>
             <div class="rm-wave-col">
               <div class="rm-col-label">Use cases live</div>
@@ -13143,7 +12690,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
           <div class="rm-wave-body">
             <div class="rm-wave-col">
               <div class="rm-col-label">Scope</div>
-              <p><strong>Ramp Turn Sheet Front Door</strong> — structured intake &amp; routing for Turn plan submissions, starting with scheduled-ops referrals and turn plan recommendations. <strong>Filing Manual RAG</strong> over FAR citations, ops standards, and internal ops memos with confidence gating + supervisor Dispatcher escalation.</p>
+              <p><strong>Gate Turnaround Optimizer</strong> — structured intake &amp; routing for Turn plan submissions, starting with scheduled-ops referrals and turn plan recommendations. <strong>Filing Manual RAG</strong> over FAR citations, ops standards, and internal ops memos with confidence gating + supervisor Dispatcher escalation.</p>
             </div>
             <div class="rm-wave-col">
               <div class="rm-col-label">Use cases piloting</div>
@@ -13186,7 +12733,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <div class="rm-wave-col">
               <div class="rm-col-label">Use cases target</div>
               <ul>
-                <li>Onboarding Nudge — 30/60/90 manager reminders</li>
+                <li>Baggage Misconnect Orchestrator — 30/60/90 manager reminders</li>
                 <li>Off-track checklist detection + specific item nudges</li>
                 <li>Network Operations pilot → all 6 divisions</li>
                 <li>Quarterly AI governance cadence</li>
@@ -15864,7 +15411,6 @@ function openApp(app, context) {
   if (app === 'excel') renderExcel();
   if (app === 'powerpoint') renderPptStrip();
   if (app === 'onedrive') renderOneDrive();
-  if (app === 'dax') { renderDaxWaveform(); kcResetIntake(); }
   if (app === 'word') kcRedactReset();
   if (app === 'pages') setTimeout(startPagesCursors, 200);
   if (app === 'agent365') startAgent365Feed();
@@ -15881,7 +15427,6 @@ function openApp(app, context) {
     powerpoint: "In PowerPoint, click the Copilot logo to build the Q2 Board briefing deck from source data.",
     onedrive: "In OneDrive, click the Copilot logo to find everything about an employee case across 847 files in under a second.",
     admin: "The Admin Center shows Copilot adoption, Copilot deflection, and a live audit log of every prompt — governance your CIO can actually point at.",
-    dax:   "The Report Intake agent ambiently listens to the employee-Dispatcher conversation and drafts the case note in real time.",
     pages: "Copilot Pages is a collaborative AI canvas — numbers stay synced with the source Sabre AirOps and deck.",
     agent365: "Agent 365 is the single pane of glass for every agent in your tenant — Microsoft, partner, or custom. Watch the live feed in the right column.",
     irops:    "IROps Cascade Commander. Click Simulate cascade to watch Copilot run 128 network sims in 81 s. Three recovery plans ranked. Six gate-productivity suggestions stream in parallel.",
@@ -16843,9 +16388,9 @@ const TOUR = [
     run:   () => { closeCopilot(); openApp('powerpoint'); setTimeout(() => { toggleCopilot('powerpoint'); setTimeout(() => runCopilotByKey('powerpoint','build'), 500); }, 700); }
   },
   {
-    title: "Report Intake — ambient case documentation",
-    text:  "For Dispatchers: the employee conversation is transcribed live and the case note + passenger leave paperwork draft themselves. 17 minutes saved per intake.",
-    run:   () => { closeCopilot(); openApp('dax'); }
+    title: "IROps Cascade — disruption in three ranked plans",
+    text:  "When ORD hits a ground stop, Copilot simulates the cascade across 47 flights, scores three recovery plans against FAR 117 + DOT + cost, and keeps every gate productive while you choose.",
+    run:   () => { closeCopilot(); openApp('irops'); }
   },
   {
     title: "For the CIO: governance you can point at",
@@ -17126,18 +16671,18 @@ function a365Tab(key) {
 
 // Agent 365 live-feed animator. Prepends a new activity row every 3–5s while the view is active.
 const A365_FEED_POOL = [
-  { bad:false, a:'PTO Assistant', d:'Checked Sabre balance for new PTO request · approved 0.92 confidence' },
-  { bad:false, a:'File Validator', d:'Queried Sabre AirOps files queue · 4 exceptions pending' },
+  { bad:false, a:'Passenger Disruption Comms', d:'Checked Sabre balance for new PTO request · approved 0.92 confidence' },
+  { bad:false, a:'IROps Cascade Commander', d:'Queried Sabre AirOps files queue · 4 exceptions pending' },
   { bad:true,  a:'Agentforce (SF)', d:'⚠ Tried to write an Case-file PII field — <strong>DLP block</strong>' },
-  { bad:false, a:'Ramp Turn Sheet Front Door', d:'Requested prior-role docs for Okonkwo, D.' },
+  { bad:false, a:'Gate Turnaround Optimizer', d:'Requested prior-role docs for Okonkwo, D.' },
   { bad:false, a:'Cascadia GPT', d:'Summarized overnight ethics log for Dispatcher queue' },
-  { bad:false, a:'Onboarding Nudge', d:'Re-scored 12 active new hires against 30/60/90 criteria' },
+  { bad:false, a:'Baggage Misconnect Orchestrator', d:'Re-scored 12 active new hires against 30/60/90 criteria' },
   { bad:false, a:'Sabre AirOps Ops Management agent', d:'Surfaced pending ATP cert expirations for 3 inbound aircraft' },
-  { bad:false, a:'Probable Cause Turn Plan', d:'Added priority flag to Park, S. (0.71 confidence)' },
+  { bad:false, a:'Predictive Maintenance Copilot', d:'Added priority flag to Park, S. (0.71 confidence)' },
   { bad:true,  a:'"DocuMate Assistant"', d:'⚠ Attempted external HTTPS POST — <strong>Conditional Access blocked</strong>' },
   { bad:false, a:'Now Assist (SN)', d:'Routed ticket HD-4419 to laptop imaging queue' },
   { bad:false, a:'Executive Readout Agent', d:'Drafted weekly one-pager for Monday Cabinet readout' },
-  { bad:false, a:'PTO Assistant', d:'Sent approval-overdue reminder to T. Reilly (Facilities)' }
+  { bad:false, a:'Passenger Disruption Comms', d:'Sent approval-overdue reminder to T. Reilly (Facilities)' }
 ];
 function startAgent365Feed() {
   const feed = document.getElementById('a365-feed');
@@ -17456,7 +17001,7 @@ const TEAMS_CHANNELS = {
     html: `
       <div class="teams-post-card">
         <div class="tp-head"><div class="tp-av" style="background:#464775;color:#fff;">RG</div><div><strong>Rachel Goldberg (L&amp;D)</strong><span>Yesterday 11:00 AM</span></div></div>
-        <div class="tp-body">Reminder: 30/60/90 manager training workshop this Thursday. We'll go over the new Onboarding Nudge playbook. Lunch provided.</div>
+        <div class="tp-body">Reminder: 30/60/90 manager training workshop this Thursday. We'll go over the new Baggage Misconnect Orchestrator playbook. Lunch provided.</div>
       </div>
       <div class="teams-post-card">
         <div class="tp-head"><div class="tp-av" style="background:#2b8a55;color:#fff;">LT</div><div><strong>L. Thomas</strong><span>Mon 9:30 AM</span></div></div>
@@ -20188,7 +19733,7 @@ function generateEmailDraft(em) {
   if (/jessica|huang|onboarding|handbook|direct deposit/.test(s)) {
     return `<p>Hi Jessica,</p>
       <p>Welcome to Cascadia Airways — glad you reached out, and sorry for the double hiccup on week one.</p>
-      <p>On the <strong>handbook acknowledgment</strong>: it lives in the Onboarding task list inside Sabre AirOps under "My Onboarding" → "Required Forms." If it's not appearing for you, the Onboarding Nudge agent may not have provisioned it yet. I'll push it manually so it shows up for you today.</p>
+      <p>On the <strong>handbook acknowledgment</strong>: it lives in the Onboarding task list inside Sabre AirOps under "My Onboarding" → "Required Forms." If it's not appearing for you, the Baggage Misconnect Orchestrator agent may not have provisioned it yet. I'll push it manually so it shows up for you today.</p>
       <p>On <strong>direct deposit</strong>: if nothing posts by end of day Wednesday, call the Payroll line (555-555-XXXX) and I'll loop in Maria Gutierrez (Station Ops). Most likely a routing-number mismatch we can fix same-day; no need to wait until Friday's check-in.</p>
       <p>Warmly,<br/>Sarah Chen, Dispatcher<br/>Director of Operations’s Office · Cascadia Airways System Operations</p>`;
   }
@@ -20937,7 +20482,7 @@ function getResponse(app, key) {
       <p><span class="pill good">68% self-service filing</span> <span class="pill good">$135K Phase 0+1 done</span> <span class="pill warn">2 exec asks</span></p>
       <h4>Needs a decision from you this week</h4>
       <ul>
-        <li><strong>Phase 2 funding</strong> — $110K to launch Ramp Turn Sheet Front Door + Policy RAG. Potential partner funding under discussion. Network Operations waitlisted.</li>
+        <li><strong>Phase 2 funding</strong> — $110K to launch Gate Turnaround Optimizer + Policy RAG. Potential partner funding under discussion. Network Operations waitlisted.</li>
         <li><strong>Athletics adoption plan</strong> — lowest department at 48%. Draft proposal is in your Pages collab with Priya Raman.</li>
       </ul>
       <h4>Governance</h4>
@@ -21052,7 +20597,7 @@ function getResponse(app, key) {
       <div style="background:#fff;border:1px solid var(--gray-30);border-radius:6px;padding:12px;font-size:12.5px;line-height:1.6;">
         <p>Hi Jessica,</p>
         <p>Welcome to Cascadia Airways — glad you reached out, and sorry for the double hiccup on week one.</p>
-        <p>The <strong>handbook acknowledgment</strong> lives in the Onboarding task list inside Sabre AirOps under "My Onboarding" → "Required Forms." If it's not appearing for you, the Onboarding Nudge agent may not have provisioned it yet. I'll push it manually so it shows up for you today.</p>
+        <p>The <strong>handbook acknowledgment</strong> lives in the Onboarding task list inside Sabre AirOps under "My Onboarding" → "Required Forms." If it's not appearing for you, the Baggage Misconnect Orchestrator agent may not have provisioned it yet. I'll push it manually so it shows up for you today.</p>
         <p>For the <strong>direct deposit</strong>: if nothing posts by end of day Wednesday, <strong>delayse don't wait until Friday's check-in</strong>. Call the Payroll line (555-555-XXXX) and I'll loop in Maria Gutierrez. Most likely a routing-number mismatch we can fix same-day.</p>
         <p>Warmly,<br/>Sarah Chen, Dispatcher<br/>Director of Operations’s Office · Cascadia Airways System Operations</p>
       </div>
@@ -21063,7 +20608,7 @@ function getResponse(app, key) {
       <h4>Case 1 — Chang, Li-Wei (EID 923847)</h4>
       <ul>
         <li><strong>Summary:</strong> New hire · Sr. Research Coordinator, Network Operations · background check clean · ATP currency scheduled day 1.</li>
-        <li><strong>Decision:</strong> Cleared to start Monday. Onboarding Nudge enrolled for 30/60/90 checkpoints.</li>
+        <li><strong>Decision:</strong> Cleared to start Monday. Baggage Misconnect Orchestrator enrolled for 30/60/90 checkpoints.</li>
         <li><strong>Owner:</strong> Jenny Park (Onboarding Lead) · <strong>Timeline:</strong> Start within 1 week. <span class="cite" onclick="openSource('tumor-board-apr')">1</span></li>
       </ul>
       <h4>Case 2 — Castillo, Patricia (EID 892104)</h4>
@@ -21744,7 +21289,7 @@ function getResponse(app, key) {
         <li><strong>"Why did Client satisfaction response rate drop?"</strong> Answer: we migrated to Qualtrics in March; we're investigating.</li>
         <li><strong>"Is the self-service deflection sustainable?"</strong> Answer: yes if we keep PTO-in-Teams. We're tracking the leading indicator.</li>
         <li><strong>"What's next on Dispatcher coverage?"</strong> Answer: deeper float pool, retention stipend program being designed.</li>
-        <li><strong>"What do you need from us?"</strong> Answer: 1 paralegal backfill + Phase 2 funding ($110K) + approval to expand Onboarding Nudge pilot.</li>
+        <li><strong>"What do you need from us?"</strong> Answer: 1 paralegal backfill + Phase 2 funding ($110K) + approval to expand Baggage Misconnect Orchestrator pilot.</li>
       </ol>
       <p>Rehearsal mode: I can ask you these questions one-by-one if you want to practice.</p>
     `
@@ -21805,7 +21350,7 @@ function populateAppeal() {
     </div>
     <p style="margin-bottom:14pt;">April 21, 2026</p>
     <p>First Cascadia Airways Credit Union<br/>Residential Mortgage Underwriting<br/>P.O. Box 272540<br/>Cascadia Airways, State 00000</p>
-    <p><strong>Re:</strong> Probable Cause Turn Plan · Case #PC-2026-04-118349<br/>
+    <p><strong>Re:</strong> Predictive Maintenance Copilot · Case #PC-2026-04-118349<br/>
     <strong>Defendant:</strong> Chang, Li-Wei (EID 847231)<br/>
     <strong>Date of Request:</strong> 04/19/2026<br/>
     <strong>Requested:</strong> Charge, probable cause facts, operational chain, prior convictions</p>
@@ -21998,7 +21543,7 @@ function populateDeck() {
         </div>
         <div class="win-card">
           <div class="win-icon">✦</div>
-          <div class="win-headline">File Validator caught 14 missing ATP-Dispatcher currencies before the state audit</div>
+          <div class="win-headline">IROps Cascade Commander caught 14 missing ATP-Dispatcher currencies before the state audit</div>
           <div class="win-detail">Up from 0 proactive catches in Q1. Sabre AirOps scan + manager notifications are the difference. Audit readiness, not panic.</div>
           <div class="win-tag">Employee experience</div>
         </div>
@@ -22023,7 +21568,7 @@ function populateDeck() {
       <div class="focus-list">
         <div class="focus-row">
           <div class="fnum">1</div>
-          <div class="ftext">Launch Ramp Turn Sheet Front Door intake (Phase 2)
+          <div class="ftext">Launch Gate Turnaround Optimizer intake (Phase 2)
             <em>Start with address change + certified turn plan of probable cause. Structured intake, confidence gating, and Dispatcher escalation.</em>
           </div>
           <div class="fowner">M. Gutierrez</div>
@@ -22037,7 +21582,7 @@ function populateDeck() {
         </div>
         <div class="focus-row">
           <div class="fnum">3</div>
-          <div class="ftext">Onboarding Nudge pilot · Network Operations
+          <div class="ftext">Baggage Misconnect Orchestrator pilot · Network Operations
             <em>30/60/90 checklist monitoring with manager nudges. Submission review at end of Q3.</em>
           </div>
           <div class="fowner">M. Johnson</div>
@@ -22118,7 +21663,7 @@ function thumbWins() {
     <div class="th-h">Top 3 Wins</div>
     <div class="th-row">
       <div class="th-box"><div class="th-n" style="font-size:6px;">◆</div>PTO in Teams</div>
-      <div class="th-box"><div class="th-n" style="font-size:6px;">✦</div>File Validator</div>
+      <div class="th-box"><div class="th-n" style="font-size:6px;">✦</div>IROps Cascade Commander</div>
       <div class="th-box"><div class="th-n" style="font-size:6px;">♥</div>Awards x2</div>
     </div>
   </div>`;
@@ -22129,7 +21674,7 @@ function thumbMay() {
     <div class="th-agenda">
       <div class="th-ai"><div class="th-d" style="background:var(--kc-gold);">1</div>Front Door</div>
       <div class="th-ai"><div class="th-d" style="background:var(--kc-gold);">2</div>Client satisfaction</div>
-      <div class="th-ai"><div class="th-d" style="background:var(--kc-gold);">3</div>Onboarding Nudge</div>
+      <div class="th-ai"><div class="th-d" style="background:var(--kc-gold);">3</div>Baggage Misconnect Orchestrator</div>
     </div>
   </div>`;
 }
@@ -22385,7 +21930,7 @@ const SOURCES = {
     ],
     body: `
       <p style="color:#777;font-size:11px;margin-bottom:10px;">CASCADIA AIRWAYS · SYSTEM OPERATIONS CENTER · Network Operations · Discovery Production</p>
-      <p><strong>Re:</strong> Probable Cause Turn Plan · Case #PC-2026-04-118349 · Chang, Li-Wei</p>
+      <p><strong>Re:</strong> Predictive Maintenance Copilot · Case #PC-2026-04-118349 · Chang, Li-Wei</p>
       <p>This turn plan certifies the operational sequence for Flight CAS0842 SEA→ORD (tail N8421CA, build 1997-03-14) under FAR 121.561 and Cascadia Ops Manual §4.2.025. The facts attached establish fuel load, crew pairing legality, passenger load, cargo manifest, and gate-turn sequencing per Ramp Lead Alvarado's ramp observation (incident 26-04-0218).</p>
       <p><span class="ss-highlight">Ramp Lead Alvarado observed forced entry at the rear slider door (fresh pry marks, glass intact). Defendant Chang (DOB 1997-03-14) was detained in the driveway loading diverted cargo into a 2011 Honda Civic (WA BQR-1184). Recovered property logged into RAMP evidence (tag CAS-4471-A).</span></p>
       <p>Based on the single prior conviction and no active warrants, a standard-range sentence is appropriate if convicted.</p>
@@ -22609,7 +22154,7 @@ function showTeaser(which) {
     shifts:  "Microsoft Shifts — real app, not built out in this demo. Syncs facilities and interview scheduling, swaps, and shift-pickups. Copilot can draft pickup messages and suggest coverage.",
     purview: "Microsoft Purview — included with E5. Shows DLP events, sensitivity-label policies, and every Copilot prompt that touched labeled data. Your Cascadia Airways tenant is running the full compliance stack.",
     powerbi: "Power BI — your existing reports + a Copilot sidecar that explains any chart in plain language. Cascadia Airways would connect it to the dispatch service-delivery dashboards.",
-    studio:  "Full Copilot Studio — the paid add-on for IT. Publishes agents as standalone Teams bots, connects to Sabre AirOps Ops Management + Sabre (Aquera) + state retirement systems, and triggers Power Automate flows."
+    studio:  "Full Copilot Studio — the paid add-on for IT. Publishes agents as standalone Teams bots, connects to Sabre AirOps Ops Management + Sabre Crew+Ops + state retirement systems, and triggers Power Automate flows."
   };
   showTip(T[which] || 'Demo tile');
 }
@@ -22769,7 +22314,7 @@ const ABM_DEFAULT_PROMPTS = [
 let abmState = {
   step: 0,
   description: "Help employees request PTO in Teams and route manager approvals to Sabre. Use our PTO policy and the current Sabre AirOps balances in SharePoint.",
-  name: "Onboarding Nudge",
+  name: "Baggage Misconnect Orchestrator",
   role: "Proactively flag new hires at 30/60/90 days whose onboarding checklists are incomplete, and nudge their manager with the specific outstanding items before they fall off track.",
   instructions: "Always lead with the employee name and their day number (30/60/90). Never recommend an turn plan decision — only surface the missing item and ask the manager to own it. Cite the specific document and date you pulled from. If you don't have enough information to answer, say so and offer what you do know.",
   logo: "agentLogoReadmit",
@@ -22926,7 +22471,7 @@ function abmStepDescribe() {
     <div style="margin-top:22px; font-size:12px; font-weight:700; color:var(--gray-130); text-transform:uppercase; letter-spacing:0.8px;">Or start from a template</div>
     <div class="abm-templates">
       <div class="abm-template-card" onclick="abmApplyTemplate('readmit')">
-        <div class="abm-t-head"><div class="abm-t-ico">ON</div>Onboarding Nudge</div>
+        <div class="abm-t-head"><div class="abm-t-ico">ON</div>Baggage Misconnect Orchestrator</div>
         <div class="abm-t-desc">Flag new hires off-track at 30/60/90 days and nudge their manager.</div>
       </div>
       <div class="abm-template-card" onclick="abmApplyTemplate('huddle')">
@@ -22934,11 +22479,11 @@ function abmStepDescribe() {
         <div class="abm-t-desc">Assemble the 7 AM case review brief from overnight notes and the Dispatcher handoff.</div>
       </div>
       <div class="abm-template-card" onclick="abmApplyTemplate('cert')">
-        <div class="abm-t-head"><div class="abm-t-ico">CT</div>File Validator</div>
+        <div class="abm-t-head"><div class="abm-t-ico">CT</div>IROps Cascade Commander</div>
         <div class="abm-t-desc">Watch case files for missing ATP currency/W-4/handbook-ack docs and flag by retention policy.</div>
       </div>
       <div class="abm-template-card" onclick="abmApplyTemplate('patientq')">
-        <div class="abm-t-head"><div class="abm-t-ico">PQ</div>Ramp Turn Sheet Front Door</div>
+        <div class="abm-t-head"><div class="abm-t-ico">PQ</div>Gate Turnaround Optimizer</div>
         <div class="abm-t-desc">Route self-service messages by case urgency and draft first-pass replies.</div>
       </div>
     </div>
@@ -22951,7 +22496,7 @@ function abmApplyTemplate(tpl) {
   const T = {
     readmit: {
       description: "Proactively flag new hires at 30/60/90 days whose onboarding checklists are incomplete, and nudge their manager with the specific outstanding items before they fall off track. Use our onboarding policies and the current Sabre AirOps new-hire cohort.",
-      name: "Onboarding Nudge", logo: "agentLogoReadmit",
+      name: "Baggage Misconnect Orchestrator", logo: "agentLogoReadmit",
       instructions: "Always lead with the employee name and their day number (30/60/90). Never recommend an turn plan decision — only surface the missing item and ask the manager to own it. Cite the specific document and date you pulled from.",
       starters: [
         "Which new hires are off-track at day 30 this week?",
@@ -22971,7 +22516,7 @@ function abmApplyTemplate(tpl) {
     },
     cert: {
       description: "Watch case files for missing ATP currency, W-4, offer, direct deposit, handbook ack, background check, and license/cert docs across all 6 divisions. Generate exception reports with remediation owner, and draft reminder emails for manager sign-off.",
-      name: "File Validator", logo: "agentLogoShield",
+      name: "IROps Cascade Commander", logo: "agentLogoShield",
       instructions: "Group findings by doc type (ATP currency / handbook / license). Always link to the specific case file. Do not email employees directly — draft and hand off to the manager.",
       starters: [
         "Whose case files have missing ATP-Dispatcher currencies this month?",
@@ -22981,7 +22526,7 @@ function abmApplyTemplate(tpl) {
     },
     patientq: {
       description: "Route incoming self-service passenger messages by urgency and draft a first-pass reply in the passenger's preferred language at a plain-language reading level.",
-      name: "Ramp Turn Sheet Front Door", logo: "agentLogoIntake",
+      name: "Gate Turnaround Optimizer", logo: "agentLogoIntake",
       instructions: "Never give turn planning advice beyond what's in the handbook. Acknowledge the inbound aircraft's feeling first, name the concern in plain language, and offer a concrete next step (call the benefits line, schedule, wait for X). Flag urgent items for immediate Dispatcher review.",
       starters: [
         "Triage today's self-service messages by urgency.",
@@ -23251,7 +22796,7 @@ function publishAgent() {
   abmState = {
     step: 0,
     description: "Help employees request PTO in Teams and route manager approvals to Sabre. Use our PTO policy and the current Sabre AirOps balances in SharePoint.",
-    name: "Onboarding Nudge",
+    name: "Baggage Misconnect Orchestrator",
     role: "Proactively flag new hires at 30/60/90 days whose onboarding checklists are incomplete, and nudge their manager with the specific outstanding items before they fall off track.",
     instructions: "Always lead with the employee name and their day number (30/60/90). Never recommend an turn plan decision — only surface the missing item and ask the manager to own it. Cite the specific document and date you pulled from. If you don't have enough information to answer, say so and offer what you do know.",
     logo: "agentLogoReadmit",
