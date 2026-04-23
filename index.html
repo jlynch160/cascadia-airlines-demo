@@ -17065,62 +17065,475 @@ function _oaWireMapInteraction() {
 // =========================================================================
 // Scenario picker (Airport Operations Decision Support)
 // =========================================================================
-const OA_SCENARIOS = {
+const OA_SCENARIO_FLOWS = {
   'ramp-wx': {
     title: 'Ramp Closure (Weather)',
-    alert: { headline:'Ramp closure · lightning within 5 nm of KSEA', desc:'All ramp activity halted · 18 aircraft holding · pax disembarking on hold', time:'06:47 UTC' },
-    narrative: "Lightning has been reported within 5 nm of KSEA. Per FAA Part 139 and Cascadia safety policy, all ramp activity must halt. 18 aircraft are currently holding with passengers aboard or mid-turn. If this lasts 30+ min we trip DOT tarmac-rule exposure on 7 flights. I've modeled two holding-pattern strategies and one diversion option. Need your call before 07:00.",
-    toast:  'Ramp closure scenario staged · 18 aircraft holding · 7 DOT exposure risks · 3 Copilot options ready'
+    alert: {
+      title: 'Active Alert: Ramp Closure · Lightning within 5 nm',
+      desc: 'All ramp activity halted · 18 aircraft affected · 7 flights approaching DOT tarmac trigger',
+      time: '06:47 UTC',
+      cta: 'Resolve with Advisor'
+    },
+    pane1: {
+      kicker: 'ASSESSMENT · READY',
+      h3: 'Hi Sarah — KSEA ramp is closed for lightning. Let me walk through this with you.',
+      body: 'Lightning reported <strong>within 5 nm</strong> of KSEA at 06:42. Per FAA Part 139 and CASA safety policy, all ramp activity has halted. <strong>18 aircraft</strong> are currently affected (8 boarding, 6 taxiing, 4 post-pushback). <strong>7 flights</strong> are within 30 min of tripping the DOT 2-h tarmac-rule notify. Tell me the situation in your own words and what you\'re trying to protect.',
+      btn: 'Let\'s go · describe situation'
+    },
+    pane2: {
+      placeholder: 'Lightning within 5 nm of KSEA — ramp closed under FAA Part 139. 18 Cascadia aircraft holding with pax aboard or mid-turn. I want to stay under DOT tarmac exposure and keep pax informed…',
+      sample: 'Lightning within 5 nm of KSEA. Ramp is closed. 18 aircraft holding with pax aboard. I want to avoid DOT tarmac-rule breaches and keep pax informed.'
+    },
+    pane3: {
+      userMsg: 'Lightning within 5 nm of KSEA. Ramp is closed. 18 aircraft holding with pax aboard. I want to avoid DOT tarmac-rule breaches and keep pax informed.',
+      analysis: [
+        'Ramp closed per FAA Part 139 lightning policy (5-nm radius) at <strong>06:42</strong>',
+        '<strong>18 Cascadia aircraft</strong> affected · 8 boarding · 6 taxiing · 4 post-pushback',
+        '<strong>7 flights</strong> within 30 min of DOT 2-h tarmac trigger',
+        '<strong>482 pax</strong> currently onboard · <strong>1,240 pax</strong> in boarding areas',
+        'Primary goal: <strong>stay under DOT exposure</strong> + <strong>keep pax informed</strong>'
+      ],
+      question: 'How long do you expect the closure to last?',
+      pills: [
+        { label: '&lt; 10 min' },
+        { label: '10–30 min', selected: true },
+        { label: '30+ min' },
+        { label: 'Unknown' }
+      ]
+    },
+    pane4: {
+      chip: 'Scenario: Ramp Closure · lightning · expected 10–30 min',
+      options: [
+        {
+          rec: true,
+          title: 'Deplane to gate + hold at gate',
+          sub: 'Return boarded pax to hold-rooms · stop mid-turn activities · full pax comms · minimum DOT exposure',
+          airlineLine: 'Cascadia · 18 flights affected · 7 DOT-at-risk flights protected',
+          trade: [ ['Ops Impact','low'], ['Passenger','low'], ['Risk','low'], ['Time to execute','fast'] ]
+        },
+        {
+          title: 'Hold in-cabin + on taxiways',
+          sub: 'Keep pax onboard · bet the storm passes fast · zero gate rebuild time IF <15 min',
+          airlineLine: 'Cascadia · risk of 4 DOT notifications if storm extends past 10 min',
+          trade: [ ['Ops Impact','med'], ['Passenger','med'], ['Risk','med'], ['Time to execute','med'] ]
+        },
+        {
+          title: 'Pre-emptively divert inbounds',
+          sub: 'Redirect 3 inbound Cascadia flights to PDX/SFO · preserves network schedule · heavy pax impact',
+          airlineLine: 'Cascadia · 3 diversions · tail-positioning ripple into tomorrow · EU261 exposure $0 (no EU-origin)',
+          trade: [ ['Ops Impact','high'], ['Passenger','high'], ['Risk','high'], ['Time to execute','med'] ]
+        }
+      ]
+    },
+    pane5: {
+      selected: 'Option 1 — Deplane to gate + hold at gate',
+      title: 'Option 1 — Deplane to gate + hold at gate',
+      sub: 'Return boarded pax to hold-rooms · hold mid-turn ops · comprehensive pax comms',
+      body: 'Deplaning pax to gate hold-rooms is the safest option for a 10–30 min closure. It resets the tarmac-rule clock, keeps DOT exposure at $0, and sets us up for a clean restart the moment the ramp reopens. Gate hold-rooms are within capacity at all 18 affected gates.',
+      airlineImpact: 'Cascadia Airways — 18 flights pause, 7 tarmac-rule clocks reset, no EU261 exposure (no EU-origin).',
+      assumptions: [
+        'Closure lasts between 10 and 30 minutes',
+        'Ground staff available at all 18 gates for deplane support',
+        'FIDS / app / gate PA push completes in &lt;3 min',
+        'Gate hold-room capacity sufficient for boarded pax'
+      ],
+      risks: [
+        'Secondary delays if closure extends past 90 min',
+        'Catering/cleaning cycles affected on mid-turn aircraft',
+        'WCHR/UMNR escort re-staging required'
+      ]
+    },
+    pane6: {
+      selected: 'Option 1 — Deplane to gate + hold at gate',
+      airport: [
+        'Halt all ramp vehicle + GSE movement · confirm with Tower',
+        'Record lightning detection timestamp + distance for Part 139 log',
+        'Activate FIDS weather-hold banner across all gates',
+        'Coordinate with ARFF for standby (Part 139 §d)'
+      ],
+      airline: [
+        'Deplane boarded pax to gate hold-rooms · 8 gates affected',
+        'Start DOT 2-h tarmac timers for 7 at-risk flights · notify Pax Comms Copilot',
+        'Push pax-app + PA weather-hold message (EN/ES)',
+        'Notify connections teams of hold · update OAL re-accommodation agreements'
+      ],
+      watch: [
+        'Storm cell shifts north (second closure within 30 min)',
+        'Part 139 inspection evidence — MAKE SURE timestamps logged',
+        'Catering/cleaning cycles for 6 mid-turn aircraft'
+      ]
+    },
+    toast: 'Ramp-closure scenario loaded · 18 aircraft · 7 DOT-at-risk · 3 Copilot options ready'
   },
   'gate-conflict': {
     title: 'Gate Conflict (Delayed Arrival)',
-    alert: { headline:'Gate conflict · CAS1247 ORD→SEA late · AS 2208 scheduled on same stand', desc:'Delayed Cascadia arrival conflicts with Alaska departure · common-use gate · ground handler shared', time:'06:47 UTC' },
-    narrative: "CAS1247 ORD→SEA is running 42 min late and will land while AS 2208 is scheduled to depart from the same common-use stand (C7). Both carriers share SkyLink Ground as the handler. I've identified three resolutions — two reassignments and one hold — scored on pax walking distance, handler overtime, and downstream OTP impact.",
-    toast:  'Gate conflict staged · 3 resolutions · shared-handler logic applied'
+    alert: {
+      title: 'Active Alert: Gate Conflict · C7 oversubscribed',
+      desc: 'CAS1247 inbound +42 min · AS 2208 scheduled depart C7 at 08:05 · shared handler (SkyLink)',
+      time: '06:47 UTC',
+      cta: 'Resolve with Advisor'
+    },
+    pane1: {
+      kicker: 'ASSESSMENT · READY',
+      h3: 'Hi Sarah — we have a shared-gate conflict at C7. Let me set this up.',
+      body: '<strong>CAS1247 ORD→SEA</strong> is running 42 min late and will land at <strong>08:17</strong>. <strong>AS 2208</strong> is scheduled to depart <strong>C7</strong> at <strong>08:05</strong>. C7 is common-use and both carriers share <strong>SkyLink Ground</strong> as the handler. I\'ve modeled three resolutions scored on walking distance, handler overtime, and downstream OTP. Tell me the situation in your own words and which party you\'re prioritizing.',
+      btn: 'Let\'s go · describe situation'
+    },
+    pane2: {
+      placeholder: 'CAS1247 ORD→SEA delayed 42 min — arriving 08:17 into C7. AS 2208 departure C7 scheduled 08:05. Both carriers share SkyLink Ground. I want to minimize overtime + walking distance…',
+      sample: 'CAS1247 ORD→SEA running 42 min late, arriving at 08:17 into common-use gate C7. AS 2208 is scheduled to depart C7 at 08:05. Both carriers use SkyLink Ground. I want to keep both tenants happy and minimize handler overtime.'
+    },
+    pane3: {
+      userMsg: 'CAS1247 ORD→SEA running 42 min late, arriving at 08:17 into C7. AS 2208 departs C7 at 08:05. Both carriers use SkyLink Ground. Minimize overtime + walking distance.',
+      analysis: [
+        'CAS1247 arrival <strong>08:17</strong> (planned 07:35 · <strong>+42 min</strong> · ORD ripple)',
+        'AS 2208 scheduled depart <strong>08:05</strong> · Boeing 737-800 · 148 pax',
+        'Gate C7 is <strong>common-use</strong> (not leased to either carrier)',
+        'Ground handler: <strong>SkyLink Ground</strong> (both carriers) · one crew, two tasks',
+        '<strong>172 pax</strong> on CAS1247 · <strong>148 pax</strong> on AS 2208',
+        'Primary goal: <strong>minimize handler OT</strong> + <strong>walk distance</strong> + keep both tenants happy'
+      ],
+      question: 'Which carrier takes priority on C7?',
+      pills: [
+        { label: 'Cascadia (inbound)' },
+        { label: 'Alaska (scheduled dep)', selected: true },
+        { label: 'Either · cost-weighted' },
+        { label: 'No preference' }
+      ]
+    },
+    pane4: {
+      chip: 'Scenario: Gate Conflict · C7 oversubscribed · Alaska priority',
+      options: [
+        {
+          rec: true,
+          title: 'AS 2208 keeps C7 · CAS1247 reassigns to D5',
+          sub: 'Alaska departs on-time from C7 · Cascadia arrival to D5 (180m walk) · handler stagger fits without OT',
+          airlineLine: 'AS no impact · Cascadia +180m walk for 172 pax · SkyLink Ground picks up CAS1247 at D5 at 08:22',
+          trade: [ ['Ops Impact','low'], ['Passenger','low'], ['Risk','low'], ['Time to execute','fast'] ]
+        },
+        {
+          title: 'Delay AS 2208 by 17 min to 08:22',
+          sub: 'Clean gate transition · no walk-distance penalty · AS carrier-delay code FOB',
+          airlineLine: 'Cascadia no impact · Alaska 17-min delay · 148 pax affected · SkyLink stays in sequence',
+          trade: [ ['Ops Impact','med'], ['Passenger','med'], ['Risk','low'], ['Time to execute','med'] ]
+        },
+        {
+          title: 'Move both to new gates (AS→C9, CAS→D5)',
+          sub: 'Handler logistics improve · 2 gate agents need repositioning · clean slate',
+          airlineLine: 'AS +80m walk · Cascadia +180m walk · double handler repositioning · slowest',
+          trade: [ ['Ops Impact','high'], ['Passenger','med'], ['Risk','med'], ['Time to execute','slow'] ]
+        }
+      ]
+    },
+    pane5: {
+      selected: 'Option 1 — AS keeps C7, CAS1247 → D5',
+      title: 'Option 1 — AS keeps C7 · CAS1247 reassigns to D5',
+      sub: 'Alaska departs on-time from C7 · Cascadia inbound moves to D5',
+      body: 'AS 2208 maintains its scheduled departure from C7. CAS1247 is reassigned to D5 for arrival at 08:22. D5 is A320/737-compatible, about 180m additional walking distance. The SkyLink Ground handler completes AS 2208 at C7 by 08:05 and moves directly to D5 with a 17-min buffer — no overtime required.',
+      airlineImpact: 'AS no impact · Cascadia absorbs 180m walk for 172 pax · shared handler remains on straight-time.',
+      assumptions: [
+        'SkyLink Ground handler can reposition C7 → D5 in 17 min',
+        'D5 available between 08:22 and 10:30 (confirmed no conflict)',
+        'A320 compatible with D5 jet bridge',
+        'FIDS push to new gate completes &lt;2 min after decision'
+      ],
+      risks: [
+        'CAS1247 further slips — handler OT if arrival past 08:40',
+        'Pax walking-distance complaints (especially WCHR/UMNR)',
+        'D5 cleaning cycle must complete by 08:20'
+      ]
+    },
+    pane6: {
+      selected: 'Option 1 — AS keeps C7 · CAS1247 reassigns to D5',
+      airport: [
+        'Confirm D5 availability + GSE compatibility (A320)',
+        'Notify SkyLink Ground dispatcher of C7 → D5 transition',
+        'Update FIDS: CAS1247 → D5',
+        'Coordinate bag routing from inbound to D5 carousel'
+      ],
+      airline: [
+        'Notify Cascadia rebook station of D5 · update pax-app',
+        'Confirm AS 2208 departure on-time from C7 (no change)',
+        'Update SkyLink Ground scheduler with stagger plan (C7 → D5)',
+        'Coordinate WCHR/UMNR escort from D5 (update Cascadia station)'
+      ],
+      watch: [
+        'CAS1247 further slip · handler OT threshold at 08:40',
+        'SkyLink handler shift change at 09:00',
+        'WCHR/UMNR timing — escort from D5 longer than from C7'
+      ]
+    },
+    toast: 'Gate-conflict scenario loaded · 3 resolutions · shared-handler aware'
   },
   'mx-stuck': {
     title: 'Aircraft Mechanical Issue',
-    alert: { headline:'N8421CA stuck at B10 · hydraulic SNAG · MX ETA unknown', desc:'CAS0842 SEA→LAX delayed indefinitely · gate B10 blocked · 164 pax at gate', time:'06:47 UTC' },
-    narrative: "N8421CA pulled a hydraulic pump #2 SNAG after pushback. Maintenance is troubleshooting; ETA to release is uncertain (15 min to 4 hr range). Gate B10 is blocked. I've modeled tail-swap options with N7721CA and N5512CA, plus the option to tow-off B10 to free the gate and rebook CAS0842 to C9.",
-    toast:  'Mechanical scenario staged · tail-swap + tow-off options · 164 pax coordination'
+    alert: {
+      title: 'Active Alert: N8421CA hydraulic SNAG at B10',
+      desc: 'CAS0842 SEA→LAX stuck · gate B10 blocked · 164 pax at gate · MX ETA uncertain',
+      time: '06:47 UTC',
+      cta: 'Resolve with Advisor'
+    },
+    pane1: {
+      kicker: 'ASSESSMENT · READY',
+      h3: 'Hi Sarah — N8421CA is stuck at B10 with a hydraulic SNAG. Let\'s sort this.',
+      body: '<strong>N8421CA</strong> (737-900ER) pulled a <strong>hydraulic pump #2 SNAG</strong> after pushback from B10. <strong>CAS0842 SEA→LAX</strong> is stuck with <strong>164 pax</strong> at gate. MX ETA is uncertain — diagnosis suggests 30 min to 4 hours. <strong>Gate B10 is fully blocked</strong>, with 2 downstream flights scheduled in today. I\'ve modeled tow-off + tail-swap + full cancel options. Tell me the situation and your tolerance for MX uncertainty.',
+      btn: 'Let\'s go · describe situation'
+    },
+    pane2: {
+      placeholder: 'N8421CA pulled a hydraulic pump #2 SNAG after pushback at B10. CAS0842 SEA→LAX stuck, 164 pax at gate. MX ETA uncertain (30 min to 4 hr). I want to unblock B10 and rebook pax without a long delay…',
+      sample: 'N8421CA pulled a hydraulic pump #2 SNAG after pushback at B10. CAS0842 SEA→LAX is stuck, 164 pax at gate. MX ETA uncertain. B10 blocked. I want to unblock B10 and rebook pax.'
+    },
+    pane3: {
+      userMsg: 'N8421CA pulled a hydraulic SNAG at B10. CAS0842 stuck, 164 pax at gate. MX ETA uncertain. Want to unblock B10 and rebook pax.',
+      analysis: [
+        'Aircraft: <strong>N8421CA</strong> · Boeing 737-900ER · hydraulic pump #2 SNAG',
+        'MX diagnosis in progress · ETA range <strong>30 min to 4 hr</strong>',
+        'Gate <strong>B10 fully blocked</strong> to all outbound traffic',
+        'CAS0842 SEA→LAX · <strong>164 pax</strong> at gate · STD was 07:55',
+        'Downstream B10 flights today: CAS0517 @ 08:22 · CAS2211 @ 10:15',
+        'Primary goal: <strong>unblock B10</strong> + <strong>rebook 164 pax</strong>'
+      ],
+      question: 'What\'s your MX confidence?',
+      pills: [
+        { label: '&lt; 30 min (optimistic)' },
+        { label: '30–90 min (most likely)', selected: true },
+        { label: '&gt; 90 min (pessimistic)' },
+        { label: 'Unknown' }
+      ]
+    },
+    pane4: {
+      chip: 'Scenario: Mechanical · N8421CA hydraulic · MX ETA 30–90 min',
+      options: [
+        {
+          rec: true,
+          title: 'Tow-off N8421CA + tail-swap with N7721CA',
+          sub: 'Tow N8421CA to hangar 4 for MX · swap N7721CA in from B15 · CAS0842 departs C9 at 08:40',
+          airlineLine: 'Cascadia · 164 pax CAS0842 rebook C9 · 45-min total delay · no cascading schedule impact',
+          trade: [ ['Ops Impact','med'], ['Passenger','low'], ['Risk','low'], ['Time to execute','med'] ]
+        },
+        {
+          title: 'Wait for MX · hold pax at B10',
+          sub: 'Pax stay at gate · MX completes (hopefully <60 min) · CAS0842 off-gate ~08:45',
+          airlineLine: 'Cascadia · gamble on MX · B10 stays blocked · 2 downstream flights at risk',
+          trade: [ ['Ops Impact','med'], ['Passenger','med'], ['Risk','high'], ['Time to execute','fast'] ]
+        },
+        {
+          title: 'Cancel CAS0842 · rebook 164 pax',
+          sub: 'Full cancellation · spread pax across CAS0517 + OAL partner · frees B10 fast',
+          airlineLine: 'Cascadia · 164 pax cancellation · DOT comp triggers · partner re-accommodation lift',
+          trade: [ ['Ops Impact','high'], ['Passenger','high'], ['Risk','med'], ['Time to execute','slow'] ]
+        }
+      ]
+    },
+    pane5: {
+      selected: 'Option 1 — Tow-off + tail swap',
+      title: 'Option 1 — Tow-off N8421CA + tail-swap with N7721CA',
+      sub: 'Tow to hangar 4 · swap N7721CA from B15 · CAS0842 departs C9 at 08:40',
+      body: 'Tow N8421CA off B10 to SEA hangar 4 for continued MX diagnosis. Swap in N7721CA, currently resting at B15, to operate CAS0842. Reassign the departure to C9 (open at 08:30). Net pax delay: ~45 min. B10 freed by 08:15 — downstream flights (CAS0517 and CAS2211) are unaffected. N8421CA stays in MX; we can decide on its tomorrow schedule after diagnosis closes.',
+      airlineImpact: 'Cascadia · 164 pax CAS0842 rebooked to C9 · 45-min delay · tail swap preserves schedule · no partner coordination needed.',
+      assumptions: [
+        'Tug + tow crew available within 15 min',
+        'N7721CA is clean and crew-ready (pairing P4573 compatible with C9 dep)',
+        'C9 available by 08:30 (confirmed no conflict)',
+        'MX team can accept N8421CA in hangar 4 at 08:15'
+      ],
+      risks: [
+        'Tow-off delay (second tug request) · slips past 08:30',
+        'MX diagnostic extends beyond today — impacts tomorrow schedule',
+        'N7721CA backfill gap at B15 (B15 needed by 11:00)',
+        'Pax walking-distance to C9 (about 240m)'
+      ]
+    },
+    pane6: {
+      selected: 'Option 1 — Tow-off N8421CA + tail-swap with N7721CA',
+      airport: [
+        'Schedule tow of N8421CA → hangar 4 (tug dispatch ~07:55)',
+        'Release B10 by 08:15 · confirm with ramp tower',
+        'Confirm C9 turn with SkyLink Ground for 08:30',
+        'Update FIDS: CAS0842 gate change B10 → C9'
+      ],
+      airline: [
+        'Reposition N7721CA from B15 to C9',
+        'Update crew pairing P4573 for C9 departure (Capt. Ali + FO Brown)',
+        'Rebook 164 pax to C9 via app push + gate PA',
+        'Notify LAX station of 45-min arrival delay · downstream schedule preserved'
+      ],
+      watch: [
+        'Tow-off timeline slip · second tug request',
+        'MX diagnostic extends past today (N8421CA tomorrow schedule)',
+        'N7721CA backfill gap — B15 needed by 11:00',
+        'Pax walking distance to C9 — WCHR/UMNR'
+      ]
+    },
+    toast: 'Mechanical scenario loaded · tow-off + tail-swap · 164 pax coordination · downstream preserved'
   }
 };
-let _oaCurrentScen = null;
 
-function oaPickScenario(key) {
-  _oaCurrentScen = key;
-  document.querySelectorAll('.oa-scen-card').forEach(c => c.classList.toggle('active', c.dataset.scen === key));
-  const btn = document.getElementById('oa-scen-btn');
-  const help = document.getElementById('oa-scen-help');
-  if (btn)  btn.disabled = false;
-  if (help) help.textContent = 'Click “Start Scenario” to load it into the Advisor';
+let _oaActiveScen = null;
+
+function _oaBuildPane1(d) {
+  return `
+    <div class="oa-adv-intro">
+      <div class="oa-adv-kicker"><span class="oa-adv-kicker-dot"></span>${d.kicker}</div>
+      <h3>${d.h3}</h3>
+      <p>${d.body}</p>
+    </div>
+    <div class="oa-adv-actions">
+      <button class="oa-adv-next" onclick="oaAdvStep(2)">${d.btn} <span>→</span></button>
+    </div>`;
 }
+function _oaBuildPane2(d) {
+  return `
+    <div class="oa-adv-kicker"><span class="oa-adv-kicker-dot"></span>DESCRIBE THE INCIDENT</div>
+    <h3>What's the situation — and what are you optimizing for?</h3>
+    <textarea class="oa-adv-ta" id="oa-adv-ta" rows="4" placeholder="${d.placeholder.replace(/"/g,'&quot;')}"></textarea>
+    <div class="oa-adv-sample" onclick="oaFillSample()"><svg width="12" height="12"><use href="#copilotLogo"/></svg> Fill with the example above</div>
+    <div class="oa-adv-actions">
+      <button class="oa-adv-back" onclick="oaAdvStep(1)"><span>←</span> back</button>
+      <button class="oa-adv-next oa-adv-cta" onclick="oaAdvStep(3)">Generate Options <span>→</span></button>
+    </div>
+    <div class="oa-adv-microtip">The AI will generate ranked response options. You can refine results using priorities and constraints.</div>`;
+}
+function _oaBuildPane3(d) {
+  const pillsHtml = d.pills.map(p =>
+    `<button class="oa-adv-pill ${p.selected ? 'oa-adv-pill-sel' : ''}" onclick="oaAdvStep(4)">${p.label}</button>`
+  ).join('');
+  const analysisHtml = d.analysis.map(a => `<li>${a}</li>`).join('');
+  return `
+    <div class="oa-adv-chat-row oa-adv-user">
+      <div class="oa-adv-bubble">${d.userMsg}</div>
+    </div>
+    <div class="oa-adv-chat-row oa-adv-ai">
+      <div class="oa-adv-bubble oa-adv-bubble-ai">
+        <div class="oa-adv-subhead">SYSTEM ANALYSIS</div>
+        <p>Here's my understanding of the situation:</p>
+        <ul class="oa-adv-ul">${analysisHtml}</ul>
+        <p style="margin-top:10px;">I need one more detail to proceed.</p>
+        <div class="oa-adv-subhead" style="margin-top:10px;">${d.question}</div>
+        <div class="oa-adv-pills">${pillsHtml}</div>
+      </div>
+    </div>
+    <div class="oa-adv-input-row">
+      <input class="oa-adv-input" placeholder="Send a message…" />
+      <button class="oa-adv-send"><svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M1 6l10-5-2 10-3-3-5-2z"/></svg></button>
+    </div>
+    <div class="oa-adv-microtip">Chat explains existing options only.</div>`;
+}
+function _oaBuildPane4(d) {
+  const optsHtml = d.options.map((o, i) => {
+    const idx = i + 1;
+    const isRec = !!o.rec;
+    const trade = o.trade.map(t => {
+      const map = { low:'oa-to-low', med:'oa-to-med', high:'oa-to-high', fast:'oa-to-fast', slow:'oa-to-med' };
+      const cls = map[t[1]] || 'oa-to-low';
+      const label = t[1].charAt(0).toUpperCase() + t[1].slice(1);
+      return `<div class="oa-to"><div class="oa-to-l">${t[0]}</div><div class="oa-to-v ${cls}">${label}</div></div>`;
+    }).join('');
+    return `
+      <div class="oa-opt ${isRec ? 'oa-opt-rec' : ''}" onclick="oaAdvStep(5, ${idx})">
+        <div class="oa-opt-head">
+          <span class="oa-opt-rank">Option ${idx}</span>
+          ${isRec ? '<span class="oa-opt-rec-pill">✓ Recommended</span>' : ''}
+          <span class="oa-opt-radio"></span>
+        </div>
+        <div class="oa-opt-title">${o.title}</div>
+        <div class="oa-opt-sub">${o.sub}</div>
+        <div class="oa-opt-airline">${o.airlineLine}</div>
+        <div class="oa-opt-tradeoffs">${trade}</div>
+      </div>`;
+  }).join('');
+  return `
+    <div class="oa-adv-aircraft-chip">${d.chip}</div>
+    <div class="oa-adv-subhead" style="margin-top:12px;">RECOMMENDED OPTIONS</div>
+    <p class="oa-adv-p-muted">Based on the information provided, here are the best response options.</p>
+    ${optsHtml}
+    <div class="oa-adv-input-row" style="margin-top:14px;">
+      <input class="oa-adv-input" placeholder="Ask a follow-up question about these options or adjust priorities…" />
+      <button class="oa-adv-send"><svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M1 6l10-5-2 10-3-3-5-2z"/></svg></button>
+    </div>
+    <div class="oa-adv-microtip">Chat explains existing options only.</div>`;
+}
+function _oaBuildPane5(d) {
+  return `
+    <div class="oa-adv-selected">Selected <strong>${d.selected.split(' — ')[0]}</strong> — ${d.selected.split(' — ')[1] || ''}</div>
+    <div class="oa-adv-subhead">OPTION REVIEW</div>
+    <p class="oa-adv-p-muted">Here's a closer look at this option and why it was recommended.</p>
+    <h4 class="oa-adv-rev-h">${d.title}</h4>
+    <div class="oa-adv-rev-sub">${d.sub}</div>
+    <p>${d.body}</p>
+    <div class="oa-adv-rev-subh">Airline Impact</div>
+    <p>${d.airlineImpact}</p>
+    <div class="oa-adv-rev-subh">Key Assumptions</div>
+    <ul class="oa-adv-ul">${d.assumptions.map(a => `<li>${a}</li>`).join('')}</ul>
+    <div class="oa-adv-rev-subh">Risks &amp; Trade-offs</div>
+    <ul class="oa-adv-ul">${d.risks.map(r => `<li>${r}</li>`).join('')}</ul>
+    <div class="oa-adv-rev-callout">
+      <strong>Important</strong><br>
+      Selecting an option does not apply system changes. Human-in-the-loop by design — execution still requires the checklist on the next step.
+    </div>
+    <div class="oa-adv-actions">
+      <button class="oa-adv-back" onclick="oaAdvStep(4)"><span>←</span> other options</button>
+      <button class="oa-adv-next oa-adv-cta" onclick="oaAdvStep(6)">View Option Checklist <span>→</span></button>
+    </div>`;
+}
+function _oaBuildPane6(d) {
+  return `
+    <div class="oa-adv-selected">Selected <strong>${d.selected.split(' — ')[0]}</strong> — ${d.selected.split(' — ')[1] || ''}</div>
+    <div class="oa-adv-subhead">EXECUTION CHECKLIST</div>
+    <p class="oa-adv-p-muted">Coordinate across Airport Ops and Airline Ops. Check items as completed — every check writes back to Sabre + Dataverse + Purview.</p>
+    <div class="oa-check-col">
+      <div class="oa-check-cat">Airport Operations</div>
+      ${d.airport.map(i => `<label class="oa-check-item"><input type="checkbox"><span>${i}</span></label>`).join('')}
+    </div>
+    <div class="oa-check-col">
+      <div class="oa-check-cat">Airline Coordination</div>
+      ${d.airline.map(i => `<label class="oa-check-item"><input type="checkbox"><span>${i}</span></label>`).join('')}
+    </div>
+    <div class="oa-check-col">
+      <div class="oa-check-cat">Watch-Outs</div>
+      ${d.watch.map(w => `<div class="oa-watch">▸ ${w}</div>`).join('')}
+    </div>
+    <div class="oa-adv-actions">
+      <button class="oa-adv-back" onclick="oaAdvStep(5)"><span>←</span> review option</button>
+      <button class="oa-adv-next oa-adv-cta oa-adv-cta-exec" onclick="oaExecuteOption()">Execute · Dispatch to Sabre <span>→</span></button>
+    </div>
+    <div class="oa-adv-microtip">Roles, not names — can be mapped to airport/airline SOPs for deployment.</div>`;
+}
+
+function _oaApplyScenarioFlow(key) {
+  const s = OA_SCENARIO_FLOWS[key];
+  if (!s) return;
+  _oaActiveScen = key;
+  const getPane = (n) => document.querySelector(`#oa-adv-body .oa-adv-pane[data-pane="${n}"]`);
+  const p1 = getPane(1); if (p1) p1.innerHTML = _oaBuildPane1(s.pane1);
+  const p2 = getPane(2); if (p2) p2.innerHTML = _oaBuildPane2(s.pane2);
+  const p3 = getPane(3); if (p3) p3.innerHTML = _oaBuildPane3(s.pane3);
+  const p4 = getPane(4); if (p4) p4.innerHTML = _oaBuildPane4(s.pane4);
+  const p5 = getPane(5); if (p5) p5.innerHTML = _oaBuildPane5(s.pane5);
+  const p6 = getPane(6); if (p6) p6.innerHTML = _oaBuildPane6(s.pane6);
+}
+
 function oaStartScenario() {
   if (!_oaCurrentScen) return;
-  const s = OA_SCENARIOS[_oaCurrentScen];
+  const s = OA_SCENARIO_FLOWS[_oaCurrentScen];
   if (!s) return;
-  // Update the alert banner contents
+  // Update the alert banner
   const t = document.querySelector('#oa-alert .oa-alert-title');
   const d = document.querySelector('#oa-alert .oa-alert-desc');
   const clk = document.querySelector('#oa-alert .oa-alert-time');
-  if (t) t.innerHTML = 'Active Alert: ' + s.alert.headline;
+  const cta = document.querySelector('#oa-alert .oa-alert-cta');
+  if (t) t.innerHTML = s.alert.title;
   if (d) d.innerHTML = s.alert.desc;
   if (clk) clk.textContent = s.alert.time;
-  // Open the Advisor panel and seed Step 1 with scenario narrative
+  if (cta) { cta.childNodes[0].textContent = s.alert.cta; }
+  // Rewrite every advisor pane for the scenario
+  _oaApplyScenarioFlow(_oaCurrentScen);
+  // Open the Advisor panel
   oaOpenAdvisor();
-  setTimeout(() => {
-    const pane1 = document.querySelector('#oa-adv-body .oa-adv-pane[data-pane="1"]');
-    if (pane1) {
-      const h3 = pane1.querySelector('h3');
-      const p  = pane1.querySelector('p');
-      if (h3) h3.textContent = s.title;
-      if (p)  p.textContent = s.narrative;
-    }
-  }, 180);
-  // Scroll the main body so the alert banner is visible
+  // Scroll the main pane so the alert banner is in view
   const main = document.getElementById('oa-main');
   if (main) main.scrollTo({ top: 0, behavior: 'smooth' });
-  showToast({ kind:'copilot', title:'Scenario: ' + s.title, text: s.toast, ttl: 5200 });
+  showToast({ kind: 'copilot', title: 'Scenario: ' + s.title, text: s.toast, ttl: 5200 });
 }
 
 function oaToggleLayer(layer, btn) {
@@ -17255,7 +17668,9 @@ function oaAdvStep(n, optionIdx) {
 function oaFillSample() {
   const ta = document.getElementById('oa-adv-ta');
   if (!ta) return;
-  const text = 'Jet bridge at Gate B12 is out of service for an A320 departing in 45 minutes. I want to minimize passenger disruption.';
+  const sFlow = _oaActiveScen && OA_SCENARIO_FLOWS[_oaActiveScen];
+  const text = (sFlow && sFlow.pane2 && sFlow.pane2.sample)
+    || 'Jet bridge at Gate B12 is out of service for an A320 departing in 45 minutes. I want to minimize passenger disruption.';
   ta.value = '';
   // typing animation
   let i = 0;
