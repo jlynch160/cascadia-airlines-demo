@@ -8206,6 +8206,221 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 .oa-adv-step.done span { border-color: transparent; }
 .oa-adv-step:not(.done):not(.active) span { color: #94a3b8; }
 .oa-adv-step.done::after { display: none; } /* remove the floating checkmark that was clipping */
+
+/* ========== Tab panes ========== */
+.oa-tab-pane { animation: oaTabIn 0.22s ease-out; }
+@keyframes oaTabIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.oa-tab { position: relative; }
+.oa-tab-badge {
+  display: inline-block;
+  background: #c50f1f; color: #fff;
+  font-size: 9px; font-weight: 800;
+  padding: 1px 6px; border-radius: 8px;
+  margin-left: 5px;
+  vertical-align: middle;
+  letter-spacing: 0.3px;
+}
+
+/* Filter chips for tab headers */
+.oa-page-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 14px; }
+.oa-filters { display: flex; gap: 5px; flex-wrap: wrap; }
+.oa-fchip {
+  font-family: inherit; font-size: 11.5px; font-weight: 600;
+  padding: 5px 11px; border-radius: 12px;
+  background: #fff; border: 1px solid var(--gray-40);
+  color: var(--gray-130);
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.oa-fchip:hover { background: #f3f6fb; color: var(--kc-navy); }
+.oa-fchip.active { background: var(--kc-navy); color: #fff; border-color: transparent; }
+
+/* Table cards */
+.oa-table-card {
+  background: #fff; border: 1px solid var(--gray-30); border-radius: 10px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+.oa-table-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--gray-30);
+  background: #fafbfc;
+}
+.oa-table-head strong { font-size: 13px; color: var(--kc-navy); }
+.oa-table-head span { font-size: 11px; color: var(--gray-130); }
+.oa-gtable { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.oa-gtable th {
+  background: #fafbfc;
+  color: var(--gray-130);
+  font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;
+  padding: 9px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-30);
+}
+.oa-gtable td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--gray-30);
+  color: var(--gray-160);
+  vertical-align: middle;
+}
+.oa-gtable tr:last-child td { border-bottom: none; }
+.oa-gtable tr:hover td { background: #f7faff; }
+.oa-gtable td.ok   { color: #10b981; font-weight: 600; }
+.oa-gtable td.warn { color: #c57f00; font-weight: 600; }
+.oa-gtable td.bad  { color: #c50f1f; font-weight: 700; }
+.oa-gtable tr.oa-gtable-alert td { background: #fff5f5; }
+.oa-gtable tr.oa-gtable-alert:hover td { background: #ffeeee; }
+.oa-gtable tr.oa-gtable-rec td {
+  background: linear-gradient(90deg, #ecfdf5 0%, #fff 70%);
+}
+
+/* Status pills */
+.oa-st {
+  display: inline-block;
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.4px;
+  padding: 3px 9px; border-radius: 10px;
+}
+.oa-st-ok      { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.oa-st-board   { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+.oa-st-deplane { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+.oa-st-arr     { background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
+.oa-st-warn    { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+.oa-st-alert   { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; animation: oaStAlertPulse 1.6s ease-in-out infinite; }
+.oa-st-reco    { background: linear-gradient(135deg,#14b8a6,#0ea5e9); color: #fff; border: none; box-shadow: 0 1px 3px rgba(14,165,233,0.4); }
+@keyframes oaStAlertPulse { 0%,100% { box-shadow: 0 0 0 rgba(197,15,31,0); } 50% { box-shadow: 0 0 0 3px rgba(197,15,31,0.25); } }
+
+/* Small action buttons */
+.oa-btn-sm {
+  font-family: inherit; font-size: 11px; font-weight: 600;
+  padding: 5px 11px; border-radius: 5px;
+  background: #fff; border: 1px solid var(--gray-40);
+  color: var(--gray-160);
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.oa-btn-sm:hover { background: var(--kc-navy); color: #fff; border-color: transparent; }
+.oa-btn-sm.oa-btn-primary {
+  background: linear-gradient(135deg,#0ea5e9,#2563eb);
+  color: #fff; border: none;
+  box-shadow: 0 2px 6px rgba(14,165,233,0.35);
+}
+
+/* Timeline (Flight Schedule tab) */
+.oa-timeline {
+  padding: 16px 18px 18px;
+  position: relative;
+}
+.oa-tl-axis {
+  display: grid; grid-template-columns: repeat(8, 1fr);
+  font-family: "Segoe UI", monospace;
+  font-size: 10px; color: var(--gray-130);
+  padding-left: 160px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--gray-30);
+  padding-bottom: 6px;
+}
+.oa-tl-axis span { text-align: left; }
+.oa-tl-row {
+  display: grid; grid-template-columns: 160px 1fr;
+  gap: 10px; align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px dotted var(--gray-30);
+}
+.oa-tl-row:last-child { border-bottom: none; }
+.oa-tl-lbl { font-size: 11px; color: var(--gray-130); font-weight: 600; }
+.oa-tl-track { position: relative; height: 22px; background: #fafbfc; border-radius: 4px; }
+.oa-tl-seg {
+  position: absolute; top: 3px; bottom: 3px;
+  padding: 0 8px; border-radius: 3px;
+  display: flex; align-items: center;
+  font-size: 10px; font-weight: 700; color: #fff;
+  white-space: nowrap; overflow: hidden;
+  font-family: "Segoe UI", monospace;
+}
+.oa-tl-seg.oa-tl-ok   { background: linear-gradient(90deg,#10b981,#059669); }
+.oa-tl-seg.oa-tl-warn { background: linear-gradient(90deg,#f59e0b,#c57f00); }
+.oa-tl-seg.oa-tl-bad  { background: linear-gradient(90deg,#c50f1f,#991b1b); color: #fecaca; }
+.oa-tl-seg.oa-tl-reco { background: linear-gradient(135deg,#14b8a6,#0ea5e9); box-shadow: 0 0 0 1.5px rgba(14,165,233,0.3); }
+.oa-tl-now {
+  position: absolute; top: 30px; bottom: 10px;
+  width: 2px; background: #c50f1f;
+  box-shadow: 0 0 0 1px rgba(197,15,31,0.2);
+  margin-left: 160px;
+  z-index: 2;
+}
+.oa-tl-now::before {
+  content: 'NOW'; position: absolute; top: -14px; left: -12px;
+  font-size: 8px; font-weight: 800; color: #c50f1f;
+  background: #fff; padding: 1px 5px; border-radius: 3px;
+  border: 1px solid #fca5a5;
+}
+
+/* Alerts tab · alert cards */
+.oa-alerts-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.oa-alert-card {
+  display: grid;
+  grid-template-columns: 90px 1fr 180px;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid var(--gray-30);
+  border-radius: 10px;
+  padding: 14px 18px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.oa-alert-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,37,69,0.08); }
+.oa-alert-card.oa-alert-crit { border-left: 4px solid #c50f1f; background: linear-gradient(90deg,#fff5f5 0%, #fff 40%); }
+.oa-alert-card.oa-alert-warn { border-left: 4px solid #f59e0b; background: linear-gradient(90deg,#fffaf1 0%, #fff 40%); }
+.oa-alc-sev {
+  align-self: flex-start;
+  background: #c50f1f; color: #fff;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.6px;
+  padding: 5px 10px; border-radius: 4px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(197,15,31,0.35);
+}
+.oa-alc-sev.oa-alc-sev-warn { background: #f59e0b; box-shadow: 0 2px 6px rgba(245,158,11,0.35); }
+.oa-alc-title { font-size: 14px; font-weight: 700; color: var(--kc-navy); margin-bottom: 4px; }
+.oa-alc-desc { font-size: 12px; color: var(--gray-160); line-height: 1.5; margin-bottom: 8px; }
+.oa-alc-meta { display: flex; gap: 12px; font-size: 11px; color: var(--gray-130); flex-wrap: wrap; }
+.oa-alc-r { display: flex; flex-direction: column; gap: 6px; align-items: stretch; }
+.oa-alc-r .oa-btn-sm { width: 100%; text-align: center; }
+
+/* Analytics grid */
+.oa-an-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.oa-an-card {
+  background: #fff; border: 1px solid var(--gray-30); border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.oa-an-card.oa-an-wide { grid-column: 1 / -1; }
+.oa-an-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.oa-an-title { font-size: 13px; font-weight: 700; color: var(--kc-navy); }
+.oa-an-sub   { font-size: 11px; color: var(--gray-130); margin-top: 2px; }
+.oa-an-kpi   { text-align: right; }
+.oa-an-kpi-v { display: block; font-size: 20px; font-weight: 700; color: var(--kc-navy); line-height: 1; }
+.oa-an-svg   { width: 100%; height: 140px; display: block; }
+.oa-an-bars  { display: flex; flex-direction: column; gap: 8px; }
+.oa-bar { display: grid; grid-template-columns: 60px 1fr 40px; align-items: center; gap: 10px; font-size: 11px; }
+.oa-bar-l { color: var(--gray-130); font-weight: 600; }
+.oa-bar-t { height: 8px; background: #eef3f8; border-radius: 4px; overflow: hidden; }
+.oa-bar-t span { display: block; height: 100%; border-radius: 4px; }
+.oa-bar-v { text-align: right; font-weight: 700; color: var(--kc-navy); font-family: "Segoe UI", monospace; }
+
+/* Donut */
+.oa-donut { display: flex; align-items: center; gap: 14px; }
+.oa-donut-svg { width: 100px; height: 100px; flex-shrink: 0; }
+.oa-donut-leg { font-size: 11px; color: var(--gray-160); display: flex; flex-direction: column; gap: 5px; }
+.oa-donut-leg div { display: flex; align-items: center; gap: 6px; }
+.oa-lg-teal { background: #14b8a6; width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.oa-lg-sky  { background: #0ea5e9; width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.oa-lg-muted{ background: #cbd5e1; width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+/* Tiny classes used inline */
+.oa-page-meta .bad  { color: #c50f1f; }
+.oa-page-meta .warn { color: #c57f00; }
 </style>
 </head>
 <body>
@@ -13039,11 +13254,11 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <!-- Consolidated dashboard header: brand + tabs + primary CTA -->
       <div class="oa-topnav">
         <div class="oa-topnav-tabs">
-          <button class="oa-tab active">Overview</button>
-          <button class="oa-tab">Gate Status</button>
-          <button class="oa-tab">Flight Schedule</button>
-          <button class="oa-tab">Alerts</button>
-          <button class="oa-tab">Analytics</button>
+          <button class="oa-tab active" data-tab="overview" onclick="oaSwitchTab('overview', this)">Overview</button>
+          <button class="oa-tab" data-tab="gates"     onclick="oaSwitchTab('gates', this)">Gate Status</button>
+          <button class="oa-tab" data-tab="schedule"  onclick="oaSwitchTab('schedule', this)">Flight Schedule</button>
+          <button class="oa-tab" data-tab="alerts"    onclick="oaSwitchTab('alerts', this)">Alerts <span class="oa-tab-badge">3</span></button>
+          <button class="oa-tab" data-tab="analytics" onclick="oaSwitchTab('analytics', this)">Analytics</button>
         </div>
         <div class="oa-topnav-right">
           <span class="oa-env-chip" title="Published 2 h ago · Dataverse: casa-prod-us-west-2 · DLP Confidential · Purview 100% audit">
@@ -13059,6 +13274,9 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <div class="oa-body-grid">
         <!-- MAIN dashboard -->
         <div class="oa-main" id="oa-main">
+
+          <!-- =========== OVERVIEW TAB =========== -->
+          <div class="oa-tab-pane" data-tab-pane="overview">
 
           <!-- Page header -->
           <div class="oa-page-head">
@@ -13083,8 +13301,8 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
             <div class="oa-alert-r">
               <div class="oa-alert-time">14:32 UTC</div>
               <button class="oa-alert-cta" onclick="oaOpenAdvisor()">
-                <svg width="11" height="11"><use href="#copilotLogo"/></svg>
-                Ask Cascadia Ops AI
+                Resolve with Advisor
+                <span style="margin-left:4px;">→</span>
               </button>
             </div>
           </div>
@@ -13346,6 +13564,359 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
               <div class="oa-act-ico oa-act-ico-crew">👤</div>
               <span class="oa-act-t">13:45</span>
               <span class="oa-act-b"><strong>Crew reserve R. Patel called up</strong> · covering Pairing P4481 (Capt. Moreno FDP) · Outlook + Teams notifications sent</span>
+            </div>
+          </div>
+
+          </div><!-- /overview tab pane -->
+
+          <!-- =========== GATE STATUS TAB =========== -->
+          <div class="oa-tab-pane" data-tab-pane="gates" style="display:none;">
+            <div class="oa-page-head">
+              <div>
+                <h1 class="oa-page-title">Gate Status <small>· 34 of 48 gates in use</small></h1>
+                <div class="oa-page-meta">KSEA airfield · live · Sabre AirOps stream · <strong>8 available</strong> · <strong>34 occupied</strong> · <strong>1 alert</strong> · <strong>5 overnight spares</strong></div>
+              </div>
+              <div class="oa-filters">
+                <button class="oa-fchip active">All (48)</button>
+                <button class="oa-fchip">Terminal 2 (18)</button>
+                <button class="oa-fchip">Terminal 3 (30)</button>
+                <button class="oa-fchip">N Satellite (18)</button>
+                <button class="oa-fchip">⚠ Alert (1)</button>
+              </div>
+            </div>
+
+            <!-- Summary strip -->
+            <div class="oa-kpis">
+              <div class="oa-kpi-card"><div class="oa-kpi-label">Available</div><div class="oa-kpi-v"><span class="oa-kpi-num" style="color:#10b981;">8</span><span class="oa-kpi-denom">ready to receive</span></div><div class="oa-kpi-foot"><span>avg turn 42 min</span><span class="oa-trend-ok">✓ on pace</span></div></div>
+              <div class="oa-kpi-card"><div class="oa-kpi-label">Occupied</div><div class="oa-kpi-v"><span class="oa-kpi-num">34</span><span class="oa-kpi-denom">active turns</span></div><div class="oa-kpi-foot"><span>14 boarding · 12 deplaning · 8 prep</span></div></div>
+              <div class="oa-kpi-card oa-kpi-attn"><div class="oa-kpi-label">Alerts</div><div class="oa-kpi-v"><span class="oa-kpi-num" style="color:#c50f1f;">1</span><span class="oa-kpi-denom">jet bridge OTS</span></div><div class="oa-kpi-foot"><span>B12 · MX ETA 15–60m</span><span class="oa-trend-bad">attn</span></div></div>
+              <div class="oa-kpi-card"><div class="oa-kpi-label">Overnight spares</div><div class="oa-kpi-v"><span class="oa-kpi-num">5</span><span class="oa-kpi-denom">RON + MX</span></div><div class="oa-kpi-foot"><span>D3, A2, C17, N8, D19</span></div></div>
+            </div>
+
+            <!-- Full gate table -->
+            <div class="oa-table-card">
+              <div class="oa-table-head">
+                <strong>All gates · KSEA</strong>
+                <span>live · refreshed every 15 s</span>
+              </div>
+              <table class="oa-gtable">
+                <thead>
+                  <tr><th>Gate</th><th>Status</th><th>Flight</th><th>Aircraft</th><th>Scheduled</th><th>Predicted</th><th>Crew</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                  <tr class="oa-gtable-alert">
+                    <td><strong>B12</strong></td>
+                    <td><span class="oa-st oa-st-alert">ALERT</span></td>
+                    <td>CAS1247 SEA→MDW</td>
+                    <td>A320 · N8421CA</td>
+                    <td>07:32</td>
+                    <td class="bad">jet bridge OTS</td>
+                    <td>P4481</td>
+                    <td><button class="oa-btn-sm" onclick="oaOpenAdvisor()">Advise</button></td>
+                  </tr>
+                  <tr><td><strong>A4</strong></td><td><span class="oa-st oa-st-ok">READY</span></td><td>CAS0517 SEA→DEN</td><td>739 · N5512CA</td><td>08:22</td><td class="ok">on time</td><td>P4519</td><td><button class="oa-btn-sm">Details</button></td></tr>
+                  <tr><td><strong>A5</strong></td><td><span class="oa-st oa-st-board">BOARD</span></td><td>CAS4412 SEA→YVR</td><td>738 · N8411CA</td><td>09:10</td><td class="ok">on time</td><td>P4488</td><td><button class="oa-btn-sm">Details</button></td></tr>
+                  <tr><td><strong>A8</strong></td><td><span class="oa-st oa-st-deplane">DEPLANE</span></td><td>CAS1102 ORD→SEA</td><td>739 · N6152CA</td><td>07:18 arr</td><td class="warn">+6 min</td><td>P4601</td><td><button class="oa-btn-sm">Details</button></td></tr>
+                  <tr><td><strong>B10</strong></td><td><span class="oa-st oa-st-board">BOARD</span></td><td>CAS0842 SEA→LAX</td><td>739 · N7721CA</td><td>07:55</td><td class="warn">+8 min</td><td>P4573</td><td><button class="oa-btn-sm">Details</button></td></tr>
+                  <tr><td><strong>B15</strong></td><td><span class="oa-st oa-st-ok">READY</span></td><td>—</td><td>spare</td><td>next 09:44</td><td>—</td><td>—</td><td><button class="oa-btn-sm">Assign</button></td></tr>
+                  <tr class="oa-gtable-rec"><td><strong>C14</strong></td><td><span class="oa-st oa-st-reco">SUGGESTED</span></td><td>CAS1247 (proposed)</td><td>A320-compatible</td><td>07:38 (rebook)</td><td class="ok">Copilot pick</td><td>—</td><td><button class="oa-btn-sm" onclick="oaOpenAdvisor()">Accept</button></td></tr>
+                  <tr><td><strong>C9</strong></td><td><span class="oa-st oa-st-board">BOARD</span></td><td>CAS7722 SEA→JFK</td><td>739 · N8182CA</td><td>08:10</td><td class="ok">on time</td><td>P4444</td><td><button class="oa-btn-sm">Details</button></td></tr>
+                  <tr><td><strong>D5</strong></td><td><span class="oa-st oa-st-ok">READY</span></td><td>CAS2201 OGG→SEA</td><td>738 · N8212CA</td><td>08:46 arr</td><td class="ok">on time</td><td>P4512</td><td><button class="oa-btn-sm">Details</button></td></tr>
+                  <tr><td><strong>D11</strong></td><td><span class="oa-st oa-st-arr">INBOUND</span></td><td>CAS2118 ICN→SEA</td><td>77W · N5617CA</td><td>23:58 arr</td><td class="warn">curfew risk</td><td>P4601</td><td><button class="oa-btn-sm" onclick="oaOpenAdvisor()">Advise</button></td></tr>
+                  <tr><td><strong>N1</strong></td><td><span class="oa-st oa-st-board">BOARD</span></td><td>CAS4412 SEA→YVR</td><td>738 · N6691CA</td><td>09:10</td><td class="ok">on time</td><td>P4488</td><td><button class="oa-btn-sm">Details</button></td></tr>
+                  <tr><td><strong>N7</strong></td><td><span class="oa-st oa-st-ok">READY</span></td><td>CAS8821 SEA→SFO</td><td>738 · N8821CA</td><td>10:02</td><td class="ok">on time</td><td>—</td><td><button class="oa-btn-sm">Details</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- =========== FLIGHT SCHEDULE TAB =========== -->
+          <div class="oa-tab-pane" data-tab-pane="schedule" style="display:none;">
+            <div class="oa-page-head">
+              <div>
+                <h1 class="oa-page-title">Flight Schedule <small>· departures + arrivals · next 6 h</small></h1>
+                <div class="oa-page-meta">Live · Sabre AirOps + FAA SWIM · <strong>38 departures</strong> · <strong>32 arrivals</strong> · OTP-D0 <strong>81%</strong> · cascade driven by ORD ground stop</div>
+              </div>
+              <div class="oa-filters">
+                <button class="oa-fchip active">Departures (38)</button>
+                <button class="oa-fchip">Arrivals (32)</button>
+                <button class="oa-fchip">Delays (7)</button>
+                <button class="oa-fchip">Cancelled (1)</button>
+              </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="oa-table-card">
+              <div class="oa-table-head">
+                <strong>Timeline · next 4 hours</strong>
+                <span>now 06:47 PT</span>
+              </div>
+              <div class="oa-timeline">
+                <div class="oa-tl-axis">
+                  <span>07:00</span><span>07:30</span><span>08:00</span><span>08:30</span><span>09:00</span><span>09:30</span><span>10:00</span><span>10:30</span>
+                </div>
+                <div class="oa-tl-row">
+                  <div class="oa-tl-lbl">CAS1247 SEA→MDW</div>
+                  <div class="oa-tl-track"><span class="oa-tl-seg oa-tl-warn" style="left:8%;width:6%;" title="CAS1247 · expected delay">CAS1247</span><span class="oa-tl-seg oa-tl-reco" style="left:14%;width:5%;" title="Rebook to C14">→ C14</span></div>
+                </div>
+                <div class="oa-tl-row">
+                  <div class="oa-tl-lbl">CAS0842 SEA→LAX</div>
+                  <div class="oa-tl-track"><span class="oa-tl-seg oa-tl-warn" style="left:14%;width:6%;">CAS0842</span></div>
+                </div>
+                <div class="oa-tl-row">
+                  <div class="oa-tl-lbl">CAS0517 SEA→DEN</div>
+                  <div class="oa-tl-track"><span class="oa-tl-seg oa-tl-ok" style="left:20%;width:5%;">CAS0517</span></div>
+                </div>
+                <div class="oa-tl-row">
+                  <div class="oa-tl-lbl">CAS4412 SEA→YVR</div>
+                  <div class="oa-tl-track"><span class="oa-tl-seg oa-tl-ok" style="left:30%;width:5%;">CAS4412</span></div>
+                </div>
+                <div class="oa-tl-row">
+                  <div class="oa-tl-lbl">CAS7722 SEA→JFK</div>
+                  <div class="oa-tl-track"><span class="oa-tl-seg oa-tl-ok" style="left:18%;width:8%;">CAS7722</span></div>
+                </div>
+                <div class="oa-tl-row">
+                  <div class="oa-tl-lbl">CAS8821 SEA→SFO</div>
+                  <div class="oa-tl-track"><span class="oa-tl-seg oa-tl-ok" style="left:42%;width:6%;">CAS8821</span></div>
+                </div>
+                <div class="oa-tl-row">
+                  <div class="oa-tl-lbl">CAS1318 ORD→SEA</div>
+                  <div class="oa-tl-track"><span class="oa-tl-seg oa-tl-bad" style="left:42%;width:4%;text-decoration:line-through;">CAS1318 cx</span></div>
+                </div>
+                <div class="oa-tl-now" style="left:6%;" title="Now 06:47 PT"></div>
+              </div>
+            </div>
+
+            <!-- Detailed table -->
+            <div class="oa-table-card">
+              <div class="oa-table-head">
+                <strong>All departures · next 6 h</strong>
+                <span>sorted by STD</span>
+              </div>
+              <table class="oa-gtable">
+                <thead><tr><th>Flight</th><th>Route</th><th>Gate</th><th>STD</th><th>Predicted</th><th>Aircraft</th><th>Load</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr class="oa-gtable-alert"><td><strong>CAS1247</strong></td><td>SEA → MDW</td><td>B12 → C14</td><td>07:32</td><td class="bad">+47 min</td><td>A320 · N8421CA</td><td>178/180</td><td><span class="oa-st oa-st-alert">REBOOK</span></td></tr>
+                  <tr><td><strong>CAS0842</strong></td><td>SEA → LAX</td><td>B10</td><td>07:55</td><td class="warn">+8 min</td><td>739 · N7721CA</td><td>164/172</td><td><span class="oa-st oa-st-board">BOARDING</span></td></tr>
+                  <tr><td><strong>CAS7722</strong></td><td>SEA → JFK</td><td>C9</td><td>08:10</td><td class="ok">on time</td><td>739 · N8182CA</td><td>152/172</td><td><span class="oa-st oa-st-board">BOARDING</span></td></tr>
+                  <tr><td><strong>CAS0517</strong></td><td>SEA → DEN</td><td>A4</td><td>08:22</td><td class="ok">on time</td><td>739 · N5512CA</td><td>158/172</td><td><span class="oa-st oa-st-ok">READY</span></td></tr>
+                  <tr><td><strong>CAS4412</strong></td><td>SEA → YVR</td><td>N1</td><td>09:10</td><td class="ok">on time</td><td>738 · N6691CA</td><td>141/172 + 4 standby</td><td><span class="oa-st oa-st-ok">PREP</span></td></tr>
+                  <tr><td><strong>CAS8821</strong></td><td>SEA → SFO</td><td>N7</td><td>10:02</td><td class="ok">on time</td><td>738 · N8821CA</td><td>138/172</td><td><span class="oa-st oa-st-ok">PREP</span></td></tr>
+                  <tr><td><strong>CAS1318</strong></td><td>ORD → SEA</td><td>—</td><td>09:05</td><td class="bad">CANCELLED</td><td>738 · N8821CA</td><td>142 pax rebooked</td><td><span class="oa-st oa-st-alert">CANCELLED</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- =========== ALERTS TAB =========== -->
+          <div class="oa-tab-pane" data-tab-pane="alerts" style="display:none;">
+            <div class="oa-page-head">
+              <div>
+                <h1 class="oa-page-title">Alerts &amp; Events <small>· live · auto-triaged by Copilot</small></h1>
+                <div class="oa-page-meta">3 open · <strong class="bad">1 critical</strong> · <strong class="warn">2 warnings</strong> · 47 resolved today · MTTR <strong>18 min</strong> (−9 vs 30-day avg)</div>
+              </div>
+              <div class="oa-filters">
+                <button class="oa-fchip active">Open (3)</button>
+                <button class="oa-fchip">Resolved today (47)</button>
+                <button class="oa-fchip">All severities</button>
+                <button class="oa-fchip">Critical</button>
+                <button class="oa-fchip">Warning</button>
+              </div>
+            </div>
+
+            <!-- Open alerts -->
+            <div class="oa-alerts-list">
+              <div class="oa-alert-card oa-alert-crit">
+                <div class="oa-alc-sev">CRITICAL</div>
+                <div class="oa-alc-body">
+                  <div class="oa-alc-title">Gate B12 · Jet bridge equipment failure</div>
+                  <div class="oa-alc-desc">Jet bridge out of service · A320 CAS1247 SEA→MDW departing in 45 min · 178 pax booked · MX ETA 15–60 min</div>
+                  <div class="oa-alc-meta"><span>📍 Gate B12</span><span>👤 assigned D. Kowalski + SEA Ramp</span><span>🕒 opened 14:32 UTC · 14 min ago</span></div>
+                </div>
+                <div class="oa-alc-r">
+                  <button class="oa-btn-sm oa-btn-primary" onclick="oaOpenAdvisor()">Open in Advisor →</button>
+                  <button class="oa-btn-sm">Snooze</button>
+                </div>
+              </div>
+              <div class="oa-alert-card oa-alert-warn">
+                <div class="oa-alc-sev oa-alc-sev-warn">WARNING</div>
+                <div class="oa-alc-body">
+                  <div class="oa-alc-title">CAS2118 ICN→SEA · curfew risk</div>
+                  <div class="oa-alc-desc">Trans-Pac tracking +40 min · predicted arrival 23:58 · 01:00 KSEA noise-abatement curfew at risk · Copilot pre-staged overnight ramp team + bus B-4</div>
+                  <div class="oa-alc-meta"><span>📍 Gate D11</span><span>👤 assigned overnight ops</span><span>🕒 opened 14:18 UTC · 28 min ago</span></div>
+                </div>
+                <div class="oa-alc-r">
+                  <button class="oa-btn-sm oa-btn-primary">Accept plan</button>
+                  <button class="oa-btn-sm">Details</button>
+                </div>
+              </div>
+              <div class="oa-alert-card oa-alert-warn">
+                <div class="oa-alc-sev oa-alc-sev-warn">WARNING</div>
+                <div class="oa-alc-body">
+                  <div class="oa-alc-title">Pairing P4481 · FAR 117 FDP cushion</div>
+                  <div class="oa-alc-desc">Capt. Moreno + FO Kim · at 12.8 h / 14 h FDP · would break §b if ORD hold extends past 09:00 · reserve H. Lee matched (94/100 score)</div>
+                  <div class="oa-alc-meta"><span>📍 CAS1247 pairing</span><span>👤 Crew Scheduling</span><span>🕒 opened 13:45 UTC · 1 h 2 m ago</span></div>
+                </div>
+                <div class="oa-alc-r">
+                  <button class="oa-btn-sm oa-btn-primary">Call up reserve</button>
+                  <button class="oa-btn-sm">Details</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recently resolved -->
+            <div class="oa-table-card">
+              <div class="oa-table-head">
+                <strong>Recently resolved</strong>
+                <span>last 2 h · 12 events</span>
+              </div>
+              <table class="oa-gtable">
+                <thead><tr><th>Event</th><th>Severity</th><th>Opened</th><th>Closed</th><th>Resolved by</th><th>Resolution</th></tr></thead>
+                <tbody>
+                  <tr><td>CAS4412 · load capacity clear</td><td><span class="oa-st oa-st-ok">INFO</span></td><td>14:02</td><td>14:03</td><td>Revenue Mgmt agent</td><td>4 standbys cleared · +$1,842 booked</td></tr>
+                  <tr><td>Bag loader 2 idle at B17</td><td><span class="oa-st oa-st-warn">WARN</span></td><td>13:47</td><td>13:58</td><td>Maria Gutierrez (SEA)</td><td>Re-tasked to B15 · 11-min recovery</td></tr>
+                  <tr><td>CAS0517 diversion comms</td><td><span class="oa-st oa-st-warn">WARN</span></td><td>13:22</td><td>13:41</td><td>Passenger Disruption Comms</td><td>162 EU261 letters sent · auto-approved</td></tr>
+                  <tr><td>N6152CA engine #2 EGT trend</td><td><span class="oa-st oa-st-warn">WARN</span></td><td>12:58</td><td>13:04</td><td>Predictive MX Copilot</td><td>A-check slot moved to 04/24 · part RB211-T-042 pre-ordered</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- =========== ANALYTICS TAB =========== -->
+          <div class="oa-tab-pane" data-tab-pane="analytics" style="display:none;">
+            <div class="oa-page-head">
+              <div>
+                <h1 class="oa-page-title">Analytics <small>· KSEA operations · last 30 days</small></h1>
+                <div class="oa-page-meta">OTP-D0 <strong>87.3%</strong> · avg turn time <strong>42 min</strong> · alert MTTR <strong>18 min</strong> · Cascadia Ops Advisor acceptance rate <strong>76%</strong></div>
+              </div>
+              <div class="oa-filters">
+                <button class="oa-fchip active">30 days</button>
+                <button class="oa-fchip">7 days</button>
+                <button class="oa-fchip">24 h</button>
+                <button class="oa-fchip">YoY</button>
+              </div>
+            </div>
+
+            <div class="oa-an-grid">
+              <!-- OTP chart -->
+              <div class="oa-an-card oa-an-wide">
+                <div class="oa-an-head">
+                  <div>
+                    <div class="oa-an-title">On-Time Performance (D0)</div>
+                    <div class="oa-an-sub">Last 30 days · dotted line = cascade goal · 87.3% MTD</div>
+                  </div>
+                  <div class="oa-an-kpi"><span class="oa-an-kpi-v">87.3%</span><span class="oa-trend-ok">▲ 3.1 pts</span></div>
+                </div>
+                <svg class="oa-an-svg" viewBox="0 0 600 160" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="oaOtpFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.35"/><stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"/></linearGradient>
+                  </defs>
+                  <!-- goal line -->
+                  <line x1="0" y1="45" x2="600" y2="45" stroke="#c50f1f" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+                  <text x="595" y="40" text-anchor="end" fill="#c50f1f" font-size="10" font-family="Segoe UI" font-weight="600">goal 90%</text>
+                  <!-- grid -->
+                  <g stroke="#eef3f8" stroke-width="1">
+                    <line x1="0" y1="30" x2="600" y2="30"/>
+                    <line x1="0" y1="80" x2="600" y2="80"/>
+                    <line x1="0" y1="130" x2="600" y2="130"/>
+                  </g>
+                  <!-- Fill -->
+                  <path d="M0 70 L20 68 L40 75 L60 65 L80 70 L100 60 L120 55 L140 62 L160 72 L180 58 L200 50 L220 56 L240 60 L260 68 L280 55 L300 48 L320 52 L340 42 L360 90 L380 85 L400 58 L420 50 L440 45 L460 50 L480 48 L500 42 L520 44 L540 50 L560 45 L580 48 L600 42 L600 160 L0 160 Z" fill="url(#oaOtpFill)"/>
+                  <!-- Line -->
+                  <path d="M0 70 L20 68 L40 75 L60 65 L80 70 L100 60 L120 55 L140 62 L160 72 L180 58 L200 50 L220 56 L240 60 L260 68 L280 55 L300 48 L320 52 L340 42 L360 90 L380 85 L400 58 L420 50 L440 45 L460 50 L480 48 L500 42 L520 44 L540 50 L560 45 L580 48 L600 42" fill="none" stroke="#0ea5e9" stroke-width="2"/>
+                  <!-- Outage annotation -->
+                  <g transform="translate(360 95)"><circle r="4" fill="#c50f1f"/><text y="-10" text-anchor="middle" font-size="10" fill="#c50f1f" font-weight="700">wx event 03/29</text></g>
+                </svg>
+              </div>
+
+              <!-- Gate utilization bar chart -->
+              <div class="oa-an-card">
+                <div class="oa-an-head">
+                  <div><div class="oa-an-title">Gate utilization</div><div class="oa-an-sub">By concourse · last 7 d</div></div>
+                </div>
+                <div class="oa-an-bars">
+                  <div class="oa-bar"><span class="oa-bar-l">T2 · A</span><div class="oa-bar-t"><span style="width:62%;background:#10b981;"></span></div><span class="oa-bar-v">62%</span></div>
+                  <div class="oa-bar"><span class="oa-bar-l">T2 · B</span><div class="oa-bar-t"><span style="width:78%;background:#f59e0b;"></span></div><span class="oa-bar-v">78%</span></div>
+                  <div class="oa-bar"><span class="oa-bar-l">T3 · C</span><div class="oa-bar-t"><span style="width:71%;background:#f59e0b;"></span></div><span class="oa-bar-v">71%</span></div>
+                  <div class="oa-bar"><span class="oa-bar-l">T3 · D</span><div class="oa-bar-t"><span style="width:65%;background:#10b981;"></span></div><span class="oa-bar-v">65%</span></div>
+                  <div class="oa-bar"><span class="oa-bar-l">N sat.</span><div class="oa-bar-t"><span style="width:44%;background:#10b981;"></span></div><span class="oa-bar-v">44%</span></div>
+                </div>
+              </div>
+
+              <!-- Alert MTTR -->
+              <div class="oa-an-card">
+                <div class="oa-an-head">
+                  <div><div class="oa-an-title">Alert MTTR</div><div class="oa-an-sub">Mean time to resolution · daily</div></div>
+                  <div class="oa-an-kpi"><span class="oa-an-kpi-v">18m</span><span class="oa-trend-ok">▼ 9m</span></div>
+                </div>
+                <svg class="oa-an-svg" viewBox="0 0 300 100" preserveAspectRatio="none">
+                  <g fill="#14b8a6">
+                    <rect x="5"   y="60" width="12" height="40"/>
+                    <rect x="22"  y="55" width="12" height="45"/>
+                    <rect x="39"  y="68" width="12" height="32"/>
+                    <rect x="56"  y="50" width="12" height="50"/>
+                    <rect x="73"  y="65" width="12" height="35"/>
+                    <rect x="90"  y="72" width="12" height="28"/>
+                    <rect x="107" y="58" width="12" height="42"/>
+                    <rect x="124" y="70" width="12" height="30"/>
+                    <rect x="141" y="66" width="12" height="34"/>
+                    <rect x="158" y="72" width="12" height="28"/>
+                    <rect x="175" y="78" width="12" height="22"/>
+                    <rect x="192" y="72" width="12" height="28"/>
+                    <rect x="209" y="74" width="12" height="26"/>
+                    <rect x="226" y="78" width="12" height="22"/>
+                    <rect x="243" y="76" width="12" height="24" fill="#0ea5e9"/>
+                  </g>
+                </svg>
+              </div>
+
+              <!-- Advisor acceptance -->
+              <div class="oa-an-card">
+                <div class="oa-an-head">
+                  <div><div class="oa-an-title">Advisor acceptance</div><div class="oa-an-sub">% of Copilot recommendations accepted</div></div>
+                  <div class="oa-an-kpi"><span class="oa-an-kpi-v">76%</span><span class="oa-trend-ok">▲ 12 pts</span></div>
+                </div>
+                <div class="oa-donut">
+                  <svg viewBox="0 0 42 42" class="oa-donut-svg">
+                    <circle cx="21" cy="21" r="15.915" fill="none" stroke="#eef3f8" stroke-width="4"/>
+                    <circle cx="21" cy="21" r="15.915" fill="none" stroke="#14b8a6" stroke-width="4" stroke-dasharray="76 24" stroke-dashoffset="25" transform="rotate(-90 21 21)" stroke-linecap="round"/>
+                    <text x="21" y="22" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="Segoe UI" font-weight="700" fill="#0b2545">76%</text>
+                  </svg>
+                  <div class="oa-donut-leg">
+                    <div><span class="oa-lg oa-lg-teal"></span>Accepted as-is · 58%</div>
+                    <div><span class="oa-lg oa-lg-sky"></span>Modified · 18%</div>
+                    <div><span class="oa-lg oa-lg-muted"></span>Rejected · 24%</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pax disruption cost avoided -->
+              <div class="oa-an-card oa-an-wide">
+                <div class="oa-an-head">
+                  <div><div class="oa-an-title">Disruption cost avoided (Copilot attributable)</div><div class="oa-an-sub">Monthly · actual vs. historical baseline</div></div>
+                  <div class="oa-an-kpi"><span class="oa-an-kpi-v">$1.42M</span><span class="oa-trend-ok">YTD</span></div>
+                </div>
+                <svg class="oa-an-svg" viewBox="0 0 600 120" preserveAspectRatio="none">
+                  <g>
+                    <rect x="20"  y="50" width="40" height="50" fill="#14b8a6" rx="3"/>
+                    <rect x="70"  y="40" width="40" height="60" fill="#14b8a6" rx="3"/>
+                    <rect x="120" y="55" width="40" height="45" fill="#14b8a6" rx="3"/>
+                    <rect x="170" y="35" width="40" height="65" fill="#14b8a6" rx="3"/>
+                    <rect x="220" y="28" width="40" height="72" fill="#14b8a6" rx="3"/>
+                    <rect x="270" y="42" width="40" height="58" fill="#14b8a6" rx="3"/>
+                    <rect x="320" y="30" width="40" height="70" fill="#14b8a6" rx="3"/>
+                    <rect x="370" y="18" width="40" height="82" fill="#0ea5e9" rx="3"/>
+                    <rect x="420" y="22" width="40" height="78" fill="#0ea5e9" rx="3"/>
+                    <rect x="470" y="12" width="40" height="88" fill="#0ea5e9" rx="3"/>
+                    <rect x="520" y="8"  width="40" height="92" fill="#0ea5e9" rx="3"/>
+                  </g>
+                  <g font-family="Segoe UI" font-size="9" fill="#55708b" text-anchor="middle" font-weight="600">
+                    <text x="40" y="115">May</text><text x="90" y="115">Jun</text><text x="140" y="115">Jul</text><text x="190" y="115">Aug</text>
+                    <text x="240" y="115">Sep</text><text x="290" y="115">Oct</text><text x="340" y="115">Nov</text><text x="390" y="115">Dec</text>
+                    <text x="440" y="115">Jan</text><text x="490" y="115">Feb</text><text x="540" y="115">Mar</text>
+                  </g>
+                </svg>
+              </div>
             </div>
           </div>
 
@@ -14253,6 +14824,23 @@ function crwRender() {
 }
 
 // ============ SEA OPS AI ADVISOR (Power App) ============
+function oaSwitchTab(name, btn) {
+  // Toggle tab buttons
+  document.querySelectorAll('#app-opsadvisor .oa-tab').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  // Toggle panes
+  document.querySelectorAll('#app-opsadvisor .oa-tab-pane').forEach(p => {
+    p.style.display = (p.dataset.tabPane === name) ? '' : 'none';
+  });
+  // Update breadcrumb
+  const bc = document.querySelector('#app-opsadvisor .app-breadcrumb');
+  if (bc) {
+    const labels = { overview:'Overview', gates:'Gate Status', schedule:'Flight Schedule', alerts:'Alerts', analytics:'Analytics' };
+    const last = bc.querySelectorAll('span');
+    if (last.length) last[last.length - 1].textContent = labels[name] || 'Overview';
+  }
+}
+
 function oaStartApp() {
   // live updated-time ticker in the header
   if (window._oaClock) clearInterval(window._oaClock);
@@ -14265,6 +14853,9 @@ function oaStartApp() {
                        String(now.getSeconds()).padStart(2,'0') + ' PT';
     }, 1000);
   }
+  // Reset to Overview tab
+  const overviewBtn = document.querySelector('#app-opsadvisor .oa-tab[data-tab="overview"]');
+  if (overviewBtn) oaSwitchTab('overview', overviewBtn);
   // Reset advisor panel to step 1
   oaAdvStep(1);
   // Close if left open
