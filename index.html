@@ -237,7 +237,7 @@
 .kc-splash-bar-fill {
   height: 100%;
   width: 0;
-  background: linear-gradient(90deg, #f59e0b, #14b8a6, #f59e0b);
+  background: linear-gradient(90deg, #36c5f0 0%, #7b5bff 30%, #c85bff 55%, #ff5a8c 80%, #ff8a3a 100%);
   animation: kcSplashBar 1.2s ease-out forwards;
 }
 @keyframes kcSplashBar {
@@ -259,7 +259,7 @@ body { background: #faf9f8; }
   --ms-blue-dark: #005a9e;
   --copilot-purple: #6264a7;
   /* Real M365 Copilot brand gradient: teal-blue → purple → magenta-pink */
-  --copilot-gradient: linear-gradient(135deg, #14b8a6 0%, #1b80ea 22%, #6b4eff 55%, #d948ef 88%, #ff5cab 100%);
+  --copilot-gradient: linear-gradient(135deg, #36c5f0 0%, #1b80ea 22%, #6b4eff 55%, #d948ef 88%, #ff5cab 100%);
   --copilot-gradient-soft: linear-gradient(135deg, rgba(0,195,255,0.08) 0%, rgba(107,78,255,0.08) 50%, rgba(217,72,239,0.08) 100%);
   --copilot-border: #a78bfa;
   --gray-10: #faf9f8;
@@ -3023,7 +3023,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 .kc-doc-scan-overlay.running { opacity: 1; }
 .kc-doc-scan-line {
   position: absolute; left: -12px; right: -12px; top: 0; height: 4px;
-  background: linear-gradient(90deg, transparent, #14b8a6 15%, #6264a7 50%, #14b8a6 85%, transparent);
+  background: linear-gradient(90deg, transparent, #3a9fe8 15%, #6264a7 50%, #3a9fe8 85%, transparent);
   box-shadow: 0 0 30px 8px rgba(58, 159, 232, 0.5), 0 12px 60px -10px rgba(98, 100, 167, 0.7);
 }
 .kc-doc-scan-overlay.running .kc-doc-scan-line {
@@ -3194,7 +3194,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 .kc-hw-paper { position: relative; overflow: hidden; }
 .kc-scan-line {
   position: absolute; left: -4px; right: -4px; top: 0; height: 3px;
-  background: linear-gradient(90deg, transparent, #14b8a6 15%, #6264a7 50%, #14b8a6 85%, transparent);
+  background: linear-gradient(90deg, transparent, #3a9fe8 15%, #6264a7 50%, #3a9fe8 85%, transparent);
   box-shadow: 0 0 20px 6px rgba(58,159,232,0.45), 0 8px 40px -6px rgba(98,100,167,0.6);
   pointer-events: none; opacity: 0; transform: translateY(0);
   transition: opacity 0.2s;
@@ -5330,7 +5330,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 }
 .kc-dv-scanbar-dot {
   width: 8px; height: 8px; border-radius: 50%;
-  background: #14b8a6;
+  background: #3a9fe8;
   box-shadow: 0 0 0 0 rgba(58, 159, 232, 0.6);
   animation: dotPulse 1.4s infinite;
   flex-shrink: 0;
@@ -5348,7 +5348,7 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 .kc-dv-stage { position: relative; }
 .kc-dv-stage .kc-dv-scan-line {
   position: absolute; left: -16px; right: -16px; top: 0; height: 4px;
-  background: linear-gradient(90deg, transparent, #14b8a6 15%, #6264a7 50%, #14b8a6 85%, transparent);
+  background: linear-gradient(90deg, transparent, #3a9fe8 15%, #6264a7 50%, #3a9fe8 85%, transparent);
   box-shadow: 0 0 32px 8px rgba(58, 159, 232, 0.55), 0 14px 60px -8px rgba(98, 100, 167, 0.75);
   pointer-events: none; z-index: 9;
   animation: kcDvScan 4.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
@@ -7848,6 +7848,78 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
   border-radius: 0 0 9px 9px;
 }
 
+/* ========== Fleet modals (anomaly review, attribution) ========== */
+.flt-mx-overlay {
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 900px 700px at 35% 40%, rgba(14,165,233,0.22), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 75% 70%, rgba(168,85,247,0.18), transparent 55%),
+    rgba(6,13,30,0.86);
+  backdrop-filter: blur(7px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 9800;
+  padding: 24px;
+  animation: irModFade 0.22s ease-out;
+}
+.flt-mx-overlay.open { display: flex; }
+.flt-mx-card {
+  width: min(900px, 95vw);
+  max-height: 88vh;
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(135deg, #14b8a6, #0ea5e9, #a855f7, #f59e0b) border-box;
+  border: 1.5px solid transparent;
+  border-radius: 14px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 12px 30px rgba(14,165,233,0.18);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  animation: irModCardIn 0.36s cubic-bezier(0.22,0.61,0.36,1);
+}
+.flt-mx-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--gray-30);
+  background: linear-gradient(90deg, #f7fbff, #fff);
+}
+.flt-mx-head-l { display: flex; align-items: center; gap: 14px; }
+.flt-mx-rank {
+  width: 40px; height: 40px; border-radius: 50%;
+  color: #fff; font-weight: 800; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px rgba(11,37,69,0.3);
+}
+.flt-mx-h-t { font-size: 16px; font-weight: 700; color: var(--kc-navy); }
+.flt-mx-h-s { font-size: 11.5px; color: var(--gray-130); margin-top: 3px; }
+.flt-mx-close {
+  background: none; border: 1px solid var(--gray-40); border-radius: 8px;
+  width: 34px; height: 34px; font-size: 15px; cursor: pointer;
+  color: var(--gray-130);
+}
+.flt-mx-close:hover { background: var(--gray-20); }
+.flt-mx-body { padding: 18px 22px; overflow-y: auto; }
+.flt-mx-row { display: grid; grid-template-columns: 140px 1fr; gap: 14px; align-items: start; padding: 10px 0; border-bottom: 1px dashed var(--gray-30); }
+.flt-mx-row:last-child { border-bottom: none; }
+.flt-mx-lbl { font-size: 10.5px; color: var(--gray-90); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; padding-top: 2px; }
+.flt-mx-val { font-size: 12.5px; color: var(--gray-160); line-height: 1.55; }
+.flt-mx-val strong { color: var(--kc-navy); }
+.flt-mx-act { display: flex; gap: 8px; align-items: flex-start; padding: 4px 0; font-size: 12px; }
+.flt-mx-chk {
+  flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%;
+  background: #10b981; color: #fff; font-size: 11px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 4px rgba(16,185,129,0.3);
+}
+.flt-mx-chk.flt-mx-chk-pending {
+  background: #f59e0b; box-shadow: 0 2px 4px rgba(245,158,11,0.4);
+  animation: crwAtRiskPulse 1.6s ease-in-out infinite;
+}
+.flt-mx-foot {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 22px;
+  border-top: 1px solid var(--gray-30);
+  background: #fafbfc;
+}
+
 /* ========== CREW LEGALITY BOARD — rich upgrade elements ========== */
 .crw-h-rule {
   display: inline-block;
@@ -8215,17 +8287,17 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
 }
 .oa-ai-btn {
   display: inline-flex; align-items: center; gap: 8px;
-  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  background: linear-gradient(135deg, #36c5f0 0%, #7b5bff 40%, #c85bff 65%, #ff5a8c 85%, #ff8a3a 100%);
   color: #fff;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
   font-size: 12.5px; font-weight: 700; font-family: inherit;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(14,165,233,0.4);
+  box-shadow: 0 4px 14px rgba(123,91,255,0.35), 0 2px 6px rgba(0,0,0,0.12);
   transition: transform 0.1s, box-shadow 0.15s;
 }
-.oa-ai-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(14,165,233,0.55); }
+.oa-ai-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(123,91,255,0.5), 0 2px 6px rgba(0,0,0,0.15); }
 .oa-ai-btn:active { transform: translateY(0); }
 
 /* Body grid: main + advisor side panel */
@@ -9144,30 +9216,33 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <stop offset="0%" stop-color="#ffffff"/>
       <stop offset="100%" stop-color="#cfe4fc"/>
     </linearGradient>
+    <!-- IROps Cascade: concentric ripple + downstream dots on Cascadia navy -->
     <symbol id="agentLogoBed" viewBox="0 0 64 64">
       <rect width="64" height="64" rx="14" fill="url(#agBedBg)"/>
       <path d="M0 0h64v26Q32 12 0 26Z" fill="rgba(255,255,255,0.12)"/>
       <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="rgba(255,255,255,0.25)"/>
-      <!-- floor plan grid -->
-      <g transform="translate(11 14)" opacity="0.2">
-        <rect width="42" height="16" rx="1.5" fill="none" stroke="#fff" stroke-width="0.8"/>
-        <line x1="14" y1="0" x2="14" y2="16" stroke="#fff" stroke-width="0.8"/>
-        <line x1="28" y1="0" x2="28" y2="16" stroke="#fff" stroke-width="0.8"/>
+      <!-- Ripple arcs emanating from the "disruption" origin -->
+      <g stroke="#fff" fill="none" stroke-linecap="round">
+        <path d="M16 32 Q26 20 36 32" stroke-width="2.2" opacity="0.92"/>
+        <path d="M16 32 Q30 14 44 32" stroke-width="1.8" opacity="0.65"/>
+        <path d="M16 32 Q34 10 52 32" stroke-width="1.4" opacity="0.42"/>
+        <path d="M16 32 Q26 44 36 32" stroke-width="2.2" opacity="0.92"/>
+        <path d="M16 32 Q30 50 44 32" stroke-width="1.8" opacity="0.65"/>
       </g>
-      <!-- bed -->
-      <g transform="translate(14 32)">
-        <rect x="0"  y="8" width="36" height="4" rx="1" fill="url(#agBedSheet)"/>
-        <rect x="0"  y="12" width="2" height="6" fill="url(#agBedSheet)"/>
-        <rect x="34" y="12" width="2" height="6" fill="url(#agBedSheet)"/>
-        <rect x="-2" y="-2" width="3" height="14" rx="1" fill="url(#agBedSheet)"/>
-        <path d="M2 3 L22 3 Q28 3 28 8 L28 8 L2 8 Z" fill="url(#agBedSheet)"/>
-        <rect x="5" y="3.5" width="8" height="3" rx="1" fill="#fff" opacity="0.75"/>
-        <!-- red cross badge -->
-        <g transform="translate(30 -4)">
-          <circle r="4.5" fill="#ff5a5a"/>
-          <rect x="-2.4" y="-0.6" width="4.8" height="1.2" fill="#fff"/>
-          <rect x="-0.6" y="-2.4" width="1.2" height="4.8" fill="#fff"/>
-        </g>
+      <!-- Origin (red disruption node) -->
+      <circle cx="16" cy="32" r="6" fill="#fff"/>
+      <circle cx="16" cy="32" r="4.2" fill="#ff5a5a"/>
+      <!-- Downstream (teal dots, fanning out) -->
+      <g fill="#7fe2d6">
+        <circle cx="40" cy="22" r="2.4"/>
+        <circle cx="48" cy="26" r="2"/>
+        <circle cx="52" cy="32" r="1.8"/>
+        <circle cx="48" cy="38" r="2"/>
+        <circle cx="40" cy="42" r="2.4"/>
+      </g>
+      <!-- Small plane silhouette moving outward -->
+      <g transform="translate(36 32) rotate(20)" fill="#fff" opacity="0.9">
+        <path d="M0 -4 L0.6 0 L4 0.5 L4 1 L0.6 1.2 L0.5 3 L1.5 3.8 L1.5 4 L0 3.6 L-1.5 4 L-1.5 3.8 L-0.5 3 L-0.6 1.2 L-4 1 L-4 0.5 L-0.6 0 Z"/>
       </g>
     </symbol>
 
@@ -9265,18 +9340,26 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
       <stop offset="55%" stop-color="#0ea5e9"/>
       <stop offset="100%" stop-color="#005a67"/>
     </linearGradient>
+    <!-- Passenger Disruption Comms: speech bubbles + people silhouettes on teal/sky gradient -->
     <symbol id="agentLogoReadmit" viewBox="0 0 64 64">
       <rect width="64" height="64" rx="14" fill="url(#agReadmitBg)"/>
       <path d="M0 0h64v26Q32 12 0 26Z" fill="rgba(255,255,255,0.14)"/>
       <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="rgba(255,255,255,0.28)"/>
-      <!-- pulse waveform -->
-      <g transform="translate(10 34)" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
-        <path d="M0 0 L8 0 L12 -10 L18 14 L24 -6 L30 2 L44 2"/>
+      <!-- Main message bubble -->
+      <g transform="translate(14 12)">
+        <path d="M0 4 Q0 0 4 0 L30 0 Q34 0 34 4 L34 18 Q34 22 30 22 L10 22 L5 28 L6 22 L4 22 Q0 22 0 18 Z" fill="#fff"/>
+        <rect x="5" y="6" width="24" height="1.6" rx="0.8" fill="#0ea5e9" opacity="0.55"/>
+        <rect x="5" y="10" width="20" height="1.6" rx="0.8" fill="#0ea5e9" opacity="0.35"/>
+        <rect x="5" y="14" width="16" height="1.6" rx="0.8" fill="#0ea5e9" opacity="0.35"/>
       </g>
-      <!-- door/home -->
-      <g transform="translate(40 14)" fill="#fff">
-        <path d="M0 10 L7 2 L14 10 L14 18 L0 18 Z" opacity="0.9"/>
-        <rect x="5" y="12" width="4" height="6" fill="#0ea5e9" opacity="0.7"/>
+      <!-- Reply bubble -->
+      <g transform="translate(30 34)">
+        <path d="M0 3 Q0 0 3 0 L22 0 Q25 0 25 3 L25 14 Q25 17 22 17 L15 17 L10 22 L11 17 L3 17 Q0 17 0 14 Z" fill="#3dd9d4"/>
+      </g>
+      <!-- Notification dot -->
+      <g transform="translate(48 12)">
+        <circle r="6" fill="#ff5a8c"/>
+        <text y="2" text-anchor="middle" font-family="Segoe UI" font-size="7" font-weight="800" fill="#fff">EN/ES</text>
       </g>
     </symbol>
 
@@ -14064,25 +14147,25 @@ body.dark .rm-track { background: linear-gradient(90deg, #107c10 0%, #107c10 60%
           </button>
         </div>
         <div class="flt-ci-grid">
-          <div class="flt-ci-card flt-ci-alert" onclick="fltTailDetail('N6152CA')">
+          <div class="flt-ci-card flt-ci-alert" onclick="fltInsight('anomaly')">
             <div class="flt-ci-c-head"><span class="flt-ci-chip">Emerging risk</span><span class="flt-ci-conf">82% confidence</span></div>
             <div class="flt-ci-c-t"><strong>N6152CA</strong> engine #2 · EGT +14 °C vs 30-day baseline</div>
             <div class="flt-ci-c-d">Copilot booked A-check slot 04/24 22:00 and pre-ordered RB211-T-042 · <strong>avoids projected AOG in 40 cycles</strong></div>
             <div class="flt-ci-c-cta">Review + approve →</div>
           </div>
-          <div class="flt-ci-card flt-ci-warn">
+          <div class="flt-ci-card flt-ci-warn" onclick="fltInsight('mxplan')">
             <div class="flt-ci-c-head"><span class="flt-ci-chip flt-ci-chip-warn">Utilization trending</span><span class="flt-ci-conf">72% confidence</span></div>
             <div class="flt-ci-c-t">3 tails approaching <strong>A-check threshold</strong> in next 7 days</div>
             <div class="flt-ci-c-d">N8821CA, N8411CA, N6084CA · sequencing suggests staggered slots to avoid capacity crunch at SEA hangar 4</div>
             <div class="flt-ci-c-cta">See MX plan →</div>
           </div>
-          <div class="flt-ci-card flt-ci-good">
+          <div class="flt-ci-card flt-ci-good" onclick="fltInsight('attribution')">
             <div class="flt-ci-c-head"><span class="flt-ci-chip flt-ci-chip-good">Optimization</span><span class="flt-ci-conf">91% confidence</span></div>
             <div class="flt-ci-c-t">Fleet dispatch reliability <strong>▲ 0.3 pts</strong> vs MTD</div>
             <div class="flt-ci-c-d">Predictive MX prevented 4 unscheduled removals YTD · $428K AOGs avoided · $118K projected Q2 if pattern holds</div>
             <div class="flt-ci-c-cta">View attribution →</div>
           </div>
-          <div class="flt-ci-card flt-ci-info">
+          <div class="flt-ci-card flt-ci-info" onclick="fltInsight('swap')">
             <div class="flt-ci-c-head"><span class="flt-ci-chip flt-ci-chip-info">Fleet swap opportunity</span><span class="flt-ci-conf">live</span></div>
             <div class="flt-ci-c-t">IROps Cascade flagged <strong>N8421CA ↔ N6152CA</strong> swap at MDW</div>
             <div class="flt-ci-c-d">Rebalances MDW→DEN leg in Plan A · negligible MX impact · <strong>aligns with N6152CA A-check move-up</strong></div>
@@ -16320,6 +16403,182 @@ function fltAskCopilot(prompt) {
 function fltTailDetail(reg) {
   fltOpenCopilot();
   setTimeout(() => fltAskCopilot(`Walk me through the ${reg} anomaly and what you've already done.`), 220);
+}
+
+// Each Copilot insight card routes to a real action
+function fltInsight(kind) {
+  if (kind === 'anomaly') {
+    fltOpenAnomalyModal();
+    return;
+  }
+  if (kind === 'mxplan') {
+    fltOpenCopilot();
+    setTimeout(() => fltAskCopilot('Propose an MX-slot schedule that avoids capacity crunch at SEA hangar 4.'), 220);
+    return;
+  }
+  if (kind === 'attribution') {
+    fltOpenAttributionModal();
+    return;
+  }
+  if (kind === 'swap') {
+    // Navigate to IROps Cascade and highlight Plan A
+    openApp('irops');
+    setTimeout(() => {
+      showToast({ kind:'copilot', title:'Opened in IROps Cascade', text:'Plan A includes the N8421CA ↔ N6152CA tail swap at MDW. Click <strong>Modify</strong> on Plan A to tweak the swap.', ttl:6500 });
+      // Scroll to plans column if present
+      const plans = document.querySelector('.ir-col-plans');
+      if (plans) plans.scrollIntoView({ behavior:'smooth', block:'center' });
+    }, 450);
+    return;
+  }
+}
+
+// Anomaly review modal (approve MX slot + part order)
+function fltOpenAnomalyModal() {
+  let m = document.getElementById('flt-anomaly-modal');
+  if (!m) {
+    m = document.createElement('div');
+    m.id = 'flt-anomaly-modal';
+    m.className = 'flt-mx-overlay';
+    m.innerHTML = `
+      <div class="flt-mx-card">
+        <div class="flt-mx-head">
+          <div class="flt-mx-head-l">
+            <div class="flt-mx-rank" style="background:linear-gradient(135deg,#ef4444,#c50f1f);">⚠</div>
+            <div>
+              <div class="flt-mx-h-t">Review + approve · N6152CA anomaly</div>
+              <div class="flt-mx-h-s">Predictive MX has already acted · your sign-off closes the loop</div>
+            </div>
+          </div>
+          <button class="flt-mx-close" onclick="document.getElementById('flt-anomaly-modal').classList.remove('open')">✕</button>
+        </div>
+        <div class="flt-mx-body">
+          <div class="flt-mx-row">
+            <div class="flt-mx-lbl">Tail · aircraft</div>
+            <div class="flt-mx-val"><strong>N6152CA</strong> · Boeing 737-900ER · build 2014-03 · Rolls-Royce RB211</div>
+          </div>
+          <div class="flt-mx-row">
+            <div class="flt-mx-lbl">Signal</div>
+            <div class="flt-mx-val">Engine #2 EGT <strong>+14 °C</strong> vs 30-day baseline · N1 vibration <strong>+0.6 mils</strong> · ACARS 36 h rolling window</div>
+          </div>
+          <div class="flt-mx-row">
+            <div class="flt-mx-lbl">Prediction</div>
+            <div class="flt-mx-val">p(unscheduled removal in next 40 cycles) = <strong style="color:#c50f1f;">78%</strong> · graph model on Foundry · grounded on 24 mo MX history</div>
+          </div>
+          <div class="flt-mx-row">
+            <div class="flt-mx-lbl">Copilot actions</div>
+            <div class="flt-mx-val">
+              <div class="flt-mx-act"><span class="flt-mx-chk">✓</span> Booked A-check slot · <strong>04/24 22:00 local · SEA hangar 4</strong> · 18h duration</div>
+              <div class="flt-mx-act"><span class="flt-mx-chk">✓</span> Pre-ordered part <strong>RB211-T-042</strong> from Rolls-Royce · ETA 04/24 14:00 · cost $18.4K</div>
+              <div class="flt-mx-act"><span class="flt-mx-chk">✓</span> Proposed <strong>tail swap N8421CA ↔ N6152CA</strong> at MDW to IROps Cascade · aligns with Plan A</div>
+              <div class="flt-mx-act"><span class="flt-mx-chk flt-mx-chk-pending">●</span> <strong>Awaiting your sign-off</strong> on MX slot + part order</div>
+            </div>
+          </div>
+          <div class="flt-mx-row">
+            <div class="flt-mx-lbl">Projected impact</div>
+            <div class="flt-mx-val">
+              <strong>Without action:</strong> p(AOG event within 40 cycles) 78% · avg ground-time 22 h · pax-disruption cost ~$112K · ops cost ~$38K<br>
+              <strong>With this action:</strong> planned ground-time 18 h at SEA hangar 4 · zero pax impact (tail swap covers) · <strong style="color:#10b981;">net $112K avoided</strong>
+            </div>
+          </div>
+          <div class="flt-mx-row">
+            <div class="flt-mx-lbl">Audit</div>
+            <div class="flt-mx-val" style="font-family:'Segoe UI',monospace;font-size:11px;color:var(--gray-130);">
+              Prompt · grounded on ACARS + Sabre AirOps + MX history · Purview labeled <em>Ops · Decision-Support · Confidential</em><br>
+              Cost-to-generate: $2.18 Azure AI · gpt-4.1 · deployment casa-ops-private
+            </div>
+          </div>
+        </div>
+        <div class="flt-mx-foot">
+          <button class="ir-btn ir-btn-ghost" onclick="document.getElementById('flt-anomaly-modal').classList.remove('open')">Hold · review with MX chief</button>
+          <button class="ir-btn ir-btn-ghost" onclick="fltOpenCopilot();document.getElementById('flt-anomaly-modal').classList.remove('open');setTimeout(()=>fltAskCopilot('Why this confidence score on the N6152CA anomaly? Walk me through the telemetry.'),220);">Ask Copilot a follow-up</button>
+          <div style="flex:1;"></div>
+          <button class="ir-btn ir-btn-primary ir-btn-xl" onclick="fltApproveAnomaly()">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1.5 6 L5 9 L10.5 2.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+            Approve MX slot + part order
+          </button>
+        </div>
+      </div>`;
+    document.body.appendChild(m);
+  }
+  m.classList.add('open');
+}
+function fltApproveAnomaly() {
+  document.getElementById('flt-anomaly-modal').classList.remove('open');
+  showToast({
+    kind: 'copilot',
+    title: '✓ Approved · N6152CA MX plan dispatched',
+    text: 'A-check slot confirmed at SEA hangar 4 · 04/24 22:00 · part RB211-T-042 order placed with Rolls-Royce · tail swap forwarded to IROps Plan A · crew sched + station ops notified · Purview audit written.',
+    ttl: 6500
+  });
+}
+
+// Attribution modal (breakdown of Copilot-attributable savings)
+function fltOpenAttributionModal() {
+  let m = document.getElementById('flt-attr-modal');
+  if (!m) {
+    m = document.createElement('div');
+    m.id = 'flt-attr-modal';
+    m.className = 'flt-mx-overlay';
+    m.innerHTML = `
+      <div class="flt-mx-card" style="width:min(760px,95vw);">
+        <div class="flt-mx-head">
+          <div class="flt-mx-head-l">
+            <div class="flt-mx-rank" style="background:linear-gradient(135deg,#10b981,#059669);">$</div>
+            <div>
+              <div class="flt-mx-h-t">Copilot-attributable savings · YTD</div>
+              <div class="flt-mx-h-s">$428K AOGs avoided · methodology · auditable to source signal</div>
+            </div>
+          </div>
+          <button class="flt-mx-close" onclick="document.getElementById('flt-attr-modal').classList.remove('open')">✕</button>
+        </div>
+        <div class="flt-mx-body">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;">
+            <thead>
+              <tr style="background:#fafbfc;">
+                <th style="text-align:left;padding:8px 10px;font-size:10.5px;text-transform:uppercase;letter-spacing:0.4px;color:var(--gray-130);border-bottom:1px solid var(--gray-30);">Event</th>
+                <th style="text-align:left;padding:8px 10px;font-size:10.5px;text-transform:uppercase;letter-spacing:0.4px;color:var(--gray-130);border-bottom:1px solid var(--gray-30);">Tail</th>
+                <th style="text-align:left;padding:8px 10px;font-size:10.5px;text-transform:uppercase;letter-spacing:0.4px;color:var(--gray-130);border-bottom:1px solid var(--gray-30);">Detected</th>
+                <th style="text-align:right;padding:8px 10px;font-size:10.5px;text-transform:uppercase;letter-spacing:0.4px;color:var(--gray-130);border-bottom:1px solid var(--gray-30);">Savings</th>
+                <th style="text-align:left;padding:8px 10px;font-size:10.5px;text-transform:uppercase;letter-spacing:0.4px;color:var(--gray-130);border-bottom:1px solid var(--gray-30);">Evidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);">Hydraulic pump #2 trend</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);font-family:monospace;"><strong>N8411CA</strong></td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);">2026-02-14</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);text-align:right;font-weight:700;color:#10b981;">$142K</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);color:var(--gray-130);">ACARS · 18 cycles early</td></tr>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);">APU vibration anomaly</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);font-family:monospace;"><strong>N6084CA</strong></td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);">2026-01-28</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);text-align:right;font-weight:700;color:#10b981;">$96K</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);color:var(--gray-130);">ACARS + MX history</td></tr>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);">Flight-control actuator</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);font-family:monospace;"><strong>N5512CA</strong></td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);">2025-12-03</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);text-align:right;font-weight:700;color:#10b981;">$118K</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);color:var(--gray-130);">SNAG + ACARS</td></tr>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);">Engine bearing wear</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);font-family:monospace;"><strong>N8821CA</strong></td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);">2025-11-15</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);text-align:right;font-weight:700;color:#10b981;">$72K</td><td style="padding:9px 10px;border-bottom:1px solid var(--gray-30);color:var(--gray-130);">ACARS oil-analysis</td></tr>
+              <tr><td style="padding:12px 10px;"><strong>Total · 4 events</strong></td><td></td><td></td><td style="padding:12px 10px;text-align:right;font-weight:800;color:#10b981;font-size:16px;">$428K</td><td></td></tr>
+            </tbody>
+          </table>
+          <div class="flt-mx-row" style="margin-top:14px;">
+            <div class="flt-mx-lbl">Methodology</div>
+            <div class="flt-mx-val" style="font-size:11.5px;color:var(--gray-160);line-height:1.6;">
+              Baseline = mean ground-time + pax-disruption cost for comparable MX events in the previous 24 months (2022–2024). Savings = baseline minus the actual cost of the Copilot-triggered scheduled intervention. Attribution requires <em>both</em> (1) a Copilot prediction that preceded an MX event and (2) the intervention being executed. Events where the Dispatcher overrode Copilot are excluded.
+            </div>
+          </div>
+          <div class="flt-mx-row">
+            <div class="flt-mx-lbl">Projection</div>
+            <div class="flt-mx-val"><strong>Q2 2026:</strong> $118K projected if current pattern holds · <strong>Q3 2026:</strong> $142K as ACARS history grows</div>
+          </div>
+          <div class="flt-mx-row">
+            <div class="flt-mx-lbl">Governance</div>
+            <div class="flt-mx-val" style="font-size:11px;color:var(--gray-130);">Every attributed event is traceable to the originating ACARS signal + Copilot prompt + Dispatcher approval. Purview audit available for regulatory review.</div>
+          </div>
+        </div>
+        <div class="flt-mx-foot">
+          <button class="ir-btn ir-btn-ghost" onclick="document.getElementById('flt-attr-modal').classList.remove('open')">Close</button>
+          <div style="flex:1;"></div>
+          <button class="ir-btn ir-btn-ghost" onclick="showToast({kind:'copilot',title:'Exporting…',text:'Copilot-attribution dashboard exported to Excel · emailed to M. Johnson + Finance',ttl:4200})">Export to Excel</button>
+          <button class="ir-btn ir-btn-primary" onclick="document.getElementById('flt-attr-modal').classList.remove('open');fltOpenCopilot();setTimeout(()=>fltAskCopilot('Draft a Q2 board-readout summary of Copilot MX savings.'),220);">
+            <svg width="12" height="12"><use href="#copilotLogo"/></svg>
+            Draft board readout
+          </button>
+        </div>
+      </div>`;
+    document.body.appendChild(m);
+  }
+  m.classList.add('open');
 }
 
 // Crew Legality · filter + what-if + auto-reassign
