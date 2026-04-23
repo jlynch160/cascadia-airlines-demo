@@ -17370,6 +17370,16 @@ const OA_SCENARIO_FLOWS = {
 };
 
 let _oaActiveScen = null;
+let _oaCurrentScen = null;
+
+function oaPickScenario(key) {
+  _oaCurrentScen = key;
+  document.querySelectorAll('.oa-scen-card').forEach(c => c.classList.toggle('active', c.dataset.scen === key));
+  const btn = document.getElementById('oa-scen-btn');
+  const help = document.getElementById('oa-scen-help');
+  if (btn) btn.disabled = false;
+  if (help) help.textContent = 'Click "Start Scenario" to load it into the Advisor';
+}
 
 function _oaBuildPane1(d) {
   return `
